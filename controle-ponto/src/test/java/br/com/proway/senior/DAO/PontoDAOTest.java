@@ -15,7 +15,7 @@ public class PontoDAOTest {
 	public void testeCadastroPonto() {
 		Ponto ponto = new Ponto(25, LocalDateTime.of(2021, 04, 22, 2,3,6), LocalDate.of(2021, 04, 22), 369);
 		
-		PontoDAO Db = PontoDAO.getInstance(ponto);
+		JornadaDAO Db = JornadaDAO.getInstance(ponto);
 		
 		assertTrue(Db.cadastrarPonto(ponto));
 		System.out.println("");
