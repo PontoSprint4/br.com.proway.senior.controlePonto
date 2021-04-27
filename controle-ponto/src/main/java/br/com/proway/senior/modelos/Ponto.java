@@ -3,14 +3,11 @@ package br.com.proway.senior.modelos;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import br.com.proway.senior.interfaces.JornadaServico;
-
 public class Ponto {
 	private Integer idPonto;
 	private LocalDateTime momentoPonto;
 	private LocalDate dataPonto;
 	private Integer idPessoa;
-	private JornadaServico jornada;
 	
 	public Ponto() {
 		
@@ -50,15 +47,11 @@ public class Ponto {
 	public void setIdPessoa(Integer idPessoa) {
 		this.idPessoa = idPessoa;
 	}
-	public JornadaServico getJornada() {
-		return jornada;
-	}
-	public void setJornada(JornadaServico jornada) {
-		this.jornada = jornada;
-	}
+
 	@Override
 	public String toString() {
-		return "Ponto [idPonto=" + idPonto + ", momentoPonto=" + momentoPonto + ", idPessoa=" + idPessoa + ", jornada="
-				+ jornada + "]";
+		return "Ponto [idPonto=" + idPonto + ", momentoPonto=" + momentoPonto + ", dataPonto=" + dataPonto
+				+ ", idPessoa=" + idPessoa + "]";
 	}
+
 }
