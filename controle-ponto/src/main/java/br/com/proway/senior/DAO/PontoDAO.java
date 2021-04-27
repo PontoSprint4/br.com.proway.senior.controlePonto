@@ -5,18 +5,18 @@ import java.util.ArrayList;
 
 import br.com.proway.senior.modelos.Ponto;
 
-public final class JornadaDAO {
-	private static JornadaDAO instance;
+public final class PontoDAO {
+	private static PontoDAO instance;
 	Ponto ponto = new Ponto();
 	public ArrayList<Ponto> pontos = new ArrayList<Ponto>();
 	
-	private JornadaDAO(Ponto ponto) {
+	private PontoDAO(Ponto ponto) {
 		this.ponto = ponto;
 	}
 	
-	public static JornadaDAO getInstance(Ponto ponto) {
+	public static PontoDAO getInstance(Ponto ponto) {
 		if (instance == null) {
-			instance = new JornadaDAO(ponto);
+			instance = new PontoDAO(ponto);
 		}
 		return instance;
 	}
@@ -65,7 +65,7 @@ public final class JornadaDAO {
 	public void alterarPonto(int id) {
 		for(Ponto ponto : pontos) {
 			if(ponto.getIdPonto() == id) {
-
+				ponto.setDataPonto(null);
 			}
 		}
 	}
