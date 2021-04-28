@@ -2,31 +2,17 @@ package br.com.proway.senior.implementacao;
 
 import java.time.LocalDateTime;
 
-import br.com.proway.senior.DAO.JornadaDAO;
 import br.com.proway.senior.interfaces.JornadaDiurnaServico;
-import br.com.proway.senior.modelos.Ponto;
+import br.com.proway.senior.modelos.Jornada;
 
 public class SegundoTurnoServico implements JornadaDiurnaServico {
 
-	public boolean registraPonto(Integer idPessoa, LocalDateTime momentoBatida) {
-		Ponto ponto = new Ponto();
-		ponto.setIdPessoa(idPessoa);
-		ponto.setMomentoPonto(momentoBatida);
-		
-		/*
-		 * if() { PontoDAO db = PontoDAO.getInstance(ponto); db.cadastrarPonto(ponto); }
-		 */
-		JornadaDAO db = JornadaDAO.getInstance(ponto);
-		db.cadastrarPonto(ponto);
-		
+	public boolean fechaJornadaDiurna(Jornada jornada) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public void fechaJornada() {
-		// TODO Auto-generated method stub
-	}
-
-	public boolean comparaSeDataEhIgual() {
+	public boolean registraPonto(int idPessoa, LocalDateTime momentoBatida) {
 		// TODO Auto-generated method stub
 		return false;
 	}

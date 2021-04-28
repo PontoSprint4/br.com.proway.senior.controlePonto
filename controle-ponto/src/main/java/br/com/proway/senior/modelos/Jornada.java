@@ -45,5 +45,4 @@ public class Jornada {
 		return "Jornada [idJornada=" + idJornada + ", idPessoa=" + idPessoa + ", aberta=" + aberta + ", pontos="
 				+ pontos + "]";
 	}
-
 }

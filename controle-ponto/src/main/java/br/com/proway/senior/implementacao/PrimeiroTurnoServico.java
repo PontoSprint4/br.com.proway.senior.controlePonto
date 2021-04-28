@@ -27,7 +27,7 @@ public class PrimeiroTurnoServico implements JornadaDiurnaServico {
 
 		registroPonto.setIdPonto(registroPonto.getIdPonto() + 1);
 
-		Jornada jornada = db.buscarUltima(idPessoa);
+		Jornada jornada = db.buscarUltimaJornadaAberta(idPessoa);
 		
 		System.out.println(jornada);
 		System.out.println(jornada.isAberta());
