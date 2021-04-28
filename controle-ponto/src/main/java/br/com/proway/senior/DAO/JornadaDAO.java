@@ -67,7 +67,7 @@ public final class JornadaDAO {
 	public boolean atualizar(Jornada jornada) {
 		for(Jornada jornadaBuscada : jornadas) {
 			if(jornadaBuscada.getId() == jornada.getId()) {
-				jornadaBuscada.getPontos().addAll(jornada.getPontos());
+				jornadaBuscada.setPontos(jornada.getPontos());
 				return true;
 			}
 		}
