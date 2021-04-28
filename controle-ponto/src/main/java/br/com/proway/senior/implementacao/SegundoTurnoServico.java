@@ -2,7 +2,7 @@ package br.com.proway.senior.implementacao;
 
 import java.time.LocalDateTime;
 
-import br.com.proway.senior.DAO.PontoDAO;
+import br.com.proway.senior.DAO.JornadaDAO;
 import br.com.proway.senior.interfaces.JornadaDiurnaServico;
 import br.com.proway.senior.modelos.Ponto;
 
@@ -16,7 +16,7 @@ public class SegundoTurnoServico implements JornadaDiurnaServico {
 		/*
 		 * if() { PontoDAO db = PontoDAO.getInstance(ponto); db.cadastrarPonto(ponto); }
 		 */
-		PontoDAO db = PontoDAO.getInstance(ponto);
+		JornadaDAO db = JornadaDAO.getInstance(ponto);
 		db.cadastrarPonto(ponto);
 		
 		return false;

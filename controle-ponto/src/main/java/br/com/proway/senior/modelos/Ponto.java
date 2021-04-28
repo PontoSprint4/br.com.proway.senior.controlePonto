@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import br.com.proway.senior.interfaces.JornadaServico;
 
 public class Ponto {
-	private Integer idPonto;
+	private int idPonto;
 	private LocalDateTime momentoPonto;
 	private LocalDate dataPonto;
 	private Integer idPessoa;
@@ -16,7 +16,7 @@ public class Ponto {
 		
 	}
 	
-	public Ponto(Integer idPonto, LocalDateTime momentoPonto, LocalDate dataPonto, Integer idPessoa) {
+	public Ponto(int idPonto, LocalDateTime momentoPonto, LocalDate dataPonto, Integer idPessoa) {
 		super();
 		this.idPonto = idPonto;
 		this.momentoPonto = momentoPonto;
@@ -32,10 +32,10 @@ public class Ponto {
 	}
 
 
-	public Integer getIdPonto() {
+	public int getIdPonto() {
 		return idPonto;
 	}
-	public void setIdPonto(Integer idPonto) {
+	public void setIdPonto(int idPonto) {
 		this.idPonto = idPonto;
 	}
 	public LocalDateTime getMomentoPonto() {
