@@ -15,51 +15,58 @@ public class JornadaDAOTest {
 	@Test
 	public void testCadastrar() {
 		Jornada jornada = new Jornada();
-		
+		ArrayList<Ponto> pontosJornada = new ArrayList<Ponto>();
+		Ponto ponto = new Ponto(651, null, null, 732);
 		JornadaDAO db = JornadaDAO.getInstance();
-		db.cadastrar(jornada);
 		
-		//Que a sorte esteja com você
+		pontosJornada.add(ponto);
+		
+		jornada.setIdPessoa(ponto.getIdPessoa());
+		jornada.setId(222);
+		jornada.setPontos(pontosJornada);
+	
 		assertTrue(db.cadastrar(jornada));
 	}
 	
 	@Test
-	public void testBuscarUltimaRetornaNull() {
-		Jornada jornadaFechada = new Jornada();
-		ArrayList<Ponto> pontosJornadaFechada = new ArrayList<Ponto>();
-		Ponto ponto1 = new Ponto();
-		
-		pontosJornadaFechada.add(ponto1);
-		pontosJornadaFechada.add(ponto1);
-		pontosJornadaFechada.add(ponto1);
-		pontosJornadaFechada.add(ponto1);
-		
-		jornadaFechada.setIdPessoa(456);
-		jornadaFechada.setAberta(false);
-		jornadaFechada.setPontos(pontosJornadaFechada);
-		
+	public void testBuscarUltimaRetornaJornadaAberta() {
 		JornadaDAO db = JornadaDAO.getInstance();
-		db.cadastrar(jornadaFechada);
+		
+		Integer idEsperado = 222;
 
-		assertEquals(null, db.buscarUltima(456));
+		assertTrue(db.buscarUltimaJornadaAberta(732).getId().equals(idEsperado));
 	}
 	
 	@Test
-	public void testBuscarUltimaRetornaJornada() {
-		Jornada jornadaAberta = new Jornada();
-		ArrayList<Ponto> pontosJornadaAberta = new ArrayList<Ponto>();
-		Ponto ponto2 = new Ponto();
-		
-		pontosJornadaAberta.add(ponto2);
-		pontosJornadaAberta.add(ponto2);
-		pontosJornadaAberta.add(ponto2);
-		
-		jornadaAberta.setIdPessoa(498);
-		jornadaAberta.setPontos(pontosJornadaAberta);
-		
+	public void testAtualizarJornada() {
 		JornadaDAO db = JornadaDAO.getInstance();
-		db.cadastrar(jornadaAberta);
-
-		assertTrue(jornadaAberta.equals(db.buscarUltima(498)));
+		Ponto ponto2 = new Ponto(652, null, null, 732);
+		Jornada jornada = db.buscarUltimaJornadaAberta(ponto2.getIdPessoa());
+		
+		jornada.getPontos().add(ponto2);
+		
+		db.atualizar(jornada);
+		
+		assertTrue(db.buscarUltimaJornadaAberta(732).getPontos().contains(ponto2));
 	}
+	
+	@Test
+	public void testBuscarUltimaJornadaFechadaRetornaNull() {
+		Ponto ponto3 = new Ponto(653, null, null, 732);
+		Ponto ponto4 = new Ponto(654, null, null, 732);
+		ArrayList<Ponto> pontosJornada = new ArrayList<Ponto>();
+		Jornada jornada = new Jornada();
+		JornadaDAO db = JornadaDAO.getInstance();
+		
+		pontosJornada.add(ponto3);
+		pontosJornada.add(ponto4);
+		jornada.setId(732);
+		jornada.setPontos(pontosJornada);
+		jornada.setAberta(false);
+		
+		db.atualizar(jornada);
+		
+		assertEquals(null, db.buscarUltimaJornadaAberta(732));
+	}
+	
 }

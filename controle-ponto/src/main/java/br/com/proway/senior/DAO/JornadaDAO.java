@@ -8,8 +8,7 @@ public final class JornadaDAO {
 	private static JornadaDAO instance;
 	public ArrayList<Jornada> jornadas = new ArrayList<Jornada>();
 	
-	private JornadaDAO() {
-	}
+	private JornadaDAO() {}
 	
 	public static JornadaDAO getInstance() {
 		if (instance == null) {
@@ -47,7 +46,7 @@ public final class JornadaDAO {
 	 * @param idPessoa
 	 * @return Jornada
 	 */
-	public Jornada buscarUltima(Integer idPessoa) {
+	public Jornada buscarUltimaJornadaAberta(Integer idPessoa) {
 		for(Jornada jornada : jornadas) {
 			if(jornada.getIdPessoa().equals(idPessoa) && jornada.isAberta() == true) {
 				return jornada;
@@ -68,7 +67,7 @@ public final class JornadaDAO {
 	public boolean atualizar(Jornada jornada) {
 		for(Jornada jornadaBuscada : jornadas) {
 			if(jornadaBuscada.getId() == jornada.getId()) {
-				jornadaBuscada.setPontos(jornada.getPontos());
+				jornadaBuscada.getPontos().addAll(jornada.getPontos());
 				return true;
 			}
 		}
