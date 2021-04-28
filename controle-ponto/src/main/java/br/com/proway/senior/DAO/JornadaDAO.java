@@ -96,4 +96,9 @@ public final class JornadaDAO {
 		}
 		return false;
 	}
+	
+	public static JornadaDAO newInstance() {
+		instance = new JornadaDAO();
+		return instance;
+	}
 }
