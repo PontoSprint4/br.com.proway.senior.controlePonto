@@ -3,6 +3,8 @@ package br.com.proway.senior.modelos;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import br.com.proway.senior.interfaces.IPessoa;
+
 public class Ponto {
 	private int idPonto;
 	private LocalDateTime momentoPonto;
@@ -13,12 +15,12 @@ public class Ponto {
 		
 	}
 	
-	public Ponto(int idPonto, LocalDateTime momentoPonto, LocalDate dataPonto, Integer idPessoa) {
+	public Ponto(int idPonto, LocalDateTime momentoPonto, LocalDate dataPonto, IPessoa idPessoa) {
 		super();
 		this.idPonto = idPonto;
 		this.momentoPonto = momentoPonto;
 		this.dataPonto = dataPonto;
-		this.idPessoa = idPessoa;
+		this.idPessoa = idPessoa.getIdPessoa();
 	}
 	
 	public LocalDate getDataPonto() {
