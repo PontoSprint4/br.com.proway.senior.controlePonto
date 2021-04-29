@@ -29,8 +29,7 @@ public class JornadaDAOUnitTest {
 		Jornada jornada = new Jornada();
 		ArrayList<Ponto> pontosJornada = new ArrayList<Ponto>();
 		Pessoa pessoa = new Pessoa();
-		pessoa.getIdPessoa();
-		Ponto ponto = new Ponto(651, null, null, pessoa);
+		Ponto ponto = new Ponto(651, null, null, pessoa.getIdPessoa());
 		JornadaDAO db = JornadaDAO.getInstance();
 
 		pontosJornada.add(ponto);

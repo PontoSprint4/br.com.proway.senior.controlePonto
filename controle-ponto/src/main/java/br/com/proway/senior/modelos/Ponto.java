@@ -15,12 +15,12 @@ public class Ponto {
 		
 	}
 	
-	public Ponto(int idPonto, LocalDateTime momentoPonto, LocalDate dataPonto, IPessoa idPessoa) {
+	public Ponto(int idPonto, LocalDateTime momentoPonto, LocalDate dataPonto, Integer idPessoa) {
 		super();
 		this.idPonto = idPonto;
 		this.momentoPonto = momentoPonto;
 		this.dataPonto = dataPonto;
-		this.idPessoa = idPessoa.getIdPessoa();
+		this.idPessoa = idPessoa;
 	}
 	
 	public LocalDate getDataPonto() {

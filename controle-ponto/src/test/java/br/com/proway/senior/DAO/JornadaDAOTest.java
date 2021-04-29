@@ -1,9 +1,11 @@
 package br.com.proway.senior.DAO;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -51,8 +53,9 @@ public class JornadaDAOTest {
 		JornadaDAO db = JornadaDAO.getInstance();
 		
 		Integer idEsperado = 222;
-
-		assertTrue(db.buscarUltimaJornadaAberta(732).getId().equals(idEsperado));
+		
+		assertEquals(idEsperado, db.buscarUltimaJornadaAberta(732).getId());
+		//assertTrue(db.buscarUltimaJornadaAberta(732).getId().equals(idEsperado));
 	}
 	
 	@Test
