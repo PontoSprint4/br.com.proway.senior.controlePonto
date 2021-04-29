@@ -13,12 +13,6 @@ import br.com.proway.senior.modelos.Ponto;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JornadaDAOTest {
-
-	/*
-	 * @Before public void cleanDAO() { System.out.println("antes " +
-	 * JornadaDAO.getInstance().jornadas.size()); JornadaDAO.newInstance();
-	 * System.out.println("depois " + JornadaDAO.getInstance().jornadas.size()); }
-	 */
 	
 	@Test
 	public void ATesteCadastrar() {
