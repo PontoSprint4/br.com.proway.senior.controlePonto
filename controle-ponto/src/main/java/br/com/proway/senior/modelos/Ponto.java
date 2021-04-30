@@ -3,6 +3,8 @@ package br.com.proway.senior.modelos;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import br.com.proway.senior.interfaces.IPessoa;
+
 public class Ponto {
 	private int idPonto;
 	private LocalDateTime momentoPonto;

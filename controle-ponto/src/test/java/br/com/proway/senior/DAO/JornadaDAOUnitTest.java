@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import br.com.proway.senior.modelos.Jornada;
+import br.com.proway.senior.modelos.Pessoa;
 import br.com.proway.senior.modelos.Ponto;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -27,7 +28,8 @@ public class JornadaDAOUnitTest {
 	public void testeCadastrar() {
 		Jornada jornada = new Jornada();
 		ArrayList<Ponto> pontosJornada = new ArrayList<Ponto>();
-		Ponto ponto = new Ponto(651, null, null, 732);
+		Pessoa pessoa = new Pessoa();
+		Ponto ponto = new Ponto(651, null, null, pessoa.getIdPessoa());
 		JornadaDAO db = JornadaDAO.getInstance();
 
 		pontosJornada.add(ponto);
@@ -65,5 +67,21 @@ public class JornadaDAOUnitTest {
 		db.atualizar(jornada);
 		
 		assertNull(db.buscarUltimaJornadaAberta(732));
+	}
+	
+	@Test
+	public void testeCadastrarRecebeIdPessoa() {
+		Jornada jornada = new Jornada();
+		ArrayList<Ponto> pontosJornada = new ArrayList<Ponto>();
+		Ponto ponto = new Ponto(651, null, null, 732);
+		JornadaDAO db = JornadaDAO.getInstance();
+
+		pontosJornada.add(ponto);
+
+		jornada.setIdPessoa(ponto.getIdPessoa());
+		jornada.setId(222);
+		jornada.setPontos(pontosJornada);
+
+		assertTrue(db.cadastrar(jornada));
 	}
 }
