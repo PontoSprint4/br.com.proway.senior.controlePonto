@@ -19,9 +19,7 @@ public class JornadaDAOUnitTest {
 
 	@Before
 	public void cleanDAO() {
-		System.out.println("antes " + JornadaDAO.getInstance().jornadas.size());
 		JornadaDAO.newInstance();
-		System.out.println("depois " + JornadaDAO.getInstance().jornadas.size());
 	}
 
 	@Test

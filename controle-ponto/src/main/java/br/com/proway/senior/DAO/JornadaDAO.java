@@ -9,9 +9,17 @@ public final class JornadaDAO {
 	private static JornadaDAO instance;
 	public ArrayList<Jornada> jornadas = new ArrayList<Jornada>();
 	
+	/**
+	 * Construtor vazio
+	 * 
+	 */
 	private JornadaDAO() {}
 
-	
+	/**
+	 * Cria uma nova jornada caso seja nula
+	 * 
+	 * @return instance
+	 */
 	public static JornadaDAO getInstance() {
 		if (instance == null) {
 			instance = new JornadaDAO();
@@ -97,6 +105,11 @@ public final class JornadaDAO {
 		return false;
 	}
 	
+	/**
+	 * Limpa o DAO
+	 * 
+	 * @return instance
+	 */
 	public static JornadaDAO newInstance() {
 		instance = new JornadaDAO();
 		return instance;
