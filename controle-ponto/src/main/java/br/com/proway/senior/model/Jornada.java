@@ -1,4 +1,4 @@
-package br.com.proway.senior.modelos;
+package br.com.proway.senior.model;
 
 import java.util.ArrayList;
 

@@ -1,117 +1,105 @@
-
 package br.com.proway.senior.DAO;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-import br.com.proway.senior.modelos.Jornada;
+import br.com.proway.senior.model.interfaces.IPessoa;
 
 public final class JornadaDAO {
 	private static JornadaDAO instance;
-	public ArrayList<Jornada> jornadas = new ArrayList<Jornada>();
 	
-	/**
-	 * Construtor vazio
-	 * 
-	 */
-	private JornadaDAO() {}
-
-	/**
-	 * Cria uma nova jornada caso seja nula
-	 * 
-	 * @return instance
-	 */
 	public static JornadaDAO getInstance() {
-		if (instance == null) {
+		if(instance == null) {
 			instance = new JornadaDAO();
 		}
 		return instance;
 	}
-	
-	/**
-	 * <h1>
-	 * Cadastra uma jornada
-	 * </h1>
-	 * </br>
-	 * Recebe um objeto Jornada e cadastra na lista de jornadas 
-	 * @param jornada Jornada
-	 * @return boolean
-	 */
-	public boolean cadastrar(Jornada jornada) {
-		if(jornada != null) {
-			jornadas.add(jornada);
-			return true;
+
+	public void create(IPessoa pessoa) {
+
+		pessoa.getIdPessoa();
+		pessoa.getIdTurno();
+
+		/**
+		 * Formata a data conforme o banco recebe
+		 */
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		String date = simpleDateFormat.format(LocalDate.now());
+
+		String insert = "INSERT INTO jornada (idPessoa, data, idTurno) VALUES (" + pessoa.getIdPessoa() + "," + date
+				+ "," + pessoa.getIdTurno() + ")";
+
+		try {
+			PostgresConnector.executeUpdate(insert);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return false;
 	}
 
-	/**
-	 * <h>
-	 * Busca a ultima jornada da pessoa
-	 * </h>
-	 * 
-	 * Recebe a id da pessoa; Se a ultima jornada estiver aberta
-	 * </br>
-	 * retorna a jornada; Se estiver fechada, retorna null;
-	 * 
-	 * @param idPessoa
-	 * @return Jornada
-	 */
+	public ArrayList<String> read(int id) {
+		ArrayList<String> result = new ArrayList<String>();
+		String query = "SELECT * FROM jornadas WHERE id = " + id;
+		ResultSet rs;
+		try {
+			rs = PostgresConnector.executeQuery(query);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int totalColumns = rsmd.getColumnCount();
+			if (rs.next()) {
+				for (int i = 0; i < totalColumns; i++) {
+					result.add(rs.getString(i));
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 
-	public Jornada buscarUltimaJornadaAberta(Integer idPessoa) {
-		for(Jornada jornada : jornadas) {
-			if(jornada.getIdPessoa().equals(idPessoa) && jornada.isAberta() == true) {
-				return jornada;
-			}
+	public void delete(int id) {
+		String query = "DELETE FROM jornadas WHERE id =" + id;
+		try {
+			PostgresConnector.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return null;
 	}
-	
-	/**
-	 * <h>
-	 * Adiciona pontos a uma jornada aberta
-	 * </h>
-	 * 
-	 * 
-	 * @param jornada
-	 * @return boolean
-	 */
-	public boolean atualizar(Jornada jornada) {
-		for(Jornada jornadaBuscada : jornadas) {
-			if(jornadaBuscada.getId() == jornada.getId()) {
-				jornadaBuscada.setPontos(jornada.getPontos());
-				return true;
-			}
+
+	public void update(int id, String col, String data) {
+		String query = "UPDATE jornadas SET " + col + "=" + data + " WHERE id =" + id;
+		try {
+			PostgresConnector.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return false;
 	}
-	
-	/**
-	 * <h>
-	 * Remove uma jornada
-	 * </h>
-	 * 
-	 * Procura uma jornada pela idJornada e remove esta jornada da lista
-	 * 
-	 * @param idJornada
-	 * @return boolean
-	 */
-	public boolean remover(Integer idJornada) {
-		for(Jornada jornadaBuscada : jornadas) {
-			if(jornadaBuscada.getId() == idJornada) {
-				jornadas.remove(jornadaBuscada);
-				return true;
+
+	public ArrayList<ArrayList<String>> readAll() {
+		ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
+		String query = "SELECT * FROM jornadas";
+		ResultSet rs;
+		try {
+			rs = PostgresConnector.executeQuery(query);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int totalColumns = rsmd.getColumnCount();
+			while (rs.next()) {
+				ArrayList<String> row = new ArrayList<String>();
+				for (int i = 0; i < totalColumns; i++) {
+					row.add(rs.getString(i));
+				}
+				results.add(row);
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return false;
-	}
-	
-	/**
-	 * Limpa o DAO
-	 * 
-	 * @return instance
-	 */
-	public static JornadaDAO newInstance() {
-		instance = new JornadaDAO();
-		return instance;
+		return results;
 	}
 }

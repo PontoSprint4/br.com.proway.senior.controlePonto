@@ -10,16 +10,16 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import br.com.proway.senior.modelos.Jornada;
-import br.com.proway.senior.modelos.Pessoa;
-import br.com.proway.senior.modelos.Ponto;
+import br.com.proway.senior.model.Jornada;
+import br.com.proway.senior.model.Pessoa;
+import br.com.proway.senior.model.Ponto;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JornadaDAOUnitTest {
 
 	@Before
 	public void cleanDAO() {
-		JornadaDAO.newInstance();
+		JornadaDAO_V1.newInstance();
 	}
 
 	@Test
@@ -27,8 +27,8 @@ public class JornadaDAOUnitTest {
 		Jornada jornada = new Jornada();
 		ArrayList<Ponto> pontosJornada = new ArrayList<Ponto>();
 		Pessoa pessoa = new Pessoa();
-		Ponto ponto = new Ponto(651, null, null, pessoa.getIdPessoa());
-		JornadaDAO db = JornadaDAO.getInstance();
+		Ponto ponto = new Ponto(651, null, null, pessoa.getIdPessoa(1));
+		JornadaDAO_V1 db = JornadaDAO_V1.getInstance();
 
 		pontosJornada.add(ponto);
 
@@ -46,7 +46,7 @@ public class JornadaDAOUnitTest {
 		Ponto ponto3 = new Ponto(653, null, null, 732);
 		Ponto ponto4 = new Ponto(654, null, null, 732);
 		ArrayList<Ponto> pontos = new ArrayList<Ponto>();
-		JornadaDAO db = JornadaDAO.getInstance();
+		JornadaDAO_V1 db = JornadaDAO_V1.getInstance();
 		Jornada jornada = new Jornada();
 		
 		pontos.add(ponto1);
@@ -72,7 +72,7 @@ public class JornadaDAOUnitTest {
 		Jornada jornada = new Jornada();
 		ArrayList<Ponto> pontosJornada = new ArrayList<Ponto>();
 		Ponto ponto = new Ponto(651, null, null, 732);
-		JornadaDAO db = JornadaDAO.getInstance();
+		JornadaDAO_V1 db = JornadaDAO_V1.getInstance();
 
 		pontosJornada.add(ponto);
 

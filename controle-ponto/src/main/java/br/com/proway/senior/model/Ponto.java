@@ -1,9 +1,9 @@
-package br.com.proway.senior.modelos;
+package br.com.proway.senior.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import br.com.proway.senior.interfaces.IPessoa;
+import br.com.proway.senior.model.interfaces.IPessoa;
 
 public class Ponto {
 	private int idPonto;

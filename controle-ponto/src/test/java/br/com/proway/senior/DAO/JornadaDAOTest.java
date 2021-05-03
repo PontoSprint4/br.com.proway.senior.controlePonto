@@ -10,8 +10,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import br.com.proway.senior.modelos.Jornada;
-import br.com.proway.senior.modelos.Ponto;
+import br.com.proway.senior.model.Jornada;
+import br.com.proway.senior.model.Ponto;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JornadaDAOTest {
@@ -21,7 +21,7 @@ public class JornadaDAOTest {
 		Jornada jornada = new Jornada();
 		ArrayList<Ponto> pontosJornada = new ArrayList<Ponto>();
 		Ponto ponto = new Ponto(651, null, null, 732);
-		JornadaDAO db = JornadaDAO.getInstance();
+		JornadaDAO_V1 db = JornadaDAO_V1.getInstance();
 		
 		pontosJornada.add(ponto);
 		
@@ -37,7 +37,7 @@ public class JornadaDAOTest {
 		Jornada jornada = new Jornada();
 		ArrayList<Ponto> pontosJornada = new ArrayList<Ponto>();
 		Ponto ponto = new Ponto(984, null, null, 735);
-		JornadaDAO db = JornadaDAO.getInstance();
+		JornadaDAO_V1 db = JornadaDAO_V1.getInstance();
 		
 		pontosJornada.add(ponto);
 		
@@ -50,7 +50,7 @@ public class JornadaDAOTest {
 	
 	@Test
 	public void CTesteBuscarUltimaRetornaJornadaAberta() {
-		JornadaDAO db = JornadaDAO.getInstance();
+		JornadaDAO_V1 db = JornadaDAO_V1.getInstance();
 		
 		Integer idEsperado = 222;
 		
@@ -60,7 +60,7 @@ public class JornadaDAOTest {
 	
 	@Test
 	public void DATesteAtualizarJornada() {
-		JornadaDAO db = JornadaDAO.getInstance();
+		JornadaDAO_V1 db = JornadaDAO_V1.getInstance();
 		Ponto ponto2 = new Ponto(652, null, null, 732);
 		Jornada jornada = db.buscarUltimaJornadaAberta(ponto2.getIdPessoa());
 		
@@ -73,7 +73,7 @@ public class JornadaDAOTest {
 	
 	@Test
 	public void ETesteBuscarUltimaRetornaJornadaAbertaJornadaDois() {
-		JornadaDAO db = JornadaDAO.getInstance();
+		JornadaDAO_V1 db = JornadaDAO_V1.getInstance();
 		
 		Integer idEsperado = 245;
 
@@ -84,7 +84,7 @@ public class JornadaDAOTest {
 	public void FTesteBuscarUltimaJornadaFechadaRetornaNull() {
 		Ponto ponto3 = new Ponto(653, null, null, 732);
 		Ponto ponto4 = new Ponto(654, null, null, 732);
-		JornadaDAO db = JornadaDAO.getInstance();
+		JornadaDAO_V1 db = JornadaDAO_V1.getInstance();
 		Jornada jornada = db.buscarUltimaJornadaAberta(732);
 		
 		jornada.getPontos().add(ponto3);
@@ -94,5 +94,7 @@ public class JornadaDAOTest {
 		db.atualizar(jornada);
 		
 		assertNull(db.buscarUltimaJornadaAberta(732));
+		
+		
 	}
 }
