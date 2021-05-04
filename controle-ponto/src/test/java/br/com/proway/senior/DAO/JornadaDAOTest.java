@@ -57,6 +57,7 @@ public class JornadaDAOTest {
 	public void cleanDAO() {
 		JornadaDAO.newInstance();
 	}
+
 	@Test
 	public void testCreateData() {
 		JornadaDAO db = JornadaDAO.getInstance();
