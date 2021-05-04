@@ -1,27 +1,21 @@
 package br.com.proway.senior.model;
 
-import java.time.LocalTime;
-
 public class Turno {
 
 	private int id;
-	private LocalTime horaInicio;
-	private LocalTime horaFim;
-	private LocalTime horaIntervaloInicio;
-	private LocalTime horaIntervaloFim;
+	private String horaInicio;
+	private String horaFim;
+	private String nomeTurno;
 
 	public Turno() {
-
 	}
 
-	public Turno(int id, LocalTime horaInicio, LocalTime horaFim, LocalTime horaIntervaloInicio,
-			LocalTime horaIntervaloFim) {
+	public Turno(int id, String horaInicio, String horaFim, String nomeTurno) {
 		super();
 		this.id = id;
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
-		this.horaIntervaloInicio = horaIntervaloInicio;
-		this.horaIntervaloFim = horaIntervaloFim;
+		this.nomeTurno = nomeTurno;
 	}
 
 	public int getId() {
@@ -32,36 +26,28 @@ public class Turno {
 		this.id = id;
 	}
 
-	public LocalTime getHoraInicio() {
+	public String getHoraInicio() {
 		return horaInicio;
 	}
 
-	public void setHoraInicio(LocalTime horaInicio) {
+	public void setHoraInicio(String horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 
-	public LocalTime getHoraFim() {
+	public String getHoraFim() {
 		return horaFim;
 	}
 
-	public void setHoraFim(LocalTime horaFim) {
+	public void setHoraFim(String horaFim) {
 		this.horaFim = horaFim;
 	}
 
-	public LocalTime getHoraIntervaloInicio() {
-		return horaIntervaloInicio;
+	public String getNomeTurno() {
+		return nomeTurno;
 	}
 
-	public void setHoraIntervaloInicio(LocalTime horaIntervaloInicio) {
-		this.horaIntervaloInicio = horaIntervaloInicio;
+	public void setNomeTurno(String nomeTurno) {
+		this.nomeTurno = nomeTurno;
 	}
-
-	public LocalTime getHoraIntervaloFim() {
-		return horaIntervaloFim;
-	}
-
-	public void setHoraIntervaloFim(LocalTime horaIntervaloFim) {
-		this.horaIntervaloFim = horaIntervaloFim;
-	}
-
+	
 }

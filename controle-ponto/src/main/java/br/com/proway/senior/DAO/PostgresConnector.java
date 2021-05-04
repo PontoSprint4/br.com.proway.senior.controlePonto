@@ -18,6 +18,9 @@ public class PostgresConnector {
 	}
 
 	public static ResultSet executeQuery(String query) throws SQLException {
+		if (con == null) {
+			connect();
+		}
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
 		return rs;
@@ -40,6 +43,9 @@ public class PostgresConnector {
 	}
 
 	public static void executeUpdate(String query) throws SQLException {
+		if (con == null) {
+			connect();
+		}
 		Statement st = con.createStatement();
 		st.executeUpdate(query);
 	}
