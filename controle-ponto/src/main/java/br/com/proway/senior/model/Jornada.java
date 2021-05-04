@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import br.com.proway.senior.model.interfaces.IJornada;
 
 public class Jornada implements IJornada {
+	
+	/**
+	 * Atributos da classe jornada
+	 */
 	private int id;
 	private int idPessoa;
 	private LocalDate data;
@@ -52,6 +56,13 @@ public class Jornada implements IJornada {
 	
 	public Jornada() {}
 
+	/**
+	 * Implementação da interface IJornada
+	 * 
+	 * Foi utilizada pela classe ponto
+	 * 
+	 * @return id
+	 */
 	public Integer getIdJornada() {
 		Integer id = this.id;
 		return id;

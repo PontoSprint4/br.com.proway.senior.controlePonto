@@ -1,36 +1,47 @@
 package br.com.proway.senior.controller;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+
+import br.com.proway.senior.DAO.JornadaDAO;
+import br.com.proway.senior.model.interfaces.IPessoa;
 
 public class JornadaController {
 
-	private ArrayList<String> observacoes = new ArrayList<String>();
-
+	/**
+	 * Verifica se a jornada aberta
+	 * 
+	 * Caso a jornada esteja aberta retorna true
+	 * 
+	 * @param pessoa
+	 * @return true || false
+	 */
+	public boolean verificaJornadaAberta(IPessoa pessoa) {
+		JornadaDAO jornadaDAO = JornadaDAO.getInstance();
+		String dataUsuario = jornadaDAO.readByIdPessoa(pessoa).get(2);
+		
+		if (dataUsuario.equals(LocalDate.now().toString()))
+			return true;
+		else
+			return false;
+	}
+	
 	/**
 	 * Dispara alerta de quantos pontos bateu
 	 * 
+	 * Nao foi implementado
+	 * 
 	 */
-	public void pontosBatidos() {
-
-	}
+	public void pontosBatidos() {}
 
 	/**
-	 * Quando sair do padrão de batidas (4 pontos).
+	 * Quando sair do padrão de batidas
 	 * 
-	 * Será disparado uma mensagem
+	 * Sera disparado uma mensagem
+	 * 
+	 * Não foi implementado
 	 * 
 	 */
-	public void padraoBatidaPonto() {
-
-	}
-
-	public ArrayList<String> getObservacoes() {
-		return observacoes;
-	}
-
-	public void setObservacoes(ArrayList<String> observacoes) {
-		this.observacoes = observacoes;
-	}
+	public void padraoBatidaPonto() {}
 }
 
 	

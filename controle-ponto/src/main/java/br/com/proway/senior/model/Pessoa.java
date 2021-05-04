@@ -4,14 +4,23 @@ import br.com.proway.senior.model.interfaces.IPessoa;
 
 public class Pessoa implements IPessoa {
 
+	private int id = 118;
+	private int idTurno = 1;
+
 	public int getIdPessoa() {
-		int id = 118;
-		return id;
+		return this.id;
 	}
 
 	public int getIdTurno() {
-		int id = 1;
-		return id;
+		return this.idTurno;
 
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setIdTurno(int idTurno) {
+		this.idTurno = idTurno;
 	}
 }
