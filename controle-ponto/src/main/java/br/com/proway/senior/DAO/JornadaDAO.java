@@ -10,14 +10,14 @@ import br.com.proway.senior.model.interfaces.IPessoa;
 
 public final class JornadaDAO {
 	private static JornadaDAO instance;
-	
+
 	public static JornadaDAO getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new JornadaDAO();
 		}
 		return instance;
 	}
-	
+
 	public static JornadaDAO newInstance() {
 		instance = new JornadaDAO();
 		return instance;
@@ -28,9 +28,8 @@ public final class JornadaDAO {
 		pessoa.getIdPessoa();
 		pessoa.getIdTurno();
 
-		String insert = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES ("
-						+ pessoa.getIdPessoa() + ",'" + LocalDate.now().toString()
-						+ "'," + pessoa.getIdTurno() + ")";
+		String insert = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + pessoa.getIdPessoa() + ",'"
+				+ LocalDate.now().toString() + "'," + pessoa.getIdTurno() + ")";
 
 		try {
 			PostgresConnector.executeUpdate(insert);
@@ -59,6 +58,26 @@ public final class JornadaDAO {
 		return result;
 	}
 
+	public ArrayList<String> readByIdPessoa(IPessoa pessoa) {
+		ArrayList<String> result = new ArrayList<String>();
+		String query = "SELECT * FROM jornadas WHERE idPessoa = " + pessoa.getIdPessoa();
+		ResultSet rs;
+		try {
+			rs = PostgresConnector.executeQuery(query);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int totalColumns = rsmd.getColumnCount();
+			if (rs.next()) {
+				for (int i = 1; i <= totalColumns; i++) {
+					result.add(rs.getString(i));
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public void delete(int id) {
 		String query = "DELETE FROM jornadas WHERE id =" + id;
 		try {
@@ -70,10 +89,8 @@ public final class JornadaDAO {
 	}
 
 	public void update(int id, String col, LocalDate data) {
-		String query = "UPDATE jornadas"
-				+ " SET " + col + " = '" + data
-				+ "' WHERE id = " + id;
-				
+		String query = "UPDATE jornadas" + " SET " + col + " = '" + data + "' WHERE id = " + id;
+
 		try {
 			PostgresConnector.executeUpdate(query);
 		} catch (SQLException e) {

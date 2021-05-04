@@ -15,31 +15,23 @@ import br.com.proway.senior.model.Pessoa;
 public class JornadaDAOTest {
 	@BeforeClass
 	public static void refreshDatabase() {
-		
+
 		String queryDrop = "DROP TABLE jornadas";
-		
-		String queryCreate = "CREATE TABLE jornadas ("
-				+ "id SERIAL PRIMARY KEY NOT NULL,"
-				+ "idPessoa INT NOT NULL,"
-				+ "data DATE NOT NULL,"
-				+ "idTurno INT NOT NULL)";
-		
-		String query1 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES ("
-				+ 111 + ",'" + LocalDate.now().toString()
-				+ "'," + 1 + ")";
-		String query2 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES ("
-				+ 112 + ",'" + LocalDate.now().toString()
-				+ "'," + 1 + ")";
-		String query3 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES ("
-				+ 113 + ",'" + LocalDate.now().toString()
-				+ "'," + 2 + ")";
-		String query4 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES ("
-				+ 114 + ",'" + LocalDate.now().toString()
-				+ "'," + 3 + ")";
-		String query5 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES ("
-				+ 117 + ",'" + LocalDate.now().toString()
-				+ "'," + 2 + ")";
-		
+
+		String queryCreate = "CREATE TABLE jornadas (" + "id SERIAL PRIMARY KEY NOT NULL," + "idPessoa INT NOT NULL,"
+				+ "data DATE NOT NULL," + "idTurno INT NOT NULL)";
+
+		String query1 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + 111 + ",'"
+				+ LocalDate.now().toString() + "'," + 1 + ")";
+		String query2 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + 112 + ",'"
+				+ LocalDate.now().toString() + "'," + 1 + ")";
+		String query3 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + 113 + ",'"
+				+ LocalDate.now().toString() + "'," + 2 + ")";
+		String query4 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + 114 + ",'"
+				+ LocalDate.now().toString() + "'," + 3 + ")";
+		String query5 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + 117 + ",'"
+				+ LocalDate.now().toString() + "'," + 2 + ")";
+
 		try {
 			PostgresConnector.executeUpdate(queryDrop);
 			PostgresConnector.executeUpdate(queryCreate);
@@ -52,43 +44,46 @@ public class JornadaDAOTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}	
+	}
+
 	@Before
 	public void cleanDAO() {
 		JornadaDAO.newInstance();
 	}
+
 	@Test
 	public void testCreateData() {
 		JornadaDAO db = JornadaDAO.getInstance();
 		Pessoa pessoa = new Pessoa();
-		
+
 		db.create(pessoa);
 	}
+
 	@Test
 	public void testBuscarJornadaPorId() {
 		JornadaDAO db = JornadaDAO.getInstance();
 		System.out.println(db.read(1));
 		assertEquals("[1, 111, 2021-05-04, 1]", db.read(1).toString());
 	}
+
 	@Test
 	public void testReadAll() {
 		JornadaDAO db = JornadaDAO.getInstance();
-		
-		assertEquals("[[1, 111, 2021-05-04, 1],"
-				+ " [2, 112, 2021-05-04, 1],"
-				+ " [3, 113, 2021-05-04, 2],"
-				+ " [4, 114, 2021-05-04, 3],"
-				+ " [5, 117, 2021-05-04, 2],"
-				+ " [6, 118, 2021-05-04, 1]"
-				+ "]", db.readAll().toString());
+
+		assertEquals(
+				"[[1, 111, 2021-05-04, 1]," + " [2, 112, 2021-05-04, 1]," + " [3, 113, 2021-05-04, 2],"
+						+ " [4, 114, 2021-05-04, 3]," + " [5, 117, 2021-05-04, 2]," + " [6, 118, 2021-05-04, 1]" + "]",
+				db.readAll().toString());
 	}
+
 	@Test
 	public void testUpdate() {
 		JornadaDAO db = JornadaDAO.getInstance();
 		db.update(4, "data", LocalDate.of(2021, 05, 03));
-		
-		assertEquals("[4, 114, 2021-05-03, 3]",db.read(4).toString());
+
+		assertEquals("[4, 114, 2021-05-03, 3]", db.read(4).toString());
 	}
+
 	@Test
 	public void testDelete() {
 		JornadaDAO db = JornadaDAO.getInstance();
