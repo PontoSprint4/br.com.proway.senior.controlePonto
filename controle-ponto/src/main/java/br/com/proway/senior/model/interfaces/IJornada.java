@@ -8,4 +8,5 @@ public interface IJornada {
 	 * @return Integer
 	 */
 	public Integer getIdJornada();
+	
 }

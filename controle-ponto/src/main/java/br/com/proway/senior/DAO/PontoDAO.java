@@ -3,30 +3,23 @@ package br.com.proway.senior.DAO;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import br.com.proway.senior.model.Jornada;
-import br.com.proway.senior.model.interfaces.IPessoa;
 import br.com.proway.senior.model.interfaces.IJornada;
 
 /**
- * 
- * @author Gabriel
+ * @author Gabriel 
  * @author Enzo
- *
  */
+
 public final class PontoDAO {
 
 	private static PontoDAO instance;
 
-	/**
-	 * @author Gabriel
-	 * 
-	 * Verifica se instance é nulo. Se for, o instance é instanciado, caso contrario
-	 * só retorna.
-	 * 
+	/** 
+	 * Verifica se ha uma instancia, se haver e retornada. Caso contrario e
+	 * criada uma. 
 	 */
 	public static PontoDAO getInstance() {
 		if (instance == null) {
@@ -34,27 +27,20 @@ public final class PontoDAO {
 		}
 		return instance;
 	}
+	
 	/**
-	 * @author Gabriel
-	 * 
-	 * Aqui o instance é somente instanciado e retorna.
+	 * Objeto PontoDAO instanciado e retornado.
 	 */
-
 	public static PontoDAO newInstance() {
-
 		instance = new PontoDAO();
 		return instance;
 	}
 
 	/** 
-	 * @author Gabriel
-	 * 
-	 *  Insere na tabela 
+	 * Insere na tabela 
 	 *  
-	 *A variável insert é responsável por receber o insert na tabela pontos
-	 *os valores id da jornada e o momento em que o ponto foi batido e os
-	 *insere dentro da tabela.
-	 * 
+	 * Recebe o ID da Jornada como chave estrangeira e "pega" o momento em que o Ponto foi batido. Criando
+	 * uma linha na tabela para ele, com seu devido ID.
 	 */
 	public void create(IJornada jornada) {
 		
@@ -71,13 +57,10 @@ public final class PontoDAO {
 	}
 
 	/**
-	 * @author Gabriel
-	 * 
-	 * Seleciona ID
-	 * 
-	 *O select que vai pegar todos os registros quando o idPonto for igual 
-	 *a algum id esperado.
-	 * 
+	 * Exibe determinado Ponto
+	 * 	  
+	 * Exibe todos os dados referentes ao Ponto que correspode ao seu proprio
+	 * ID informado como parametro.	  
 	 */
 	public ArrayList<String> read(int id) {
 		ArrayList<String> result = new ArrayList<String>();
@@ -101,9 +84,8 @@ public final class PontoDAO {
 	/**
 	 * Deleta da tabela
 	 * 
-	 * A variável query vai receber o comando de deletar o ponto da tabela pontos
-	 * quando o id for igual a algum id esperado.
-	 * 
+	 * Procura na tabela o Ponto correspondente ao seu proprio ID 
+	 * como parametro, e o remove da tabela.
 	 */
 	public void delete(int id) {
 		String query = "DELETE FROM pontos WHERE id =" + id;
@@ -118,11 +100,9 @@ public final class PontoDAO {
 	/**
 	 * Atualiza o ponto
 	 * 
-	 * A variável query recebe o comando alterar o dado da coluna quando o número é
-	 * informado.
-	 * 
-	 * results or expetion; exibição de tudo or tratamento de execessão;
-	 * 
+	 * Procura na tabela o Ponto correspondente ao seu proprio ID 
+	 * como parametro, e de acordo com a coluna desejada muda o valor do seu
+	 * dado.
 	 */
 	public void update(int id, String col, String dado) {
 		String query = "UPDATE pontos SET " + col + "=" + dado + " WHERE id =" + id;
@@ -135,11 +115,10 @@ public final class PontoDAO {
 	}
 
 	/**
-	 * Exibe tudo;
+	 * Exibe tudo 
 	 * 
-	 * Retorna todos oa dados de todas as linhas da Tabela;
-	 * 
-	 * @return results or expetion; exibição de tudo or tratamento de execessão;
+	 * Retorna todos os dados de todas as linhas da Tabela (exibe todos os
+	 * Pontos). 
 	 */
 	public ArrayList<ArrayList<String>> readAll() {
 		ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();

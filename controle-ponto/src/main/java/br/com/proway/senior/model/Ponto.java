@@ -2,6 +2,8 @@ package br.com.proway.senior.model;
 
 import java.time.LocalDateTime;
 
+import br.com.proway.senior.model.interfaces.IJornada;
+
 public class Ponto {
 	
 	private Integer idPonto;
@@ -11,6 +13,9 @@ public class Ponto {
 	public Ponto(Integer idPonto, LocalDateTime momentoPonto) {
 		this.idPonto = idPonto;
 		this.momentoPonto = momentoPonto;
+	}
+	
+	public Ponto() {		
 	}
 		
 	public int getIdPonto() {
@@ -23,10 +28,10 @@ public class Ponto {
 	
 	public Integer getCeJornada() {
 		return ceJornada;
-	}
-
-	public void setCeJornada(Integer ceJornada) {
-		this.ceJornada = ceJornada;
+	}	
+	
+	public void setCeJornada(IJornada iJornada) {
+		this.ceJornada = iJornada.getIdJornada();
 	}
 	
 	public LocalDateTime getMomentoPonto() {

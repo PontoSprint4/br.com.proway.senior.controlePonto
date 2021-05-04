@@ -1,5 +1,7 @@
 package br.com.proway.senior.DAO;
 
+import static org.junit.Assert.assertTrue;
+
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -44,32 +46,21 @@ public class PontoDAOTest {
 	@Before
 	public void cleanDAO() {
 		PontoDAO.newInstance();
-	}
+	}	
 	
 	@Test
-	public void testCreateData() {
+	public void testCreate() {
 		PontoDAO db = PontoDAO.getInstance();
 		Jornada jornada = new Jornada();
-		
 		db.create(jornada);
-	}
-/*	
-	@Test
-	public void testBuscarPontoPorId() {
-		PontoDAO db = PontoDAO.getInstance();
-		
-		assertEquals("[112, 2021-03-30 14:35]", db.read(2).toString());
+		assertTrue(db.readAll().size() == 5);
 	}
 
-	/*
 	@Test
-	public void testBuscarJornadaPor() {
+	public void testDelete() {
 		PontoDAO db = PontoDAO.getInstance();
-		
-		db.delete(3);
-		
-		assertTrue();
+		db.delete(2);
+		assertTrue(db.readAll().size() == 3);
 	}
-	*/
 
 }

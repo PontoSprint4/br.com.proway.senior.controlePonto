@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class PostgresConnector {
 
 	static String url = "jdbc:postgresql://localhost:5432/controlepontodb";
-	static String user = "postgres";
+	static String user = "admin";
 	static String password = "admin";
 	static Connection con;
 
