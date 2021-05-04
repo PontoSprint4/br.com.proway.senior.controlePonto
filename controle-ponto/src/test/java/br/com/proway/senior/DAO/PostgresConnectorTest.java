@@ -1,35 +1,12 @@
 package br.com.proway.senior.DAO;
 
-import static org.junit.Assert.*;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class PostgresConnectorTest {
+import br.com.proway.senior.model.Pessoa;
 
-	@Test
-	public void testExecuteQuery() {
-		String insert1 = "INSERT INTO jornadas VALUES (353, '2021-05-03', 235)";
-		String insert2 = "INSERT INTO jornadas VALUES (235, '2021-05-02', 256)";
-		String select = "SELECT * FROM jornadas";
-		String delete = "DELETE FROM jornadas";
-		try {
-			PostgresConnector.executeUpdate(insert1);
-			PostgresConnector.executeUpdate(insert2);
-			ResultSet rs = PostgresConnector.executeQuery(select);
-			rs.next();
-			assertEquals(1, rs.getInt(1));
-			assertEquals(1, rs.getInt(1));
-			PostgresConnector.executeUpdate(delete);
-			ResultSet rs2 = PostgresConnector.executeQuery(select);
-			assertFalse(rs2.next());
-		} catch (SQLException e) {
-			e.printStackTrace();
-			e.getMessage();
-		}
-	}
+public class PostgresConnectorTest {
 
 	@Test
 	public void testDbVersion() {

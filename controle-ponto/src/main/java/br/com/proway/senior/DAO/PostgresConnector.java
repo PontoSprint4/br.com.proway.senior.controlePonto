@@ -10,7 +10,7 @@ public class PostgresConnector {
 
 	static String url = "jdbc:postgresql://localhost:5432/controlepontodb";
 	static String user = "postgres";
-	static String password = "admin";
+	static String password = "lothlorien";
 	static Connection con;
 
 	public static void connect() throws SQLException {
@@ -18,6 +18,9 @@ public class PostgresConnector {
 	}
 
 	public static ResultSet executeQuery(String query) throws SQLException {
+		if (con == null) {
+			connect();
+		}
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
 		return rs;
@@ -40,6 +43,9 @@ public class PostgresConnector {
 	}
 
 	public static void executeUpdate(String query) throws SQLException {
+		if (con == null) {
+			connect();
+		}
 		Statement st = con.createStatement();
 		st.executeUpdate(query);
 	}
