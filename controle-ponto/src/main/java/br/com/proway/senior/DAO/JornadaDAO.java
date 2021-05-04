@@ -3,7 +3,6 @@ package br.com.proway.senior.DAO;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -18,14 +17,20 @@ public final class JornadaDAO {
 		}
 		return instance;
 	}
+	
+	public static JornadaDAO newInstance() {
+		instance = new JornadaDAO();
+		return instance;
+	}
 
 	public void create(IPessoa pessoa) {
 
 		pessoa.getIdPessoa();
 		pessoa.getIdTurno();
 
-		String insert = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + pessoa.getIdPessoa() + ",'" + LocalDate.now().toString()
-				+ "'," + pessoa.getIdTurno() + ")";
+		String insert = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES ("
+						+ pessoa.getIdPessoa() + ",'" + LocalDate.now().toString()
+						+ "'," + pessoa.getIdTurno() + ")";
 
 		try {
 			PostgresConnector.executeUpdate(insert);
@@ -43,7 +48,7 @@ public final class JornadaDAO {
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int totalColumns = rsmd.getColumnCount();
 			if (rs.next()) {
-				for (int i = 0; i < totalColumns; i++) {
+				for (int i = 1; i <= totalColumns; i++) {
 					result.add(rs.getString(i));
 				}
 			}
@@ -64,8 +69,11 @@ public final class JornadaDAO {
 		}
 	}
 
-	public void update(int id, String col, String data) {
-		String query = "UPDATE jornadas SET " + col + "=" + data + " WHERE id =" + id;
+	public void update(int id, String col, LocalDate data) {
+		String query = "UPDATE jornadas"
+				+ " SET " + col + " = '" + data
+				+ "' WHERE id = " + id;
+				
 		try {
 			PostgresConnector.executeUpdate(query);
 		} catch (SQLException e) {
@@ -84,7 +92,7 @@ public final class JornadaDAO {
 			int totalColumns = rsmd.getColumnCount();
 			while (rs.next()) {
 				ArrayList<String> row = new ArrayList<String>();
-				for (int i = 0; i < totalColumns; i++) {
+				for (int i = 1; i <= totalColumns; i++) {
 					row.add(rs.getString(i));
 				}
 				results.add(row);

@@ -1,11 +1,22 @@
 package br.com.proway.senior.DAO;
 
+<<<<<<< HEAD
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 public class PostgresConnectorTest {
 	
+=======
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+import br.com.proway.senior.model.Pessoa;
+
+public class PostgresConnectorTest {
+
+>>>>>>> testesJornadaDAO
 	@Test
 	public void testDbVersion() {
 		String version = PostgresConnector.dbVersion();
