@@ -40,6 +40,10 @@ public class PostgresConnector {
 	}
 
 	public static void executeUpdate(String query) throws SQLException {
+		if (con == null) {
+			connect();
+		}
+		
 		Statement st = con.createStatement();
 		st.executeUpdate(query);
 	}

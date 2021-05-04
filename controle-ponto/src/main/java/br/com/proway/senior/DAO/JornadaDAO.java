@@ -24,15 +24,8 @@ public final class JornadaDAO {
 		pessoa.getIdPessoa();
 		pessoa.getIdTurno();
 
-		/**
-		 * Formata a data conforme o banco recebe
-		 */
-		String pattern = "yyyy-MM-dd";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		String date = simpleDateFormat.format(LocalDate.now());
-
-		String insert = "INSERT INTO jornada (idPessoa, data, idTurno) VALUES (" + pessoa.getIdPessoa() + "," + date
-				+ "," + pessoa.getIdTurno() + ")";
+		String insert = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + pessoa.getIdPessoa() + ",'" + LocalDate.now().toString()
+				+ "'," + pessoa.getIdTurno() + ")";
 
 		try {
 			PostgresConnector.executeUpdate(insert);
