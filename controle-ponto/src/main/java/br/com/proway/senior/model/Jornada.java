@@ -3,7 +3,7 @@ package br.com.proway.senior.model;
 import java.util.ArrayList;
 
 public class Jornada {
-	private Integer idJornada;
+	private Integer idJornada=2;
 	private Integer idPessoa;
 	private boolean aberta = true;
 	private ArrayList<Ponto> pontos;

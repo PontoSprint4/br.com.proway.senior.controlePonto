@@ -1,59 +1,45 @@
 package br.com.proway.senior.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import br.com.proway.senior.model.interfaces.IPessoa;
-
 public class Ponto {
-	private int idPonto;
+	
+	private Integer idPonto;
+	private Integer ceJornada; // ce = Chave Estrangeira ID
 	private LocalDateTime momentoPonto;
-	private LocalDate dataPonto;
-	private Integer idPessoa;
 	
-	public Ponto() {
-		
-	}
-	
-	public Ponto(int idPonto, LocalDateTime momentoPonto, LocalDate dataPonto, Integer idPessoa) {
-		super();
+	public Ponto(Integer idPonto, LocalDateTime momentoPonto) {
 		this.idPonto = idPonto;
 		this.momentoPonto = momentoPonto;
-		this.dataPonto = dataPonto;
-		this.idPessoa = idPessoa;
 	}
-	
-	public LocalDate getDataPonto() {
-		return dataPonto;
-	}
-	public void setDataPonto(LocalDate dataPonto) {
-		this.dataPonto = dataPonto;
-	}
-
-
+		
 	public int getIdPonto() {
 		return idPonto;
 	}
+	
 	public void setIdPonto(int idPonto) {
 		this.idPonto = idPonto;
 	}
+	
+	public Integer getCeJornada() {
+		return ceJornada;
+	}
+
+	public void setCeJornada(Integer ceJornada) {
+		this.ceJornada = ceJornada;
+	}
+	
 	public LocalDateTime getMomentoPonto() {
 		return momentoPonto;
 	}
+	
 	public void setMomentoPonto(LocalDateTime momentoPonto) {
 		this.momentoPonto = momentoPonto;
 	}
-	public Integer getIdPessoa() {
-		return idPessoa;
-	}
-	public void setIdPessoa(Integer idPessoa) {
-		this.idPessoa = idPessoa;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "Ponto [idPonto=" + idPonto + ", momentoPonto=" + momentoPonto + ", dataPonto=" + dataPonto
-				+ ", idPessoa=" + idPessoa + "]";
+		return "Ponto [idPonto=" + idPonto + ", idJornada=" + ceJornada + ", momentoPonto=" + momentoPonto + "]";
 	}
-
+	
 }

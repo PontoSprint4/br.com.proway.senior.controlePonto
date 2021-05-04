@@ -10,7 +10,6 @@ public class Pessoa implements IPessoa {
 	}
 
 	public Integer getIdTurno() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
