@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.interfaces.IPessoa;
-import br.com.proway.senior.model.interfaces.IJornadaProvisoria;
+import br.com.proway.senior.model.interfaces.IJornada;
 
 /**
  * 
@@ -56,11 +56,11 @@ public final class PontoDAO {
 	 *insere dentro da tabela.
 	 * 
 	 */
-	public void create(IJornadaProvisoria jornadaProvisoria) {
-
+	public void create(IJornada jornada) {
+		
 		String momentoPonto = LocalDateTime.now().toString();
 
-		String insert = "INSERT INTO pontos (ceJornada, momentoPonto) VALUES (" + jornadaProvisoria.getIdJornada() + ","
+		String insert = "INSERT INTO pontos (ceJornada, momentoPonto) VALUES (" + jornada.getIdJornada() + ","
 				+ momentoPonto + ")"; 
 		
 		try {

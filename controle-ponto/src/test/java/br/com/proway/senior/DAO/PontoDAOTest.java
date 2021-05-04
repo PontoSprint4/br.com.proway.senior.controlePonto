@@ -1,7 +1,5 @@
 package br.com.proway.senior.DAO;
 
-import static org.junit.Assert.assertEquals;
-
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -9,7 +7,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.proway.senior.model.JornadaProvisoria;
+import br.com.proway.senior.model.Jornada;
 
 public class PontoDAOTest {
 	
@@ -51,7 +49,7 @@ public class PontoDAOTest {
 	@Test
 	public void testCreateData() {
 		PontoDAO db = PontoDAO.getInstance();
-		JornadaProvisoria jornada = new JornadaProvisoria();
+		Jornada jornada = new Jornada();
 		
 		db.create(jornada);
 	}
