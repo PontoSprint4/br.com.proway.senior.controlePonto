@@ -23,13 +23,13 @@ public class PontoDAOTest {
 				+ "momentoPonto TIMESTAMP NOT NULL)";
 				 	
 		String query1 = "INSERT INTO pontos (ceJornada, momentoPonto) VALUES ("
-				+ 111 + ",'" + LocalDateTime.now().toString()+")";
+				+ 111 + ",'" + LocalDateTime.now() + "')"; 
 		String query2 = "INSERT INTO pontos (ceJornada, momentoPonto) VALUES ("
-				+ 112 + ",'" + LocalDateTime.now().toString() + ")";
+				+ 112 + ",'" + LocalDateTime.now() + "')";
 		String query3 = "INSERT INTO pontos (ceJornada, momentoPonto) VALUES ("
-				+ 113 + ",'" + LocalDateTime.now().toString()+")";
-		String query4 = "INSERT INTO jornadas (ceJornada, momentoPonto) VALUES ("
-				+ 114 + ",'" + LocalDateTime.now().toString()+")";
+				+ 113 + ",'" + LocalDateTime.now() + "')";
+		String query4 = "INSERT INTO pontos (ceJornada, momentoPonto) VALUES ("
+				+ 114 + ",'" + LocalDateTime.now() + "')";
 		
 		try {
 			PostgresConnector.executeUpdate(queryDrop);
@@ -52,7 +52,10 @@ public class PontoDAOTest {
 	public void testCreate() {
 		PontoDAO db = PontoDAO.getInstance();
 		Jornada jornada = new Jornada();
+		
+		jornada.setId(555);
 		db.create(jornada);
+		
 		assertTrue(db.readAll().size() == 5);
 	}
 
@@ -60,7 +63,7 @@ public class PontoDAOTest {
 	public void testDelete() {
 		PontoDAO db = PontoDAO.getInstance();
 		db.delete(2);
-		assertTrue(db.readAll().size() == 3);
+		assertTrue(db.readAll().size() == 4);
 	}
 
 }

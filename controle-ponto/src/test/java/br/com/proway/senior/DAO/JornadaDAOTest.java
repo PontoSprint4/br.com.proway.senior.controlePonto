@@ -63,7 +63,7 @@ public class JornadaDAOTest {
 	public void testBuscarJornadaPorId() {
 		JornadaDAO db = JornadaDAO.getInstance();
 		System.out.println(db.read(1));
-		assertEquals("[1, 111, 2021-05-04, 1]", db.read(1).toString());
+		assertEquals(LocalDate.now().toString(), db.read(2).get(2).toString());
 	}
 
 	@Test
@@ -71,8 +71,12 @@ public class JornadaDAOTest {
 		JornadaDAO db = JornadaDAO.getInstance();
 
 		assertEquals(
-				"[[1, 111, 2021-05-04, 1]," + " [2, 112, 2021-05-04, 1]," + " [3, 113, 2021-05-04, 2],"
-						+ " [4, 114, 2021-05-04, 3]," + " [5, 117, 2021-05-04, 2]," + " [6, 118, 2021-05-04, 1]" + "]",
+					 "[[1, 111, " + LocalDate.now().toString() + ", 1],"
+				   + " [2, 112, " + LocalDate.now().toString() + ", 1]," 
+				   + " [3, 113, " + LocalDate.now().toString() + ", 2],"
+				   + " [4, 114, " + LocalDate.now().toString() + ", 3],"
+				   + " [5, 117, " + LocalDate.now().toString() + ", 2],"
+				   + " [6, 118, " + LocalDate.now().toString() + ", 1]]",
 				db.readAll().toString());
 	}
 

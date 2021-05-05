@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import br.com.proway.senior.model.interfaces.IJornada;
 
 /**
- * @author Gabriel 
+ * @author Gabriel
  * @author Enzo
  */
 
@@ -17,9 +17,9 @@ public final class PontoDAO {
 
 	private static PontoDAO instance;
 
-	/** 
-	 * Verifica se ha uma instancia, se haver e retornada. Caso contrario e
-	 * criada uma. 
+	/**
+	 * Verifica se ha uma instancia, se haver e retornada. Caso contrario e criada
+	 * uma.
 	 */
 	public static PontoDAO getInstance() {
 		if (instance == null) {
@@ -27,7 +27,7 @@ public final class PontoDAO {
 		}
 		return instance;
 	}
-	
+
 	/**
 	 * Objeto PontoDAO instanciado e retornado.
 	 */
@@ -36,19 +36,17 @@ public final class PontoDAO {
 		return instance;
 	}
 
-	/** 
-	 * Insere na tabela 
-	 *  
-	 * Recebe o ID da Jornada como chave estrangeira e "pega" o momento em que o Ponto foi batido. Criando
-	 * uma linha na tabela para ele, com seu devido ID.
+	/**
+	 * Insere na tabela
+	 * 
+	 * Recebe o ID da Jornada como chave estrangeira e "pega" o momento em que o
+	 * Ponto foi batido. Criando uma linha na tabela para ele, com seu devido ID.
 	 */
 	public void create(IJornada jornada) {
-		
-		String momentoPonto = LocalDateTime.now().toString();
 
-		String insert = "INSERT INTO pontos (ceJornada, momentoPonto) VALUES (" + jornada.getIdJornada() + ","
-				+ momentoPonto + ")"; 
-		
+		String insert = "INSERT INTO pontos (ceJornada, momentoPonto) VALUES (" + jornada.getIdJornada() + ",'"
+				+ LocalDateTime.now() + "')";
+
 		try {
 			PostgresConnector.executeUpdate(insert);
 		} catch (SQLException e) {
@@ -58,9 +56,9 @@ public final class PontoDAO {
 
 	/**
 	 * Exibe determinado Ponto
-	 * 	  
-	 * Exibe todos os dados referentes ao Ponto que correspode ao seu proprio
-	 * ID informado como parametro.	  
+	 * 
+	 * Exibe todos os dados referentes ao Ponto que correspode ao seu proprio ID
+	 * informado como parametro.
 	 */
 	public ArrayList<String> read(int id) {
 		ArrayList<String> result = new ArrayList<String>();
@@ -84,8 +82,8 @@ public final class PontoDAO {
 	/**
 	 * Deleta da tabela
 	 * 
-	 * Procura na tabela o Ponto correspondente ao seu proprio ID 
-	 * como parametro, e o remove da tabela.
+	 * Procura na tabela o Ponto correspondente ao seu proprio ID como parametro, e
+	 * o remove da tabela.
 	 */
 	public void delete(int id) {
 		String query = "DELETE FROM pontos WHERE id =" + id;
@@ -100,9 +98,8 @@ public final class PontoDAO {
 	/**
 	 * Atualiza o ponto
 	 * 
-	 * Procura na tabela o Ponto correspondente ao seu proprio ID 
-	 * como parametro, e de acordo com a coluna desejada muda o valor do seu
-	 * dado.
+	 * Procura na tabela o Ponto correspondente ao seu proprio ID como parametro, e
+	 * de acordo com a coluna desejada muda o valor do seu dado.
 	 */
 	public void update(int id, String col, String dado) {
 		String query = "UPDATE pontos SET " + col + "=" + dado + " WHERE id =" + id;
@@ -115,10 +112,9 @@ public final class PontoDAO {
 	}
 
 	/**
-	 * Exibe tudo 
+	 * Exibe tudo
 	 * 
-	 * Retorna todos os dados de todas as linhas da Tabela (exibe todos os
-	 * Pontos). 
+	 * Retorna todos os dados de todas as linhas da Tabela (exibe todos os Pontos).
 	 */
 	public ArrayList<ArrayList<String>> readAll() {
 		ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();

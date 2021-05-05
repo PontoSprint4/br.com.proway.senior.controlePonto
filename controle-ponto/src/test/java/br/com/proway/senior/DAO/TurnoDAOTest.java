@@ -88,5 +88,4 @@ public class TurnoDAOTest {
 		+ "[3, Turno Maluco, 09:00:15, 19:00:15]" 
 				+ "]", db.readAll().toString());		
 	}
-
 }
