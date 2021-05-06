@@ -46,7 +46,6 @@ public final class PontoDAO {
 
 		String insert = "INSERT INTO pontos (ceJornada, momentoPonto) VALUES (" + jornada.getIdJornada() + ",'"
 				+ LocalDateTime.now() + "')";
-
 		try {
 			PostgresConnector.executeUpdate(insert);
 		} catch (SQLException e) {

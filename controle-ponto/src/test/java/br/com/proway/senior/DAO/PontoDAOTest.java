@@ -3,6 +3,7 @@ package br.com.proway.senior.DAO;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.Before;
@@ -51,9 +52,9 @@ public class PontoDAOTest {
 	@Test
 	public void testCreate() {
 		PontoDAO db = PontoDAO.getInstance();
-		Jornada jornada = new Jornada();
+		Jornada jornada = new Jornada(555, 2, LocalDate.now(), 3);
 		
-		jornada.setId(555);
+		//jornada.setId(555);
 		db.create(jornada);
 		
 		assertTrue(db.readAll().size() == 5);

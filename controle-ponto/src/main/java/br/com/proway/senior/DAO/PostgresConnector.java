@@ -10,7 +10,7 @@ public class PostgresConnector {
 
 	static String url = "jdbc:postgresql://localhost:5432/controlepontodb";
 	static String user = "postgres";
-	static String password = "lothlorien";
+	static String password = "admin";
 	static Connection con;
 
 	public static void connect() throws SQLException {

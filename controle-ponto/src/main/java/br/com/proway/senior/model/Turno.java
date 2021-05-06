@@ -7,11 +7,7 @@ public class Turno {
 	private String horaFim;
 	private String nomeTurno;
 
-	public Turno() {
-	}
-
 	public Turno(int id, String horaInicio, String horaFim, String nomeTurno) {
-		super();
 		this.id = id;
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;

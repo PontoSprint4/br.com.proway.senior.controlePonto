@@ -13,7 +13,6 @@ public class Pessoa implements IPessoa {
 
 	public int getIdTurno() {
 		return this.idTurno;
-
 	}
 
 	public void setId(int id) {

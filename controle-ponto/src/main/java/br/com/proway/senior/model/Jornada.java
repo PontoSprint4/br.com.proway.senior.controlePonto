@@ -10,9 +10,9 @@ public class Jornada implements IJornada {
 	 * Atributos da classe jornada
 	 */
 	private int id;
-	private int idPessoa;
+	private int idPessoa;  // FK
 	private LocalDate data;
-	private int idTurno;
+	private int idTurno;   // FK
 
 	public int getId() {
 		return id;
@@ -47,17 +47,14 @@ public class Jornada implements IJornada {
 	}
 
 	public Jornada(int id, int idPessoa, LocalDate data, int idTurno) {
-		super();
 		this.id = id;
 		this.idPessoa = idPessoa;
 		this.data = data;
 		this.idTurno = idTurno;
 	}
 	
-	public Jornada() {}
-
 	/**
-	 * Implementação da interface IJornada
+	 * Implementaï¿½ï¿½o da interface IJornada
 	 * 
 	 * Foi utilizada pela classe ponto
 	 * 
