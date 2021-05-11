@@ -2,11 +2,9 @@ package br.com.proway.senior.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import br.com.proway.senior.DAO.JornadaDAO;
 import br.com.proway.senior.DAO.PontoDAO;
-import br.com.proway.senior.model.Pessoa;
 import br.com.proway.senior.model.interfaces.IPessoa;
 
 public class JornadaController {
