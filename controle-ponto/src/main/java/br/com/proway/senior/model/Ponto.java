@@ -1,9 +1,6 @@
 package br.com.proway.senior.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-import br.com.proway.senior.model.interfaces.IJornada;
 
 public class Ponto {
 
@@ -16,10 +13,17 @@ public class Ponto {
         this.momentoPonto = momentoPonto;
     }
 
-    public Ponto(Integer idPonto, Integer idJornada, LocalDateTime momentoPonto) {
+    public Ponto(Integer idPonto, Jornada jornada, LocalDateTime momentoPonto) {
         this.idPonto = idPonto;
-        this.idJornada = idJornada;
+        this.idJornada = validaJornada(jornada);
         this.momentoPonto = momentoPonto;
+    }
+
+    private Integer validaJornada(Jornada jornada) {
+        if (jornada != null) {
+            return jornada.getIdJornada();
+        }
+        return null;
     }
 
     public int getIdPonto() {

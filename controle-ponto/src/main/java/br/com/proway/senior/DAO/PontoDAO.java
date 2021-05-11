@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import br.com.proway.senior.model.Ponto;
-import br.com.proway.senior.model.interfaces.IJornada;
+import br.com.proway.senior.model.interfaces.Jornada;
 
 /**
  * @author Gabriel
@@ -43,7 +43,7 @@ public final class PontoDAO {
      * Recebe o ID da Jornada como chave estrangeira e "pega" o momento em que o
      * Ponto foi batido. Criando uma linha na tabela para ele, com seu devido ID.
      */
-    public void create(IJornada jornada) {
+    public void create(Jornada jornada) {
 
         String insert = "INSERT INTO pontos (idJornada, momentoPonto) VALUES (" + jornada.getIdJornada() + ",'"
                 + LocalDateTime.now() + "')";
