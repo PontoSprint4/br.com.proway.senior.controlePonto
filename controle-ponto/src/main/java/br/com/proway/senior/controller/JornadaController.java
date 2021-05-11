@@ -1,8 +1,12 @@
 package br.com.proway.senior.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import br.com.proway.senior.DAO.JornadaDAO;
+import br.com.proway.senior.DAO.PontoDAO;
+import br.com.proway.senior.model.Pessoa;
 import br.com.proway.senior.model.interfaces.IPessoa;
 
 public class JornadaController {
@@ -34,15 +38,40 @@ public class JornadaController {
 	public void pontosBatidos() {}
 
 	/**
-	 * Quando sair do padrão de batidas
+	 * Quando sair do padrï¿½o de batidas
 	 * 
 	 * Sera disparado uma mensagem
 	 * 
-	 * Não foi implementado
+	 * Nï¿½o foi implementado
 	 * 
 	 */
 	public void padraoBatidaPonto() {}
 
+	/**
+	 * Este mÃ©todo farÃ¡ o calculo das horas faltas.
+	 * 
+	 * Pega as horas de acordo com o turno que trabalha.
+	 * 
+	 * Faz a diferenÃ§a, caso negativo retorna horas faltas,
+	 * caso >= 0 retorna null.
+	 * 
+	 * @author Tharlys Dias
+	 * @author Vanderlei Kleinschmidt
+	 * @author Vitor Gehrke
+	 * @return horasFaltas
+	 */
+	public Double horasFalta(ArrayList<String> pontos) {
+		Double horasFaltas = null;
+		PontoDAO db = PontoDAO.getInstance();
+		
+		for (int i = 0; i < db.toString().length(); i++) {
+			//if () {
+				
+			//}
+		}
+		
+		return horasFaltas;
+	}
 
 }
 
