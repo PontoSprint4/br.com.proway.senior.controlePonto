@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.interfaces.IJornada;
 
 /**
@@ -59,8 +60,8 @@ public final class PontoDAO {
 	 * Exibe todos os dados referentes ao Ponto que correspode ao seu proprio ID
 	 * informado como parametro.
 	 */
-	public ArrayList<String> read(int id) {
-		ArrayList<String> result = new ArrayList<String>();
+	public ArrayList<Ponto> read(int id) {
+		ArrayList<Ponto> result = new ArrayList<Ponto>();
 		String query = "SELECT * FROM pontos WHERE idPonto = " + id;
 		ResultSet rs;
 		try {
@@ -68,8 +69,12 @@ public final class PontoDAO {
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int totalColumns = rsmd.getColumnCount();
 			if (rs.next()) {
-				for (int i = 1; i <= totalColumns; i++) {
-					result.add(rs.getString(i));
+				for (int i = 0; i <= totalColumns; i++) {
+					LocalDateTime momentoPonto = rs.getTimestamp("momentoponto").toLocalDateTime();
+					Ponto ponto = new Ponto(rs.getInt("id"), momentoPonto);
+					ponto.setIdJornada(rs.getInt("idjornada"));
+					System.out.println(ponto);
+					result.add(ponto);
 				}
 			}
 		} catch (SQLException e) {
@@ -77,25 +82,27 @@ public final class PontoDAO {
 		}
 		return result;
 	}
-	
+
 	/**
-	 * Retorna lista de pontos pelo  da jornada (idJornada) 
+	 * Retorna lista de pontos pelo da jornada (idJornada)
 	 * 
 	 * @param pessoa
-	 * @return ArrayList<String> result 
+	 * @return ArrayList<String> result
 	 */
-	public ArrayList<String> readByIdJornada(IJornada jornada) {
-		ArrayList<String> result = new ArrayList<String>();
-		String query = "SELECT * FROM pontos WHERE idJornada = " + jornada.getIdJornada();
+	public ArrayList<Ponto> readByIdJornada(int jornada) {
+		ArrayList<Ponto> result = new ArrayList<Ponto>();
+		String query = "SELECT * FROM pontos WHERE idJornada = " + jornada;
 		ResultSet rs;
 		try {
 			rs = PostgresConnector.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int totalColumns = rsmd.getColumnCount();
-			if (rs.next()) {
-				for (int i = 1; i <= totalColumns; i++) {
-					result.add(rs.getString(i));
-				}
+			while (rs.next()) {
+				LocalDateTime momentoPonto = rs.getTimestamp("momentoponto").toLocalDateTime();
+				Ponto ponto = new Ponto(rs.getInt("id"), momentoPonto);
+				ponto.setIdJornada(rs.getInt("idjornada"));
+				System.out.println(ponto);
+				result.add(ponto);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

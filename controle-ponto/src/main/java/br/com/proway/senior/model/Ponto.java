@@ -27,8 +27,8 @@ public class Ponto {
 		return idJornada;
 	}	
 	
-	public void setIdJornada(IJornada iJornada) { // idJornada
-		this.idJornada = iJornada.getIdJornada();
+	public void setIdJornada(int idJornada) { // idJornada
+		this.idJornada = idJornada;
 	}
 	
 	public LocalDateTime getMomentoPonto() {
