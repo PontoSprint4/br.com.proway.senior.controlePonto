@@ -7,7 +7,7 @@ import br.com.proway.senior.model.interfaces.IJornada;
 public class Ponto {
 	
 	private Integer idPonto;
-	private Integer ceJornada; 	// FK  idJornada
+	private Integer idJornada; 	// FK  idJornada
 	private LocalDateTime momentoPonto;  // registroPonto
 	
 	public Ponto(Integer idPonto, LocalDateTime momentoPonto) {
@@ -23,12 +23,12 @@ public class Ponto {
 		this.idPonto = idPonto;
 	}
 	
-	public Integer getCeJornada() {
-		return ceJornada;
+	public Integer getIdJornada() {
+		return idJornada;
 	}	
 	
-	public void setCeJornada(IJornada iJornada) { // idJornada
-		this.ceJornada = iJornada.getIdJornada();
+	public void setIdJornada(IJornada iJornada) { // idJornada
+		this.idJornada = iJornada.getIdJornada();
 	}
 	
 	public LocalDateTime getMomentoPonto() {
@@ -41,7 +41,7 @@ public class Ponto {
 	
 	@Override
 	public String toString() {
-		return "Ponto [idPonto=" + idPonto + ", idJornada=" + ceJornada + ", momentoPonto=" + momentoPonto + "]";
+		return "Ponto [idPonto=" + idPonto + ", idJornada=" + idJornada + ", momentoPonto=" + momentoPonto + "]";
 	}
 	
 }

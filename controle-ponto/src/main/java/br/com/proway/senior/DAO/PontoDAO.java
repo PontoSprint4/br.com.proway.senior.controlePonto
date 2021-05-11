@@ -44,7 +44,7 @@ public final class PontoDAO {
 	 */
 	public void create(IJornada jornada) {
 
-		String insert = "INSERT INTO pontos (ceJornada, momentoPonto) VALUES (" + jornada.getIdJornada() + ",'"
+		String insert = "INSERT INTO pontos (idJornada, momentoPonto) VALUES (" + jornada.getIdJornada() + ",'"
 				+ LocalDateTime.now() + "')";
 		try {
 			PostgresConnector.executeUpdate(insert);
@@ -73,6 +73,32 @@ public final class PontoDAO {
 				}
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * Retorna lista de pontos pelo  da jornada (idJornada) 
+	 * 
+	 * @param pessoa
+	 * @return ArrayList<String> result 
+	 */
+	public ArrayList<String> readByIdJornada(IJornada jornada) {
+		ArrayList<String> result = new ArrayList<String>();
+		String query = "SELECT * FROM pontos WHERE idJornada = " + jornada.getIdJornada();
+		ResultSet rs;
+		try {
+			rs = PostgresConnector.executeQuery(query);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int totalColumns = rsmd.getColumnCount();
+			if (rs.next()) {
+				for (int i = 1; i <= totalColumns; i++) {
+					result.add(rs.getString(i));
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
