@@ -54,34 +54,31 @@ public final class PontoDAO {
         }
     }
 
-    /**
-     * Exibe determinado Ponto
-     * <p>
-     * Exibe todos os dados referentes ao Ponto que correspode ao seu proprio ID
-     * informado como parametro.
-     */
-    public ArrayList<Ponto> read(int id) {
-        ArrayList<Ponto> result = new ArrayList<Ponto>();
-        String query = "SELECT * FROM pontos WHERE idPonto = " + id;
-        ResultSet rs;
-        try {
-            rs = PostgresConnector.executeQuery(query);
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int totalColumns = rsmd.getColumnCount();
-            if (rs.next()) {
-                for (int i = 0; i <= totalColumns; i++) {
-                    LocalDateTime momentoPonto = rs.getTimestamp("momentoponto").toLocalDateTime();
-                    Ponto ponto = new Ponto(rs.getInt("id"), momentoPonto);
-                    ponto.setIdJornada(rs.getInt("idjornada"));
-                    System.out.println(ponto);
-                    result.add(ponto);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
+	/**
+	 * Exibe determinado Ponto
+	 * 
+	 * Exibe todos os dados referentes ao Ponto que correspode ao seu proprio ID
+	 * informado como parametro.
+	 */
+	public Ponto read(int id) {
+		String query = "SELECT * FROM pontos WHERE id = " + id;
+		ResultSet rs;
+		try {
+			rs = PostgresConnector.executeQuery(query);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			//int totalColumns = rsmd.getColumnCount();
+			if (rs.next()) {
+					LocalDateTime momentoPonto = rs.getTimestamp("momentoponto").toLocalDateTime();
+					Ponto ponto = new Ponto(rs.getInt("id"), momentoPonto);
+					ponto.setIdJornada(rs.getInt("idjornada"));
+					System.out.println(ponto);
+					return ponto;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
     /**
      * Retorna lista de pontos pelo da jornada (idJornada)
