@@ -80,12 +80,12 @@ public class JornadaController {
 	 * @param index id da jornada a ser calculada
 	 * @return tempoTrabalhado em minutos.
 	 */
-	public int tempoTrabalhado (int index){
-		PontoController pontoController = new PontoController();
-		pontoController.
-
-
-	}
+//	public int tempoTrabalhado (int index){
+//		PontoController pontoController = new PontoController();
+//		//pontoController.
+//
+//
+//	}
 
 }
 

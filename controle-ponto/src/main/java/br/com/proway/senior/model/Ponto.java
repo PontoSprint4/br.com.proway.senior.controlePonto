@@ -13,17 +13,17 @@ public class Ponto {
         this.momentoPonto = momentoPonto;
     }
 
-    public Ponto(Integer idPonto, Jornada jornada, LocalDateTime momentoPonto) {
+    public Ponto(Integer idPonto, Jornada jornada, LocalDateTime momentoPonto) throws Exception {
         this.idPonto = idPonto;
-        this.idJornada = validaJornada(jornada);
+        this.idJornada = this.validaJornada(jornada);
         this.momentoPonto = momentoPonto;
     }
 
-    private Integer validaJornada(Jornada jornada) {
+    private Integer validaJornada(Jornada jornada) throws Exception{
         if (jornada != null) {
             return jornada.getIdJornada();
         }
-        return null;
+        throw new Exception("Jornada Recebida igual a nulo");
     }
 
     public int getIdPonto() {

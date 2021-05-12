@@ -81,9 +81,9 @@ public class PontoDAOTest {
 	public void testCreate() {
 		PontoDAO db = PontoDAO.getInstance();
 		Jornada jornada = new Jornada(555, 2, LocalDate.now(), 3);
+		LocalDateTime registro = LocalDateTime.of(2021, 05, 10, 21, 37);
 		
-		
-		db.create(jornada); // 9 itens no db		
+		db.create(jornada, registro); // 9 itens no db		
 		assertTrue(db.readAll().size() == 9);
 	}
 

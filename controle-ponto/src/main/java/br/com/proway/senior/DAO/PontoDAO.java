@@ -43,17 +43,17 @@ public final class PontoDAO {
      * Recebe o ID da Jornada como chave estrangeira e "pega" o momento em que o
      * Ponto foi batido. Criando uma linha na tabela para ele, com seu devido ID.
      */
-    public void create(Jornada jornada) {
+    public void create(Jornada jornada, LocalDateTime registro) {
 
         String insert = "INSERT INTO pontos (idJornada, momentoPonto) VALUES (" + jornada.getIdJornada() + ",'"
-                + LocalDateTime.now() + "')";
+                + registro + "')";
         try {
             PostgresConnector.executeUpdate(insert);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
 	/**
 	 * Exibe determinado Ponto
 	 * 
@@ -71,7 +71,7 @@ public final class PontoDAO {
 					LocalDateTime momentoPonto = rs.getTimestamp("momentoponto").toLocalDateTime();
 					Ponto ponto = new Ponto(rs.getInt("id"), momentoPonto);
 					ponto.setIdJornada(rs.getInt("idjornada"));
-					System.out.println(ponto);
+					//System.out.println(ponto);
 					return ponto;
 			}
 		} catch (SQLException e) {
@@ -98,7 +98,7 @@ public final class PontoDAO {
                 LocalDateTime momentoPonto = rs.getTimestamp("momentoponto").toLocalDateTime();
                 Ponto ponto = new Ponto(rs.getInt("id"), momentoPonto);
                 ponto.setIdJornada(rs.getInt("idjornada"));
-                System.out.println(ponto);
+                //System.out.println(ponto);
                 result.add(ponto);
             }
         } catch (SQLException e) {
@@ -145,8 +145,8 @@ public final class PontoDAO {
      * <p>
      * Retorna todos os dados de todas as linhas da Tabela (exibe todos os Pontos).
      */
-    public ArrayList<ArrayList<String>> readAll() {
-        ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
+    public ArrayList<Ponto> readAll() {
+        ArrayList<Ponto> result = new ArrayList<Ponto>();
         String query = "SELECT * FROM pontos";
         ResultSet rs;
         try {
@@ -154,16 +154,16 @@ public final class PontoDAO {
             ResultSetMetaData rsmd = rs.getMetaData();
             int totalColumns = rsmd.getColumnCount();
             while (rs.next()) {
-                ArrayList<String> row = new ArrayList<String>();
-                for (int i = 1; i <= totalColumns; i++) {
-                    row.add(rs.getString(i));
-                }
-                results.add(row);
+            	LocalDateTime momentoPonto = rs.getTimestamp("momentoponto").toLocalDateTime();
+                Ponto ponto = new Ponto(rs.getInt("id"), momentoPonto);
+                ponto.setIdJornada(rs.getInt("idjornada"));
+                //System.out.println(ponto);
+                result.add(ponto);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return results;
+        return result;
     }
 
 }

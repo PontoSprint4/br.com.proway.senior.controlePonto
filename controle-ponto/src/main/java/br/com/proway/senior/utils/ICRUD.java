@@ -2,11 +2,15 @@ package br.com.proway.senior.utils;
 
 import java.util.ArrayList;
 
+import br.com.proway.senior.model.Jornada;
+
 public interface ICRUD<T> {
 
     public void create (T obj);
 
-    public T readById(int index);
+    public ArrayList<T> readByIdJornada(int index) throws Exception;
+    
+    public T read(int index) throws Exception;
 
     public ArrayList<T> readAll();
 
