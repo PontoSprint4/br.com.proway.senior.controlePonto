@@ -17,9 +17,9 @@ public class PontoController implements ICRUD<Ponto> {
 
 	}
 
-	public void create(Jornada jornada, LocalDateTime registro) throws Exception {
+	public void create(Jornada jornada) throws Exception {
 		try {
-			pdao.create(jornada, registro);
+			pdao.create(jornada);
 		} catch (Exception e) {
 			e.getMessage();
 		}

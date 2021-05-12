@@ -46,8 +46,7 @@ public class PontoControllerTest extends TestCase {
 		PontoController controller = new PontoController();
 
 		Jornada jornada = new Jornada(1, 13, LocalDate.of(2021, 05, 11), 7);
-		LocalDateTime registro = LocalDateTime.of(2021, 05, 11, 10, 53);
-		controller.create(jornada, registro);
+		controller.create(jornada);
 	}
 
 	@Test
@@ -56,8 +55,7 @@ public class PontoControllerTest extends TestCase {
 		PontoController controller = new PontoController();
 
 		Jornada jornada = new Jornada(1, 3, LocalDate.of(2021, 05, 9), 7);
-		LocalDateTime registro = LocalDateTime.of(2021, 05, 9, 7, 43);
-		controller.create(jornada, registro);
+		controller.create(jornada);
 
 	}
 

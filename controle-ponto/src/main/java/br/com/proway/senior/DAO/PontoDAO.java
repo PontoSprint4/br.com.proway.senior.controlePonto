@@ -43,10 +43,10 @@ public final class PontoDAO {
      * Recebe o ID da Jornada como chave estrangeira e "pega" o momento em que o
      * Ponto foi batido. Criando uma linha na tabela para ele, com seu devido ID.
      */
-    public void create(Jornada jornada, LocalDateTime registro) {
+    public void create(Jornada jornada) {
 
         String insert = "INSERT INTO pontos (idJornada, momentoPonto) VALUES (" + jornada.getIdJornada() + ",'"
-                + registro + "')";
+                + LocalDateTime.now() + "')";
         try {
             PostgresConnector.executeUpdate(insert);
         } catch (SQLException e) {
