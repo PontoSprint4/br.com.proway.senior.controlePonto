@@ -1,6 +1,6 @@
 package br.com.proway.senior.model.interfaces;
 
-public interface IJornada {
+public interface Jornada {
 
 	/**
 	 * Recebe chave estrangeira

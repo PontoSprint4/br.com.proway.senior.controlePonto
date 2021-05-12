@@ -82,8 +82,7 @@ public class PontoDAOTest {
 	public void testCreate() {
 		PontoDAO db = PontoDAO.getInstance();
 		Jornada jornada = new Jornada(555, 2, LocalDate.now(), 3);
-		
-		
+
 		db.create(jornada); // 9 itens no db		
 		assertTrue(db.readAll().size() == 9);
 	}

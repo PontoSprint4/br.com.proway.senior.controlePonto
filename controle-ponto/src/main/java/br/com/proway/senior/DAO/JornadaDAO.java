@@ -176,4 +176,5 @@ public final class JornadaDAO {
 		}
 		return results;
 	}
+
 }

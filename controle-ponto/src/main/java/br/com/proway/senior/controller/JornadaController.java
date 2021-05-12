@@ -44,8 +44,7 @@ public class JornadaController {
 	 * 
 	 */
 	public void padraoBatidaPonto() {}
-	
-	
+
 	/**
 	 * Este método fará o calculo das horas faltas.
 	 * 
@@ -68,9 +67,26 @@ public class JornadaController {
 				
 			//}
 		}
-		
 		return horasFaltas;
 	}
+
+	/**
+	 * Calcula as horas trabalhadas na jornada.
+	 * Este método receb um número inteiro, correspondente à jornada que será
+	 * calculada. Usará o array retornado pelo método que obtém a lista de
+	 * pontos por jornada. Atrávés do Chrono Between retornará o valor em
+	 * minutos da diferença entre a 1ª e 2ª batida e entre a 3ª e 4ª batida
+	 * de ponto.
+	 * @param index id da jornada a ser calculada
+	 * @return tempoTrabalhado em minutos.
+	 */
+//	public int tempoTrabalhado (int index){
+//		PontoController pontoController = new PontoController();
+//		//pontoController.
+//
+//
+//	}
+
 }
 
 	
