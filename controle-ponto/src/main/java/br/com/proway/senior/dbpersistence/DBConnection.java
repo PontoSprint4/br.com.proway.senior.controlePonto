@@ -10,10 +10,10 @@ import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.Turno;
 
 /**
- * Essa classe faz a integração com o banco de dados usando JPA/Hibernate
+ * Essa classe faz a integraï¿½ï¿½o com o banco de dados usando JPA/Hibernate
  * 
  * @author Lucas W
- * @author Tharlys D
+ * @author Tharlys D <tharlys.souza@outlook.com>
  * @author Vitor A
  *
  */
@@ -29,6 +29,7 @@ public class DBConnection {
 					.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
 					.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/controlepontodb")
 					.setProperty("hibernate.connection.username", "postgres")
+					.setProperty("hibernate.connection.password", "admin")
 					.setProperty("hibernate.jdbc.time_zone", "UTC")
 					.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
 					.setProperty("hibernate.show__sql", "true")
@@ -39,9 +40,10 @@ public class DBConnection {
 					.addAnnotatedClass(Pessoa.class)
 					.addAnnotatedClass(Ponto.class)
 					.addAnnotatedClass(Turno.class)
+					.addAnnotatedClass(Pessoa.class).addAnnotatedClass(Ponto.class).addAnnotatedClass(Turno.class)
 					.buildSessionFactory();
 		} catch (Throwable e) {
-			System.err.println("Initial SessionFactory creation failed: " + e);
+			System.err.println("Initial SessionFactory creation failed: " + e.getMessage());
 			throw new ExceptionInInitializerError(e);
 		}
 
@@ -58,10 +60,10 @@ public class DBConnection {
 		session.close();
 		getSessionFactory().close();
 	}
-	
+
 	public static Session getSession() {
 		getSessionFactory();
-		if(session == null) {
+		if (session == null) {
 			session = sessionFactory.openSession();
 		}
 		return session;
