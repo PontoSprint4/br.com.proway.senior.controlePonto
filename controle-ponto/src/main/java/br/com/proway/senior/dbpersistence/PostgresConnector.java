@@ -1,4 +1,4 @@
-package br.com.proway.senior.DAO;
+package br.com.proway.senior.dbpersistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

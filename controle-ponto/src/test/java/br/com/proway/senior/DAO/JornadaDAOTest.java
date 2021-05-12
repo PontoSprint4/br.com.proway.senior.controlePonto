@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.com.proway.senior.dbpersistence.PostgresConnector;
 import br.com.proway.senior.model.Pessoa;
 
 public class JornadaDAOTest {
@@ -94,4 +95,9 @@ public class JornadaDAOTest {
 		db.delete(2);
 		assertTrue(db.readAll().size() == 5);
 	}
+
+    public void testTempoTrabalhado() {
+		//Cenário
+
+    }
 }

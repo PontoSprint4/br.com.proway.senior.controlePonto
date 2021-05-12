@@ -2,9 +2,7 @@ package br.com.proway.senior.model;
 
 import java.time.LocalDate;
 
-import br.com.proway.senior.model.interfaces.IJornada;
-
-public class Jornada implements IJornada {
+public class Jornada implements br.com.proway.senior.model.interfaces.Jornada {
 	
 	/**
 	 * Atributos da classe jornada
