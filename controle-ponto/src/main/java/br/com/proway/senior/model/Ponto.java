@@ -1,46 +1,36 @@
 package br.com.proway.senior.model;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Classe Ponto. Estrutura e define o ponto como objeto.
+ * @version Sprint 5
+ * @author Samuel Levi <samuel.levi@senior.com.br>
+ * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
+ */
+
+@Entity
 public class Ponto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idPonto;
-    private Integer idJornada;
     private LocalDateTime momentoPonto;
+
+    public Ponto() {}
 
     public Ponto(Integer idPonto, LocalDateTime momentoPonto) {
         this.idPonto = idPonto;
         this.momentoPonto = momentoPonto;
     }
 
-    public Ponto(Integer idPonto, Jornada jornada, LocalDateTime momentoPonto) throws Exception {
-        this.idPonto = idPonto;
-        this.idJornada = this.validaJornada(jornada);
-        this.momentoPonto = momentoPonto;
-    }
-
-    private Integer validaJornada(Jornada jornada) throws Exception{
-        if (jornada != null) {
-            return jornada.getIdJornada();
-        }
-        throw new Exception("Jornada Recebida igual a nulo");
-    }
-
-    public int getIdPonto() {
+    public Integer getIdPonto() {
         return idPonto;
     }
 
-    public void setIdPonto(int idPonto) {
+    public void setIdPonto(Integer idPonto) {
         this.idPonto = idPonto;
-    }
-
-    public Integer getIdJornada() {
-        return idJornada;
-    }
-
-
-    public void setIdJornada(int idJornada) { // idJornada
-        this.idJornada = idJornada;
     }
 
     public LocalDateTime getMomentoPonto() {
@@ -53,7 +43,24 @@ public class Ponto {
 
     @Override
     public String toString() {
-        return "Ponto [idPonto=" + idPonto + ", idJornada=" + idJornada + ", momentoPonto=" + momentoPonto + "]";
+        return "Ponto{" +
+                "idPonto=" + idPonto +
+                ", momentoPonto=" + momentoPonto +
+                '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Ponto ponto = (Ponto) o;
+
+        return idPonto.equals(ponto.idPonto);
+    }
+
+    @Override
+    public int hashCode() {
+        return idPonto.hashCode();
+    }
 }
