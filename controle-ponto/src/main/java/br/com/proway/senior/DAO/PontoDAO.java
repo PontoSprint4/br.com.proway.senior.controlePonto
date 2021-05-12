@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import br.com.proway.senior.dbpersistence.PostgresConnector;
 import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.interfaces.IJornada;
 

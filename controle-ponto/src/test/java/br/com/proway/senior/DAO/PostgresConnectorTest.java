@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import br.com.proway.senior.dbpersistence.PostgresConnector;
+
 public class PostgresConnectorTest {
 	
 	@Test

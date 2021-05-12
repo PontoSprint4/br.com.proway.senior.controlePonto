@@ -5,6 +5,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import br.com.proway.senior.dbpersistence.PostgresConnector;
+
 public class TurnoDAO {
 
 	private static TurnoDAO instance;
