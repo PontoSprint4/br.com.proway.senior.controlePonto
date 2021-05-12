@@ -25,15 +25,20 @@ public class DBConnection {
 
 	private static SessionFactory buildSessionFactory() {
 		try {
-			return new Configuration().setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
+			return new Configuration()
+					.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
 					.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/controlepontodb")
 					.setProperty("hibernate.connection.username", "postgres")
 					.setProperty("hibernate.jdbc.time_zone", "UTC")
 					.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
-					.setProperty("hibernate.show__sql", "true").setProperty("hibernate.format_sql", "false")
+					.setProperty("hibernate.show__sql", "true")
+					.setProperty("hibernate.format_sql", "false")
 					.setProperty("hibernate.hbm2ddl.auto", "update")
-					.setProperty("hibernate.connection.autocommit", "true").addAnnotatedClass(Jornada.class)
-					.addAnnotatedClass(Pessoa.class).addAnnotatedClass(Ponto.class).addAnnotatedClass(Turno.class)
+					.setProperty("hibernate.connection.autocommit", "true")
+					.addAnnotatedClass(Jornada.class)
+					.addAnnotatedClass(Pessoa.class)
+					.addAnnotatedClass(Ponto.class)
+					.addAnnotatedClass(Turno.class)
 					.buildSessionFactory();
 		} catch (Throwable e) {
 			System.err.println("Initial SessionFactory creation failed: " + e);
