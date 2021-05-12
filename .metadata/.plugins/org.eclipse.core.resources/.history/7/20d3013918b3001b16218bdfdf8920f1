@@ -1,0 +1,15 @@
+package br.com.teste;
+
+import java.time.Instant;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Instant instante = Instant.now();
+		System.out.println(instante);
+		
+		Instant instante2 = Instant.MAX;
+		System.out.println(instante2);
+	}
+
+}
