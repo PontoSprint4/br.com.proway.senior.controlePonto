@@ -15,7 +15,7 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Turno {
+public class Turno{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -85,7 +85,7 @@ public class Turno {
 
 	@Override
 	public String toString() {
-		return "Turno = " + id + ", começa às: " + horaInicio + ", termina às: " + horaFim + ", descrição: " + nomeTurno;
+		return "Turno = " + id + ", comeï¿½a ï¿½s: " + horaInicio + ", termina ï¿½s: " + horaFim + ", descriï¿½ï¿½o: " + nomeTurno;
 	}
 
 	

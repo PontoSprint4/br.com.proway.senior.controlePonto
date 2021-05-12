@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import br.com.proway.senior.model.Jornada;
-import br.com.proway.senior.model.Pessoa;
+import br.com.proway.senior.model.PessoaDoPonto;
 import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.Turno;
 
@@ -37,10 +37,10 @@ public class DBConnection {
 					.setProperty("hibernate.hbm2ddl.auto", "update")
 					.setProperty("hibernate.connection.autocommit", "true")
 					.addAnnotatedClass(Jornada.class)
-					.addAnnotatedClass(Pessoa.class)
+					.addAnnotatedClass(PessoaDoPonto.class)
 					.addAnnotatedClass(Ponto.class)
 					.addAnnotatedClass(Turno.class)
-					.addAnnotatedClass(Pessoa.class).addAnnotatedClass(Ponto.class).addAnnotatedClass(Turno.class)
+					.addAnnotatedClass(PessoaDoPonto.class).addAnnotatedClass(Ponto.class).addAnnotatedClass(Turno.class)
 					.buildSessionFactory();
 		} catch (Throwable e) {
 			System.err.println("Initial SessionFactory creation failed: " + e.getMessage());

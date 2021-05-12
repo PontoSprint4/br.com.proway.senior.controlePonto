@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.com.proway.senior.dbpersistence.PostgresConnector;
-import br.com.proway.senior.model.Pessoa;
+import br.com.proway.senior.model.PessoaDoPonto;
 
 public class JornadaDAOTest {
 	@BeforeClass
@@ -55,7 +55,7 @@ public class JornadaDAOTest {
 	@Test
 	public void testCreateData() {
 		JornadaDAO db = JornadaDAO.getInstance();
-		Pessoa pessoa = new Pessoa();
+		PessoaDoPonto pessoa = new PessoaDoPonto();
 
 		db.create(pessoa);
 	}

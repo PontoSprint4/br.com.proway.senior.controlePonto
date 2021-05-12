@@ -7,8 +7,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import br.com.proway.senior.dbpersistence.PostgresConnector;
+import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.Ponto;
-import br.com.proway.senior.model.interfaces.Jornada;
+
 
 /**
  * @author Gabriel
@@ -46,7 +47,7 @@ public final class PontoDAO {
      */
     public void create(Jornada jornada) {
 
-        String insert = "INSERT INTO pontos (idJornada, momentoPonto) VALUES (" + jornada.getIdJornada() + ",'"
+        String insert = "INSERT INTO pontos (idJornada, momentoPonto) VALUES (" + jornada.getId() + ",'"
                 + LocalDateTime.now() + "')";
         try {
             PostgresConnector.executeUpdate(insert);

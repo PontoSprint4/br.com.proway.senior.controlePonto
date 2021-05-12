@@ -1,9 +1,20 @@
 package br.com.proway.senior.model;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
+
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import br.com.proway.senior.model.interfaces.IPessoa;
+
+
 
 public class Jornada {
 	
@@ -16,8 +27,10 @@ public class Jornada {
 
 	private LocalDate data;
 
-	private int idPessoa;
-	private int idTurno;
+	@OneToOne
+	private IPessoa pessoa;
+	
+	private Turno turno;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private ArrayList<Ponto> listaPonto;
@@ -25,11 +38,19 @@ public class Jornada {
 	public Jornada() {
 	}
 
-	public Jornada(int id, LocalDate data, int idPessoa, int idTurno) {
+	public Jornada(int id, LocalDate data, IPessoa pessoa, Turno turno) {
 		this.id = id;
 		this.data = data;
-		this.idPessoa = idPessoa;
-		this.idTurno = idTurno;
+		this.pessoa = pessoa;
+		this.turno = turno;
+	}
+	
+//	public void setPessoa(IPessoa pessoa) {
+//		this.pessoa = pessoa;
+//	}
+	
+	void setPessoa(IPessoa pessoa){
+		this.pessoa = pessoa;
 	}
 
 	public int getId() {
@@ -48,35 +69,8 @@ public class Jornada {
 		this.data = data;
 	}
 
-	public int getIdPessoa() {
-		return idPessoa;
-	}
-
-	public void setIdPessoa(int idPessoa) {
-		this.idPessoa = idPessoa;
-	}
-
-	public int getIdTurno() {
-		return idTurno;
-	}
-
-	public void setIdTurno(int idTurno) {
-		this.idTurno = idTurno;
-	}
-
 	public ArrayList<Ponto> getListaPonto() {
 		return listaPonto;
-	}
-
-	@Override
-	public String toString() {
-		return "Jornada{" +
-				"id=" + id +
-				", data=" + data +
-				", idPessoa=" + idPessoa +
-				", idTurno=" + idTurno +
-				", listaPonto=" + listaPonto +
-				'}';
 	}
 
 	@Override
@@ -91,4 +85,12 @@ public class Jornada {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
+	@Override
+	public String toString() {
+		return "Jornada [id=" + id + ", data=" + data + ", pessoa=" + pessoa + ", turno=" + turno + ", listaPonto="
+				+ listaPonto + "]";
+	}
+	
+	
 }
