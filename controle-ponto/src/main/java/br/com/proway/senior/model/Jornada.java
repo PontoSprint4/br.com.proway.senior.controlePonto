@@ -1,16 +1,36 @@
 package br.com.proway.senior.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Objects;
 
-public class Jornada implements br.com.proway.senior.model.interfaces.Jornada {
+public class Jornada {
 	
 	/**
 	 * Atributos da classe jornada
 	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private int idPessoa;  // FK
+
 	private LocalDate data;
-	private int idTurno;   // FK
+
+	private int idPessoa;
+	private int idTurno;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private ArrayList<Ponto> listaPonto;
+
+	public Jornada() {
+	}
+
+	public Jornada(int id, LocalDate data, int idPessoa, int idTurno) {
+		this.id = id;
+		this.data = data;
+		this.idPessoa = idPessoa;
+		this.idTurno = idTurno;
+	}
 
 	public int getId() {
 		return id;
@@ -18,14 +38,6 @@ public class Jornada implements br.com.proway.senior.model.interfaces.Jornada {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getIdPessoa() {
-		return idPessoa;
-	}
-
-	public void setIdPessoa(int idPessoa) {
-		this.idPessoa = idPessoa;
 	}
 
 	public LocalDate getData() {
@@ -36,6 +48,14 @@ public class Jornada implements br.com.proway.senior.model.interfaces.Jornada {
 		this.data = data;
 	}
 
+	public int getIdPessoa() {
+		return idPessoa;
+	}
+
+	public void setIdPessoa(int idPessoa) {
+		this.idPessoa = idPessoa;
+	}
+
 	public int getIdTurno() {
 		return idTurno;
 	}
@@ -44,22 +64,31 @@ public class Jornada implements br.com.proway.senior.model.interfaces.Jornada {
 		this.idTurno = idTurno;
 	}
 
-	public Jornada(int id, int idPessoa, LocalDate data, int idTurno) {
-		this.id = id;
-		this.idPessoa = idPessoa;
-		this.data = data;
-		this.idTurno = idTurno;
+	public ArrayList<Ponto> getListaPonto() {
+		return listaPonto;
 	}
-	
-	/**
-	 * Implementa��o da interface IJornada
-	 * 
-	 * Foi utilizada pela classe ponto
-	 * 
-	 * @return id
-	 */
-	public Integer getIdJornada() {
-		Integer id = this.id;
-		return id;
+
+	@Override
+	public String toString() {
+		return "Jornada{" +
+				"id=" + id +
+				", data=" + data +
+				", idPessoa=" + idPessoa +
+				", idTurno=" + idTurno +
+				", listaPonto=" + listaPonto +
+				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Jornada jornada = (Jornada) o;
+		return id == jornada.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
 	}
 }
