@@ -25,7 +25,7 @@ public class JornadaControllerTest {
 		JornadaController jornadaController = new JornadaController();
 		PessoaDoPonto pessoa = new PessoaDoPonto();
 		pessoa.setId(114);
-		pessoa.setIdTurno(3);
+		
 		
 		assertFalse(jornadaController.verificaJornadaAberta(pessoa));
 	}
@@ -35,16 +35,16 @@ public class JornadaControllerTest {
 		fail("Not yet implemented");
 	}
 	
-	@Test
-	public void testHorasFalta() {
-		ArrayList<String> pontos = new ArrayList<String>();
-		PontoDAO db = PontoDAO.getInstance();
-		JornadaController controller = new JornadaController();
-		PessoaDoPonto pessoa = new PessoaDoPonto();
-		pessoa.setId(114);
-		System.out.println(db.readAll().toString());
-		pontos.add(db.readAll().toString());
-		System.out.println(pontos);
-	}
+//	@Test
+//	public void testHorasFalta() {
+//		ArrayList<String> pontos = new ArrayList<String>();
+//		PontoDAO db = PontoDAO.getInstance();
+//		JornadaController controller = new JornadaController();
+//		PessoaDoPonto pessoa = new PessoaDoPonto();
+//		pessoa.setId(114);
+//		System.out.println(db.readAll().toString());
+//		pontos.add(db.readAll().toString());
+//		System.out.println(pontos);
+//	}
 
 }

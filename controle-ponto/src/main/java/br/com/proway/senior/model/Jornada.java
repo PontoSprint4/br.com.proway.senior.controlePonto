@@ -1,7 +1,7 @@
 package br.com.proway.senior.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -33,8 +33,8 @@ public class Jornada {
 	
 	private ITurno turno;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private ArrayList<Ponto> listaPonto;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Ponto> listaPonto;
 
 	public Jornada() {
 	}
@@ -70,7 +70,7 @@ public class Jornada {
 		this.data = data;
 	}
 
-	public ArrayList<Ponto> getListaPonto() {
+	public List<Ponto> getListaPonto() {
 		return listaPonto;
 	}
 
