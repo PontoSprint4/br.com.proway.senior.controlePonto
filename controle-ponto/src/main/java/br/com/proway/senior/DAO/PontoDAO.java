@@ -1,173 +1,104 @@
 package br.com.proway.senior.DAO;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-import javax.persistence.criteria.Root;
-
-import br.com.proway.senior.dbpersistence.PostgresConnector;
-import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.Ponto;
+import br.com.proway.senior.utils.ICRUD;
+import org.hibernate.Session;
+import org.hibernate.query.criteria.internal.compile.CriteriaQueryTypeQueryAdapter;
+
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
- * @author Gabriel
- * @author Enzo
+ * @author Samuel Levi <samuel.levi@senior.com.br>
+ * @author Tharlys de Souza Dias <tharlys.dias@senior.com.br>
+ * @version Sprint5
+ * Alteração da classe pontoDAO para implementar o CriteriaBuilder.
  */
 
-public final class PontoDAO {
+public class PontoDAO implements ICRUD<Ponto> {
 
     private static PontoDAO instance;
+    private final Session session;
 
     /**
-     * Verifica se ha uma instancia, se haver e retornada. Caso contrario e criada
-     * uma.
-     */
-    public static PontoDAO getInstance() {
-        if (instance == null) {
-            instance = new PontoDAO();
-        }
-        return instance;
-    }
-
-    /**
-     * Objeto PontoDAO instanciado e retornado.
-     */
-    public static PontoDAO newInstance() {
-        instance = new PontoDAO();
-        return instance;
-    }
-
-    /**
-     * Insere na tabela
-     * <p>
-     * Recebe o ID da Jornada como chave estrangeira e "pega" o momento em que o
-     * Ponto foi batido. Criando uma linha na tabela para ele, com seu devido ID.
-     */
-    public void create(Jornada jornada) {
-
-        String insert = "INSERT INTO pontos (idJornada, momentoPonto) VALUES (" + jornada.getId() + ",'"
-                + LocalDateTime.now() + "')";
-        try {
-            PostgresConnector.executeUpdate(insert);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-	/**
-	 * Exibe determinado Ponto
-	 * 
-	 * Exibe todos os dados referentes ao Ponto que correspode ao seu proprio ID
-	 * informado como parametro.
-	 */
-	public Ponto read(int id) {
-		String query = "SELECT * FROM pontos WHERE id = " + id;
-		ResultSet rs;
-		try {
-			rs = PostgresConnector.executeQuery(query);
-			ResultSetMetaData rsmd = rs.getMetaData();
-			//int totalColumns = rsmd.getColumnCount();
-			if (rs.next()) {
-					LocalDateTime momentoPonto = rs.getTimestamp("momentoponto").toLocalDateTime();
-					Ponto ponto = new Ponto(rs.getInt("id"), momentoPonto);
-					ponto.setIdJornada(rs.getInt("idjornada"));
-					//System.out.println(ponto);
-					return ponto;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-    /**
-     * Retorna lista de pontos pelo da jornada (idJornada)
+     * Construtor que recebe a sessão.
      *
-     * @param jornada id da jornada correspondente.
-     * @return ArrayList<String> result
+     * @param session sessão recebida como parâmetro
      */
-    public ArrayList<Ponto> readByIdJornada(int jornada) {
-        ArrayList<Ponto> result = new ArrayList<Ponto>();
-        String query = "SELECT * FROM pontos WHERE idJornada = " + jornada;
-        ResultSet rs;
-        try {
-            rs = PostgresConnector.executeQuery(query);
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int totalColumns = rsmd.getColumnCount();
-            while (rs.next()) {
-                LocalDateTime momentoPonto = rs.getTimestamp("momentoponto").toLocalDateTime();
-                Ponto ponto = new Ponto(rs.getInt("id"), momentoPonto);
-                ponto.setIdJornada(rs.getInt("idjornada"));
-                //System.out.println(ponto);
-                result.add(ponto);
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return result;
+    public PontoDAO(Session session) {
+        this.session = session;
     }
 
     /**
-     * Deleta da tabela
-     * <p>
-     * Procura na tabela o Ponto correspondente ao seu proprio ID como parametro, e
-     * o remove da tabela.
+     * Método responsável por instanciar PontoDao recebendo a sessão. A
+     * sessão recebida passa pela checagem se é nula, caso positivo, uma nova
+     * sessão é instanciada, caso negativo, a sessão que já está aberta é
+     * retornada.
+     *
+     * @param session Sessão ativa
+     * @return instance a instancia da sessão.
      */
-    public void delete(int id) {
-        String query = "DELETE FROM pontos WHERE id =" + id;
+    public static PontoDAO getInstance(Session session) {
+        if (instance == null)
+            instance = new PontoDAO(session);
+        return instance;
+    }
+
+
+    public void insert(Ponto pontoASerInserido) {
+        session.save(pontoASerInserido);
+    }
+
+    public boolean update(Ponto pontoASerAlterado) {
+        if (!session.getTransaction().isActive()) {
+            session.beginTransaction();
+        }
         try {
-            PostgresConnector.executeUpdate(query);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            session.update(pontoASerAlterado);
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    /**
-     * Atualiza o ponto
-     * <p>
-     * Procura na tabela o Ponto correspondente ao seu proprio ID como parametro, e
-     * de acordo com a coluna desejada muda o valor do seu dado.
-     */
-    public void update(int id, String col, String dado) {
-        String query = "UPDATE pontos SET " + col + "=" + dado + " WHERE id =" + id;
+    public boolean delete(Ponto pontoASerDeletado) {
+        if (!session.getTransaction().isActive()) {
+            session.beginTransaction();
+        }
         try {
-            PostgresConnector.executeUpdate(query);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            session.delete(pontoASerDeletado);
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    /**
-     * Exibe tudo
-     * <p>
-     * Retorna todos os dados de todas as linhas da Tabela (exibe todos os Pontos).
-     */
-    public ArrayList<Ponto> readAll() {
-        ArrayList<Ponto> result = new ArrayList<Ponto>();
-        String query = "SELECT * FROM pontos";
-        ResultSet rs;
-        try {
-            rs = PostgresConnector.executeQuery(query);
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int totalColumns = rsmd.getColumnCount();
-            while (rs.next()) {
-            	LocalDateTime momentoPonto = rs.getTimestamp("momentoponto").toLocalDateTime();
-                Ponto ponto = new Ponto(rs.getInt("id"), momentoPonto);
-                ponto.setIdJornada(rs.getInt("idjornada"));
-                //System.out.println(ponto);
-                result.add(ponto);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
+    public Ponto get(int index){
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
+        Query query = session.createQuery(criteria);
+        Root<Ponto> pontoRoot = criteria.from(Ponto.class);
+        CriteriaQuery<Ponto> rootQuery = criteria.select(pontoRoot);
+        Expression pontoId = (Expression) pontoRoot.get("id");
+        criteria.select(pontoRoot).where(builder.equal(pontoId, index));
+        return (Ponto) query.getSingleResult();
+    }
+
+    public List<Ponto> getAll() {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
+        criteria.from(Ponto.class);
+        return session.createQuery(criteria).getResultList();
     }
 
 }

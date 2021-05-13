@@ -40,7 +40,9 @@ public class DBConnection {
 					.addAnnotatedClass(PessoaDoPonto.class)
 					.addAnnotatedClass(Ponto.class)
 					.addAnnotatedClass(Turno.class)
-					.addAnnotatedClass(PessoaDoPonto.class).addAnnotatedClass(Ponto.class).addAnnotatedClass(Turno.class)
+					.addAnnotatedClass(PessoaDoPonto.class)
+					.addAnnotatedClass(Ponto.class)
+					.addAnnotatedClass(Turno.class)
 					.buildSessionFactory();
 		} catch (Throwable e) {
 			System.err.println("Initial SessionFactory creation failed: " + e.getMessage());

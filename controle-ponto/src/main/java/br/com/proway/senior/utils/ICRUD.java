@@ -1,21 +1,17 @@
 package br.com.proway.senior.utils;
 
-import java.util.ArrayList;
-
-import br.com.proway.senior.model.Jornada;
+import java.util.List;
 
 public interface ICRUD<T> {
 
-    public void create (T obj);
+    void insert (T obj);
 
-    public ArrayList<T> readByIdJornada(int index) throws Exception;
+    T get(int index);
     
-    public T read(int index) throws Exception;
+    List<T> getAll();
 
-    public ArrayList<T> readAll();
+    boolean update(T obj, int index);
 
-    public boolean update(T obj, int index);
-
-    public boolean delete(int index);
+    boolean delete(int index);
 
 }

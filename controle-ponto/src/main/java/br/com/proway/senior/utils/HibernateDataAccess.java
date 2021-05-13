@@ -1,4 +1,4 @@
-package br.com.proway.senior.DAO;
+package br.com.proway.senior.utils;
 
 import java.util.ArrayList;
 
@@ -33,6 +33,6 @@ public abstract class HibernateDataAccess {
 	
 	public abstract Object get(int index);
 
-	public abstract <T> ArrayList<T> getAll();
+	public abstract List<T> getAll();
 
 }
