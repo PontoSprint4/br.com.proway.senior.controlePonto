@@ -6,56 +6,69 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+
 import br.com.proway.senior.dbpersistence.PostgresConnector;
+import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.interfaces.IPessoa;
+import br.com.proway.senior.model.interfaces.ITurno;
 
 public final class JornadaDAO {
-	
+
 	private static JornadaDAO instance;
-	
+	private Session session;
+
 	/**
-	 * Se nao existir nenhuma instancia do DAO,
-	 * cria uma nova instancia e a retorna;
+	 * Se nao existir nenhuma instancia do DAO, cria uma nova instancia e a retorna;
 	 * 
 	 * @return
 	 */
-	public static JornadaDAO getInstance() {
+	public static JornadaDAO getInstance(Session session) {
 		if (instance == null) {
-			instance = new JornadaDAO();
+			instance = new JornadaDAO(session);
 		}
 		return instance;
 	}
-	
-	/**
-	 * Cria uma nova instancia do DAO
-	 * 
-	 * @return JornadaDAO
-	 */
-	public static JornadaDAO newInstance() {
-		instance = new JornadaDAO();
-		return instance;
+
+	private JornadaDAO(Session session) {
+		this.session = session;
 	}
-	
+
 	/**
-	 * Recebe um parametro do tipo IPessoa que fornece
-	 * a idPessoa e a idTurno para cadastrar uma jornada
-	 * para a pessoa na data do momento do cadastro.
+	 * Recebe um parametro do tipo IPessoa que fornece a idPessoa e a idTurno para
+	 * cadastrar uma jornada para a pessoa na data do momento do cadastro.
 	 * 
 	 * @param pessoa
 	 * @return void
 	 */
-	public void create(IPessoa pessoa) {
-
-		String insert = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + pessoa.getIdPessoa() + ",'"
-				+ LocalDate.now().toString() + "'," + pessoa.getIdTurno() + ")";
-
-		try {
-			PostgresConnector.executeUpdate(insert);
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public void create(IPessoa pessoa, ITurno turno) {
+		
+		Jornada jornada = new Jornada(1, LocalDate.now(), pessoa, turno);
+		if(!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
+		session.save(jornada);
+		session.getTransaction().commit();
+//		String insert = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + pessoa.getIdPessoa() + ",'"
+//				+ LocalDate.now().toString() + "'," + pessoa.getIdTurno() + ")";
+//
+//		try {
+//			PostgresConnector.executeUpdate(insert);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		CriteriaBuilder builder = session.getCriteriaBuilder();
+//		CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
+//		Root<Jornada> root = criteria.from(Jornada.class);
+		
+
 	}
-	
+
 	/**
 	 * Busca uma jornada do banco de dados;
 	 * 
@@ -65,23 +78,27 @@ public final class JornadaDAO {
 	 * @return
 	 */
 	public ArrayList<String> read(int id) {
-		ArrayList<String> result = new ArrayList<String>();
-		String query = "SELECT * FROM jornadas WHERE id = " + id;
-		ResultSet rs;
-		try {
-			rs = PostgresConnector.executeQuery(query);
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int totalColumns = rsmd.getColumnCount();
-			if (rs.next()) {
-				for (int i = 1; i <= totalColumns; i++) {
-					result.add(rs.getString(i));
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
+//		ArrayList<String> result = new ArrayList<String>();
+//		String query = "SELECT * FROM jornadas WHERE id = " + id;
+//		ResultSet rs;
+//		try {
+//			rs = PostgresConnector.executeQuery(query);
+//			ResultSetMetaData rsmd = rs.getMetaData();
+//			int totalColumns = rsmd.getColumnCount();
+//			if (rs.next()) {
+//				for (int i = 1; i <= totalColumns; i++) {
+//					result.add(rs.getString(i));
+//				}
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return result;
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
+		Root<Jornada> root = criteria.from(Jornada.class);
+		Query query = session.createQuery(criteria);
 	}
 
 	public ArrayList<String> readByIdPessoa(IPessoa pessoa) {
@@ -103,12 +120,12 @@ public final class JornadaDAO {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Deleta uma jornada espec�fica do banco de dados;
 	 * 
-	 * Busca uma jornada no banco de dados a partir de sua id e 
-	 * remove esta jornada do banco de dados.
+	 * Busca uma jornada no banco de dados a partir de sua id e remove esta jornada
+	 * do banco de dados.
 	 * 
 	 * @param id
 	 * @return void
@@ -122,13 +139,13 @@ public final class JornadaDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Atualiza um dado espec�fico do banco de dados;
 	 * 
-	 * Recebe uma id que identifica qual item do banco a ser selecionado.
-	 * Escolhe qual coluna deve ser alterada com o parametro col e insere o
-	 * valor data na coluna col;
+	 * Recebe uma id que identifica qual item do banco a ser selecionado. Escolhe
+	 * qual coluna deve ser alterada com o parametro col e insere o valor data na
+	 * coluna col;
 	 * 
 	 * @param id
 	 * @param col
@@ -144,14 +161,13 @@ public final class JornadaDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Retorna todos os itens do banco de dados
 	 * 
-	 * Busca cada itenm do banco de dados,
-	 * faz o parse toString() dos dados das colunas e insere no array.
-	 * Insere o array de cada item do banco em um ArrayList<ArrayList<String>>
-	 * Retorna estes valores neste arraylist
+	 * Busca cada itenm do banco de dados, faz o parse toString() dos dados das
+	 * colunas e insere no array. Insere o array de cada item do banco em um
+	 * ArrayList<ArrayList<String>> Retorna estes valores neste arraylist
 	 * 
 	 * @return ArrayList<ArrayList<String>>
 	 */

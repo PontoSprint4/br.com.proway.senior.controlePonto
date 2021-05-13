@@ -1,4 +1,4 @@
-package br.com.proway.senior.DAO;
+package br.com.proway.senior.utils;
 
 import java.util.ArrayList;
 
