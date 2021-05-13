@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,9 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import br.com.proway.senior.model.interfaces.IPessoa;
+import br.com.proway.senior.model.interfaces.ITurno;
 
-
-
+@Entity
 public class Jornada {
 	
 	/**
@@ -30,7 +31,7 @@ public class Jornada {
 	@OneToOne
 	private IPessoa pessoa;
 	
-	private Turno turno;
+	private ITurno turno;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private ArrayList<Ponto> listaPonto;
@@ -38,7 +39,7 @@ public class Jornada {
 	public Jornada() {
 	}
 
-	public Jornada(int id, LocalDate data, IPessoa pessoa, Turno turno) {
+	public Jornada(int id, LocalDate data, IPessoa pessoa, ITurno turno) {
 		this.id = id;
 		this.data = data;
 		this.pessoa = pessoa;

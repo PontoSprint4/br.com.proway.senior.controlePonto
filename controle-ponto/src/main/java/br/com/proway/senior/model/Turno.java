@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.com.proway.senior.model.interfaces.ITurno;
+
 /**
  * 
  * @author Vanderlei Kleinschmidt
@@ -15,7 +17,7 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Turno{
+public class Turno implements ITurno {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
