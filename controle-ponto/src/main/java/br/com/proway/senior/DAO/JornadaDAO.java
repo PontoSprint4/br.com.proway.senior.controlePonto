@@ -11,8 +11,9 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 
 import br.com.proway.senior.model.Jornada;
+import br.com.proway.senior.model.PessoaDoPonto;
+import br.com.proway.senior.model.Turno;
 import br.com.proway.senior.model.interfaces.IPessoa;
-import br.com.proway.senior.model.interfaces.ITurno;
 
 public final class JornadaDAO {
 
@@ -42,14 +43,19 @@ public final class JornadaDAO {
 	 * @param pessoa
 	 * @return void
 	 */
-	public void create(IPessoa pessoa, ITurno turno) {
-		
-		Jornada jornada = new Jornada(1, LocalDate.now(), pessoa, turno);
+	public void create(Jornada jornada) {
 		if(!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
-		session.save(jornada);
-		session.getTransaction().commit();
+			try {
+				session.save(jornada);
+			} catch (Exception e) {
+				e.getMessage();
+			}
+			
+			session.getTransaction().commit();
+
+		
 	}
 
 	/**
@@ -130,12 +136,13 @@ public final class JornadaDAO {
 	 * @param data
 	 */
 	public void update(Jornada jornadaASerAtualizada) {
-		if(!session.getTransaction().isActive()) {
-			session.beginTransaction();
-		}
+//		if(!session.getTransaction().isActive()) {
+//			session.beginTransaction();
+//		}
 		
 		try {
-			session.update(jornadaASerAtualizada);;
+			session.beginTransaction();
+			session.update(jornadaASerAtualizada);
 			session.getTransaction().commit();
 		} catch(Exception e) {
 			e.getMessage();

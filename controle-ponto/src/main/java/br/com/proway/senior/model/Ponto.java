@@ -17,6 +17,9 @@ public class Ponto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idPonto;
     private LocalDateTime momentoPonto;
+    
+    @ManyToOne 
+    private Jornada jornada;
 
     public Ponto() {}
 

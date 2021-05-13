@@ -33,7 +33,7 @@ public class DBConnection {
 					.setProperty("hibernate.jdbc.time_zone", "UTC")
 					.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
 					.setProperty("hibernate.show__sql", "true")
-					.setProperty("hibernate.format_sql", "false")
+					.setProperty("hibernate.format_sql", "true")
 					.setProperty("hibernate.hbm2ddl.auto", "update")
 					.setProperty("hibernate.connection.autocommit", "true")
 					.addAnnotatedClass(Jornada.class)
