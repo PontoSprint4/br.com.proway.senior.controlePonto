@@ -1,6 +1,6 @@
 package br.com.proway.senior.utils;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.SessionFactory;
 
@@ -30,9 +30,9 @@ public abstract class HibernateDataAccess {
 	public abstract void update(Object object);
 
 	public abstract void delete(Object object);
-	
+
 	public abstract Object get(int index);
 
-	public abstract List<T> getAll();
+	public abstract <T> List<T> getAll();
 
 }

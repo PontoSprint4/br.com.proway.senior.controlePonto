@@ -1,97 +1,61 @@
 package br.com.proway.senior.DAO;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.hibernate.*;
+import org.junit.*;
 
-import br.com.proway.senior.dbpersistence.PostgresConnector;
-import br.com.proway.senior.model.Jornada;
+import br.com.proway.senior.dbpersistence.DBConnection;
+import br.com.proway.senior.model.Ponto;
 
-//public class PontoDAOTest {
-//
-//	@BeforeClass
-//	public static void refreshDatabase() {
-//		String queryDrop = "DROP TABLE pontos";
-//
-//		String queryCreate = "CREATE TABLE pontos ("
-//				+ "id SERIAL PRIMARY KEY NOT NULL,"
-//				+ "idJornada INT NOT NULL,"
-//				+ "momentoPonto TIMESTAMP NOT NULL)";
-//
-//		String query1 = "INSERT INTO pontos (idJornada, momentoPonto) VALUES ("
-//				+ 111 + ",'" + LocalDateTime.now().plusHours(3) + "')";
-//		String query2 = "INSERT INTO pontos (idJornada, momentoPonto) VALUES ("
-//				+ 112 + ",'" + LocalDateTime.now().plusMinutes(51) + "')";
-//		String query3 = "INSERT INTO pontos (idJornada, momentoPonto) VALUES ("
-//				+ 113 + ",'" + LocalDateTime.now().plusMinutes(17) + "')";
-//		String query4 = "INSERT INTO pontos (idJornada, momentoPonto) VALUES ("
-//				+ 111 + ",'" + LocalDateTime.now().plusHours(9) + "')";
-//		// pessoa id = 114
-//		String query5 = "INSERT INTO pontos (idJornada, momentoPonto) VALUES ("
-//				+ 114 + ",'" + LocalDateTime.now() + "')";
-//		String query6 = "INSERT INTO pontos (idJornada, momentoPonto) VALUES ("
-//				+ 114 + ",'" + LocalDateTime.now().plusHours(4) + "')";
-//		String query7 = "INSERT INTO pontos (idJornada, momentoPonto) VALUES ("
-//				+ 114 + ",'" + LocalDateTime.now().plusHours(6) + "')";
-//		String query8 = "INSERT INTO pontos (idJornada, momentoPonto) VALUES ("
-//				+ 114 + ",'" + LocalDateTime.now().plusHours(10) + "')";
-//
-//		try {
-//			PostgresConnector.executeUpdate(queryDrop);
-//			PostgresConnector.executeUpdate(queryCreate);
-//			PostgresConnector.executeUpdate(query1);
-//			PostgresConnector.executeUpdate(query2);
-//			PostgresConnector.executeUpdate(query3);
-//			PostgresConnector.executeUpdate(query4);
-//			PostgresConnector.executeUpdate(query5);
-//			PostgresConnector.executeUpdate(query6);
-//			PostgresConnector.executeUpdate(query7);
-//			PostgresConnector.executeUpdate(query8);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-//	@Before
-//	public void cleanDAO() {
-//		PontoDAO.newInstance();
-//	}
-//
-//	@Test
-//	public void testRead() {
-//		PontoDAO db = PontoDAO.getInstance();
-//		db.read(2);
-//	}
-//
-//	@Test
-//	public void testReadByIdJornada() {
-//		PontoDAO db = PontoDAO.getInstance();
-//		db.readByIdJornada(111);
-//		assertFalse(db.readAll().size() == 5);
-//	}
-//
-//	@Test
-//	public void testCreate() {
-//		PontoDAO db = PontoDAO.getInstance();
-//		Jornada jornada = new Jornada(555, 2, LocalDate.now(), 3);
-//
-//		db.create(jornada); // 9 itens no db
-//		assertTrue(db.readAll().size() == 9);
-//	}
-//
-//	@Test
-//	public void testDelete() {
-//		PontoDAO db = PontoDAO.getInstance();
-//		db.delete(2);
-//		assertEquals(db.readAll().size(), 8);
-//	}
-//
-//}
+public class PontoDAOTest {
+
+	static PontoDAO instance;
+	static Session session;
+	static Ponto ponto;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		session = DBConnection.getSession();
+		instance = PontoDAO.getInstance(session);
+		ponto = new Ponto();
+	}
+
+	@Test
+	public void testInsert() {
+		ponto.setMomentoPonto(LocalDateTime.of(2021,05,13, 23,59));
+		instance.insert(ponto);
+		System.out.println("\n\n\n\n\n"+instance.getAll().size() + "\n\n\n\n\n");
+		System.out.println("\n\n\n\n\n"+instance.getAll().get(7).getIdPonto() + "\n\n\n\n\n");		
+		
+		assertEquals(instance.getAll().get(7).getIdPonto(), ponto.getIdPonto());
+	}
+
+	@Test
+	public void testUpdate() {
+//		ponto = new Ponto();
+//		ponto.getIdPonto();
+//		ponto.setMomentoPonto(LocalDateTime.of(2019,05,13, 20,59));
+		ponto = new Ponto(114, LocalDateTime.of(2019,05,13, 20,59));
+		assertTrue(instance.update(ponto));
+	}
+
+	@Test
+	public void testDelete() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGet() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetAll() {
+		System.out.println("\n\n\n\n\n\n"+instance.getAll()+"\n\n\n\n\n\n");
+		assertNotNull(instance.getAll());
+	}
+
+}

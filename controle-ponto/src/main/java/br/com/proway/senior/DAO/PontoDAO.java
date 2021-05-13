@@ -3,102 +3,101 @@ package br.com.proway.senior.DAO;
 import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.utils.ICRUD;
 import org.hibernate.Session;
-import org.hibernate.query.criteria.internal.compile.CriteriaQueryTypeQueryAdapter;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * @author Samuel Levi <samuel.levi@senior.com.br>
  * @author Tharlys de Souza Dias <tharlys.dias@senior.com.br>
  * @version Sprint5
- * Alteração da classe pontoDAO para implementar o CriteriaBuilder.
+ * 
+ * AlteraÃ§Ã£o da classe pontoDAO para implementar o CriteriaBuilder.
+ * 
  */
 
 public class PontoDAO implements ICRUD<Ponto> {
 
-    private static PontoDAO instance;
-    private final Session session;
+	private static PontoDAO instance;
+	private Session session;
 
-    /**
-     * Construtor que recebe a sessão.
-     *
-     * @param session sessão recebida como parâmetro
-     */
-    public PontoDAO(Session session) {
-        this.session = session;
-    }
+	/**
+	 * Construtor que recebe a sessï¿½o.
+	 *
+	 * @param session sessï¿½o recebida como parï¿½metro
+	 */
+	public PontoDAO(Session session) {
+		this.session = session;
+	}
 
-    /**
-     * Método responsável por instanciar PontoDao recebendo a sessão. A
-     * sessão recebida passa pela checagem se é nula, caso positivo, uma nova
-     * sessão é instanciada, caso negativo, a sessão que já está aberta é
-     * retornada.
-     *
-     * @param session Sessão ativa
-     * @return instance a instancia da sessão.
-     */
-    public static PontoDAO getInstance(Session session) {
-        if (instance == null)
-            instance = new PontoDAO(session);
-        return instance;
-    }
+	/**
+	 * Mï¿½todo responsï¿½vel por instanciar PontoDao recebendo a sessï¿½o. A sessï¿½o
+	 * recebida passa pela checagem se ï¿½ nula, caso positivo, uma nova sessï¿½o ï¿½
+	 * instanciada, caso negativo, a sessï¿½o que jï¿½ estï¿½ aberta ï¿½ retornada.
+	 *
+	 * @param session Sessï¿½o ativa
+	 * @return instance a instancia da sessï¿½o.
+	 */
+	public static PontoDAO getInstance(Session session) {
+		if (instance == null)
+			instance = new PontoDAO(session);
+		return instance;
+	}
 
+	public void insert(Ponto pontoASerInserido) {
+		session.save(pontoASerInserido);
+	}
 
-    public void insert(Ponto pontoASerInserido) {
-        session.save(pontoASerInserido);
-    }
+	public boolean update(Ponto pontoASerAlterado) {
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
+		}
+		try {
+			session.update(pontoASerAlterado);
+			session.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-    public boolean update(Ponto pontoASerAlterado) {
-        if (!session.getTransaction().isActive()) {
-            session.beginTransaction();
-        }
-        try {
-            session.update(pontoASerAlterado);
-            session.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+	public boolean delete(Ponto pontoASerDeletado) {
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
+		}
+		try {
+			session.delete(pontoASerDeletado);
+			session.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-    public boolean delete(Ponto pontoASerDeletado) {
-        if (!session.getTransaction().isActive()) {
-            session.beginTransaction();
-        }
-        try {
-            session.delete(pontoASerDeletado);
-            session.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+	public Ponto get(int index) {
+//		CriteriaBuilder builder = session.getCriteriaBuilder();
+//		CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
+//		Query query = session.createQuery(criteria);
+//		Root<Ponto> pontoRoot = criteria.from(Ponto.class);
+//		CriteriaQuery<Ponto> rootQuery = criteria.select(pontoRoot);
+//		Expression pontoId = (Expression) pontoRoot.get("id");
+//		criteria.select(pontoRoot).where(builder.equal(pontoId, index));
+//		return (Ponto) query.getSingleResult();
+		return null;
+	}
 
-    public Ponto get(int index){
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
-        Query query = session.createQuery(criteria);
-        Root<Ponto> pontoRoot = criteria.from(Ponto.class);
-        CriteriaQuery<Ponto> rootQuery = criteria.select(pontoRoot);
-        Expression pontoId = (Expression) pontoRoot.get("id");
-        criteria.select(pontoRoot).where(builder.equal(pontoId, index));
-        return (Ponto) query.getSingleResult();
-    }
-
-    public List<Ponto> getAll() {
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
-        criteria.from(Ponto.class);
-        return session.createQuery(criteria).getResultList();
-    }
+	public List<Ponto> getAll() {
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
+		criteria.from(Ponto.class);
+		List<Ponto> selectedPontos = session.createQuery(criteria).getResultList();
+		return selectedPontos;
+	}
 
 }

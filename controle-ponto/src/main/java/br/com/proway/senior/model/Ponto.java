@@ -11,11 +11,14 @@ import java.time.LocalDateTime;
  */
 
 @Entity
+@Table(name = "pontos")
 public class Ponto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer idPonto;
+    @Column(name = "momentoPonto")
     private LocalDateTime momentoPonto;
 
     public Ponto() {}

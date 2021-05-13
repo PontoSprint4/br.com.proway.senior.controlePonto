@@ -36,7 +36,7 @@ public class DBConnection {
 					.setProperty("hibernate.format_sql", "false")
 					.setProperty("hibernate.hbm2ddl.auto", "update")
 					.setProperty("hibernate.connection.autocommit", "true")
-					.addAnnotatedClass(Jornada.class)
+					//.addAnnotatedClass(Jornada.class)
 					.addAnnotatedClass(PessoaDoPonto.class)
 					.addAnnotatedClass(Ponto.class)
 					.addAnnotatedClass(Turno.class)

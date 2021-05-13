@@ -4,14 +4,14 @@ import java.util.List;
 
 public interface ICRUD<T> {
 
-    void insert (T obj);
+	void insert(T obj);
 
-    T get(int index);
-    
-    List<T> getAll();
+	T get(int index);
 
-    boolean update(T obj, int index);
+	List<T> getAll();
 
-    boolean delete(int index);
+	boolean update(T obj);
+
+	boolean delete(T obj);
 
 }
