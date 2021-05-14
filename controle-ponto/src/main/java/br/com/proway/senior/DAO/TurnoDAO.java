@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,7 +14,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 
 import br.com.proway.senior.dbpersistence.PostgresConnector;
-import br.com.proway.senior.model.Turno;
+import br.com.proway.senior.model.PessoaDoPonto;
 import br.com.proway.senior.model.Turno;
 
 public class TurnoDAO {
@@ -52,16 +53,7 @@ public class TurnoDAO {
 	}
 
 	public Turno find(int id) {
-		CriteriaBuilder builder = session.getCriteriaBuilder();
-		CriteriaQuery<Turno> criteria = builder.createQuery(Turno.class);
-		Root<Turno> root = criteria.from(Turno.class);
-		Query query = session.createQuery(criteria);
-		
-		CriteriaQuery<Turno> rootQuery = criteria.select(root);
-		javax.persistence.criteria.Expression<Object> idTurno =  root.get("id");
-		
-		criteria.select(root).where(builder.equal(idTurno, id));		
-		return (Turno) query.setMaxResults(1).getSingleResult();
+		return session.get(Turno.class, id);
 	}
 	
 	/*
@@ -98,14 +90,27 @@ public class TurnoDAO {
 	 * 
 	 */
 
-	public void delete(int id) {
-		String query = "DELETE FROM turnos WHERE id =" + id;
-		try {
-			PostgresConnector.executeUpdate(query);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public boolean delete(Turno turno) {
+		if(!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
+		
+		try {
+			session.delete(turno);
+			session.getTransaction().commit();
+			return true;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+//		String query = "DELETE FROM turnos WHERE id =" + id;
+//		try {
+//			PostgresConnector.executeUpdate(query);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	/*
@@ -114,13 +119,17 @@ public class TurnoDAO {
 	 * 
 	 */
 
-	public void update(int id, String col, String data) {
-		String query = "UPDATE turnos SET " + col + "='" + data + "' WHERE id =" + id;
+	public boolean update(Turno turnoASerAtualizado) {
+		if(!session.getTransaction().isActive()) {
+			session.beginTransaction();
+		}
 		try {
-			PostgresConnector.executeUpdate(query);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			session.update(turnoASerAtualizado);
+			session.getTransaction().commit();
+			return true;
+		} catch(Exception e) {
+			e.getMessage();
+			return false;
 		}
 	}
 
@@ -129,27 +138,12 @@ public class TurnoDAO {
 	 * 
 	 * @return ArrayList<String>
 	 */
-
-	public ArrayList<ArrayList<String>> readAll() {
-		ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
-		String query = "SELECT * FROM turnos";
-		ResultSet rs;
-		try {
-			rs = PostgresConnector.executeQuery(query);
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int totalColumns = rsmd.getColumnCount();
-			while (rs.next()) {
-				ArrayList<String> row = new ArrayList<String>();
-				for (int i = 1; i <= totalColumns; i++) {
-					row.add(rs.getString(i));
-				}
-				results.add(row);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return results;
+	public List<Turno> readAll() {
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Turno> criteria = builder.createQuery(Turno.class);
+		criteria.from(Turno.class);
+		return session.createQuery(criteria).getResultList();
+	
 	}
 
 }

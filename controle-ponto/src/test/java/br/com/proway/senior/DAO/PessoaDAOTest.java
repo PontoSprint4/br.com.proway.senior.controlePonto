@@ -18,33 +18,38 @@ class PessoaDAOTest {
 		PessoaDAO pessoaDao = PessoaDAO.getInstance(session);
 		PessoaDoPonto pessoa = new PessoaDoPonto();
 		pessoaDao.create(pessoa);
-		ArrayList<PessoaDoPonto> pessoas = (ArrayList<PessoaDoPonto>) pessoaDao.getAll();
-		assertEquals(6,pessoas.size());
+		
+		PessoaDoPonto pessoa2 = new PessoaDoPonto();
+		pessoaDao.create(pessoa2);
+		
+		PessoaDoPonto pessoa3 = new PessoaDoPonto();
+		pessoaDao.create(pessoa3);
+		
+		PessoaDoPonto pessoaFind = pessoaDao.find(pessoa2.getId());
+		
+		pessoaDao.remove(pessoa3);		
+		
+		ArrayList<PessoaDoPonto> listaPessoas = (ArrayList<PessoaDoPonto>) pessoaDao.getAll();
+		assertEquals(2,listaPessoas.size());
 	}
 
-	@Test
-	void testFind() {
-		Session session = DBConnection.getSession();
-		PessoaDAO pessoaDao = PessoaDAO.getInstance(session);
-
-		PessoaDoPonto pessoa = pessoaDao.find(30);
-		assertEquals(30, pessoa.getId());
-	}
-	
-//	@Test 
-//	void testUpdate(){
+//	@Test
+//	void testFind() {
 //		Session session = DBConnection.getSession();
 //		PessoaDAO pessoaDao = PessoaDAO.getInstance(session);
+//
+//		PessoaDoPonto pessoa = pessoaDao.find(30);
+//		assertEquals(30, pessoa.getId());
 //	}
-	
-	@Test
-	void testClearDb() {
-		Session session = DBConnection.getSession();
-		PessoaDAO pessoaDao = PessoaDAO.getInstance(session);
-		session.getTransaction();
-		session.createQuery("TRUNCATE pessoadoponto RESTART IDENTITY CASCADE;").executeUpdate();
-		
-		assertEquals(0, pessoaDao.getAll().size());
-	}
+//	
+//	@Test
+//	void testClearDb() {
+//		Session session = DBConnection.getSession();
+//		PessoaDAO pessoaDao = PessoaDAO.getInstance(session);
+//		session.getTransaction();
+//		session.createQuery("TRUNCATE pessoadoponto RESTART IDENTITY CASCADE;").executeUpdate();
+//		
+//		assertEquals(0, pessoaDao.getAll().size());
+//	}
 
 }

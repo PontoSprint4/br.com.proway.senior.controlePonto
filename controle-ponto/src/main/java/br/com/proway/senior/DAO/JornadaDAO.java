@@ -67,19 +67,7 @@ public final class JornadaDAO {
 	 * @return
 	 */
 	public Jornada read(int id) {
-		
-		CriteriaBuilder builder = session.getCriteriaBuilder();
-		CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
-		Root<Jornada> root = criteria.from(Jornada.class);
-		Query query = session.createQuery(criteria);
-		
-		CriteriaQuery<Jornada> rootQuery = criteria.select(root);
-		javax.persistence.criteria.Expression<Object> idJornada =  root.get("id");
-		
-		criteria.select(root).where(builder.equal(idJornada, id));		
-		return (Jornada) query.getSingleResult();
-		
-		
+		return session.get(Jornada.class, id);
 	}
 
 	public List<Jornada> readByIdPessoa(IPessoa pessoa) {
@@ -136,9 +124,9 @@ public final class JornadaDAO {
 	 * @param data
 	 */
 	public void update(Jornada jornadaASerAtualizada) {
-//		if(!session.getTransaction().isActive()) {
-//			session.beginTransaction();
-//		}
+		if(!session.getTransaction().isActive()) {
+			session.beginTransaction();
+		}
 		
 		try {
 			session.beginTransaction();

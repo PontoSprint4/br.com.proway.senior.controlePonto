@@ -15,28 +15,33 @@ import br.com.proway.senior.model.PessoaDoPonto;
 import br.com.proway.senior.model.Turno;
 
 class JornadaDAOTest2 {
-
+	
+	static Session session;
+	static JornadaDAO jornadaDao;
+	static PessoaDAO pessoaDao;
+	static TurnoDAO turnoDao;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception{
+		session = DBConnection.getSession();
+		jornadaDao = JornadaDAO.getInstance(session);
+		pessoaDao = PessoaDAO.getInstance(session);
+		turnoDao = TurnoDAO.getInstance(session);
+	}
+	
 	@Test
 	public void testCreate() {
-		Session session = DBConnection.getSession();
-		JornadaDAO jornadaDao = JornadaDAO.getInstance(session);
-		PessoaDAO pessoaDao = PessoaDAO.getInstance(session);
-		TurnoDAO turnoDao = TurnoDAO.getInstance(session);
-		
-		PessoaDoPonto pessoa = pessoaDao.find(30);
-		Turno turno = turnoDao.find(29);
-		
-		
-		
-//		Jornada jornada = new Jornada(0, LocalDate.now(), pessoa, turno);
-//		jornada.setData(LocalDate.now());
-//		jornadaDao.create(jornada);
+		PessoaDoPonto pessoa = pessoaDao.find(114);
+		Turno turno = turnoDao.find(109);
+		Jornada jornada = new Jornada();
+		jornada.setData(LocalDate.now());
+		jornadaDao.create(jornada);
 		
 	}
 	
 	@Test
 	public void testGetAll() {
-		Session session = DBConnection.getSession();
+		session = DBConnection.getSession();
 		JornadaDAO jornadaDao = JornadaDAO.getInstance(session);
 		
 		System.out.println(jornadaDao.readAll());
@@ -44,7 +49,7 @@ class JornadaDAOTest2 {
 	
 	@Test
 	public void testUpdate() {
-		Session session = DBConnection.getSession();
+		session = DBConnection.getSession();
 		JornadaDAO jornadaDao = JornadaDAO.getInstance(session);
 		
 		PessoaDoPonto pessoa = new PessoaDoPonto(1);
@@ -58,7 +63,8 @@ class JornadaDAOTest2 {
 	
 	@Test
 	void testClearDb() {
-		Session session = DBConnection.getSession();
+		
+		session = DBConnection.getSession();
 		JornadaDAO jornadaDao = JornadaDAO.getInstance(session);
 		session.createQuery("TRUNCATE jornada RESTART IDENTITY CASCADE").executeUpdate();
 		

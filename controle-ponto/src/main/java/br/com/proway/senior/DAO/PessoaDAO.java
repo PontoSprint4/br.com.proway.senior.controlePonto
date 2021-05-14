@@ -39,6 +39,19 @@ public class PessoaDAO {
 		return session.createQuery(criteria).getResultList();
 	}
 	
+	public boolean remove(PessoaDoPonto pessoaARemover) {
+		try {
+		session.getTransaction();
+		session.beginTransaction();
+		session.remove(pessoaARemover);
+		session.getTransaction().commit();
+		return true;
+		} catch (Exception e) {
+			e.getMessage();
+			return false;
+		}
+	}
+	
 	public PessoaDoPonto find(int id) {
 		return session.get(PessoaDoPonto.class, id);
 		
