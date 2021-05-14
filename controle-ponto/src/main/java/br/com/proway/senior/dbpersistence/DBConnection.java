@@ -31,11 +31,12 @@ public class DBConnection {
 					.setProperty("hibernate.connection.username", "postgres")
 					.setProperty("hibernate.connection.password", "admin")
 					.setProperty("hibernate.jdbc.time_zone", "UTC")
-					.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
-					.setProperty("hibernate.show__sql", "true")
+					.setProperty("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect")
+					.setProperty("hibernate.show__sql", "false")
 					.setProperty("hibernate.format_sql", "false")
 					.setProperty("hibernate.hbm2ddl.auto", "update")
 					.setProperty("hibernate.connection.autocommit", "true")
+					.setProperty("hibernate.sql", "false")
 					//.addAnnotatedClass(Jornada.class)
 					.addAnnotatedClass(PessoaDoPonto.class)
 					.addAnnotatedClass(Ponto.class)
@@ -46,7 +47,7 @@ public class DBConnection {
 					.buildSessionFactory();
 		} catch (Throwable e) {
 			System.err.println("Initial SessionFactory creation failed: " + e.getMessage());
-			throw new ExceptionInInitializerError(e);
+			throw new ExceptionInInitializerError(e.toString());
 		}
 
 	}

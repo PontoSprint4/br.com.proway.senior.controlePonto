@@ -4,20 +4,17 @@ import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.utils.ICRUD;
 import org.hibernate.Session;
 
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
  * @author Samuel Levi <samuel.levi@senior.com.br>
  * @author Tharlys de Souza Dias <tharlys.dias@senior.com.br>
  * @version Sprint5
- * 
+ *
  * Alteração da classe pontoDAO para implementar o CriteriaBuilder.
- * 
+ *
  */
 
 public class PontoDAO implements ICRUD<Ponto> {
@@ -28,19 +25,20 @@ public class PontoDAO implements ICRUD<Ponto> {
 	/**
 	 * Construtor que recebe a sess�o.
 	 *
-	 * @param session sess�o recebida como par�metro
+	 * @param session sessão recebida como par�metro
 	 */
 	public PontoDAO(Session session) {
 		this.session = session;
 	}
 
 	/**
-	 * M�todo respons�vel por instanciar PontoDao recebendo a sess�o. A sess�o
-	 * recebida passa pela checagem se � nula, caso positivo, uma nova sess�o �
-	 * instanciada, caso negativo, a sess�o que j� est� aberta � retornada.
+	 * Método responsável por instanciar {@link PontoDAO} recebendo uma sessão
+     * A sessão recebida passa pela checagem se é nula, caso positivo, uma
+     * nova sessão instanciada, caso negativo, a sessão que já está aberta é
+     * retornada.
 	 *
-	 * @param session Sess�o ativa
-	 * @return instance a instancia da sess�o.
+	 * @param session Sess�oão ativa
+	 * @return instance a instancia da sessão.
 	 */
 	public static PontoDAO getInstance(Session session) {
 		if (instance == null)
@@ -48,11 +46,42 @@ public class PontoDAO implements ICRUD<Ponto> {
 		return instance;
 	}
 
+    /**
+     * Recebe um objeto {@link Ponto} e insere no banco de dados.
+     * É realizado um teste para saber se a transação atual está ativa, se
+     * estiver é retornada, caso contrário e´iniciada uma nova transação com
+     * o banco.
+     * O objeto é salvo usando o método save da session e a transação é
+     * comitada/persistida caso o objeto seja persistido no banco.
+     * O objeto a ser recebido aqui, deve ter o parâmetro id nulo no
+     * construtor, pois esse parâmetro será atribuído no banco de dados.
+     * @param pontoASerInserido objeto a ser inserido no banco.
+     */
 	public void insert(Ponto pontoASerInserido) {
-		session.save(pontoASerInserido);
-	}
+        if (!session.getTransaction().isActive()) {
+            session.beginTransaction();
+        }
+        try {
+            session.save(pontoASerInserido);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	public boolean update(Ponto pontoASerAlterado) {
+	}
+    /**
+     * Recebe um objeto {@link Ponto} e altera no banco de dados.
+     * É realizado um teste para saber se a transação atual está ativa, se
+     * estiver é retornada, caso contrário e´iniciada uma nova transação com
+     * o banco.
+     * O objeto é salvo usando o método save da session e a transação é
+     * comitada/persistida caso o objeto seja persistido no banco.
+     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
+     * construtor, pois esse parâmetro será usado no banco de dados, para
+     * definir as outras informações que serão atualizadas.
+     * @param pontoASerAlterado objeto a ser alterado no banco.
+     */
+    public boolean update(Ponto pontoASerAlterado) {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -81,15 +110,7 @@ public class PontoDAO implements ICRUD<Ponto> {
 	}
 
 	public Ponto get(int index) {
-//		CriteriaBuilder builder = session.getCriteriaBuilder();
-//		CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
-//		Query query = session.createQuery(criteria);
-//		Root<Ponto> pontoRoot = criteria.from(Ponto.class);
-//		CriteriaQuery<Ponto> rootQuery = criteria.select(pontoRoot);
-//		Expression pontoId = (Expression) pontoRoot.get("id");
-//		criteria.select(pontoRoot).where(builder.equal(pontoId, index));
-//		return (Ponto) query.getSingleResult();
-		return null;
+		return session.get(Ponto.class, index);
 	}
 
 	public List<Ponto> getAll() {

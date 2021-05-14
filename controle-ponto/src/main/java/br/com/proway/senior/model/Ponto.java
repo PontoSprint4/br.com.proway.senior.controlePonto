@@ -46,10 +46,8 @@ public class Ponto {
 
     @Override
     public String toString() {
-        return "Ponto{" +
-                "idPonto=" + idPonto +
-                ", momentoPonto=" + momentoPonto +
-                '}';
+        return "\nPonto: " + idPonto +
+                ". Registrado em: " + momentoPonto;
     }
 
     @Override

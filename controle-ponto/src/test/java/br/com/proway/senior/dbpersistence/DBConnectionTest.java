@@ -23,8 +23,8 @@ public class DBConnectionTest {
 		Session session = db.getSession();
 		db.shutdown();
 		
-		PontoDAO pontodao = PontoDAO.getInstance();
-		pontodao.read(3);
+		PontoDAO pontodao = PontoDAO.getInstance(session);
+		pontodao.get(3);
 	
 	}
 

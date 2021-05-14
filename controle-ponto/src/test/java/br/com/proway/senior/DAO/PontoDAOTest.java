@@ -1,61 +1,69 @@
 package br.com.proway.senior.DAO;
 
-import static org.junit.Assert.*;
+import br.com.proway.senior.dbpersistence.DBConnection;
+import br.com.proway.senior.model.Ponto;
+import org.hibernate.Session;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.*;
-import org.junit.*;
+import static org.junit.Assert.*;
 
-import br.com.proway.senior.dbpersistence.DBConnection;
-import br.com.proway.senior.model.Ponto;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PontoDAOTest {
 
-	static PontoDAO instance;
-	static Session session;
-	static Ponto ponto;
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		session = DBConnection.getSession();
-		instance = PontoDAO.getInstance(session);
-		ponto = new Ponto();
-	}
+    static PontoDAO instance;
+    static Session session;
+    static Ponto ponto;
 
-	@Test
-	public void testInsert() {
-		ponto.setMomentoPonto(LocalDateTime.of(2021,05,13, 23,59));
-		instance.insert(ponto);
-		System.out.println("\n\n\n\n\n"+instance.getAll().size() + "\n\n\n\n\n");
-		System.out.println("\n\n\n\n\n"+instance.getAll().get(7).getIdPonto() + "\n\n\n\n\n");		
-		
-		assertEquals(instance.getAll().get(7).getIdPonto(), ponto.getIdPonto());
-	}
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+        session = DBConnection.getSession();
+        instance = PontoDAO.getInstance(session);
+    }
 
-	@Test
-	public void testUpdate() {
-//		ponto = new Ponto();
-//		ponto.getIdPonto();
-//		ponto.setMomentoPonto(LocalDateTime.of(2019,05,13, 20,59));
-		ponto = new Ponto(114, LocalDateTime.of(2019,05,13, 20,59));
-		assertTrue(instance.update(ponto));
-	}
+    @Test
+    public void testAInsert() {
+        Ponto ponto1 = new Ponto(null, LocalDateTime.of(2021, 5, 13, 23, 59));
+        Ponto ponto2 = new Ponto(null, LocalDateTime.of(2020, 6, 15, 9, 15));
+        instance.insert(ponto1);
+        instance.insert(ponto2);
+        System.out.println("\n\n\n\n\n" + instance.getAll().size()
+                + "\n\n" + instance.getAll());
+        assertNotNull(ponto1);
+    }
 
-	@Test
-	public void testDelete() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testCDelete() {
+        ponto = new Ponto(3, LocalDateTime.of(2222, 5, 13, 20, 59));
+        instance.insert(ponto);
+        assertTrue(instance.delete(ponto));
+    }
 
-	@Test
-	public void testGet() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testDGetAll() {
+        System.out.println("\n\n**************************\n"
+                + instance.getAll().stream().count()
+                + "\n**************************\n"
+                + instance.getAll()
+                + "\n**************************\n\n");
+        assertNotNull(instance.getAll());
+    }
 
-	@Test
-	public void testGetAll() {
-		System.out.println("\n\n\n\n\n\n"+instance.getAll()+"\n\n\n\n\n\n");
-		assertNotNull(instance.getAll());
-	}
+    @Test
+    public void testEUpdate() {
+        ponto = new Ponto(21, LocalDateTime.of(2775, 6, 6, 20, 59));
+        assertTrue(instance.update(ponto));
+    }
+
+    @Test
+    public void testFGet() {
+        assertEquals(21, (int) instance.get(21).getIdPonto());
+    }
+
 
 }
