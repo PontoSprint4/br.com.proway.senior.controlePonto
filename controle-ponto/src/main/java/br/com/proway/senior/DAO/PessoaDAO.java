@@ -1,13 +1,12 @@
 package br.com.proway.senior.DAO;
 
-import javax.persistence.Query;
+import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.PessoaDoPonto;
 
 public class PessoaDAO {
@@ -33,16 +32,24 @@ public class PessoaDAO {
 		session.getTransaction().commit();
 	}
 	
-	public PessoaDoPonto find(int id) {
+	public List<PessoaDoPonto> getAll(){
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<PessoaDoPonto> criteria = builder.createQuery(PessoaDoPonto.class);
-		Root<PessoaDoPonto> root = criteria.from(PessoaDoPonto.class);
-		Query query = session.createQuery(criteria);
+		criteria.from(PessoaDoPonto.class);
+		return session.createQuery(criteria).getResultList();
+	}
+	
+	public PessoaDoPonto find(int id) {
+		return session.get(PessoaDoPonto.class, id);
 		
-		CriteriaQuery<PessoaDoPonto> rootQuery = criteria.select(root);
-		javax.persistence.criteria.Expression<Object> idPessoa =  root.get("id");
-		
-		criteria.select(root).where(builder.equal(idPessoa, id));		
-		return (PessoaDoPonto) query.setMaxResults(1).getSingleResult();
+//		CriteriaBuilder builder = session.getCriteriaBuilder();
+//		CriteriaQuery<PessoaDoPonto> criteria = builder.createQuery(PessoaDoPonto.class);
+//		Root<PessoaDoPonto> root = criteria.from(PessoaDoPonto.class);
+//		Query query = session.createQuery(criteria);
+//
+//		CriteriaQuery<PessoaDoPonto> rootQuery = criteria.select(root);
+//		
+//		criteria.select(root).where(builder.equal(, id));		
+//		return (PessoaDoPonto) query.getSingleResult();
 	}
 }

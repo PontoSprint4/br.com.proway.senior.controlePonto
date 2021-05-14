@@ -2,6 +2,7 @@ package br.com.proway.senior.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class PessoaDoPonto implements IPessoa {
 	@Column(name = "id_pessoa")
 	private int id;
 	
-	@OneToMany
+	@OneToMany (cascade = CascadeType.ALL)
 	private List<Jornada> jornada;
 
 	/**

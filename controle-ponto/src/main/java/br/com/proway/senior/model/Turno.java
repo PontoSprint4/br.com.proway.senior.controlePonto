@@ -33,7 +33,7 @@ public class Turno implements ITurno {
 	private String nomeTurno;
 	
 	
-	@OneToMany
+	@OneToMany (cascade = CascadeType.ALL)
 	private List<Jornada> jornada;
 
 	public Turno() {}

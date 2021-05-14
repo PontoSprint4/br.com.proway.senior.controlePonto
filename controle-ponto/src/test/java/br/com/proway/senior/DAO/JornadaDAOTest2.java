@@ -1,8 +1,12 @@
 package br.com.proway.senior.DAO;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDate;
 
 import org.hibernate.Session;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import br.com.proway.senior.dbpersistence.DBConnection;
@@ -19,14 +23,14 @@ class JornadaDAOTest2 {
 		PessoaDAO pessoaDao = PessoaDAO.getInstance(session);
 		TurnoDAO turnoDao = TurnoDAO.getInstance(session);
 		
-		PessoaDoPonto pessoa = pessoaDao.find(10);
-		Turno turno = turnoDao.find(12);
+		PessoaDoPonto pessoa = pessoaDao.find(30);
+		Turno turno = turnoDao.find(29);
 		
 		
 		
-		Jornada jornada = new Jornada(0, LocalDate.now(), pessoa, turno);
-		jornada.setData(LocalDate.now());
-		jornadaDao.create(jornada);
+//		Jornada jornada = new Jornada(0, LocalDate.now(), pessoa, turno);
+//		jornada.setData(LocalDate.now());
+//		jornadaDao.create(jornada);
 		
 	}
 	
@@ -51,5 +55,17 @@ class JornadaDAOTest2 {
 		jornadaDao.update(jornada);
 		
 	}
+	
+	@Test
+	void testClearDb() {
+		Session session = DBConnection.getSession();
+		JornadaDAO jornadaDao = JornadaDAO.getInstance(session);
+		session.createQuery("TRUNCATE jornada RESTART IDENTITY CASCADE").executeUpdate();
+		
+		assertEquals(0, jornadaDao.readAll().size());
+	}
+	
+	
+	
 
 }

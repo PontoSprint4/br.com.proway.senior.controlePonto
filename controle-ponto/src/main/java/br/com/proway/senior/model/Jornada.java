@@ -27,10 +27,10 @@ public class Jornada {
 	@Column(name = "data")
 	private LocalDate data;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private PessoaDoPonto pessoa;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Turno turno;
 
 	@OneToMany(targetEntity = Ponto.class, cascade = CascadeType.ALL)

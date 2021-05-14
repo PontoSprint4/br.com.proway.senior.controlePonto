@@ -18,7 +18,7 @@ public class Ponto {
     private Integer idPonto;
     private LocalDateTime momentoPonto;
     
-    @ManyToOne 
+    @ManyToOne (cascade = CascadeType.ALL)
     private Jornada jornada;
 
     public Ponto() {}
