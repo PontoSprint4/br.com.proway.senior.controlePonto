@@ -56,12 +56,14 @@ public class PontoDAOTest {
 
     @Test
     public void testEUpdate() {
-        ponto = new Ponto(21, LocalDateTime.of(2775, 6, 6, 20, 59));
+        session.clear();
+        ponto = new Ponto(21, LocalDateTime.of(2999, 6, 6, 20, 59));
         assertTrue(instance.update(ponto));
     }
 
     @Test
     public void testFGet() {
+        System.out.println(instance.get(21).toString());
         assertEquals(21, (int) instance.get(21).getIdPonto());
     }
 
