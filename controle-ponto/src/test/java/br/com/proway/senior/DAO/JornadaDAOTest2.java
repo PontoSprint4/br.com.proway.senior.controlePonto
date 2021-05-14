@@ -16,10 +16,15 @@ class JornadaDAOTest2 {
 	public void testCreate() {
 		Session session = DBConnection.getSession();
 		JornadaDAO jornadaDao = JornadaDAO.getInstance(session);
-		PessoaDoPonto pessoa = new PessoaDoPonto(1);
-		Turno turno = new Turno();
+		PessoaDAO pessoaDao = PessoaDAO.getInstance(session);
+		TurnoDAO turnoDao = TurnoDAO.getInstance(session);
 		
-		Jornada jornada = new Jornada();
+		PessoaDoPonto pessoa = pessoaDao.find(10);
+		Turno turno = turnoDao.find(12);
+		
+		
+		
+		Jornada jornada = new Jornada(0, LocalDate.now(), pessoa, turno);
 		jornada.setData(LocalDate.now());
 		jornadaDao.create(jornada);
 		
