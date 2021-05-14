@@ -1,18 +1,16 @@
 package br.com.proway.senior.DAO;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
 import br.com.proway.senior.model.Jornada;
-import br.com.proway.senior.model.PessoaDoPonto;
-import br.com.proway.senior.model.Turno;
 import br.com.proway.senior.model.interfaces.IPessoa;
 
 public final class JornadaDAO {
@@ -49,11 +47,11 @@ public final class JornadaDAO {
 		}
 			try {
 				session.save(jornada);
+				session.getTransaction().commit();
 			} catch (Exception e) {
 				e.getMessage();
 			}
 			
-			session.getTransaction().commit();
 
 		
 	}
@@ -69,6 +67,7 @@ public final class JornadaDAO {
 	public Jornada read(int id) {
 		return session.get(Jornada.class, id);
 	}
+	
 
 	public List<Jornada> readByIdPessoa(IPessoa pessoa) {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -77,9 +76,9 @@ public final class JornadaDAO {
 		Query query = session.createQuery(criteria);
 		
 		CriteriaQuery<Jornada> rootQuery = criteria.select(root);
-		javax.persistence.criteria.Expression<Object> idPessoa =  root.get("idPessoa");
+		Expression <Object> idPessoa = root.get("pessoa_id");
+		criteria.select(root).where(builder.equal(idPessoa, pessoa.getId()));
 		
-		criteria.select(root).where(builder.equal(idPessoa, pessoa.getId()));		
 		List<Jornada> jornadasPorIdPessoa = query.getResultList();
 		return jornadasPorIdPessoa;
 	}
@@ -103,13 +102,6 @@ public final class JornadaDAO {
 		} catch (Exception e) {
 			e.getMessage();
 		}
-//		String query = "DELETE FROM jornadas WHERE id =" + id;
-//		try {
-//			PostgresConnector.executeUpdate(query);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 	}
 
 	/**
@@ -123,27 +115,19 @@ public final class JornadaDAO {
 	 * @param col
 	 * @param data
 	 */
-	public void update(Jornada jornadaASerAtualizada) {
+	public boolean update(Jornada jornadaASerAtualizada) {
 		if(!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
 		
 		try {
-			session.beginTransaction();
 			session.update(jornadaASerAtualizada);
 			session.getTransaction().commit();
+			return true;
 		} catch(Exception e) {
 			e.getMessage();
+			return false;
 		}
-
-//		String query = "UPDATE jornadas" + " SET " + col + " = '" + data + "' WHERE id = " + id;
-//
-//		try {
-//			PostgresConnector.executeUpdate(query);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 	}
 
 	/**
@@ -159,10 +143,8 @@ public final class JornadaDAO {
 
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
-		Root<Jornada> root = criteria.from(Jornada.class);
-		Query query = session.createQuery(criteria);
-		
-		List<Jornada> listaTodasJornadas = query.getResultList();
+		criteria.from(Jornada.class);
+		List<Jornada> listaTodasJornadas = session.createQuery(criteria).getResultList();
 		return listaTodasJornadas;
 	}
 }

@@ -39,7 +39,7 @@ public class Jornada {
 	public Jornada() {
 	}
 
-	public Jornada(int id, LocalDate data, PessoaDoPonto pessoa, Turno turno) {
+	public Jornada(Integer id, LocalDate data, PessoaDoPonto pessoa, Turno turno) {
 		this.id = id;
 		this.data = data;
 		this.pessoa = pessoa;

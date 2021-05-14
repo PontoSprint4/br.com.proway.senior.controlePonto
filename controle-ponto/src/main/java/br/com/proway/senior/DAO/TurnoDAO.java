@@ -46,8 +46,9 @@ public class TurnoDAO {
 	 */
 
 	public void create(Turno turno) {
-		session.getTransaction();
-		session.beginTransaction();
+		if(!session.getTransaction().isActive()) {
+			session.beginTransaction();
+		}
 		session.save(turno);
 		session.getTransaction().commit();
 	}

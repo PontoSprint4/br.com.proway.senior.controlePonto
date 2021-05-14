@@ -1,115 +1,93 @@
 package br.com.proway.senior.DAO;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+
 import org.hibernate.Session;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import br.com.proway.senior.dbpersistence.DBConnection;
-import br.com.proway.senior.model.PessoaDoPonto;
+import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.Turno;
 
-public class JornadaDAOTest {
-//	@BeforeClass
-//	public static void refreshDatabase() {
-//
-//		String queryDrop = "DROP TABLE jornadas";
-//
-//		String queryCreate = "CREATE TABLE jornadas (" + "id SERIAL PRIMARY KEY NOT NULL," + "idPessoa INT NOT NULL,"
-//				+ "data DATE NOT NULL," + "idTurno INT NOT NULL)";
-//
-//		String query1 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + 111 + ",'"
-//				+ LocalDate.now().toString() + "'," + 1 + ")";
-//		String query2 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + 112 + ",'"
-//				+ LocalDate.now().toString() + "'," + 1 + ")";
-//		String query3 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + 113 + ",'"
-//				+ LocalDate.now().toString() + "'," + 2 + ")";
-//		String query4 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + 114 + ",'"
-//				+ LocalDate.now().toString() + "'," + 3 + ")";
-//		String query5 = "INSERT INTO jornadas (idPessoa, data, idTurno) VALUES (" + 117 + ",'"
-//				+ LocalDate.now().toString() + "'," + 2 + ")";
-//
-//		try {
-//			PostgresConnector.executeUpdate(queryDrop);
-//			PostgresConnector.executeUpdate(queryCreate);
-//			PostgresConnector.executeUpdate(query1);
-//			PostgresConnector.executeUpdate(query2);
-//			PostgresConnector.executeUpdate(query3);
-//			PostgresConnector.executeUpdate(query4);
-//			PostgresConnector.executeUpdate(query5);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-//
-//	@Test
-//	public void testCreate() {
-//		DBConnection db = new DBConnection();
-//		Session session = db.getSession();
-//		JornadaDAO jornadaDao = JornadaDAO.getInstance(session);
-//		PessoaDoPonto pessoa = new PessoaDoPonto(1);
-//		Turno turno = new Turno(1, LocalTime.now(), LocalTime.now().plusHours(8), "Turno 1");
-//		jornadaDao.create(pessoa, turno);
-//		
-//	}
-//
-//	@Ignore
-//	public void testCreateData() {
-//		JornadaDAO db = JornadaDAO.getInstance();
-//		PessoaDoPonto pessoa = new PessoaDoPonto();
-//
-//		db.create(pessoa);
-//	}
-//
-//	@Ignore
-//	public void testBuscarJornadaPorId() {
-//		JornadaDAO db = JornadaDAO.getInstance();
-//		System.out.println(db.read(1));
-//		assertEquals(LocalDate.now().toString(), db.read(2).get(2).toString());
-//	}
-//
-//	@Ignore
-//	public void testReadAll() {
-//		JornadaDAO db = JornadaDAO.getInstance();
-//
-//		assertEquals(
-//					 "[[1, 111, " + LocalDate.now().toString() + ", 1],"
-//				   + " [2, 112, " + LocalDate.now().toString() + ", 1]," 
-//				   + " [3, 113, " + LocalDate.now().toString() + ", 2],"
-//				   + " [4, 114, " + LocalDate.now().toString() + ", 3],"
-//				   + " [5, 117, " + LocalDate.now().toString() + ", 2],"
-//				   + " [6, 118, " + LocalDate.now().toString() + ", 1]]",
-//				db.readAll().toString());
-//	}
-//
-//	@Ignore
-//	public void testUpdate() {
-//		JornadaDAO db = JornadaDAO.getInstance();
-//		db.update(4, "data", LocalDate.of(2021, 05, 03));
-//
-//		assertEquals("[4, 114, 2021-05-03, 3]", db.read(4).toString());
-//	}
-//
-//	@Ignore
-//	public void testDelete() {
-//		JornadaDAO db = JornadaDAO.getInstance();
-//		db.delete(2);
-//		assertTrue(db.readAll().size() == 5);
-//	}
-//
-//    public void testTempoTrabalhado() {
-//		//Cenário
-//
-//    }
+class JornadaDAOTest {
 	
-	
+	static Session session;
+	static JornadaDAO jornadaDao;
+	static PessoaDAO pessoaDao;
+	static TurnoDAO turnoDao;
+
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+		session = DBConnection.getSession();
+		jornadaDao = JornadaDAO.getInstance(session);
+		pessoaDao = PessoaDAO.getInstance(session);
+		turnoDao = TurnoDAO.getInstance(session);
+	}
+
 	@Test
-	public void testCreate() {
-		Session session = DBConnection.getSession();
-		JornadaDAO jornadaDao = JornadaDAO.getInstance(session);
-		PessoaDoPonto pessoa = new PessoaDoPonto(1);
-		Turno turno = new Turno();
+	void testCreate() {
+		Jornada jornada = new Jornada();
+		jornada.setData(LocalDate.of(2019,06,14));
+		jornada.setPessoa(pessoaDao.find(115));
+		jornada.setTurno(turnoDao.find(113));
+		jornadaDao.create(jornada);
 		
-		jornadaDao.create(pessoa, turno);
+		assertNotNull(jornada);
+	}
+
+	@Test
+	void testRead() {
+		assertEquals(119, jornadaDao.read(119).getId());
+	}
+
+	@Test
+	void testPegaTodasAsJornadasPorIdPessoa() {
+		pessoaDao.find(114);
+		ArrayList<Jornada> listaJornadas =(ArrayList) jornadaDao.readByIdPessoa(pessoaDao.find(114));
+		System.out.println("AQUI AQUI AQUI AQUI AQUI AQUI\\n\n\n\n\n\n\n\n");
+		System.out.println(jornadaDao.readByIdPessoa(pessoaDao.find(114)));
+		//assertNotNull(jornadaDao.readByIdPessoa(pessoaDao.find(114)));
+
+	}
+
+	@Test
+	void testDelete() {
+		
+		Jornada jornada = new Jornada();
+		jornada.setId(125);
+		jornadaDao.delete(jornada);
+		
+		assertEquals(21, jornadaDao.readAll().size());
+	}
+
+	@Test
+	void testUpdate() {
+		session.clear();
+		Turno turno = new Turno(0, LocalTime.now(), LocalTime.now().plusHours(4), "Turno 54");
+		turnoDao.create(turno);
+		
+		Jornada jornada2 = new Jornada(134, LocalDate.of(1999, 10, 5), pessoaDao.find(115), turno);
+		
+		jornadaDao.update(jornada2);
 		
 	}
+
+	@Test
+	void testReadAll() {
+		
+		for (int i = 0; i < jornadaDao.readAll().size(); i++) {
+		if(jornadaDao.readAll().size() == i) {
+			assertEquals(i, jornadaDao.readAll().size());
+		}
+		}
+		
+
+	}
+
 }
