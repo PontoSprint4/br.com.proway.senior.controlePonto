@@ -25,33 +25,19 @@ public class DBConnection {
 
 	private static SessionFactory buildSessionFactory() {
 		try {
-			return new Configuration()
-					.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
+			return new Configuration().setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
 					.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/controlepontodb")
 					.setProperty("hibernate.connection.username", "postgres")
 					.setProperty("hibernate.connection.password", "admin")
-<<<<<<< HEAD
-					.setProperty("hibernate.jdbc.time_zone", "UTC")
-					.setProperty("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect")
-					.setProperty("hibernate.show__sql", "false")
-					.setProperty("hibernate.format_sql", "false")
-=======
 					.setProperty("hibernate.jdbc.time_zone", "America/Sao_Paulo")
 					.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
-					.setProperty("hibernate.show__sql", "true")
-					.setProperty("hibernate.format_sql", "true")
->>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
+					.setProperty("hibernate.show__sql", "true").setProperty("hibernate.format_sql", "true")
 					.setProperty("hibernate.hbm2ddl.auto", "update")
-					.setProperty("hibernate.connection.autocommit", "true")
-					.setProperty("hibernate.sql", "false")
-					//.addAnnotatedClass(Jornada.class)
-					.addAnnotatedClass(PessoaDoPonto.class)
-					.addAnnotatedClass(Ponto.class)
-					.addAnnotatedClass(Turno.class)
-					.addAnnotatedClass(PessoaDoPonto.class)
-					.addAnnotatedClass(Ponto.class)
-					.addAnnotatedClass(Turno.class)
-					.buildSessionFactory();
+					.setProperty("hibernate.connection.autocommit", "true").setProperty("hibernate.sql", "false")
+					.addAnnotatedClass(Jornada.class).addAnnotatedClass(PessoaDoPonto.class)
+					.addAnnotatedClass(Ponto.class).addAnnotatedClass(Turno.class)
+					.addAnnotatedClass(PessoaDoPonto.class).addAnnotatedClass(Ponto.class)
+					.addAnnotatedClass(Turno.class).buildSessionFactory();
 		} catch (Throwable e) {
 			System.err.println("Initial SessionFactory creation failed: " + e.getMessage());
 			throw new ExceptionInInitializerError(e.toString());
