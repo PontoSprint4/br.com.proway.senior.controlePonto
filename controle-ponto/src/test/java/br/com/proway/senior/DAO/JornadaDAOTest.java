@@ -1,32 +1,16 @@
-<<<<<<< HEAD
-//package br.com.proway.senior.DAO;
-//
-//import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertTrue;
-//
-//import java.sql.SQLException;
-//import java.time.LocalDate;
-//
-//import org.junit.Before;
-//import org.junit.BeforeClass;
-//import org.junit.Test;
-//
-//import br.com.proway.senior.dbpersistence.PostgresConnector;
-//import br.com.proway.senior.model.PessoaDoPonto;
-//
-//public class JornadaDAOTest {
-=======
 package br.com.proway.senior.DAO;
 
+import br.com.proway.senior.dbpersistence.DBConnection;
+import br.com.proway.senior.model.Jornada;
+import br.com.proway.senior.model.PessoaDoPonto;
+import br.com.proway.senior.model.Turno;
 import org.hibernate.Session;
 import org.junit.Test;
 
-import br.com.proway.senior.dbpersistence.DBConnection;
-import br.com.proway.senior.model.PessoaDoPonto;
-import br.com.proway.senior.model.Turno;
+import java.time.LocalDate;
 
 public class JornadaDAOTest {
->>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
+
 //	@BeforeClass
 //	public static void refreshDatabase() {
 //
@@ -60,14 +44,7 @@ public class JornadaDAOTest {
 //		}
 //	}
 //
-<<<<<<< HEAD
-//	@Before
-//	public void cleanDAO() {
-//		JornadaDAO.newInstance();
-//	}
-//
-//	@Test
-=======
+
 //	@Test
 //	public void testCreate() {
 //		DBConnection db = new DBConnection();
@@ -80,7 +57,7 @@ public class JornadaDAOTest {
 //	}
 //
 //	@Ignore
->>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
+
 //	public void testCreateData() {
 //		JornadaDAO db = JornadaDAO.getInstance();
 //		PessoaDoPonto pessoa = new PessoaDoPonto();
@@ -88,22 +65,18 @@ public class JornadaDAOTest {
 //		db.create(pessoa);
 //	}
 //
-<<<<<<< HEAD
-//	@Test
-=======
+
 //	@Ignore
->>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
+
 //	public void testBuscarJornadaPorId() {
 //		JornadaDAO db = JornadaDAO.getInstance();
 //		System.out.println(db.read(1));
 //		assertEquals(LocalDate.now().toString(), db.read(2).get(2).toString());
 //	}
 //
-<<<<<<< HEAD
+
 //	@Test
-=======
 //	@Ignore
->>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
 //	public void testReadAll() {
 //		JornadaDAO db = JornadaDAO.getInstance();
 //
@@ -117,11 +90,9 @@ public class JornadaDAOTest {
 //				db.readAll().toString());
 //	}
 //
-<<<<<<< HEAD
+
 //	@Test
-=======
 //	@Ignore
->>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
 //	public void testUpdate() {
 //		JornadaDAO db = JornadaDAO.getInstance();
 //		db.update(4, "data", LocalDate.of(2021, 05, 03));
@@ -129,11 +100,10 @@ public class JornadaDAOTest {
 //		assertEquals("[4, 114, 2021-05-03, 3]", db.read(4).toString());
 //	}
 //
-<<<<<<< HEAD
+
 //	@Test
-=======
+
 //	@Ignore
->>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
 //	public void testDelete() {
 //		JornadaDAO db = JornadaDAO.getInstance();
 //		db.delete(2);
@@ -144,20 +114,17 @@ public class JornadaDAOTest {
 //		//Cenário
 //
 //    }
-<<<<<<< HEAD
 //}
-=======
-	
-	
+
 	@Test
 	public void testCreate() {
 		Session session = DBConnection.getSession();
 		JornadaDAO jornadaDao = JornadaDAO.getInstance(session);
 		PessoaDoPonto pessoa = new PessoaDoPonto(1);
 		Turno turno = new Turno();
+		Jornada jornada = new Jornada(0, LocalDate.now(), pessoa, turno);
 		
-		jornadaDao.create(pessoa, turno);
+		jornadaDao.create(jornada);
 		
 	}
 }
->>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605

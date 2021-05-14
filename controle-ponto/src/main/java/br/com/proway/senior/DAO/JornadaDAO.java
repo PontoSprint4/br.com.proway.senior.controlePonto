@@ -22,7 +22,7 @@ public final class JornadaDAO {
     /**
      * Se nao existir nenhuma instancia do DAO, cria uma nova instancia e a retorna;
      *
-     * @return
+     * @return instance
      */
     public static JornadaDAO getInstance(Session session) {
         if (instance == null) {
@@ -35,8 +35,7 @@ public final class JornadaDAO {
      * Recebe um parametro do tipo IPessoa que fornece a idPessoa e a idTurno para
      * cadastrar uma jornada para a pessoa na data do momento do cadastro.
      *
-     * @param pessoa
-     * @return void
+     * @param jornada Jornada
      */
     public void create(Jornada jornada) {
         if (!session.getTransaction().isActive()) {
@@ -58,8 +57,8 @@ public final class JornadaDAO {
      * <p>
      * Recebe uma id de Jornada, busca no banco de dados e retorna esta jornada.
      *
-     * @param id
-     * @return
+     * @param id valor do id.
+     * @return uma jornada.
      */
     public Jornada read(int id) {
         return session.get(Jornada.class, id);
@@ -80,13 +79,12 @@ public final class JornadaDAO {
     }
 
     /**
-     * Deleta uma jornada espec�fica do banco de dados;
+     * Deleta uma jornada específica do banco de dados;
      * <p>
      * Busca uma jornada no banco de dados a partir de sua id e remove esta jornada
      * do banco de dados.
      *
-     * @param id
-     * @return void
+     * @param jornadaASerDeletada Objeto Jornada.
      */
     public void delete(Jornada jornadaASerDeletada) {
         if (!session.getTransaction().isActive()) {
@@ -98,53 +96,52 @@ public final class JornadaDAO {
         } catch (Exception e) {
             e.getMessage();
         }
+    }
 
-        /**
-         * Atualiza um dado espec�fico do banco de dados;
-         *
-         * Recebe uma id que identifica qual item do banco a ser selecionado. Escolhe
-         * qual coluna deve ser alterada com o parametro col e insere o valor data na
-         * coluna col;
-         *
-         * @param id
-         * @param col
-         * @param data
-         */
-        public void update (Jornada jornadaASerAtualizada){
-            if (!session.getTransaction().isActive()) {
-                session.beginTransaction();
-            }
-
-            try {
-                session.beginTransaction();
-                session.update(jornadaASerAtualizada);
-                session.getTransaction().commit();
-            } catch (Exception e) {
-                e.getMessage();
-            }
-
+    /**
+     * Atualiza um dado espec�fico do banco de dados;
+     * <p>
+     * Recebe uma id que identifica qual item do banco a ser selecionado. Escolhe
+     * qual coluna deve ser alterada com o parametro col e insere o valor data na
+     * coluna col;
+     *
+     * @param jornadaASerAtualizada
+     */
+    public void update(Jornada jornadaASerAtualizada) {
+        if (!session.getTransaction().isActive()) {
+            session.beginTransaction();
         }
 
-        /**
-         * Retorna todos os itens do banco de dados
-         *
-         * Busca cada itenm do banco de dados, faz o parse toString() dos dados das
-         * colunas e insere no array. Insere o array de cada item do banco em um
-         * ArrayList<ArrayList<String>> Retorna estes valores neste arraylist
-         *
-         * @return ArrayList<ArrayList < String>>
-         */
-        public List<Jornada> readAll () {
-
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
-            Root<Jornada> root = criteria.from(Jornada.class);
-            Query query = session.createQuery(criteria);
-
-            List<Jornada> listaTodasJornadas = query.getResultList();
-            return listaTodasJornadas;
+        try {
+            session.beginTransaction();
+            session.update(jornadaASerAtualizada);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.getMessage();
         }
+
+    }
+
+    /**
+     * Retorna todos os itens do banco de dados
+     * <p>
+     * Busca cada itenm do banco de dados, faz o parse toString() dos dados das
+     * colunas e insere no array. Insere o array de cada item do banco em um
+     * ArrayList<ArrayList<String>> Retorna estes valores neste arraylist
+     *
+     * @return ArrayList<ArrayList < String>>
+     */
+    public List<Jornada> readAll() {
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
+        Root<Jornada> root = criteria.from(Jornada.class);
+        Query query = session.createQuery(criteria);
+
+        List<Jornada> listaTodasJornadas = query.getResultList();
+        return listaTodasJornadas;
     }
 }
+
 	
 	
