@@ -1,20 +1,17 @@
 package br.com.proway.senior.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import br.com.proway.senior.model.interfaces.IPessoa;
-import br.com.proway.senior.model.interfaces.ITurno;
 
 @Entity
 public class Jornada {
@@ -24,22 +21,25 @@ public class Jornada {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_jornada")
 	private int id;
-
+	
+	@Column(name = "data")
 	private LocalDate data;
 
-	@OneToOne
-	private IPessoa pessoa;
+	@OneToOne(cascade = CascadeType.ALL)
+	private PessoaDoPonto pessoa;
 	
-	private ITurno turno;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Turno turno;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private ArrayList<Ponto> listaPonto;
+	@OneToMany(targetEntity = Ponto.class, cascade = CascadeType.ALL)
+	private List<Ponto> listaPonto;
 
 	public Jornada() {
 	}
 
-	public Jornada(int id, LocalDate data, IPessoa pessoa, ITurno turno) {
+	public Jornada(int id, LocalDate data, PessoaDoPonto pessoa, Turno turno) {
 		this.id = id;
 		this.data = data;
 		this.pessoa = pessoa;
@@ -50,7 +50,11 @@ public class Jornada {
 //		this.pessoa = pessoa;
 //	}
 	
-	void setPessoa(IPessoa pessoa){
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
+	
+	public void setPessoa(PessoaDoPonto pessoa){
 		this.pessoa = pessoa;
 	}
 
@@ -70,7 +74,7 @@ public class Jornada {
 		this.data = data;
 	}
 
-	public ArrayList<Ponto> getListaPonto() {
+	public List<Ponto> getListaPonto() {
 		return listaPonto;
 	}
 

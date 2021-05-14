@@ -30,10 +30,17 @@ public class DBConnection {
 					.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/controlepontodb")
 					.setProperty("hibernate.connection.username", "postgres")
 					.setProperty("hibernate.connection.password", "admin")
+<<<<<<< HEAD
 					.setProperty("hibernate.jdbc.time_zone", "UTC")
 					.setProperty("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect")
 					.setProperty("hibernate.show__sql", "false")
 					.setProperty("hibernate.format_sql", "false")
+=======
+					.setProperty("hibernate.jdbc.time_zone", "America/Sao_Paulo")
+					.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
+					.setProperty("hibernate.show__sql", "true")
+					.setProperty("hibernate.format_sql", "true")
+>>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
 					.setProperty("hibernate.hbm2ddl.auto", "update")
 					.setProperty("hibernate.connection.autocommit", "true")
 					.setProperty("hibernate.sql", "false")

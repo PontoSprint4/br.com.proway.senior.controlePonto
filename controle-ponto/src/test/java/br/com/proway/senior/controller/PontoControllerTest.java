@@ -13,7 +13,11 @@ import br.com.proway.senior.model.Ponto;
 import junit.framework.TestCase;
 
 public class PontoControllerTest extends TestCase {
+<<<<<<< HEAD
 //
+=======
+
+>>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
 //	@Test
 //	public void testDiferencaHoras() {
 //		// Cenário
@@ -64,32 +68,55 @@ public class PontoControllerTest extends TestCase {
 //    	PontoDAO pontoDAO = PontoDAO.getInstance();
 //    	PontoController controller = new PontoController();
 //    	int idJornada = 114;
+<<<<<<< HEAD
 //
+=======
+//    	
+>>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
 //    	ArrayList<Ponto> registros = controller.readByIdJornada(idJornada);
 //    	for(Ponto ponto : registros) {
 //    		System.out.println(ponto);
 //    		assertSame(idJornada, ponto.getIdJornada());
 //    	}
 //    }
+<<<<<<< HEAD
 //
+=======
+//	
+>>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
 //	@Test
 //	public void testReadAll() {
 //		PontoDAO pontoDAO = PontoDAO.getInstance();
 //    	PontoController controller = new PontoController();
+<<<<<<< HEAD
 //
+=======
+//    	
+>>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
 //    	ArrayList<Ponto> lista = controller.readAll();
 //    	for(Ponto item : lista) {
 //    		System.out.println(item);
 //    	}
+<<<<<<< HEAD
 //
 //    	assertEquals(9, lista.size());
 //	}
 //
+=======
+//    	
+//    	assertEquals(9, lista.size());
+//	}
+//	
+>>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
 //	@Test
 //	public void testDelete() {
 //		PontoDAO pontoDAO = PontoDAO.getInstance();
 //    	PontoController controller = new PontoController();
+<<<<<<< HEAD
 //
+=======
+//    	
+>>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
 //    	controller.delete(7);
 //    	assertEquals(9, controller.readAll().size());
 //	}

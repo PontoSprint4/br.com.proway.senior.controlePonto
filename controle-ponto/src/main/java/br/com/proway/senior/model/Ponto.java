@@ -20,6 +20,9 @@ public class Ponto {
     private Integer idPonto;
     @Column(name = "momentoPonto")
     private LocalDateTime momentoPonto;
+    
+    @ManyToOne (cascade = CascadeType.ALL)
+    private Jornada jornada;
 
     public Ponto() {}
 

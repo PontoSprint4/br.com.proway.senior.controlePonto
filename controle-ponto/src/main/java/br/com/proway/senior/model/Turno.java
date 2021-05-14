@@ -1,11 +1,16 @@
 package br.com.proway.senior.model;
 
 import java.time.LocalTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import br.com.proway.senior.model.interfaces.ITurno;
 
@@ -21,10 +26,15 @@ public class Turno implements ITurno {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_turno")
 	private int id;
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
 	private String nomeTurno;
+	
+	
+	@OneToMany (cascade = CascadeType.ALL)
+	private List<Jornada> jornada;
 
 	public Turno() {}
 
@@ -35,6 +45,10 @@ public class Turno implements ITurno {
 		this.nomeTurno = nomeTurno;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public int getId() {
 		return id;
 	}
