@@ -1,11 +1,11 @@
 package br.com.proway.senior.controller;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -63,6 +63,11 @@ class PontoControllerTest {
 
 	@Test
 	void testGetFail() {
+		assertThrows(Exception.class, () -> pontoController.get(999));
+	}
+	
+	@Test
+	void testGetFailNegativo() {
 		assertThrows(Exception.class, () -> pontoController.get(-22));
 	}
 
@@ -88,13 +93,14 @@ class PontoControllerTest {
 	void testDelete() throws Exception {
 		Ponto ponto = new Ponto(null, LocalDateTime.of(2012, 12, 21, 0, 1));
 		pontoController.insert(ponto);
-		assertTrue(pontoController.delete(ponto));
-	}
-
-	@Test
-	void testDeleteFail() {
-		Ponto ponto = new Ponto();
-		assertFalse(pontoController.delete(ponto));
+		ArrayList<Ponto> listaPontos = pontoController.getAll();
+		int i;
+		for (i = 0; i < listaPontos.size(); i++) {
+			if(listaPontos.get(i).equals(ponto)){
+				pontoController.delete(ponto);
+			}
+		}
+		assertEquals(i-1, pontoController.getAll().size());
 	}
 
 }

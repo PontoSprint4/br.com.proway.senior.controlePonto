@@ -43,18 +43,17 @@ class JornadaDAOTest {
 
 	@Test
 	void testRead() {
-		assertEquals(119, jornadaDao.get(119).getId());
+		assertEquals(36, jornadaDao.get(36).getId());
 	}
 
-	@Test
-	void testPegaTodasAsJornadasPorIdPessoa() {
-		pessoaDao.find(114);
-		ArrayList<Jornada> listaJornadas = (ArrayList) jornadaDao.readByIdPessoa(pessoaDao.find(114));
-		System.out.println("AQUI AQUI AQUI AQUI AQUI AQUI\\n\n\n\n\n\n\n\n");
-		System.out.println(jornadaDao.readByIdPessoa(pessoaDao.find(114)));
-		// assertNotNull(jornadaDao.readByIdPessoa(pessoaDao.find(114)));
-
-	}
+//	@Test
+//	void testPegaTodasAsJornadasPorIdPessoa() {
+//		pessoaDao.find(114);
+//		ArrayList<Jornada> listaJornadas = (ArrayList) jornadaDao.readByIdPessoa(pessoaDao.find(114));
+//		System.out.println("AQUI AQUI AQUI AQUI AQUI AQUI\\n\n\n\n\n\n\n\n");
+//		System.out.println(jornadaDao.readByIdPessoa(pessoaDao.find(114)));
+//		// assertNotNull(jornadaDao.readByIdPessoa(pessoaDao.find(114)));
+//	}
 
 	@Test
 	void testDelete() {

@@ -48,7 +48,7 @@ class TurnoDAOTest {
 		
 		// Teste Delete / Get All
 		turnoDao.delete(turno2);		
-		assertEquals(4, turnoDao.readAll().size());
+		assertEquals(32, turnoDao.readAll().size());
 	}
 	
 //	@Test
