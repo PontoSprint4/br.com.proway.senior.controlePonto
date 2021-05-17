@@ -25,9 +25,9 @@ class PessoaDAOTest {
 		PessoaDoPonto pessoa3 = new PessoaDoPonto();
 		pessoaDao.insert(pessoa3);
 		
-		PessoaDoPonto pessoaFind = pessoaDao.find(pessoa2.getId());
+		PessoaDoPonto pessoaFind = pessoaDao.get(pessoa2.getId());
 		
-		pessoaDao.remove(pessoa3);		
+		pessoaDao.delete(pessoa3);
 		
 		ArrayList<PessoaDoPonto> listaPessoas = (ArrayList<PessoaDoPonto>) pessoaDao.getAll();
 		assertEquals(2,listaPessoas.size());

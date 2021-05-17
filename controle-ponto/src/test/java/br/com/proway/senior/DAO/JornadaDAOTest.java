@@ -34,8 +34,8 @@ class JornadaDAOTest {
 	void testCreate() {
 		Jornada jornada = new Jornada();
 		jornada.setData(LocalDate.of(2333, 8, 24));
-		jornada.setPessoa(pessoaDao.find(119));
-		jornada.setTurno(turnoDao.find(120));
+		jornada.setPessoa(pessoaDao.get(119));
+		jornada.setTurno(turnoDao.get(120));
 		jornadaDao.insert(jornada);
 
 		assertNotNull(jornada);
@@ -48,10 +48,10 @@ class JornadaDAOTest {
 
 	@Test
 	void testPegaTodasAsJornadasPorIdPessoa() {
-		pessoaDao.find(114);
-		ArrayList<Jornada> listaJornadas = (ArrayList) jornadaDao.readByIdPessoa(pessoaDao.find(114));
+		pessoaDao.get(114);
+		ArrayList<Jornada> listaJornadas = (ArrayList) jornadaDao.readByIdPessoa(pessoaDao.get(114));
 		System.out.println("AQUI AQUI AQUI AQUI AQUI AQUI\\n\n\n\n\n\n\n\n");
-		System.out.println(jornadaDao.readByIdPessoa(pessoaDao.find(114)));
+		System.out.println(jornadaDao.readByIdPessoa(pessoaDao.get(114)));
 		// assertNotNull(jornadaDao.readByIdPessoa(pessoaDao.find(114)));
 
 	}
@@ -70,9 +70,9 @@ class JornadaDAOTest {
 	void testUpdate() {
 		session.clear();
 		Turno turno = new Turno(0, LocalTime.now(), LocalTime.now().plusHours(4), "Turno 54");
-		turnoDao.create(turno);
+		turnoDao.insert(turno);
 
-		Jornada jornada2 = new Jornada(134, LocalDate.of(1999, 10, 5), pessoaDao.find(115), turno);
+		Jornada jornada2 = new Jornada(134, LocalDate.of(1999, 10, 5), pessoaDao.get(115), turno);
 
 		jornadaDao.update(jornada2);
 

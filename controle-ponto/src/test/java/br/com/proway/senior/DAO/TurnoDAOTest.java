@@ -18,28 +18,28 @@ class TurnoDAOTest {
 		TurnoDAO turnoDao = TurnoDAO.getInstance(session);
 		
 		Turno turno1 = new Turno(0, LocalTime.now(), LocalTime.now().plusHours(7), "Turno 1");
-		turnoDao.create(turno1);
+		turnoDao.insert(turno1);
 		
 		Turno turno2 = new Turno(0, LocalTime.now().plusHours(2), LocalTime.now().plusHours(9), "Turno 2");
-		turnoDao.create(turno2);
+		turnoDao.insert(turno2);
 		
 		Turno turno3 = new Turno(0, LocalTime.now().plusHours(4), LocalTime.now().plusHours(11), "Turno 3");
-		turnoDao.create(turno3);
+		turnoDao.insert(turno3);
 		
 		Turno turno4 = new Turno(0, LocalTime.now().plusHours(6), LocalTime.now().plusHours(13), "Turno 4");
-		turnoDao.create(turno4);
+		turnoDao.insert(turno4);
 		
 		Turno turno5 = new Turno(0, LocalTime.now().plusHours(8), LocalTime.now().plusHours(15), "Turno 5");
-		turnoDao.create(turno5);
+		turnoDao.insert(turno5);
 		
 		
 		// Teste Find
-		Turno turnoFind = turnoDao.find(turno3.getId());
+		Turno turnoFind = turnoDao.get(turno3.getId());
 		assertEquals(turno3.getId(), turnoFind.getId());
 		
 		// Teste Update
 		session.clear();
-		Turno turnoASerAtualizado = turnoDao.find(turno4.getId());
+		Turno turnoASerAtualizado = turnoDao.get(turno4.getId());
 		turnoASerAtualizado.setHoraInicio(LocalTime.now());
 		turnoASerAtualizado.setHoraFim(LocalTime.now().plusHours(4));
 		turnoDao.update(turnoASerAtualizado);
@@ -48,7 +48,7 @@ class TurnoDAOTest {
 		
 		// Teste Delete / Get All
 		turnoDao.delete(turno2);		
-		assertEquals(4, turnoDao.readAll().size());
+		assertEquals(4, turnoDao.getAll().size());
 	}
 	
 //	@Test

@@ -16,26 +16,32 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 class JornadaControllerTest {
-    static Session session;
+    static Session session = DBConnection.getSession();
     static JornadaController controller;
-    static JornadaDAO dao;
+    static JornadaDAO dao = JornadaDAO.getInstance(session);
     static PessoaDoPonto pessoa;
-    static PessoaDAO pessoaDAO;
+    static PessoaDAO pessoaDAO = PessoaDAO.getInstance(session);
     static Turno turno;
-    static TurnoDAO turnoDAO;
+    static TurnoDAO turnoDAO = TurnoDAO.getInstance(session);
 
-    @BeforeAll
-    static void setUp() throws Exception {
-        session = DBConnection.getSession();
-        controller = new JornadaController(session);
-        dao = JornadaDAO.getInstance(session);
-        pessoaDAO.insert(new PessoaDoPonto(95));
-        turno = new Turno(99, LocalTime.of(8, 10), LocalTime.of(12, 10),
-                "Teste");
-        turnoDAO.create(turno);
-    }
 
     @Test
+    void testInserindoUmaJornadaAtravesDaController() {
+        PessoaDoPonto pessoa1 = new PessoaDoPonto(172);
+        pessoaDao.create(pessoa1);
+
+        Turno turno1 = new Turno(173, LocalTime.now(), LocalTime.now().plusHours(7), "Turno Test");
+        turnoDao.create(turno1);
+
+        Jornada jornada = new Jornada(174, LocalDate.of(2020, 3, 3),
+                pessoa1, turno1);
+
+        jornadaController.insert(jornada);
+
+
+
+
+        @Test
     void testInserindoUmaJornadaAtravesDaController() {
         Jornada jornada = new Jornada(null, LocalDate.of(2020, 3, 3),
                 pessoa, turno);
