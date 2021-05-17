@@ -37,8 +37,8 @@ public class PontoDAO implements ICRUD<Ponto> {
      * nova sessão instanciada, caso negativo, a sessão que já está aberta é
      * retornada.
 	 *
-	 * @param session Sessï¿½oÃ£o ativa
-	 * @return instance a instancia da sessÃ£o.
+	 * @param session Sessão ativa
+	 * @return instance a instancia da sessão.
 	 */
 	public static PontoDAO getInstance(Session session) {
 		if (instance == null)
@@ -104,7 +104,7 @@ public class PontoDAO implements ICRUD<Ponto> {
      * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
      * construtor, pois esse parâmetro será usado no banco de dados, para
      * definir o objeto que será excluído.
-     * @param pontoASerAlterado objeto a ser excluído no banco.
+     * @param pontoASerDeletado objeto a ser excluído no banco.
      */
 	public boolean delete(Ponto pontoASerDeletado) {
 		if (!session.getTransaction().isActive()) {
