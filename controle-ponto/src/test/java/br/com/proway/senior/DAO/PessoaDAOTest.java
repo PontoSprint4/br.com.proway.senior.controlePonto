@@ -17,13 +17,13 @@ class PessoaDAOTest {
 		Session session = DBConnection.getSession();
 		PessoaDAO pessoaDao = PessoaDAO.getInstance(session);
 		PessoaDoPonto pessoa = new PessoaDoPonto();
-		pessoaDao.create(pessoa);
+		pessoaDao.insert(pessoa);
 		
 		PessoaDoPonto pessoa2 = new PessoaDoPonto();
-		pessoaDao.create(pessoa2);
+		pessoaDao.insert(pessoa2);
 		
 		PessoaDoPonto pessoa3 = new PessoaDoPonto();
-		pessoaDao.create(pessoa3);
+		pessoaDao.insert(pessoa3);
 		
 		PessoaDoPonto pessoaFind = pessoaDao.find(pessoa2.getId());
 		

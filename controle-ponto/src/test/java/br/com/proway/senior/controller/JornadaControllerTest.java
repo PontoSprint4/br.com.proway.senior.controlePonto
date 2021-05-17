@@ -8,7 +8,6 @@ import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.PessoaDoPonto;
 import br.com.proway.senior.model.Turno;
 import org.hibernate.Session;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -30,8 +29,7 @@ class JornadaControllerTest {
         session = DBConnection.getSession();
         controller = new JornadaController(session);
         dao = JornadaDAO.getInstance(session);
-        pessoa = new PessoaDoPonto(95);
-        pessoaDAO.create(pessoa);
+        pessoaDAO.insert(new PessoaDoPonto(95));
         turno = new Turno(99, LocalTime.of(8, 10), LocalTime.of(12, 10),
                 "Teste");
         turnoDAO.create(turno);
