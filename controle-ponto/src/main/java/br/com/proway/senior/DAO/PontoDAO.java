@@ -1,12 +1,14 @@
 package br.com.proway.senior.DAO;
 
-import br.com.proway.senior.model.Ponto;
-import br.com.proway.senior.utils.ICRUD;
-import org.hibernate.Session;
+import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import java.util.List;
+
+import org.hibernate.Session;
+
+import br.com.proway.senior.model.Ponto;
+import br.com.proway.senior.utils.ICRUD;
 
 /**
  * @author Samuel Levi <samuel.levi@senior.com.br>
@@ -126,12 +128,15 @@ public class PontoDAO implements ICRUD<Ponto> {
      * O objeto a ser buscado deve ter o parâmetro Id válido no banco de dados.
      * 
      * @param index objeto a ser retornado.
+	 * @throws Exception 
      */
-	
-	public Ponto get(int index) {
-		return session.get(Ponto.class, index);
+	public Ponto get(int index) throws Exception{
+		if(instance.get(index) != null) {
+			return session.get(Ponto.class, index);
+		}
+		throw new Exception("Index Inexistente");
 	}
-
+	
 	 /**
      * Busca todos os elementos do tipo {@link Ponto} e retorna o resultado.
      * 

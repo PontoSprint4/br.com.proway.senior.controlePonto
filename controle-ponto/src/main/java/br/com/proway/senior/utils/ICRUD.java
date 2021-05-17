@@ -6,7 +6,7 @@ public interface ICRUD<T> {
 
 	void insert(T obj);
 
-	T get(int index);
+	T get(int index) throws Exception;
 
 	List<T> getAll();
 
