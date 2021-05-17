@@ -1,11 +1,10 @@
 package br.com.proway.senior.controller;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ class PontoControllerTest {
 			}
 		}
 	}
-	
+
 	@Test
 	void testInsertNotEquals() throws Exception {
 		Ponto ponto = new Ponto(null, LocalDateTime.of(1997, 5, 13, 23, 59));
@@ -55,26 +54,47 @@ class PontoControllerTest {
 			}
 		}
 	}
-	
+
 	@Test
 	void testGet() throws Exception {
 		assertNotNull(pontoController.get(19));
 	}
+
+	@Test
+	void testGetFail() {
+//		assertNotNull(pontoController.get(-22));
+
+	}
+
+	@Test
+	void testGetAllPorTamanhoDaLista() {
+		ArrayList<Ponto> listaPontos = pontoController.getAll();
+		for (Integer i = 0; i < listaPontos.size(); i++) {
+			if (i.equals(listaPontos.size())) {
+				assertEquals(i, listaPontos.size());
+			} else {
+			
+			}
+		}
+	}
 	
 	@Test
-	void testGetFail() throws Exception {
-		assertNotNull(pontoController.get(-22));
-//		assertTh
+	void testGetAllListaNaoPodeSerNull() {
+		assertNotNull(pontoController.getAll());
+		
 	}
 
 	@Test
-	void testGetAll() {
-		fail("Not yet implemented");
+	void testDelete() throws Exception {
+		Ponto ponto = new Ponto(null, LocalDateTime.of(2012, 12, 21, 0, 1));
+		pontoController.insert(ponto);
+		assertTrue(pontoController.delete(ponto));
 	}
-
+	
 	@Test
-	void testDelete() {
-		fail("Not yet implemented");
+	void testDeleteFail(){
+		Ponto ponto = new Ponto();
+		assertFalse(pontoController.delete(ponto));
 	}
 
 }
