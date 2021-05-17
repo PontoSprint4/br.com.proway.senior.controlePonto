@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -62,8 +63,7 @@ class PontoControllerTest {
 
 	@Test
 	void testGetFail() {
-//		assertNotNull(pontoController.get(-22));
-
+		assertThrows(Exception.class, () -> pontoController.get(-22));
 	}
 
 	@Test
@@ -73,15 +73,15 @@ class PontoControllerTest {
 			if (i.equals(listaPontos.size())) {
 				assertEquals(i, listaPontos.size());
 			} else {
-			
+
 			}
 		}
 	}
-	
+
 	@Test
 	void testGetAllListaNaoPodeSerNull() {
 		assertNotNull(pontoController.getAll());
-		
+
 	}
 
 	@Test
@@ -90,9 +90,9 @@ class PontoControllerTest {
 		pontoController.insert(ponto);
 		assertTrue(pontoController.delete(ponto));
 	}
-	
+
 	@Test
-	void testDeleteFail(){
+	void testDeleteFail() {
 		Ponto ponto = new Ponto();
 		assertFalse(pontoController.delete(ponto));
 	}
