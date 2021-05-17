@@ -1,77 +1,62 @@
 package br.com.proway.senior.controller;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
-import org.junit.*;
-
-import br.com.proway.senior.DAO.PontoDAO;
+import br.com.proway.senior.DAO.JornadaDAO;
+import br.com.proway.senior.DAO.PessoaDAO;
+import br.com.proway.senior.DAO.TurnoDAO;
+import br.com.proway.senior.dbpersistence.DBConnection;
+import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.PessoaDoPonto;
-import br.com.proway.senior.model.Ponto;
+import br.com.proway.senior.model.Turno;
+import org.hibernate.Session;
+import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-public class JornadaControllerTest {
-//<<<<<<< HEAD
-//
-//	@Test
-//	public void testPontosBatidos() {
-//		JornadaController jornadaController = new JornadaController();
-//		PessoaDoPonto pessoa = new PessoaDoPonto();
-//
-//		assertTrue(jornadaController.verificaJornadaAberta(pessoa));
-//	}
-//
-//	@Test
-//	public void testPontosBatidosFalso() {
-//		JornadaController jornadaController = new JornadaController();
-//		PessoaDoPonto pessoa = new PessoaDoPonto();
-//		pessoa.setId(114);
-//		pessoa.setIdTurno(3);
-//
-//		assertFalse(jornadaController.verificaJornadaAberta(pessoa));
-//	}
-//
-//	@Ignore
-//	public void testPadraoBatidaPonto() {
-//		fail("Not yet implemented");
-//	}
-//
-//=======
-//
-//	@Test
-//	public void testPontosBatidos() {
-//		JornadaController jornadaController = new JornadaController();
-//		PessoaDoPonto pessoa = new PessoaDoPonto();
-//		
-//		assertTrue(jornadaController.verificaJornadaAberta(pessoa));
-//	}
-//	
-//	@Test
-//	public void testPontosBatidosFalso() {
-//		JornadaController jornadaController = new JornadaController();
-//		PessoaDoPonto pessoa = new PessoaDoPonto();
-//		pessoa.setId(114);
-//		
-//		
-//		assertFalse(jornadaController.verificaJornadaAberta(pessoa));
-//	}
-//
-//	@Ignore
-//	public void testPadraoBatidaPonto() {
-//		fail("Not yet implemented");
-//	}
-//	
-//>>>>>>> 713098d011c3b0ebf01481ec19485836a6b57605
-//	@Test
-//	public void testHorasFalta() {
-//		ArrayList<String> pontos = new ArrayList<String>();
-//		PontoDAO db = PontoDAO.getInstance();
-//		JornadaController controller = new JornadaController();
-//		PessoaDoPonto pessoa = new PessoaDoPonto();
-//		pessoa.setId(114);
-//		System.out.println(db.readAll().toString());
-//		pontos.add(db.readAll().toString());
-//		System.out.println(pontos);
-//	}
+import java.time.LocalDate;
+import java.time.LocalTime;
 
+class JornadaControllerTest {
+    static Session session;
+    static JornadaController controller;
+    static JornadaDAO dao;
+    static PessoaDoPonto pessoa;
+    static PessoaDAO pessoaDAO;
+    static Turno turno;
+    static TurnoDAO turnoDAO;
+
+    @BeforeAll
+    static void setUp() throws Exception {
+        session = DBConnection.getSession();
+        controller = new JornadaController(session);
+        dao = JornadaDAO.getInstance(session);
+        pessoa = new PessoaDoPonto(95);
+        pessoaDAO.create(pessoa);
+        turno = new Turno(99, LocalTime.of(8, 10), LocalTime.of(12, 10),
+                "Teste");
+        turnoDAO.create(turno);
+    }
+
+    @Test
+    void testInserindoUmaJornadaAtravesDaController() {
+        Jornada jornada = new Jornada(null, LocalDate.of(2020, 3, 3),
+                pessoa, turno);
+        int tamanhoInicial = dao.getAll().size();
+        controller.insert(jornada);
+        int tamanhoFinal = dao.getAll().size();
+
+        Assertions.assertEquals(tamanhoInicial + 1, tamanhoFinal);
+    }
+
+    @Test
+    void get() {
+    }
+
+    @Test
+    void getAll() {
+    }
+
+    @Test
+    void delete() {
+    }
 }

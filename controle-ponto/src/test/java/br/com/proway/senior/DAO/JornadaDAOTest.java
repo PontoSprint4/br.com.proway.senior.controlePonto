@@ -33,9 +33,9 @@ class JornadaDAOTest {
 	@Test
 	void testCreate() {
 		Jornada jornada = new Jornada();
-		jornada.setData(LocalDate.of(2019, 06, 14));
-		jornada.setPessoa(pessoaDao.find(115));
-		jornada.setTurno(turnoDao.find(113));
+		jornada.setData(LocalDate.of(2333, 8, 24));
+		jornada.setPessoa(pessoaDao.find(119));
+		jornada.setTurno(turnoDao.find(120));
 		jornadaDao.insert(jornada);
 
 		assertNotNull(jornada);
