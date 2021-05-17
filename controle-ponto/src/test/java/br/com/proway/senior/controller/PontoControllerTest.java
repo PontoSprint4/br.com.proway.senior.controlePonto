@@ -58,7 +58,14 @@ class PontoControllerTest {
 
 	@Test
 	void testGet() throws Exception {
-		assertNotNull(pontoController.get(19));
+		int idCapturado = 0;
+		ArrayList<Ponto> listaPontos = (ArrayList<Ponto>) pdao.getAll();
+		for (int i = 0; i < listaPontos.size(); i++) {
+			if ((i+1) == 1) {
+				idCapturado = listaPontos.get(1).getIdPonto();
+			}
+		}
+		assertNotNull(pontoController.get(idCapturado));
 	}
 
 	@Test
