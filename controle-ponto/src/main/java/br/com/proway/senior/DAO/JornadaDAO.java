@@ -1,146 +1,188 @@
 package br.com.proway.senior.DAO;
 
-import java.util.List;
+import br.com.proway.senior.model.Jornada;
+import br.com.proway.senior.model.Ponto;
+import br.com.proway.senior.model.interfaces.IPessoa;
+import br.com.proway.senior.utils.ICRUD;
+import org.hibernate.Session;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
-import org.hibernate.Session;
+/**
+ * @version @Sprint5
+ * @author Tharlys
+ * @author Vithor A
+ * @author Lucas Walin
+ *
+ * @version Documentação
+ * @author Samuel Levi <samuel.levi@senior.com.br>
+ * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
+ */
+public final class JornadaDAO implements ICRUD<Jornada> {
 
-import br.com.proway.senior.model.Jornada;
-import br.com.proway.senior.model.interfaces.IPessoa;
-
-public final class JornadaDAO {
-
-	private static JornadaDAO instance;
-	private Session session;
+    private static JornadaDAO instance;
+    private Session session;
 
 	/**
-	 * Se nao existir nenhuma instancia do DAO, cria uma nova instancia e a retorna;
-	 * 
-	 * @return
+	 * Construtor que recebe a sessão.
+	 *
+	 * @param session sessão recebida como parâmetro
 	 */
-	public static JornadaDAO getInstance(Session session) {
-		if (instance == null) {
-			instance = new JornadaDAO(session);
-		}
-		return instance;
-	}
-
 	private JornadaDAO(Session session) {
-		this.session = session;
-	}
+        this.session = session;
+    }
 
 	/**
-	 * Recebe um parametro do tipo IPessoa que fornece a idPessoa e a idTurno para
-	 * cadastrar uma jornada para a pessoa na data do momento do cadastro.
-	 * 
-	 * @param pessoa
-	 * @return void
+	 * Método responsável por instanciar {@link JornadaDAO} recebendo uma sessão
+	 * A sessão recebida passa pela checagem se é nula, caso positivo, uma
+	 * nova sessão instanciada, caso negativo, a sessão que já está aberta é
+	 * retornada.
+	 *
+	 * @param session Sessão ativa
+	 * @return instance a instancia da sessão.
 	 */
-	public void create(Jornada jornada) {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
-		}
-		try {
-			session.save(jornada);
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			e.getMessage();
-		}
-	}
+    public static JornadaDAO getInstance(Session session) {
+        if (instance == null) {
+            instance = new JornadaDAO(session);
+        }
+        return instance;
+    }
+
+    /**
+	 * Insere no banco uma nova jornada.
+     * Recebe como parâmetro um objeto do tipo {@link Jornada}.
+     * Verifica se a transação está ativa, e cria uma nova, se não estiver
+	 * ativa, caso já tenha uma transação ativa, retorna-a.
+	 * O objeto jornada, informado no parâmetro é salvo, utilizando o método
+	 * sabe da classe Session. Em caso de sucesso a transação é comitada e
+	 * persistida no banco de dados. A jornada informada deve ter o id null
+	 * no construtor, por será criado pelo banco de dados.
+     *
+     * @param jornada Jornada a ser cadastrada no banco de dados.
+     */
+    @Override
+    public void insert(Jornada jornada) {
+        if (!session.getTransaction().isActive()) {
+            session.beginTransaction();
+        }
+        try {
+            session.save(jornada);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
 
 	/**
-	 * Busca uma jornada do banco de dados;
-	 * 
-	 * Recebe uma id de Jornada, busca no banco de dados e retorna esta jornada.
-	 * 
-	 * @param id
-	 * @return
+	 * Recebe um inteiro que referencia o Id do ponto a ser recebido.
+	 *
+	 * O objeto a ser buscado deve ter o parâmetro Id válido no banco de dados.
+	 *
+	 * @param id Id do objeto a ser retornado.
 	 */
-	public Jornada read(int id) {
-		return session.get(Jornada.class, id);
-	}
+    @Override
+    public Jornada get(int id) {
+        return session.get(Jornada.class, id);
+    }
 
+	/**
+	 * Retorna as Jornadas de um pessoa específica.
+	 *
+	 * Recebe um objeto {@link IPessoa}, que serve de base para a busca,
+	 * utilizando o CriteriaBuilder, para listar todas as jornadas, onde o id
+	 * da pessoa, corresponde ao id da pessoa informada no parâmetro.
+	 * @param pessoa Pessoa de quem se quer obter todas as jornadas.
+	 * @return jornadasPorIdPessoa Lista de jornadas da pessoa.
+	 */
 	public List<Jornada> readByIdPessoa(IPessoa pessoa) {
-		CriteriaBuilder builder = session.getCriteriaBuilder();
-		CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
-		Root<Jornada> root = criteria.from(Jornada.class);
-		Query query = session.createQuery(criteria);
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
+        Root<Jornada> root = criteria.from(Jornada.class);
+        Query query = session.createQuery(criteria);
 
-		CriteriaQuery<Jornada> rootQuery = criteria.select(root);
-		Expression<Object> idPessoa = root.get("pessoa_id");
-		criteria.select(root).where(builder.equal(idPessoa, pessoa.getId()));
+        CriteriaQuery<Jornada> rootQuery = criteria.select(root);
+        Expression<Object> idPessoa = root.get("pessoa_id");
+        criteria.select(root).where(builder.equal(idPessoa, pessoa.getId()));
 
-		List<Jornada> jornadasPorIdPessoa = query.getResultList();
-		return jornadasPorIdPessoa;
-	}
-
-	/**
-	 * Deleta uma jornada espec�fica do banco de dados;
-	 * 
-	 * Busca uma jornada no banco de dados a partir de sua id e remove esta jornada
-	 * do banco de dados.
-	 * 
-	 * @param id
-	 * @return void
-	 */
-	public void delete(Jornada jornadaASerDeletada) {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
-		}
-		try {
-			session.delete(jornadaASerDeletada);
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			e.getMessage();
-		}
-	}
+        List<Jornada> jornadasPorIdPessoa = query.getResultList();
+        return jornadasPorIdPessoa;
+    }
 
 	/**
-	 * Atualiza um dado espec�fico do banco de dados;
-	 * 
-	 * Recebe uma id que identifica qual item do banco a ser selecionado. Escolhe
-	 * qual coluna deve ser alterada com o parametro col e insere o valor data na
-	 * coluna col;
-	 * 
-	 * @param id
-	 * @param col
-	 * @param data
+	 * Recebe um objeto {@link Jornada} e deleta no banco de dados.
+	 * É realizado um teste para saber se a transação atual está ativa, se
+	 * estiver é retornada, caso contrário é iniciada uma nova transação com
+	 * o banco.
+	 * O objeto é deletado usando o método delete da session e a transação é
+	 * comitada/persistida caso o objeto seja deletado no banco.
+	 * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
+	 * construtor, pois esse parâmetro será usado no banco de dados, para
+	 * definir o objeto que será excluído.
+	 * @param jornadaASerDeletada objeto a ser excluído no banco.
 	 */
-	public boolean update(Jornada jornadaASerAtualizada) {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
-		}
-
-		try {
-			session.update(jornadaASerAtualizada);
-			session.getTransaction().commit();
-			return true;
-		} catch (Exception e) {
-			e.getMessage();
-			return false;
-		}
-	}
+    @Override
+    public boolean delete(Jornada jornadaASerDeletada) {
+        if (!session.getTransaction().isActive()) {
+            session.beginTransaction();
+        }
+        try {
+            session.delete(jornadaASerDeletada);
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            e.getMessage();
+            return false;
+        }
+    }
 
 	/**
-	 * Retorna todos os itens do banco de dados
-	 * 
-	 * Busca cada itenm do banco de dados, faz o parse toString() dos dados das
-	 * colunas e insere no array. Insere o array de cada item do banco em um
-	 * ArrayList<ArrayList<String>> Retorna estes valores neste arraylist
-	 * 
-	 * @return ArrayList<ArrayList<String>>
+	 * Recebe um objeto {@link Jornada} e altera no banco de dados.
+	 * É realizado um teste para saber se a transação atual está ativa, se
+	 * estiver é retornada, caso contrário é iniciada uma nova transação com
+	 * o banco.
+	 * O objeto é salvo usando o método save da session e a transação é
+	 * comitada/persistida caso o objeto seja persistido no banco.
+	 * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
+	 * construtor, pois esse parâmetro será usado no banco de dados, para
+	 * definir as outras informações que serão atualizadas.
+	 * @param jornadaASerAtualizada objeto a ser alterado no banco.
 	 */
-	public List<Jornada> readAll() {
+    @Override
+    public boolean update(Jornada jornadaASerAtualizada) {
+        if (!session.getTransaction().isActive()) {
+            session.beginTransaction();
+        }
 
-		CriteriaBuilder builder = session.getCriteriaBuilder();
-		CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
-		criteria.from(Jornada.class);
-		List<Jornada> listaTodasJornadas = session.createQuery(criteria).getResultList();
-		return listaTodasJornadas;
-	}
+        try {
+            session.update(jornadaASerAtualizada);
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            e.getMessage();
+            return false;
+        }
+    }
+
+	/**
+	 * Busca todos os elementos do tipo {@link Jornada} e retorna o resultado.
+	 *
+	 * Através de um CriteriaBuilder uma lista do tipo Jornada é alimentada com
+	 * todos os valores existentes no banco de dados. É o equivalente a query
+	 * SQL: SELECT*FROM jornadas.
+	 *
+	 */
+    @Override
+    public List<Jornada> getAll() {
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
+        criteria.from(Jornada.class);
+        List<Jornada> listaTodasJornadas = session.createQuery(criteria).getResultList();
+        return listaTodasJornadas;
+    }
 }

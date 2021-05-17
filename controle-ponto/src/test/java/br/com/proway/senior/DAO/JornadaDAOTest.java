@@ -36,14 +36,14 @@ class JornadaDAOTest {
 		jornada.setData(LocalDate.of(2019, 06, 14));
 		jornada.setPessoa(pessoaDao.find(115));
 		jornada.setTurno(turnoDao.find(113));
-		jornadaDao.create(jornada);
+		jornadaDao.insert(jornada);
 
 		assertNotNull(jornada);
 	}
 
 	@Test
 	void testRead() {
-		assertEquals(119, jornadaDao.read(119).getId());
+		assertEquals(119, jornadaDao.get(119).getId());
 	}
 
 	@Test
@@ -63,7 +63,7 @@ class JornadaDAOTest {
 		jornada.setId(125);
 		jornadaDao.delete(jornada);
 
-		assertEquals(21, jornadaDao.readAll().size());
+		assertEquals(21, jornadaDao.getAll().size());
 	}
 
 	@Test
@@ -81,9 +81,9 @@ class JornadaDAOTest {
 	@Test
 	void testReadAll() {
 
-		for (int i = 0; i < jornadaDao.readAll().size(); i++) {
-			if (jornadaDao.readAll().size() == i) {
-				assertEquals(i, jornadaDao.readAll().size());
+		for (int i = 0; i < jornadaDao.getAll().size(); i++) {
+			if (jornadaDao.getAll().size() == i) {
+				assertEquals(i, jornadaDao.getAll().size());
 			}
 		}
 
