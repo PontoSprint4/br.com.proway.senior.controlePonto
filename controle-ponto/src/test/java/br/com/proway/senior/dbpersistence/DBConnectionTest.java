@@ -1,35 +1,35 @@
 package br.com.proway.senior.dbpersistence;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import br.com.proway.senior.DAO.PontoDAO;
 
-public class DBConnectionTest {
+class DBConnectionTest {
 
 	@Test
-	public void testGetSessionFactory() {
+	void testGetSessionFactory() {
 		DBConnection db = new DBConnection();
 		SessionFactory session = db.getSessionFactory();
 		assertNotNull(session);
 	}
 
 	@Test
-	public void testShutdown() {
+	void testShutdown() throws Exception {
 		DBConnection db = new DBConnection();
 		Session session = db.getSession();
 		db.shutdown();
 		
-		PontoDAO pontodao = PontoDAO.getInstance(session);
-		pontodao.get(3);
-	
+		PontoDAO pdao = PontoDAO.getInstance(session);
+		assertThrows(Exception.class, () -> pdao.get(149));
 	}
 
 	@Test
-	public void testGetSession() {
+	void testGetSession() {
 		DBConnection db = new DBConnection();
 		Session session = db.getSession();
 		
