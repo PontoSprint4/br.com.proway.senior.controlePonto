@@ -13,7 +13,7 @@ import java.util.List;
  * @author Tharlys de Souza Dias <tharlys.dias@senior.com.br>
  * @version Sprint5
  *
- * Alteração da classe pontoDAO para implementar o CriteriaBuilder.
+ * AlteraÃ§Ã£o da classe pontoDAO para implementar o CriteriaBuilder.
  *
  */
 
@@ -23,9 +23,9 @@ public class PontoDAO implements ICRUD<Ponto> {
 	private Session session;
 
 	/**
-	 * Construtor que recebe a sess�o.
+	 * Construtor que recebe a sessão.
 	 *
-	 * @param session sessão recebida como par�metro
+	 * @param session sessão recebida como parâmetro
 	 */
 	public PontoDAO(Session session) {
 		this.session = session;
@@ -37,8 +37,8 @@ public class PontoDAO implements ICRUD<Ponto> {
      * nova sessão instanciada, caso negativo, a sessão que já está aberta é
      * retornada.
 	 *
-	 * @param session Sess�oão ativa
-	 * @return instance a instancia da sessão.
+	 * @param session Sessï¿½oÃ£o ativa
+	 * @return instance a instancia da sessÃ£o.
 	 */
 	public static PontoDAO getInstance(Session session) {
 		if (instance == null)
@@ -49,7 +49,7 @@ public class PontoDAO implements ICRUD<Ponto> {
     /**
      * Recebe um objeto {@link Ponto} e insere no banco de dados.
      * É realizado um teste para saber se a transação atual está ativa, se
-     * estiver é retornada, caso contrário e´iniciada uma nova transação com
+     * estiver é retornada, caso contrário é iniciada uma nova transação com
      * o banco.
      * O objeto é salvo usando o método save da session e a transação é
      * comitada/persistida caso o objeto seja persistido no banco.
@@ -72,7 +72,7 @@ public class PontoDAO implements ICRUD<Ponto> {
     /**
      * Recebe um objeto {@link Ponto} e altera no banco de dados.
      * É realizado um teste para saber se a transação atual está ativa, se
-     * estiver é retornada, caso contrário e´iniciada uma nova transação com
+     * estiver é retornada, caso contrário é iniciada uma nova transação com
      * o banco.
      * O objeto é salvo usando o método save da session e a transação é
      * comitada/persistida caso o objeto seja persistido no banco.
@@ -94,7 +94,18 @@ public class PontoDAO implements ICRUD<Ponto> {
 			return false;
 		}
 	}
-
+    /**
+     * Recebe um objeto {@link Ponto} e deleta no banco de dados.
+     * É realizado um teste para saber se a transação atual está ativa, se
+     * estiver é retornada, caso contrário é iniciada uma nova transação com
+     * o banco.
+     * O objeto é deletado usando o método delete da session e a transação é
+     * comitada/persistida caso o objeto seja deletado no banco.
+     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
+     * construtor, pois esse parâmetro será usado no banco de dados, para
+     * definir o objeto que será excluído.
+     * @param pontoASerAlterado objeto a ser excluído no banco.
+     */
 	public boolean delete(Ponto pontoASerDeletado) {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
@@ -109,9 +120,25 @@ public class PontoDAO implements ICRUD<Ponto> {
 		}
 	}
 
+	 /**
+     * Recebe um inteiro que referencia o Id do ponto a ser recebido.
+     * 
+     * O objeto a ser buscado deve ter o parâmetro Id válido no banco de dados.
+     * 
+     * @param index objeto a ser retornado.
+     */
+	
 	public Ponto get(int index) {
 		return session.get(Ponto.class, index);
 	}
+
+	 /**
+     * Busca todos os elementos do tipo {@link Ponto} e retorna o resultado.
+     * 
+     * Através de um CriteriaBuilder uma lista do tipo Ponto é alimentada com todos os
+     * valores existentes no banco de dados. É o equivalente a query SQL: SELECT*FROM pontos.
+     * 
+     */
 
 	public List<Ponto> getAll() {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
