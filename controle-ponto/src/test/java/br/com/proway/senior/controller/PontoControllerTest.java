@@ -1,6 +1,7 @@
 package br.com.proway.senior.controller;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -82,6 +83,13 @@ class PontoControllerTest {
 	void testGetAllListaNaoPodeSerNull() {
 		assertNotNull(pontoController.getAll());
 
+	}
+	
+	@Test
+	void testUpdate() {
+		Ponto ponto = pontoController.getAll().get(1);
+		ponto.setMomentoPonto(LocalDateTime.now().plusHours(4));
+		assertTrue(pdao.update(ponto));
 	}
 
 	@Test

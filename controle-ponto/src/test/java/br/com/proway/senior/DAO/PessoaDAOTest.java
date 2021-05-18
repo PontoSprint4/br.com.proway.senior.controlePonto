@@ -8,6 +8,7 @@ import static org.mockito.Mockito.inOrder;
 import java.util.ArrayList;
 
 import org.hibernate.Session;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -46,15 +47,13 @@ class PessoaDAOTest {
 
 	@Test
 	void testDelete() {
-		ArrayList<PessoaDoPonto> listaPessoas = (ArrayList<PessoaDoPonto>) pdao.getAll();
-		PessoaDoPonto pessoaASerAtualizada = pdao.getAll().get(1);
-		pdao.delete(pessoaASerAtualizada);
-		assertEquals((listaPessoas.size() - 1), pdao.getAll().size());
+		PessoaDoPonto pessoaDoPonto = pdao.getAll().get(0);
+		assertTrue(pdao.delete(pessoaDoPonto));
 	}
 
 	@Test
 	void testGet() {
-		int idCapturado = pdao.getAll().get(3).getId();
+		int idCapturado = pdao.getAll().get(2).getId();
 		assertNotNull(pdao.get(idCapturado));
 	}
 
