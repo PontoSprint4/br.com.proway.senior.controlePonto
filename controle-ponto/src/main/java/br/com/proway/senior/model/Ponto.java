@@ -9,9 +9,7 @@ import java.time.LocalDateTime;
  * @author Samuel Levi <samuel.levi@senior.com.br>
  * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
  */
-
 @Entity
-@Table(name = "pontos")
 public class Ponto {
 
     @Id

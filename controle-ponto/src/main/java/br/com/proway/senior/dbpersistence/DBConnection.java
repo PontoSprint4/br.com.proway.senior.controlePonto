@@ -10,11 +10,11 @@ import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.Turno;
 
 /**
- * Essa classe faz a integra��o com o banco de dados usando JPA/Hibernate
+ * Classe Singleton faz a integracao com o banco de dados usando JPA/Hibernate
  * 
- * @author Lucas W
- * @author Tharlys D <tharlys.souza@outlook.com>
- * @author Vitor A
+ * @author Lucas W <lucas.walim@senior.com.br>
+ * @author Tharlys D <tharlys.dias@senior.com.br>
+ * @author Vitor G <vitor.gehrke@senior.com.br>
  *
  */
 public class DBConnection {
@@ -45,6 +45,13 @@ public class DBConnection {
 
 	}
 
+	/**
+	 * Retorna uma sessionFactory.
+	 * <p>
+	 * Faz a validacao se a sessionFactory esta nula, caso esteja retorna a
+	 * mesma.
+	 * @return sessionFactory
+	 */
 	public static SessionFactory getSessionFactory() {
 		if (sessionFactory == null) {
 			sessionFactory = buildSessionFactory();
@@ -52,11 +59,23 @@ public class DBConnection {
 		return sessionFactory;
 	}
 
+	/**
+	 * Fecha a conexao com o banco de dados
+	 * @throws Exception
+	 */
 	public static void shutdown() throws Exception {
 		session.close();
 		getSessionFactory().close();
 	}
 
+	/**
+	 * Retorna uma session com o Banco de Dados.
+	 * <p>
+	 * Verifica se a session com o banco de dados esta nula ou fechada, caso
+	 * esteja, reabre a session com getSessionFactory, se nao, só retorna a
+	 * session.
+	 * @return session Session
+	 */
 	public static Session getSession() {
 		getSessionFactory();
 		if (session == null) {

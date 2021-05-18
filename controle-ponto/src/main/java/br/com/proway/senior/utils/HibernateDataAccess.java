@@ -12,11 +12,14 @@ import br.com.proway.senior.dbpersistence.DBConnection;
  * As classes poderão herdar essa classe para implementar os métodos que
  * necessitarem.
  * 
- * @author Lucas W
- * @author Tharlys D <tharlys.souza@outlook.com>
- * @author Vitor A
+ * @author Lucas W <lucas.walim@senior.com.br>
+ * @author Tharlys D <tharlys.dias@senior.com.br>
+ * @author Vitor A <vitor.gehrke@senior.com.br>
+ * @author Samuel Levi <samuel.levi@senior.com.br>
+ * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
  *
  */
+@Deprecated
 public abstract class HibernateDataAccess {
 
 	protected SessionFactory sessionFactory;

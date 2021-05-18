@@ -10,17 +10,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import br.com.proway.senior.model.interfaces.ITurno;
 
 /**
- * 
- * @author Vanderlei Kleinschmidt
- * @author Samuel Levi Araujo Alves
+ * Classe que estrutura a entidade Turno.
+ * Possui um id único, duas datas no formato {@link LocalTime} sendo
+ * horaInicio e horaFim. Possui uma relacao de {@link OneToMany}
+ * com {@link Jornada}.
  *
+ * @author Samuel Levi <samuel.levi@senior.com.br>
+ * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
+ * @author Lucas Walim <lucas.walim@senior.com.br>
+ * @version sprint5
  */
-
 @Entity
 public class Turno implements ITurno {
 
@@ -28,11 +31,11 @@ public class Turno implements ITurno {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_turno")
 	private Integer id;
+
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
 	private String nomeTurno;
-	
-	
+
 	@OneToMany (cascade = CascadeType.ALL)
 	private List<Jornada> jornada;
 

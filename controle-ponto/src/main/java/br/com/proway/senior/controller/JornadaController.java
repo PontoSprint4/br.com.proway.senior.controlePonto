@@ -10,8 +10,8 @@ import java.util.ArrayList;
  * Classe responsável por receber as requisições, tratá-las e encaminhar para o
  * DAO.
  *
- * @author Vanderlei Kleinschmidt
- * @author Samuel Levi
+ * @author Samuel Levi <samuel.levi@senior.com.br>
+ * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
  * @version sprint5
  */
 
@@ -20,8 +20,9 @@ public class JornadaController {
     private JornadaDAO dao;
 
     /**
-     * Construtor que instancia uma controller fazendo a integração com o
-     * {@link JornadaDAO}.
+     *  Construtor que instancia um Controller fazendo uma integração com o
+     * 	 * {@link JornadaDAO}, espera uma sessão como parametro para repassar ao
+     * 	 * {@link JornadaDAO} retornando um Controller.
      *
      * @param session recebida como parâmetro.
      */

@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  * Classe que estrutura a entidade Jornada.
- * ´Possui um id único e uma data no formato {@link LocalDate}. Toda Jornada é
+ * Possui um id único e uma data no formato {@link LocalDate}. Toda Jornada é
  * única para uma uma única {@link PessoaDoPonto}
  * ({@link OneToOne}) e possui um conjunto de no máximo 4 {@link Ponto}s,
  * ({@link OneToMany}).

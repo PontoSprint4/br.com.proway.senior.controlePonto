@@ -13,6 +13,7 @@ import br.com.proway.senior.utils.ICRUD;
 /**
  * @author Samuel Levi <samuel.levi@senior.com.br>
  * @author Tharlys de Souza Dias <tharlys.dias@senior.com.br>
+ * @author Lucas Walim <lucas.walim@senior.com.br>
  * @version Sprint5
  * @author Vitor Andr� Gehrke <vitor.gehrke@senior.com.br>
  * @version Sprint5 Testes

@@ -6,6 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Realiza a conexao com o banco de dados atraves da url, user e password do
+ * banco de dados definidos nos atributos da Classe.
+ */
+@Deprecated
 public class PostgresConnector {
 
 	static String url = "jdbc:postgresql://localhost:5432/controlepontodb";

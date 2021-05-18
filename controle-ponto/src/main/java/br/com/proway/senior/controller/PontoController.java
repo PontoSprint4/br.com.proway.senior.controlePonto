@@ -45,8 +45,12 @@ public class PontoController {
 	}
 
 	/**
-	 * Precisa ser implementado.
-	 * 
+	 * Método que busca todas os {@link Ponto}'s filtrados pelo idJornada.
+	 *
+	 * Método para buscar no banco de dados através do {@link PontoDAO}, todos
+	 * os {@link Ponto}'s onde o idJornada é o mesmo que o index recebido como
+	 * parâmetro.
+	 *
 	 * @param index
 	 * @return ArrayList<Ponto>
 	 * @throws Exception
@@ -56,6 +60,8 @@ public class PontoController {
 //			return pdao.readByIdJornada(index);
 //		}
 //		throw new Exception("Index Inexistente");
+
+	// TODO
 //	}
 
 	/**
@@ -82,9 +88,9 @@ public class PontoController {
 	
 	/**
 	 * Método para atualizar um objeto do tipo {@link Ponto}, no banco de dados
-	 * através do {@link PontoDAO}
+	 * através do {@link PontoDAO}, recebendo como parâmetro um {@link Ponto}.
 	 * 
-	 * @param ponto
+	 * @param ponto {@link Ponto}
 	 */
 	public void update(Ponto ponto) {
 		pdao.update(ponto);
@@ -92,7 +98,7 @@ public class PontoController {
 
 	/**
 	 * Método para apagar do banco de dados através do {@link PontoDAO}, um objeto
-	 * do tipo {@link Ponto}.
+	 * do tipo {@link Ponto}, recebendo como parâmetro o mesmo para apagar.
 	 * 
 	 * @param ponto do tipo Ponto a ser apagado.
 	 * @return true || false

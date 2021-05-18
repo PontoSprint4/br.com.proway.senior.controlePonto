@@ -34,7 +34,7 @@ public class TurnoController {
 	 * Método para inserir no banco de dados através do {@link TurnoDAO}, um
 	 * objeto do tipo {@link Turno}.
 	 * 
-	 * @param turno do tipo Turno
+	 * @param turno do tipo {@link Turno}
 	 * @throws Exception
 	 */
 	public void insert(Turno turno) {
@@ -45,8 +45,8 @@ public class TurnoController {
 	 * Método para buscar no banco de dados através do {@link TurnoDAO}, um objeto
 	 * do tipo {@link Turno}, usando seu index.
 	 * 
-	 * @param index
-	 * @return objeto de turno
+	 * @param index do tipo int
+	 * @return objeto de {@link Turno}
 	 * @throws Exception
 	 */
 	public Turno get(int index) throws Exception{
@@ -67,7 +67,7 @@ public class TurnoController {
 	 * Método para atualizar um objeto do tipo {@link Turno}, no banco de dados
 	 * através do {@link TurnoDAO}
 	 * 
-	 * @param turno
+	 * @param turno do tipo {@link Turno}
 	 */
 	public void update(Turno turno) {
 		tdao.update(turno);
@@ -77,7 +77,7 @@ public class TurnoController {
 	 * Método para apagar do banco de dados através do {@link TurnoDAO}, um objeto
 	 * do tipo {@link Turno}.
 	 * 
-	 * @param turno do tipo Turno a ser apagado.
+	 * @param turno do tipo {@link Turno} a ser apagado.
 	 */
 	public void delete(Turno ponto) {
 		tdao.delete(ponto);

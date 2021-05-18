@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Tharlys
- * @author Vithor A
- * @author Lucas Walin
+ * @author Tharlys <tharlys.@senior.com.br>
+ * @author Vithor A <vithor.@senior.com.br>
+ * @author Lucas Walim <lucas.walim@senior.com.br>
  * @author Samuel Levi <samuel.levi@senior.com.br>
  * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
  * @version Documentação
@@ -30,7 +30,7 @@ public final class JornadaDAO implements ICRUD<Jornada> {
     private final Session session;
 
     /**
-     * Construtor que recebe a sessão.
+     * Construtor privado que recebe a sessão.
      *
      * @param session sessão recebida como parâmetro
      */
@@ -39,10 +39,10 @@ public final class JornadaDAO implements ICRUD<Jornada> {
     }
 
     /**
-     * Método responsável por instanciar {@link JornadaDAO} recebendo uma sessão
-     * A sessão recebida passa pela checagem se é nula, caso positivo, uma
-     * nova sessão instanciada, caso negativo, a sessão que já está aberta é
-     * retornada.
+     * Método responsável por instanciar {@link JornadaDAO} recebendo uma
+     * sessão. A sessão recebida passa pela checagem se é nula, caso
+     * positivo, uma nova sessão instanciada, caso negativo, a sessão que já
+     * está aberta é retornada.
      *
      * @param session Sessão ativa
      * @return instance a instancia da sessão.
@@ -80,9 +80,9 @@ public final class JornadaDAO implements ICRUD<Jornada> {
     }
 
     /**
-     * Recebe um inteiro que referencia o Id do ponto a ser recebido.
-     * <p>
-     * O objeto a ser buscado deve ter o parâmetro Id válido no banco de dados.
+     * Recebe um inteiro que referencia o Id do {@link Ponto} a ser recebido.
+     *  <p>
+     *  O objeto a ser buscado deve ter o parâmetro Id válido no banco de dados.
      *
      * @param id Id do objeto a ser retornado.
      */
@@ -115,7 +115,7 @@ public final class JornadaDAO implements ICRUD<Jornada> {
         return jornadasPorIdPessoa;
     }
 
-    public List buscarPontosDaJornada(Jornada jornadaQueEuQueroOsPontos){
+    public List buscarPontosDaJornada(Jornada jornadaQueEuQueroOsPontos) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
         Root<Ponto> root = criteria.from(Ponto.class);
