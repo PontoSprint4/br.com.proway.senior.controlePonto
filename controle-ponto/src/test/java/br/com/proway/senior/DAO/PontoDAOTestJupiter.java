@@ -78,7 +78,7 @@ class PontoDAOTestJupiter {
 		}
         assertTrue(pdao.delete(ponto));
 	}
-
+	
 	@Test
 	void testGet() throws Exception {
 		int idCapturado = 0;
@@ -88,12 +88,36 @@ class PontoDAOTestJupiter {
 				idCapturado = listaPontos.get(10).getIdPonto();
 			}
 		}
-        assertNotNull(pdao.get(idCapturado));
+		assertNotNull(pdao.get(idCapturado));
 	}
 
 	@Test
+	void testGetNegativo() throws Exception {
+		int idCapturado = -1;
+        assertThrows(Exception.class, () -> pdao.get(idCapturado));
+	}
+	
+	@Test
+	void testGetNull() throws Exception {
+		Integer idCapturado = null;
+        assertThrows(Exception.class, () -> pdao.get(idCapturado));
+	}
+	
+
+	@Test
 	void testGetAll() {
-        assertNotNull(pdao.getAll());
+        ArrayList<Ponto> listaPontos = (ArrayList<Ponto>) pdao.getAll();
+        int i;
+		for (i = 1; i < listaPontos.size(); i++) {
+			if ((i) == listaPontos.size()) {
+				assertEquals(i, pdao.getAll().size());
+			}
+		}
+	}
+	
+	@Test
+	void testGetAllNotNull() {
+		assertNotNull(pdao.getAll());
 	}
 
 }

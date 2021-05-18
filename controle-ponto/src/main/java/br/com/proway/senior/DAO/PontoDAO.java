@@ -131,10 +131,10 @@ public class PontoDAO implements ICRUD<Ponto> {
 	 * @throws Exception 
      */
 	public Ponto get(int index) throws Exception{
-		if(index <= 0 || session.get(Ponto.class, index) == null) {
-			throw new Exception("Inidice invalido. Deve ser maior que 0");
+		if(!(index <= 0 || session.get(Ponto.class, index) == null)) {
+			return session.get(Ponto.class, index);
 		}		
-		return session.get(Ponto.class, index);
+		throw new Exception("Inidice invalido. Deve ser maior que 0");
 		}
 	
 	
