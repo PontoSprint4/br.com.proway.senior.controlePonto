@@ -107,12 +107,7 @@ class PontoDAOTestJupiter {
 	@Test
 	void testGetAll() {
         ArrayList<Ponto> listaPontos = (ArrayList<Ponto>) pdao.getAll();
-        int i;
-		for (i = 1; i < listaPontos.size(); i++) {
-			if ((i) == listaPontos.size()) {
-				assertEquals(i, pdao.getAll().size());
-			}
-		}
+		assertEquals(listaPontos.size(), pdao.getAll().size());
 	}
 	
 	@Test

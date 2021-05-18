@@ -27,7 +27,7 @@ public class Turno implements ITurno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_turno")
-	private int id;
+	private Integer id;
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
 	private String nomeTurno;
@@ -38,18 +38,18 @@ public class Turno implements ITurno {
 
 	public Turno() {}
 
-	public Turno(int id, LocalTime horaInicio, LocalTime horaFim, String nomeTurno) {
+	public Turno(Integer id, LocalTime horaInicio, LocalTime horaFim, String nomeTurno) {
 		this.id = id;
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
 		this.nomeTurno = nomeTurno;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -103,6 +103,5 @@ public class Turno implements ITurno {
 	public String toString() {
 		return "Turno = " + id + ", come�a �s: " + horaInicio + ", termina �s: " + horaFim + ", descri��o: " + nomeTurno;
 	}
-
 	
 }

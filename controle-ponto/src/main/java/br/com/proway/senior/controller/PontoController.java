@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import org.hibernate.Session;
 
 import br.com.proway.senior.DAO.PontoDAO;
+import br.com.proway.senior.DAO.TurnoDAO;
 import br.com.proway.senior.model.Ponto;
+import br.com.proway.senior.model.Turno;
 
 /**
  * Classe responsável por tratar de pedidos de visualização e ações.
@@ -76,6 +78,16 @@ public class PontoController {
 	 */
 	public ArrayList<Ponto> getAll() {
 		return (ArrayList<Ponto>) pdao.getAll();
+	}
+	
+	/**
+	 * Método para atualizar um objeto do tipo {@link Ponto}, no banco de dados
+	 * através do {@link PontoDAO}
+	 * 
+	 * @param ponto
+	 */
+	public void update(Ponto ponto) {
+		pdao.update(ponto);
 	}
 
 	/**
