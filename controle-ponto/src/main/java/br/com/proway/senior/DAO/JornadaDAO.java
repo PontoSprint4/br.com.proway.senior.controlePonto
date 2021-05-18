@@ -16,38 +16,36 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @version @Sprint5
  * @author Tharlys
  * @author Vithor A
  * @author Lucas Walin
- *
- * @version Documentação
  * @author Samuel Levi <samuel.levi@senior.com.br>
  * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
+ * @version Documentação
  */
 public final class JornadaDAO implements ICRUD<Jornada> {
 
     private static JornadaDAO instance;
     private Session session;
 
-	/**
-	 * Construtor que recebe a sessão.
-	 *
-	 * @param session sessão recebida como parâmetro
-	 */
-	private JornadaDAO(Session session) {
+    /**
+     * Construtor que recebe a sessão.
+     *
+     * @param session sessão recebida como parâmetro
+     */
+    private JornadaDAO(Session session) {
         this.session = session;
     }
 
-	/**
-	 * Método responsável por instanciar {@link JornadaDAO} recebendo uma sessão
-	 * A sessão recebida passa pela checagem se é nula, caso positivo, uma
-	 * nova sessão instanciada, caso negativo, a sessão que já está aberta é
-	 * retornada.
-	 *
-	 * @param session Sessão ativa
-	 * @return instance a instancia da sessão.
-	 */
+    /**
+     * Método responsável por instanciar {@link JornadaDAO} recebendo uma sessão
+     * A sessão recebida passa pela checagem se é nula, caso positivo, uma
+     * nova sessão instanciada, caso negativo, a sessão que já está aberta é
+     * retornada.
+     *
+     * @param session Sessão ativa
+     * @return instance a instancia da sessão.
+     */
     public static JornadaDAO getInstance(Session session) {
         if (instance == null) {
             instance = new JornadaDAO(session);
@@ -56,14 +54,14 @@ public final class JornadaDAO implements ICRUD<Jornada> {
     }
 
     /**
-	 * Insere no banco uma nova jornada.
+     * Insere no banco uma nova jornada.
      * Recebe como parâmetro um objeto do tipo {@link Jornada}.
      * Verifica se a transação está ativa, e cria uma nova, se não estiver
-	 * ativa, caso já tenha uma transação ativa, retorna-a.
-	 * O objeto jornada, informado no parâmetro é salvo, utilizando o método
-	 * sabe da classe Session. Em caso de sucesso a transação é comitada e
-	 * persistida no banco de dados. A jornada informada deve ter o id null
-	 * no construtor, por será criado pelo banco de dados.
+     * ativa, caso já tenha uma transação ativa, retorna-a.
+     * O objeto jornada, informado no parâmetro é salvo, utilizando o método
+     * sabe da classe Session. Em caso de sucesso a transação é comitada e
+     * persistida no banco de dados. A jornada informada deve ter o id null
+     * no construtor, por será criado pelo banco de dados.
      *
      * @param jornada Jornada a ser cadastrada no banco de dados.
      */
@@ -79,28 +77,30 @@ public final class JornadaDAO implements ICRUD<Jornada> {
             e.getMessage();
         }
     }
-	/**
-	 * Recebe um inteiro que referencia o Id do ponto a ser recebido.
-	 *
-	 * O objeto a ser buscado deve ter o parâmetro Id válido no banco de dados.
-	 *
-	 * @param id Id do objeto a ser retornado.
-	 */
+
+    /**
+     * Recebe um inteiro que referencia o Id do ponto a ser recebido.
+     * <p>
+     * O objeto a ser buscado deve ter o parâmetro Id válido no banco de dados.
+     *
+     * @param id Id do objeto a ser retornado.
+     */
     @Override
     public Jornada get(int id) {
         return session.get(Jornada.class, id);
     }
 
-	/**
-	 * Retorna as Jornadas de um pessoa específica.
-	 *
-	 * Recebe um objeto {@link IPessoa}, que serve de base para a busca,
-	 * utilizando o CriteriaBuilder, para listar todas as jornadas, onde o id
-	 * da pessoa, corresponde ao id da pessoa informada no parâmetro.
-	 * @param pessoa Pessoa de quem se quer obter todas as jornadas.
-	 * @return jornadasPorIdPessoa Lista de jornadas da pessoa.
-	 */
-	public List<Jornada> readByIdPessoa(IPessoa pessoa) {
+    /**
+     * Retorna as Jornadas de um pessoa específica.
+     * <p>
+     * Recebe um objeto {@link IPessoa}, que serve de base para a busca,
+     * utilizando o CriteriaBuilder, para listar todas as jornadas, onde o id
+     * da pessoa, corresponde ao id da pessoa informada no parâmetro.
+     *
+     * @param pessoa Pessoa de quem se quer obter todas as jornadas.
+     * @return jornadasPorIdPessoa Lista de jornadas da pessoa.
+     */
+    public List<Jornada> readByIdPessoa(IPessoa pessoa) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
         Root<Jornada> root = criteria.from(Jornada.class);
@@ -114,18 +114,19 @@ public final class JornadaDAO implements ICRUD<Jornada> {
         return jornadasPorIdPessoa;
     }
 
-	/**
-	 * Recebe um objeto {@link Jornada} e deleta no banco de dados.
-	 * É realizado um teste para saber se a transação atual está ativa, se
-	 * estiver é retornada, caso contrário é iniciada uma nova transação com
-	 * o banco.
-	 * O objeto é deletado usando o método delete da session e a transação é
-	 * comitada/persistida caso o objeto seja deletado no banco.
-	 * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
-	 * construtor, pois esse parâmetro será usado no banco de dados, para
-	 * definir o objeto que será excluído.
-	 * @param jornadaASerDeletada objeto a ser excluído no banco.
-	 */
+    /**
+     * Recebe um objeto {@link Jornada} e deleta no banco de dados.
+     * É realizado um teste para saber se a transação atual está ativa, se
+     * estiver é retornada, caso contrário é iniciada uma nova transação com
+     * o banco.
+     * O objeto é deletado usando o método delete da session e a transação é
+     * comitada/persistida caso o objeto seja deletado no banco.
+     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
+     * construtor, pois esse parâmetro será usado no banco de dados, para
+     * definir o objeto que será excluído.
+     *
+     * @param jornadaASerDeletada objeto a ser excluído no banco.
+     */
     @Override
     public boolean delete(Jornada jornadaASerDeletada) {
         if (!session.getTransaction().isActive()) {
@@ -141,18 +142,19 @@ public final class JornadaDAO implements ICRUD<Jornada> {
         }
     }
 
-	/**
-	 * Recebe um objeto {@link Jornada} e altera no banco de dados.
-	 * É realizado um teste para saber se a transação atual está ativa, se
-	 * estiver é retornada, caso contrário é iniciada uma nova transação com
-	 * o banco.
-	 * O objeto é salvo usando o método save da session e a transação é
-	 * comitada/persistida caso o objeto seja persistido no banco.
-	 * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
-	 * construtor, pois esse parâmetro será usado no banco de dados, para
-	 * definir as outras informações que serão atualizadas.
-	 * @param jornadaASerAtualizada objeto a ser alterado no banco.
-	 */
+    /**
+     * Recebe um objeto {@link Jornada} e altera no banco de dados.
+     * É realizado um teste para saber se a transação atual está ativa, se
+     * estiver é retornada, caso contrário é iniciada uma nova transação com
+     * o banco.
+     * O objeto é salvo usando o método save da session e a transação é
+     * comitada/persistida caso o objeto seja persistido no banco.
+     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
+     * construtor, pois esse parâmetro será usado no banco de dados, para
+     * definir as outras informações que serão atualizadas.
+     *
+     * @param jornadaASerAtualizada objeto a ser alterado no banco.
+     */
     @Override
     public boolean update(Jornada jornadaASerAtualizada) {
         if (!session.getTransaction().isActive()) {
@@ -169,14 +171,13 @@ public final class JornadaDAO implements ICRUD<Jornada> {
         }
     }
 
-	/**
-	 * Busca todos os elementos do tipo {@link Jornada} e retorna o resultado.
-	 *
-	 * Através de um CriteriaBuilder uma lista do tipo Jornada é alimentada com
-	 * todos os valores existentes no banco de dados. É o equivalente a query
-	 * SQL: SELECT*FROM jornadas.
-	 *
-	 */
+    /**
+     * Busca todos os elementos do tipo {@link Jornada} e retorna o resultado.
+     * <p>
+     * Através de um CriteriaBuilder uma lista do tipo Jornada é alimentada com
+     * todos os valores existentes no banco de dados. É o equivalente a query
+     * SQL: SELECT*FROM jornadas.
+     */
     @Override
     public List<Jornada> getAll() {
 
@@ -187,16 +188,29 @@ public final class JornadaDAO implements ICRUD<Jornada> {
         return listaTodasJornadas;
     }
 
-    public long tempoEntreRegistros(LocalDateTime registroInicial,
-                                    LocalDateTime registroFinal) {
-        return ChronoUnit.MINUTES.between(registroInicial, registroFinal);
+    /**
+     * Retorna o valor em minutos entre dois momentos no tempo.
+     *
+     * @param registroInicial LocalDateTime,
+     * @param registroFinal
+     * @return
+     */
+    public Long tempoEntreRegistros(LocalDateTime registroInicial,
+                                    LocalDateTime registroFinal) throws Exception {
+
+        if (registroInicial.isBefore(registroFinal)){
+            return ChronoUnit.MINUTES.between(registroInicial, registroFinal);
+        }
+        throw new Exception("A data inicial deve ser anterior a data final");
     }
+
     /**
      * Retorna o tempo formatado baseado no tempo informado.
      * Exibe até a ordem de grandeza de dias.
-     * @param quantidade Long Quantidade do tempo
+     *
+     * @param quantidade   Long Quantidade do tempo
      * @param unidadeTempo {@link TimeUnit} É a definição da ordem de
-     *                                     grandeza da quantidade de tempo.
+     *                     grandeza da quantidade de tempo.
      * @version Sprint5
      * @author Lucas Walim <lucas.walim@senior.com.br>
      * @author Samuel Levi <samuel.levi@senior.com.br>
@@ -219,12 +233,14 @@ public final class JornadaDAO implements ICRUD<Jornada> {
             return String.format("%02d", segundo);
         }
     }
+
     /**
      * Retorna o tempo formatado baseado no tempo informado.
      * Exibe apenas até a ordem de grandeza das horas.
-     * @param quantidade Long Quantidade do tempo
+     *
+     * @param quantidade   Long Quantidade do tempo
      * @param unidadeTempo {@link TimeUnit} É a definição da ordem de
-     *                                     grandeza da quantidade de tempo.
+     *                     grandeza da quantidade de tempo.
      * @version Sprint5
      * @author Lucas Walim <lucas.walim@senior.com.br>
      * @author Samuel Levi <samuel.levi@senior.com.br>

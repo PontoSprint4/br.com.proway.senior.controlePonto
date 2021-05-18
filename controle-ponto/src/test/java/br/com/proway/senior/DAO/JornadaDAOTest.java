@@ -92,25 +92,27 @@ class JornadaDAOTest {
 
     @Test
     void minutosParaTempoTotal() {
-        Long minutos = 1000l;
+        Long minutos = 1000L;
         System.out.println(jornadaDao.minutosParaTempoTotal(minutos,
                 TimeUnit.MINUTES));
     }
 
     @Test
     void minutosParaTempoSemDias() {
-        Long minutos = 1000l;
+        Long minutos = 1000L;
         System.out.println(jornadaDao.minutosParaTempoSemDias(minutos, TimeUnit.MINUTES));
 
     }
 
     @Test
-    void tempoEntreRegistros() {
+    void tempoEntreRegistros() throws Exception {
         LocalDateTime inicio = LocalDateTime.now();
         LocalDateTime fim = LocalDateTime.now().plusHours(3);
         Assertions.assertEquals(180L, jornadaDao.tempoEntreRegistros(inicio,
                 fim));
         Assertions.assertNotEquals(188L, jornadaDao.tempoEntreRegistros(inicio,
                 fim));
+        Assertions.assertThrows(Exception.class,
+                () -> jornadaDao.tempoEntreRegistros(fim, inicio));
     }
 }
