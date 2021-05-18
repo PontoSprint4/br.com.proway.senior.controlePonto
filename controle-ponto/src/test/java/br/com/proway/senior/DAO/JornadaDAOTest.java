@@ -43,7 +43,7 @@ class JornadaDAOTest {
 
 	@Test
 	void testRead() {
-		assertEquals(119, jornadaDao.get(119).getId());
+		assertEquals(36, jornadaDao.get(36).getId());
 	}
 
 	@Test

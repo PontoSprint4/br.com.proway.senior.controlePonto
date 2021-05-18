@@ -52,7 +52,7 @@ public class DBConnection {
 		return sessionFactory;
 	}
 
-	public static void shutdown() {
+	public static void shutdown() throws Exception {
 		session.close();
 		getSessionFactory().close();
 	}

@@ -13,6 +13,7 @@ import br.com.proway.senior.model.Ponto;
  * @author Lucas Walim da Silva <lucas.walim@senior.com.br>
  * @author Tharlys de Souza Dias <tharlys.dias@senior.com.br>
  * @author Vitor Gehrke <vitor.gehrke@senior.com.br>
+ * @version Sprint5
  *
  */
 public class PontoController {
@@ -20,8 +21,8 @@ public class PontoController {
 	private PontoDAO pdao;
 
 	/**
-	 * Construtor que instancia um Controller fazendo uma integração com o 
-	 * {@link PontoDAO}, espera uma sessão como parametro para repassar ao 
+	 * Construtor que instancia um Controller fazendo uma integração com o
+	 * {@link PontoDAO}, espera uma sessão como parametro para repassar ao
 	 * {@link PontoDAO} retornando um Controller.
 	 * 
 	 * @param session Session
@@ -31,18 +32,14 @@ public class PontoController {
 	}
 
 	/**
-	 * Método para inserir no banco de dados através do {@link PontoDAO}, 
-	 * um objeto do tipo {@link Ponto}.
+	 * Método para inserir no banco de dados através do {@link PontoDAO}, um
+	 * objeto do tipo {@link Ponto}.
 	 * 
 	 * @param ponto do tipo Ponto
 	 * @throws Exception
 	 */
-	public void insert(Ponto ponto) throws Exception {
-		try {
-			pdao.insert(ponto);
-		} catch (Exception e) {
-			e.getMessage();
-		}
+	public void insert(Ponto ponto) {
+		pdao.insert(ponto);
 	}
 
 	/**
@@ -60,23 +57,20 @@ public class PontoController {
 //	}
 
 	/**
-	 * Método para buscar no banco de dados através do {@link PontoDAO}, 
-	 * um objeto do tipo {@link Ponto}, usando seu index.
+	 * Método para buscar no banco de dados através do {@link PontoDAO}, um objeto
+	 * do tipo {@link Ponto}, usando seu index.
 	 * 
 	 * @param index
 	 * @return objeto de ponto
 	 * @throws Exception
 	 */
-	public Ponto get(int index) throws Exception {
-		if (pdao.get(index) != null) {
+	public Ponto get(int index) throws Exception{
 			return pdao.get(index);
-		}
-		throw new Exception("Index Inexistente");
 	}
 
 	/**
-	 * Método para buscar todos os objetos do tipo {@link Ponto}, 
-	 * no banco de dados através do {@link PontoDAO}.
+	 * Método para buscar todos os objetos do tipo {@link Ponto}, no banco de dados
+	 * através do {@link PontoDAO}.
 	 * 
 	 * @return ArrayList<Ponto>
 	 */
@@ -85,19 +79,13 @@ public class PontoController {
 	}
 
 	/**
-	 * Método para apagar do banco de dados através do {@link PontoDAO}, 
-	 * um objeto do tipo {@link Ponto}.
+	 * Método para apagar do banco de dados através do {@link PontoDAO}, um objeto
+	 * do tipo {@link Ponto}.
 	 * 
 	 * @param ponto do tipo Ponto a ser apagado.
 	 * @return true || false
 	 */
-	public boolean delete(Ponto ponto) {
-		try {
+	public void delete(Ponto ponto) {
 			pdao.delete(ponto);
-			return true;
-		} catch (Exception e) {
-			e.getMessage();
-			return false;
-		}
 	}
 }
