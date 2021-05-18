@@ -9,7 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 /**
- * Classe responsável pela persistência do objeto {@link PessoaDoPonto} no
+ * Classe responsï¿½vel pela persistï¿½ncia do objeto {@link PessoaDoPonto} no
  * banco de dados.
  *
  * @author Samuel Levi <samuel.levi@senior.com.br>
@@ -22,22 +22,22 @@ public class PessoaDAO implements ICRUD<PessoaDoPonto> {
     private Session session;
 
     /**
-     * Construtor que recebe a sessão.
+     * Construtor que recebe a sessï¿½o.
      *
-     * @param session sessão recebida como parâmetro
+     * @param session sessï¿½o recebida como parï¿½metro
      */
     private PessoaDAO(Session session) {
         this.session = session;
     }
 
     /**
-     * Método responsável por instanciar {@link PessoaDAO} recebendo uma sessão
-     * A sessão recebida passa pela checagem se é nula, caso positivo, uma
-     * nova sessão instanciada, caso negativo, a sessão que já está aberta é
+     * Mï¿½todo responsï¿½vel por instanciar {@link PessoaDAO} recebendo uma sessï¿½o
+     * A sessï¿½o recebida passa pela checagem se ï¿½ nula, caso positivo, uma
+     * nova sessï¿½o instanciada, caso negativo, a sessï¿½o que jï¿½ estï¿½ aberta ï¿½
      * retornada.
      *
-     * @param session Sessão ativa
-     * @return instance a instancia da sessão.
+     * @param session Sessï¿½o ativa
+     * @return instance a instancia da sessï¿½o.
      */
     public static PessoaDAO getInstance(Session session) {
         if (instance == null) {
@@ -48,13 +48,13 @@ public class PessoaDAO implements ICRUD<PessoaDoPonto> {
 
     /**
      * Recebe um objeto {@link PessoaDoPonto} e insere no banco de dados.
-     * É realizado um teste para saber se a transação atual está ativa, se
-     * estiver é retornada, caso contrário é iniciada uma nova transação com
+     * ï¿½ realizado um teste para saber se a transaï¿½ï¿½o atual estï¿½ ativa, se
+     * estiver ï¿½ retornada, caso contrï¿½rio ï¿½ iniciada uma nova transaï¿½ï¿½o com
      * o banco.
-     * O objeto é salvo usando o método save da session e a transação é
+     * O objeto ï¿½ salvo usando o mï¿½todo save da session e a transaï¿½ï¿½o ï¿½
      * comitada/persistida caso o objeto seja persistido no banco.
-     * O objeto a ser recebido aqui, deve ter o parâmetro id nulo no
-     * construtor, pois esse parâmetro será atribuído no banco de dados.
+     * O objeto a ser recebido aqui, deve ter o parï¿½metro id nulo no
+     * construtor, pois esse parï¿½metro serï¿½ atribuï¿½do no banco de dados.
      *
      * @param pessoaASerInserida objeto a ser inserido no banco.
      */
@@ -72,14 +72,14 @@ public class PessoaDAO implements ICRUD<PessoaDoPonto> {
 
     /**
      * Recebe um objeto {@link PessoaDoPonto} e altera no banco de dados.
-     * É realizado um teste para saber se a transação atual está ativa, se
-     * estiver é retornada, caso contrário é iniciada uma nova transação com
+     * ï¿½ realizado um teste para saber se a transaï¿½ï¿½o atual estï¿½ ativa, se
+     * estiver ï¿½ retornada, caso contrï¿½rio ï¿½ iniciada uma nova transaï¿½ï¿½o com
      * o banco.
-     * O objeto é salvo usando o método save da session e a transação é
+     * O objeto ï¿½ salvo usando o mï¿½todo save da session e a transaï¿½ï¿½o ï¿½
      * comitada/persistida caso o objeto seja persistido no banco.
-     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
-     * construtor, pois esse parâmetro será usado no banco de dados, para
-     * definir as outras informações que serão atualizadas.
+     * O objeto a ser recebido aqui, deve ter o parï¿½metro id informado no
+     * construtor, pois esse parï¿½metro serï¿½ usado no banco de dados, para
+     * definir as outras informaï¿½ï¿½es que serï¿½o atualizadas.
      *
      * @param pessoaASerAlterada objeto a ser alterado no banco.
      */
@@ -99,19 +99,19 @@ public class PessoaDAO implements ICRUD<PessoaDoPonto> {
 
     /**
      * Recebe um objeto {@link PessoaDoPonto} e deleta no banco de dados.
-     * É realizado um teste para saber se a transação atual está ativa, se
-     * estiver é retornada, caso contrário é iniciada uma nova transação com
+     * ï¿½ realizado um teste para saber se a transaï¿½ï¿½o atual estï¿½ ativa, se
+     * estiver ï¿½ retornada, caso contrï¿½rio ï¿½ iniciada uma nova transaï¿½ï¿½o com
      * o banco.
-     * O objeto é deletado usando o método delete da session e a transação é
+     * O objeto ï¿½ deletado usando o mï¿½todo delete da session e a transaï¿½ï¿½o ï¿½
      * comitada/persistida caso o objeto seja deletado no banco.
-     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
-     * construtor, pois esse parâmetro será usado no banco de dados, para
-     * definir o objeto que será excluído.
+     * O objeto a ser recebido aqui, deve ter o parï¿½metro id informado no
+     * construtor, pois esse parï¿½metro serï¿½ usado no banco de dados, para
+     * definir o objeto que serï¿½ excluï¿½do.
      *
-     * @param pessoaASerDeletada objeto a ser excluído no banco.
+     * @param pessoaASerDeletada objeto a ser excluï¿½do no banco.
      */
     public boolean delete(PessoaDoPonto pessoaASerDeletada) {
-        if (!session.getTransaction().isActive()) {
+    	if (!session.getTransaction().isActive()) {
             session.beginTransaction();
         }
         try {
@@ -127,7 +127,7 @@ public class PessoaDAO implements ICRUD<PessoaDoPonto> {
     /**
      * Recebe um inteiro que referencia o Id da {@link PessoaDAO} a ser buscada.
      * <p>
-     * O objeto a ser buscado deve ter o parâmetro Id válido no banco de dados.
+     * O objeto a ser buscado deve ter o parï¿½metro Id vï¿½lido no banco de dados.
      *
      * @param index objeto a ser retornado.
      */
@@ -138,8 +138,8 @@ public class PessoaDAO implements ICRUD<PessoaDoPonto> {
     /**
      * Busca todos os elementos do tipo {@link PessoaDoPonto} e retorna o resultado.
      * <p>
-     * Através de um CriteriaBuilder uma lista do tipo PessoaDoPonto é
-     * alimentada com todos os valores existentes no banco de dados. É o
+     * Atravï¿½s de um CriteriaBuilder uma lista do tipo PessoaDoPonto ï¿½
+     * alimentada com todos os valores existentes no banco de dados. ï¿½ o
      * equivalente a query SQL: SELECT*FROM pontos.
      */
     public List<PessoaDoPonto> getAll() {

@@ -14,7 +14,7 @@ import br.com.proway.senior.utils.ICRUD;
  * @author Samuel Levi <samuel.levi@senior.com.br>
  * @author Tharlys de Souza Dias <tharlys.dias@senior.com.br>
  * @version Sprint5
- * @author Vitor Andr� Gehrke <vitor.gehrke@senior.com.br>
+ * @author Vitor Andr� Gehrke <vitor.gehrke@senior.com.br>
  * @version Sprint5 Testes
  *
  * AlteraÃ§Ã£o da classe pontoDAO para implementar o CriteriaBuilder.
@@ -31,7 +31,7 @@ public class PontoDAO implements ICRUD<Ponto> {
 	 *
 	 * @param session sessão recebida como parâmetro
 	 */
-	public PontoDAO(Session session) {
+	private PontoDAO(Session session) {
 		this.session = session;
 	}
 

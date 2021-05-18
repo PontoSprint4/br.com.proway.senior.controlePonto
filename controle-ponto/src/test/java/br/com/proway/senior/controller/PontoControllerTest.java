@@ -1,9 +1,8 @@
 package br.com.proway.senior.controller;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -28,32 +27,28 @@ class PontoControllerTest {
 	static void setUpBeforeClass() throws Exception {
 		session = DBConnection.getSession();
 		pontoController = new PontoController(session);
-		pdao = new PontoDAO(session);
+		pdao = PontoDAO.getInstance(session);
 
 	}
 
 	@Test
-	void testInsert() throws Exception {
+	void testInsert() {
 		Ponto ponto = new Ponto(null, LocalDateTime.of(1997, 5, 13, 23, 59));
-		pontoController.insert(ponto);
+		Ponto ponto1 = new Ponto(null, LocalDateTime.of(2005, 5, 13, 23, 59));
 		ArrayList<Ponto> listaPontos = pontoController.getAll();
-		for (int i = 0; i < listaPontos.size(); i++) {
-			if (listaPontos.get(i).equals(ponto)) {
-				assertEquals(ponto, pontoController.getAll().get(i));
-			}
-		}
+		pontoController.insert(ponto);
+		pontoController.insert(ponto1);
+		assertEquals((listaPontos.size() + 2), pontoController.getAll().size());
 	}
 
 	@Test
-	void testInsertNotEquals() throws Exception {
-		Ponto ponto = new Ponto(null, LocalDateTime.of(1997, 5, 13, 23, 59));
-		pontoController.insert(ponto);
+	void testInsertNotEquals() {
+		Ponto ponto = new Ponto(null, LocalDateTime.of(2009, 5, 13, 23, 59));
+		Ponto ponto1 = new Ponto(null, LocalDateTime.of(2020, 5, 13, 23, 59));
 		ArrayList<Ponto> listaPontos = pontoController.getAll();
-		for (int i = 0; i < listaPontos.size(); i++) {
-			if (!listaPontos.get(i).equals(ponto)) {
-				assertNotEquals(ponto, pontoController.getAll().get(i));
-			}
-		}
+		pontoController.insert(ponto);
+		pontoController.insert(ponto1);
+		assertNotEquals(listaPontos.size(), pontoController.getAll());
 	}
 
 	@Test
@@ -81,13 +76,7 @@ class PontoControllerTest {
 	@Test
 	void testGetAllPorTamanhoDaLista() {
 		ArrayList<Ponto> listaPontos = pontoController.getAll();
-		for (Integer i = 0; i < listaPontos.size(); i++) {
-			if (i.equals(listaPontos.size())) {
-				assertEquals(i, listaPontos.size());
-			} else {
-
-			}
-		}
+		assertEquals(listaPontos.size(), pontoController.getAll().size());
 	}
 
 	@Test
@@ -95,19 +84,20 @@ class PontoControllerTest {
 		assertNotNull(pontoController.getAll());
 
 	}
+	
+	@Test
+	void testUpdate() {
+		Ponto ponto = pontoController.getAll().get(1);
+		ponto.setMomentoPonto(LocalDateTime.now().plusHours(4));
+		assertTrue(pdao.update(ponto));
+	}
 
 	@Test
-	void testDelete() throws Exception {
-		Ponto ponto = new Ponto(null, LocalDateTime.of(2012, 12, 21, 0, 1));
-		pontoController.insert(ponto);
+	void testDelete() {
+		Ponto ponto = pontoController.getAll().get(1);
 		ArrayList<Ponto> listaPontos = pontoController.getAll();
-		int i;
-		for (i = 0; i < listaPontos.size(); i++) {
-			if(listaPontos.get(i).equals(ponto)){
-				pontoController.delete(ponto);
-			}
-		}
-		assertEquals(i-1, pontoController.getAll().size());
+		pontoController.delete(ponto);
+		assertEquals((listaPontos.size() - 1), pontoController.getAll().size());
 	}
 
 }
