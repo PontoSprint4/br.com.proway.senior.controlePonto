@@ -13,6 +13,18 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+/**
+ * Classe que estrutura a entidade Jornada.
+ *´Possui um id único e uma data no formato {@link LocalDate}. Toda Jornada é
+ * única para uma uma única {@link PessoaDoPonto}
+ * ({@link OneToOne}) e possui um conjunto de no máximo 4 {@link Ponto}s,
+ * ({@link OneToMany}).
+ *
+ * @version Sprint 5
+ * @author Lucas Walim <lucas.walim@senior.com.br>
+ * @author Samuel Levi <samuel.levi@senior.com.br>
+ * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
+ */
 @Entity
 public class Jornada {
 	
@@ -45,11 +57,7 @@ public class Jornada {
 		this.pessoa = pessoa;
 		this.turno = turno;
 	}
-	
-//	public void setPessoa(IPessoa pessoa) {
-//		this.pessoa = pessoa;
-//	}
-	
+
 	public void setTurno(Turno turno) {
 		this.turno = turno;
 	}

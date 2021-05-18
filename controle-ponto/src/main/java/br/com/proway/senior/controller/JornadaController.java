@@ -69,4 +69,5 @@ public class JornadaController {
     public void delete(Jornada jornadaASerDeletada) {
         dao.delete(jornadaASerDeletada);
     }
+
 }
