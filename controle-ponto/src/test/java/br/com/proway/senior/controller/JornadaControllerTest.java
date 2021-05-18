@@ -8,7 +8,7 @@ import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.PessoaDoPonto;
 import br.com.proway.senior.model.Turno;
 import org.hibernate.Session;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -74,5 +74,3 @@ class JornadaControllerTest {
         Assertions.assertEquals(tamanhoInicial - 1, controller.getAll().size());
     }
 }
-
-//adfja
