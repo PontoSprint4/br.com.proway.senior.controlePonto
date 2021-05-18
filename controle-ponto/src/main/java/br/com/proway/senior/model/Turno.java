@@ -101,7 +101,8 @@ public class Turno implements ITurno {
 
 	@Override
 	public String toString() {
-		return "Turno = " + id + ", come�a �s: " + horaInicio + ", termina �s: " + horaFim + ", descri��o: " + nomeTurno;
+		return " " + id + ", inicio: " + horaInicio + ", " +
+				"fim: " + horaFim + ", nome: " + nomeTurno;
 	}
 
 	

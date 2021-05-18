@@ -1,109 +1,104 @@
 package br.com.proway.senior.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
 /**
  * Classe que estrutura a entidade Jornada.
- *´Possui um id único e uma data no formato {@link LocalDate}. Toda Jornada é
+ * ´Possui um id único e uma data no formato {@link LocalDate}. Toda Jornada é
  * única para uma uma única {@link PessoaDoPonto}
  * ({@link OneToOne}) e possui um conjunto de no máximo 4 {@link Ponto}s,
  * ({@link OneToMany}).
  *
- * @version Sprint 5
  * @author Lucas Walim <lucas.walim@senior.com.br>
  * @author Samuel Levi <samuel.levi@senior.com.br>
  * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
+ * @version Sprint 5
  */
 @Entity
 public class Jornada {
-	
-	/**
-	 * Atributos da classe jornada
-	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_jornada")
-	private int id;
-	
-	@Column(name = "data")
-	private LocalDate data;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	private PessoaDoPonto pessoa;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Turno turno;
+    /**
+     * Atributos da classe jornada
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_jornada")
+    private int id;
 
-	@OneToMany(targetEntity = Ponto.class, cascade = CascadeType.ALL)
-	private List<Ponto> listaPonto;
+    @Column(name = "data")
+    private LocalDate data;
 
-	public Jornada() {
-	}
+    @OneToOne(cascade = CascadeType.ALL)
+    private PessoaDoPonto pessoa;
 
-	public Jornada(Integer id, LocalDate data, PessoaDoPonto pessoa, Turno turno) {
-		this.id = id;
-		this.data = data;
-		this.pessoa = pessoa;
-		this.turno = turno;
-	}
+    @OneToOne(cascade = CascadeType.ALL)
+    private Turno turno;
 
-	public void setTurno(Turno turno) {
-		this.turno = turno;
-	}
-	
-	public void setPessoa(PessoaDoPonto pessoa){
-		this.pessoa = pessoa;
-	}
+    @OneToMany(targetEntity = Ponto.class, cascade = CascadeType.ALL)
+    public List<Ponto> listaPonto = new ArrayList<Ponto>();
 
-	public int getId() {
-		return id;
-	}
+    public Jornada() {
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Jornada(Integer id, LocalDate data, PessoaDoPonto pessoa, Turno turno) {
+        this.id = id;
+        this.data = data;
+        this.pessoa = pessoa;
+        this.turno = turno;
+    }
 
-	public LocalDate getData() {
-		return data;
-	}
+    public void setTurno(Turno turno) {
+        this.turno = turno;
+    }
 
-	public void setData(LocalDate data) {
-		this.data = data;
-	}
+    public void setPessoa(PessoaDoPonto pessoa) {
+        this.pessoa = pessoa;
+    }
 
-	public List<Ponto> getListaPonto() {
-		return listaPonto;
-	}
+    public int getId() {
+        return id;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Jornada jornada = (Jornada) o;
-		return id == jornada.id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    public LocalDate getData() {
+        return data;
+    }
 
-	@Override
-	public String toString() {
-		return "Jornada [id=" + id + ", data=" + data + ", pessoa=" + pessoa + ", turno=" + turno + ", listaPonto="
-				+ listaPonto + "]";
-	}
-	
-	
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public List<Ponto> getListaPonto() {
+        return listaPonto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Jornada jornada = (Jornada) o;
+        return id == jornada.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Jornada Nº " + id + ", Data da Jornada: " + data + ", \n" +
+                "Colaborador: " + pessoa +
+                ", Turno: " + turno + ",\n Pontos registrados: {"
+                + listaPonto + "}";
+    }
+
+
 }

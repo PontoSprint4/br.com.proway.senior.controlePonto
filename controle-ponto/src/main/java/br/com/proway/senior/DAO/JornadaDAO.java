@@ -1,6 +1,7 @@
 package br.com.proway.senior.DAO;
 
 import br.com.proway.senior.model.Jornada;
+import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.interfaces.IPessoa;
 import br.com.proway.senior.utils.ICRUD;
 import org.hibernate.Session;
@@ -26,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 public final class JornadaDAO implements ICRUD<Jornada> {
 
     private static JornadaDAO instance;
-    private Session session;
+    private final Session session;
 
     /**
      * Construtor que recebe a sessão.
@@ -114,6 +115,15 @@ public final class JornadaDAO implements ICRUD<Jornada> {
         return jornadasPorIdPessoa;
     }
 
+    public List buscarPontosDaJornada(Jornada jornadaQueEuQueroOsPontos){
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
+        Root<Ponto> root = criteria.from(Ponto.class);
+        Query query = session.createQuery(criteria);
+        Expression<Object> idJornada = root.get("id");
+        return query.getResultList();
+    }
+
     /**
      * Recebe um objeto {@link Jornada} e deleta no banco de dados.
      * É realizado um teste para saber se a transação atual está ativa, se
@@ -198,7 +208,7 @@ public final class JornadaDAO implements ICRUD<Jornada> {
     public Long tempoEntreRegistros(LocalDateTime registroInicial,
                                     LocalDateTime registroFinal) throws Exception {
 
-        if (registroInicial.isBefore(registroFinal)){
+        if (registroInicial.isBefore(registroFinal)) {
             return ChronoUnit.MINUTES.between(registroInicial, registroFinal);
         }
         throw new Exception("A data inicial deve ser anterior a data final");

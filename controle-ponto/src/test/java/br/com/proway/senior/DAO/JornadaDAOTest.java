@@ -2,6 +2,8 @@ package br.com.proway.senior.DAO;
 
 import br.com.proway.senior.dbpersistence.DBConnection;
 import br.com.proway.senior.model.Jornada;
+import br.com.proway.senior.model.PessoaDoPonto;
+import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.Turno;
 import org.hibernate.Session;
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertNotNull;
@@ -30,6 +33,22 @@ class JornadaDAOTest {
         jornadaDao = JornadaDAO.getInstance(session);
         pessoaDao = PessoaDAO.getInstance(session);
         turnoDao = TurnoDAO.getInstance(session);
+    }
+
+
+    @Test
+    void pontoNaJornada() {
+        PessoaDoPonto pessoa = new PessoaDoPonto(123);
+        Turno turno = new Turno(467898, LocalTime.of(8, 0), LocalTime.of(18, 0),
+                "teste123");
+        Jornada jornada = new Jornada(789, LocalDate.now(), pessoa, turno);
+        Ponto ponto1 = new Ponto(5645665, LocalDateTime.now());
+        Ponto ponto2 = new Ponto(8946515, LocalDateTime.now().plusHours(8));
+        jornada.listaPonto.add(ponto1);
+        jornada.listaPonto.add(ponto2);
+        jornadaDao.insert(jornada);
+        List<Jornada> jornadas = jornadaDao.getAll();
+        System.out.println(jornadas);
     }
 
     @Test
