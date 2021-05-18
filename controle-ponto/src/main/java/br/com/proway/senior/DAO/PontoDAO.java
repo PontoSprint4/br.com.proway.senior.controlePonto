@@ -127,7 +127,6 @@ public class PontoDAO implements ICRUD<Ponto> {
      * 
      * @param index objeto a ser retornado.
      */
-	
 	public Ponto get(int index) {
 		return session.get(Ponto.class, index);
 	}
@@ -139,7 +138,6 @@ public class PontoDAO implements ICRUD<Ponto> {
      * valores existentes no banco de dados. É o equivalente a query SQL: SELECT*FROM pontos.
      * 
      */
-
 	public List<Ponto> getAll() {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
