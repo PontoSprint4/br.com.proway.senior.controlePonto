@@ -34,10 +34,7 @@ public class Turno implements ITurno {
 
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
-	private String nomeTurno;
-
-	@OneToMany (cascade = CascadeType.ALL)
-	private List<Jornada> jornada;
+	private String nomeTurno;	
 
 	public Turno() {}
 
@@ -48,13 +45,13 @@ public class Turno implements ITurno {
 		this.nomeTurno = nomeTurno;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
 	public Integer getId() {
 		return id;
 	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}	
 
 	public LocalTime getHoraInicio() {
 		return horaInicio;
@@ -78,34 +75,6 @@ public class Turno implements ITurno {
 
 	public void setNomeTurno(String nomeTurno) {
 		this.nomeTurno = nomeTurno;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Turno other = (Turno) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return " " + id + ", inicio: " + horaInicio + ", " +
-				"fim: " + horaFim + ", nome: " + nomeTurno;
-	}
+	}	
 	
 }

@@ -14,13 +14,11 @@ public class Ponto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id")    
     private Integer idPonto;
-    @Column(name = "momentoPonto")
-    private LocalDateTime momentoPonto;
     
-    @ManyToOne (cascade = CascadeType.ALL)
-    private Jornada jornada;
+    @Column(name = "momentoPonto")
+    private LocalDateTime momentoPonto;    
 
     public Ponto() {}
 
@@ -44,25 +42,5 @@ public class Ponto {
     public void setMomentoPonto(LocalDateTime momentoPonto) {
         this.momentoPonto = momentoPonto;
     }
-
-    @Override
-    public String toString() {
-        return "\nPonto: " + idPonto +
-                ". Registrado em: " + momentoPonto;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Ponto ponto = (Ponto) o;
-
-        return idPonto.equals(ponto.idPonto);
-    }
-
-    @Override
-    public int hashCode() {
-        return idPonto.hashCode();
-    }
+    
 }

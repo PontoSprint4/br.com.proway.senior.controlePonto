@@ -20,53 +20,41 @@ import java.util.Objects;
  */
 @Entity
 public class Jornada {
-
-    /**
-     * Atributos da classe jornada
-     */
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_jornada")
     private int id;
 
     @Column(name = "data")
-    private LocalDate data;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private PessoaDoPonto pessoa;
+    private LocalDate data;     
 
     @OneToOne(cascade = CascadeType.ALL)
     private Turno turno;
 
     @OneToMany(targetEntity = Ponto.class, cascade = CascadeType.ALL)
     public List<Ponto> listaPonto = new ArrayList<Ponto>();
+    
+    private int idPessoa;
 
     public Jornada() {
     }
 
-    public Jornada(Integer id, LocalDate data, PessoaDoPonto pessoa, Turno turno) {
+    public Jornada(Integer id, LocalDate data, int idPessoa, Turno turno) {
         this.id = id;
         this.data = data;
-        this.pessoa = pessoa;
+        this.idPessoa = idPessoa;
         this.turno = turno;
     }
-
-    public void setTurno(Turno turno) {
-        this.turno = turno;
-    }
-
-    public void setPessoa(PessoaDoPonto pessoa) {
-        this.pessoa = pessoa;
-    }
-
+    
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
+    } 
+    
     public LocalDate getData() {
         return data;
     }
@@ -74,31 +62,29 @@ public class Jornada {
     public void setData(LocalDate data) {
         this.data = data;
     }
+    
+    public int getIdPessoa() {
+		return idPessoa;
+	}
 
-    public List<Ponto> getListaPonto() {
+	public void setIdPessoa(int idPessoa) {
+		this.idPessoa = idPessoa;
+	}
+
+	public Turno getTurno() {
+		return turno;
+	}
+
+	public void setTurno(Turno turno) {
+        this.turno = turno;
+    }
+	 
+	public List<Ponto> getListaPonto() {
         return listaPonto;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Jornada jornada = (Jornada) o;
-        return id == jornada.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Jornada Nº " + id + ", Data da Jornada: " + data + ", \n" +
-                "Colaborador: " + pessoa +
-                ", Turno: " + turno + ",\n Pontos registrados: {"
-                + listaPonto + "}";
-    }
-
+    }  
+	
+	public void setListaPonto(Ponto ponto) {
+		this.listaPonto.add(ponto);
+	}	
 
 }
