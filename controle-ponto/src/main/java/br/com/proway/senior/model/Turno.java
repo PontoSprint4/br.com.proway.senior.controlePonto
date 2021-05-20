@@ -45,13 +45,13 @@ public class Turno implements ITurno {
 		this.nomeTurno = nomeTurno;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
 	public Integer getId() {
 		return id;
 	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}	
 
 	public LocalTime getHoraInicio() {
 		return horaInicio;
@@ -75,7 +75,6 @@ public class Turno implements ITurno {
 
 	public void setNomeTurno(String nomeTurno) {
 		this.nomeTurno = nomeTurno;
-	}
-	
+	}	
 	
 }

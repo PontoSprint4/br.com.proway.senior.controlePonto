@@ -14,8 +14,9 @@ public class Ponto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id")    
     private Integer idPonto;
+    
     @Column(name = "momentoPonto")
     private LocalDateTime momentoPonto;    
 

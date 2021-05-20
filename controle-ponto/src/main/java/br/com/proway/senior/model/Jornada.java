@@ -20,25 +20,22 @@ import java.util.Objects;
  */
 @Entity
 public class Jornada {
-
-    /**
-     * Atributos da classe jornada
-     */
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_jornada")
     private int id;
 
     @Column(name = "data")
-    private LocalDate data;
-    
-    private int idPessoa;
+    private LocalDate data;     
 
     @OneToOne(cascade = CascadeType.ALL)
     private Turno turno;
 
     @OneToMany(targetEntity = Ponto.class, cascade = CascadeType.ALL)
     public List<Ponto> listaPonto = new ArrayList<Ponto>();
+    
+    private int idPessoa;
 
     public Jornada() {
     }
@@ -86,8 +83,8 @@ public class Jornada {
         return listaPonto;
     }  
 	
-	public void setListaPonto(List<Ponto> listaPonto) {
-		this.listaPonto = listaPonto;
+	public void setListaPonto(Ponto ponto) {
+		this.listaPonto.add(ponto);
 	}	
 
 }

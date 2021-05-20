@@ -32,16 +32,8 @@ public class PessoaDoPonto implements IPessoa {
 	@Column(name = "id_pessoa")
 	private int id;	
 
-	/**
-	 * Construtor vazio.
-	 */
 	public PessoaDoPonto() {}
 
-	/**
-	 * Construtor com parametros.
-	 * 
-	 * @param id
-	 */
 	public PessoaDoPonto(int id) {
 		this.id = id;
 	}
