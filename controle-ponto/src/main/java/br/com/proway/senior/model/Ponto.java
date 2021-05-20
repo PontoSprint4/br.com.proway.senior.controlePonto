@@ -17,9 +17,8 @@ public class Ponto {
     @Column(name = "id")
     private Integer idPonto;
     @Column(name = "momentoPonto")
-    private LocalDateTime momentoPonto;
+    private LocalDateTime momentoPonto;    
     
-    @ManyToOne (cascade = CascadeType.ALL)
     private Jornada jornada;
 
     public Ponto() {}

@@ -31,8 +31,7 @@ public class Jornada {
 
     @Column(name = "data")
     private LocalDate data;
-
-    @OneToOne(cascade = CascadeType.ALL)
+    
     private PessoaDoPonto pessoa;
 
     @OneToOne(cascade = CascadeType.ALL)

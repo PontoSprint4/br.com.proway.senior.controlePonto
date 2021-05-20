@@ -36,8 +36,8 @@ public class Turno implements ITurno {
 	private LocalTime horaFim;
 	private String nomeTurno;
 
-	@OneToMany (cascade = CascadeType.ALL)
-	private List<Jornada> jornada;
+	/*@OneToMany (cascade = CascadeType.ALL)
+	private List<Jornada> jornada; - Remoção*/ 
 
 	public Turno() {}
 
