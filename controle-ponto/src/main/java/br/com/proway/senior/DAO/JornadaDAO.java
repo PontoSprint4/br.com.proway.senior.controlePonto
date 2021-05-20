@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
  * @version Documentação
  */
-public final class JornadaDAO implements ICRUD<Jornada> {
+public final class JornadaDAO extends GenericDAO<Jornada>  {
 
     private static JornadaDAO instance;
     private final Session session;
@@ -66,17 +66,9 @@ public final class JornadaDAO implements ICRUD<Jornada> {
      *
      * @param jornada Jornada a ser cadastrada no banco de dados.
      */
-    @Override
-    public void insert(Jornada jornada) {
-        if (!session.getTransaction().isActive()) {
-            session.beginTransaction();
-        }
-        try {
-            session.save(jornada);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.getMessage();
-        }
+    
+    public Integer create(Jornada jornada) {
+        return super.create(jornada);
     }
 
     /**
@@ -86,9 +78,57 @@ public final class JornadaDAO implements ICRUD<Jornada> {
      *
      * @param id Id do objeto a ser retornado.
      */
-    @Override
     public Jornada get(int id) {
-        return session.get(Jornada.class, id);
+        return super.get(Jornada.class, id);
+    }
+    
+    /**
+     * Recebe um objeto {@link Jornada} e altera no banco de dados.
+     * É realizado um teste para saber se a transação atual está ativa, se
+     * estiver é retornada, caso contrário é iniciada uma nova transação com
+     * o banco.
+     * O objeto é salvo usando o método save da session e a transação é
+     * comitada/persistida caso o objeto seja persistido no banco.
+     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
+     * construtor, pois esse parâmetro será usado no banco de dados, para
+     * definir as outras informações que serão atualizadas.
+     *
+     * @param jornadaASerAtualizada objeto a ser alterado no banco.
+     */
+    public boolean update(Jornada jornadaASerAtualizada) {
+        return super.update(jornadaASerAtualizada);
+    }
+    
+    /**
+     * Recebe um objeto {@link Jornada} e deleta no banco de dados.
+     * É realizado um teste para saber se a transação atual está ativa, se
+     * estiver é retornada, caso contrário é iniciada uma nova transação com
+     * o banco.
+     * O objeto é deletado usando o método delete da session e a transação é
+     * comitada/persistida caso o objeto seja deletado no banco.
+     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
+     * construtor, pois esse parâmetro será usado no banco de dados, para
+     * definir o objeto que será excluído.
+     *
+     * @param jornadaASerDeletada objeto a ser excluído no banco.
+     */
+    public boolean delete(int id) {
+        return super.delete(Jornada.class, id);
+    }
+
+    /**
+     * Busca todos os elementos do tipo {@link Jornada} e retorna o resultado.
+     * <p>
+     * Através de um CriteriaBuilder uma lista do tipo Jornada é alimentada com
+     * todos os valores existentes no banco de dados. É o equivalente a query
+     * SQL: SELECT*FROM jornadas.
+     */
+    public List<Jornada> getAll() {
+    	return super.getAll(Jornada.class);
+    }
+    
+    public boolean deleteAll() {
+    	return super.deleteAll("jornada");
     }
 
     /**
@@ -124,79 +164,7 @@ public final class JornadaDAO implements ICRUD<Jornada> {
         return query.getResultList();
     }
 
-    /**
-     * Recebe um objeto {@link Jornada} e deleta no banco de dados.
-     * É realizado um teste para saber se a transação atual está ativa, se
-     * estiver é retornada, caso contrário é iniciada uma nova transação com
-     * o banco.
-     * O objeto é deletado usando o método delete da session e a transação é
-     * comitada/persistida caso o objeto seja deletado no banco.
-     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
-     * construtor, pois esse parâmetro será usado no banco de dados, para
-     * definir o objeto que será excluído.
-     *
-     * @param jornadaASerDeletada objeto a ser excluído no banco.
-     */
-    @Override
-    public boolean delete(Jornada jornadaASerDeletada) {
-        if (!session.getTransaction().isActive()) {
-            session.beginTransaction();
-        }
-        try {
-            session.delete(jornadaASerDeletada);
-            session.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            e.getMessage();
-            return false;
-        }
-    }
-
-    /**
-     * Recebe um objeto {@link Jornada} e altera no banco de dados.
-     * É realizado um teste para saber se a transação atual está ativa, se
-     * estiver é retornada, caso contrário é iniciada uma nova transação com
-     * o banco.
-     * O objeto é salvo usando o método save da session e a transação é
-     * comitada/persistida caso o objeto seja persistido no banco.
-     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
-     * construtor, pois esse parâmetro será usado no banco de dados, para
-     * definir as outras informações que serão atualizadas.
-     *
-     * @param jornadaASerAtualizada objeto a ser alterado no banco.
-     */
-    @Override
-    public boolean update(Jornada jornadaASerAtualizada) {
-        if (!session.getTransaction().isActive()) {
-            session.beginTransaction();
-        }
-
-        try {
-            session.update(jornadaASerAtualizada);
-            session.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            e.getMessage();
-            return false;
-        }
-    }
-
-    /**
-     * Busca todos os elementos do tipo {@link Jornada} e retorna o resultado.
-     * <p>
-     * Através de um CriteriaBuilder uma lista do tipo Jornada é alimentada com
-     * todos os valores existentes no banco de dados. É o equivalente a query
-     * SQL: SELECT*FROM jornadas.
-     */
-    @Override
-    public List<Jornada> getAll() {
-
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
-        criteria.from(Jornada.class);
-        List<Jornada> listaTodasJornadas = session.createQuery(criteria).getResultList();
-        return listaTodasJornadas;
-    }
+    
 
     /**
      * Retorna o valor em minutos entre dois momentos no tempo.

@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import br.com.proway.senior.dbpersistence.DBConnection;
+import br.com.proway.senior.utils.ICRUD;
 
 /**
  * Classe Generica com Metodos de interacao com a HibernateConnection
@@ -19,7 +20,7 @@ import br.com.proway.senior.dbpersistence.DBConnection;
  *
  * @param <T> : Classe que serve de base para a Tabela do Hibernate (@Entity)
  */
-public class GenericDAO<T> {
+public abstract class GenericDAO<T> implements ICRUD<T> {
 	
 	/***
 	 * Insere no banco de dados o registro de um objeto.
@@ -27,7 +28,7 @@ public class GenericDAO<T> {
 	 * @param obj Objeto a ser inserido.
 	 * @return int Id do objeto inserido.
 	 */
-	public int create(T entidade) {
+	public Integer create(T entidade) {
 		Session sessao = DBConnection.getSession();
 		if (!sessao.getTransaction().isActive())
 			sessao.beginTransaction();
@@ -93,11 +94,10 @@ public class GenericDAO<T> {
 	/**
 	 * Retorna todas as linhas da coluna 'nomeTabela' desejada.
 	 * 
-	 * 
 	 * @param classeTabela Class classe da entidade
 	 * @return 
 	 */
-	public List<T> listarPorTabela(Class<T> classeTabela) {
+	public List<T> getAll(Class<T> classeTabela) {
 		Session session = DBConnection.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
@@ -105,6 +105,16 @@ public class GenericDAO<T> {
 		Query<T> query = session.createQuery(criteria);
 		List<T> results = query.getResultList();
 		return new ArrayList<T>(results);
+	}
+	
+	public boolean deleteAll(String nomeTabela) {
+		Session session = DBConnection.getSession();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
+		}
+		int modificados = session.createSQLQuery("DELETE FROM "+nomeTabela).executeUpdate();
+		session.getTransaction().commit();
+		return modificados > 0 ? true : false;
 	}
 	
 	/**
