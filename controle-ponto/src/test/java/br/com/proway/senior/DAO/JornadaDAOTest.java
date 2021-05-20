@@ -6,6 +6,7 @@ import br.com.proway.senior.model.PessoaDoPonto;
 import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.Turno;
 import org.hibernate.Session;
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -24,14 +25,12 @@ class JornadaDAOTest {
 
     static Session session;
     static JornadaDAO jornadaDao;
-    static PessoaDAO pessoaDao;
     static TurnoDAO turnoDao;
 
-    @BeforeAll
+    @Before
     static void setUpBeforeClass() throws Exception {
         session = DBConnection.getSession();
         jornadaDao = JornadaDAO.getInstance(session);
-        pessoaDao = PessoaDAO.getInstance(session);
         turnoDao = TurnoDAO.getInstance(session);
     }
 
@@ -46,7 +45,7 @@ class JornadaDAOTest {
         Ponto ponto2 = new Ponto(8946515, LocalDateTime.now().plusHours(8));
         jornada.listaPonto.add(ponto1);
         jornada.listaPonto.add(ponto2);
-        jornadaDao.insert(jornada);
+        jornadaDao.create(jornada);
         List<Jornada> jornadas = jornadaDao.getAll();
         System.out.println(jornadas);
     }
@@ -55,9 +54,8 @@ class JornadaDAOTest {
     void testCreate() {
         Jornada jornada = new Jornada();
         jornada.setData(LocalDate.of(2333, 8, 24));
-        jornada.setPessoa(pessoaDao.get(119));
         jornada.setTurno(turnoDao.get(120));
-        jornadaDao.insert(jornada);
+        jornadaDao.create(jornada);
 
         assertNotNull(jornada);
     }
