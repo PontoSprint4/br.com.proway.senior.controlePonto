@@ -21,11 +21,15 @@ public class Ponto {
     private LocalDateTime momentoPonto;    
 
     public Ponto() {}
-
+    
+    public Ponto(LocalDateTime momentoPonto) {        
+        this.momentoPonto = momentoPonto;
+    }
+    
     public Ponto(Integer idPonto, LocalDateTime momentoPonto) {
         this.idPonto = idPonto;
         this.momentoPonto = momentoPonto;
-    }
+    }     
 
     public Integer getIdPonto() {
         return idPonto;
