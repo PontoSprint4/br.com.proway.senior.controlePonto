@@ -15,8 +15,8 @@ import br.com.proway.senior.dbpersistence.DBConnection;
 import br.com.proway.senior.model.interfaces.ICRUD;
 
 /**
- * Classe Generica com Metodos de interacao com a HibernateConnection
- * @author Willian Kenji Nishizawa
+ * Classe Abstrata com Metodos de interacao com a Hibernate Session.
+ * @author Willian Kenji Nishizawa <willian.kenji@senior.com.br>
  *
  * @param <T> : Classe que serve de base para a Tabela do Hibernate (@Entity)
  */
@@ -25,8 +25,8 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	/***
 	 * Insere no banco de dados o registro de um objeto.
 	 *
-	 * @param obj Objeto a ser inserido.
-	 * @return int Id do objeto inserido.
+	 * @param T entidade : Objeto a ser inserido.
+	 * @return int Id :  identificador do objeto inserido.
 	 */
 	public Integer create(T entidade) {
 		Session sessao = DBConnection.getSession();
@@ -54,7 +54,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 * Atualiza o registro de um objeto.
 	 *
 	 * @param T objetoAtualizado objeto atualizado a ser inserido no BD.
-	 * @return int Id do objeto inserido.
+	 * @return boolean para sucesso da operacao
 	 */
 	public boolean update(T objetoAtualizado) {
         if (!DBConnection.getSession().getTransaction().isActive()) {
@@ -77,8 +77,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 * 
 	 * @param int Id do objeto a ser deletado.
 	 * @param classeTabela Class classe da entidade
-	 * @return boolean Retorna true caso o banco de dados encontre um objeto com o
-	 *         id recebido. Retorna false caso ocorra algum erro durante o método.
+	 * @return boolean para sucesso da operacao
 	 */
 	public boolean delete(Class<T> classeTabela,int id) {
 		T cargo = get(classeTabela,id);
@@ -95,7 +94,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 * Retorna todas as linhas da coluna 'nomeTabela' desejada.
 	 * 
 	 * @param classeTabela Class classe da entidade
-	 * @return 
+	 * @return ArrayList com todas as entradas da tabela.
 	 */
 	public List<T> getAll(Class<T> classeTabela) {
 		Session session = DBConnection.getSession();
@@ -107,6 +106,12 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 		return new ArrayList<T>(results);
 	}
 	
+	/**
+	 * Remove todas as linhas da coluna 'nomeTabela' desejada.
+	 * 
+	 * @param classeTabela Class classe da entidade
+	 * @return Boolean para sucesso da operacao 
+	 */
 	public boolean deleteAll(String nomeTabela) {
 		Session session = DBConnection.getSession();
 		if (!session.getTransaction().isActive()) {
