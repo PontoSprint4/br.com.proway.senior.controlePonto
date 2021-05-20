@@ -17,12 +17,12 @@ import br.com.proway.senior.model.interfaces.ICRUD;
  * @version Sprint5
  * @author Vitor Andr� Gehrke <vitor.gehrke@senior.com.br>
  * @version Sprint5 Testes
- *
- * AlteraÃ§Ã£o da classe pontoDAO para implementar o CriteriaBuilder.
+ * @version Sprint6
+ * @author Leonardo Pereira <leonardo.pereira@senior.com.br>
  *
  */
 
-public class PontoDAO implements ICRUD<Ponto> {
+public final class PontoDAO extends GenericDAO<Ponto> {
 
 	private static PontoDAO instance;
 	private Session session;
@@ -30,20 +30,20 @@ public class PontoDAO implements ICRUD<Ponto> {
 	/**
 	 * Construtor que recebe a sessão.
 	 *
-	 * @param session sessão recebida como parâmetro
+	 * @param sessao recebida como parametro
 	 */
 	private PontoDAO(Session session) {
 		this.session = session;
 	}
 
 	/**
-	 * Método responsável por instanciar {@link PontoDAO} recebendo uma sessão
-     * A sessão recebida passa pela checagem se é nula, caso positivo, uma
-     * nova sessão instanciada, caso negativo, a sessão que já está aberta é
-     * retornada.
+	 * Metodo responsavel por instanciar {@link PontoDAO} recebendo uma sessao
+	 * A sessao recebida passa pela checagem se eh nula, caso positivo, uma nova
+	 * sessoa sera instanciada, caso negativo, a sessao que ja esta aberta eh
+	 * retornada.
 	 *
-	 * @param session Sessão ativa
-	 * @return instance a instancia da sessão.
+	 * @param session sessao ativa
+	 * @return instancia da sessao.
 	 */
 	public static PontoDAO getInstance(Session session) {
 		if (instance == null)
@@ -51,109 +51,81 @@ public class PontoDAO implements ICRUD<Ponto> {
 		return instance;
 	}
 
-    /**
-     * Recebe um objeto {@link Ponto} e insere no banco de dados.
-     * É realizado um teste para saber se a transação atual está ativa, se
-     * estiver é retornada, caso contrário é iniciada uma nova transação com
-     * o banco.
-     * O objeto é salvo usando o método save da session e a transação é
-     * comitada/persistida caso o objeto seja persistido no banco.
-     * O objeto a ser recebido aqui, deve ter o parâmetro id nulo no
-     * construtor, pois esse parâmetro será atribuído no banco de dados.
-     * @param pontoASerInserido objeto a ser inserido no banco.
-     */
-	public void insert(Ponto pontoASerInserido) {
-        if (!session.getTransaction().isActive()) {
-            session.beginTransaction();
-        }
-        try {
-            session.save(pontoASerInserido);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+	/**
+	 * Recebe um objeto {@link Ponto} e insere no banco de dados. Na Classe
+	 * GenericDAO Eh realizado um  teste para saber se a transacao atual esta 
+	 * ativa, se estiver eh retornada, caso contrario eh iniciada uma nova
+	 * transacao com o banco. O objeto eh salvo usando o metodo  - save - 
+	 * da session e a transacao eh comitada/persistida caso o objeto seja 
+	 * persistido no banco. 
+	 * O objeto a ser recebido aqui, deve ter o parametro id nulo no construtor,
+	 * pois esse parametro sera atribuido no banco de dados.
+	 * 
+	 * 
+	 * @param pontoASerInserido  : objeto a ser inserido no banco.
+	 */
+	public Integer create(Ponto pontoASerInserido) {
+		return super.create(pontoASerInserido);
 
 	}
-    /**
-     * Recebe um objeto {@link Ponto} e altera no banco de dados.
-     * É realizado um teste para saber se a transação atual está ativa, se
-     * estiver é retornada, caso contrário é iniciada uma nova transação com
-     * o banco.
-     * O objeto é salvo usando o método save da session e a transação é
-     * comitada/persistida caso o objeto seja persistido no banco.
-     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
-     * construtor, pois esse parâmetro será usado no banco de dados, para
-     * definir as outras informações que serão atualizadas.
-     * @param pontoASerAlterado objeto a ser alterado no banco.
-     */
-    public boolean update(Ponto pontoASerAlterado) {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
-		}
-		try {
-			session.update(pontoASerAlterado);
-			session.getTransaction().commit();
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-    /**
-     * Recebe um objeto {@link Ponto} e deleta no banco de dados.
-     * É realizado um teste para saber se a transação atual está ativa, se
-     * estiver é retornada, caso contrário é iniciada uma nova transação com
-     * o banco.
-     * O objeto é deletado usando o método delete da session e a transação é
-     * comitada/persistida caso o objeto seja deletado no banco.
-     * O objeto a ser recebido aqui, deve ter o parâmetro id informado no
-     * construtor, pois esse parâmetro será usado no banco de dados, para
-     * definir o objeto que será excluído.
-     * @param pontoASerDeletado objeto a ser excluído no banco.
-     */
-	public boolean delete(Ponto pontoASerDeletado) {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
-		}
-		try {
-			session.delete(pontoASerDeletado);
-			session.getTransaction().commit();
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+
+	/**
+	 * Recebe um objeto {@link Ponto} e altera no banco de dados. Eh realizado um
+	 * teste para saber se a transacao atual esta ativa, se estiver eh retornada,
+	 * caso contrario eh iniciada uma nova transacao com o banco. O objeto eh
+	 * salvo usando o metodo save da session e a transacao eh comitada/persistida
+	 * caso o objeto seja persistido no banco. O objeto a ser recebido aqui, deve
+	 * ter o parametro id informado no construtor, pois esse parameto sera usado
+	 * no banco de dados, para definir as outras informacoes que serao
+	 * atualizadas.
+	 * 
+	 * @param pontoASerAlterado objeto a ser alterado no banco.
+	 */
+	public boolean update(Ponto pontoASerAlterado) {
+		return super.update(pontoASerAlterado);
 	}
 
-	 /**
-     * Recebe um inteiro que referencia o Id do ponto a ser recebido.
-     * 
-     * O objeto a ser buscado deve ter o parâmetro Id válido no banco de dados.
-     * 
-     * @param index objeto a ser retornado.
-	 * @throws Exception 
-     */
+	/**
+	 * Recebe um objeto {@link Ponto} e exclui no banco de dados. Eh realizado um
+	 * teste para saber se a transacao atual esta ativa, se estiver eh retornada,
+	 * caso contrario eh iniciada uma nova transacao com o banco. O objeto eh
+	 * salvo usando o metodo save da session e a transacao eh comitada/persistida
+	 * caso o objeto seja persistido no banco. O objeto a ser recebido aqui, deve
+	 * ter o parametro id informado no construtor, pois esse parameto sera usado
+	 * no banco de dados, para definir as outras informacoes que serao
+	 * excluidas.
+	 * 
+	 * @param pontoASerDeletado objeto a ser excluído no banco.
+	 */
 
-	public Ponto get(int index) throws Exception{
-		if(!(index <= 0 || session.get(Ponto.class, index) == null)) {
-			return session.get(Ponto.class, index);
-		}		
-		throw new Exception("Inidice invalido. Deve ser maior que 0");
-		}
-	
-	 /**
-     * Busca todos os elementos do tipo {@link Ponto} e retorna o resultado.
-     * 
-     * Através de um CriteriaBuilder uma lista do tipo Ponto é alimentada com todos os
-     * valores existentes no banco de dados. É o equivalente a query SQL: SELECT*FROM pontos.
-     * 
-     */
+	public boolean delete(int id) {
+		return super.delete(Ponto.class, id);
+	}
+
+	/**
+	 * Recebe um inteiro que referencia o Id do ponto a ser recebido.
+	 * 
+	 * O objeto a ser buscado deve ter o parametro Id valido no banco de dados.
+	 * 
+	 * @param id objeto a ser retornado.
+	 * @throws Exception
+	 */
+
+	public Ponto get(int id) {
+		return super.get(Ponto.class, id);
+	}
+
+	/**
+	 * Busca todos os elementos do tipo {@link Ponto} e retorna o resultado.
+	 * 
+	 * Através de um CriteriaBuilder uma lista do tipo Ponto eh alimentada com
+	 * todos os valores existentes no banco de dados. Eh o equivalente a query SQL:
+	 * SELECT*FROM pontos.
+	 * 
+	 */
+
 	public List<Ponto> getAll() {
-		CriteriaBuilder builder = session.getCriteriaBuilder();
-		CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
-		criteria.from(Ponto.class);
-		List<Ponto> selectedPontos = session.createQuery(criteria).getResultList();
-		return selectedPontos;
+		return super.getAll(Ponto.class);
 	}
 
 }

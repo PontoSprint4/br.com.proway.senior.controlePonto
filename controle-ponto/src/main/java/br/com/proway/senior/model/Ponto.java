@@ -42,5 +42,5 @@ public class Ponto {
     public void setMomentoPonto(LocalDateTime momentoPonto) {
         this.momentoPonto = momentoPonto;
     }
-    
 }
+
