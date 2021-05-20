@@ -35,6 +35,12 @@ class JornadaTest {
 		Jornada jornada = new Jornada();
 		assertNotNull(jornada);
 	}
+	
+	@Test
+	void testConstructor3() {
+		Jornada jornada = new Jornada(data, idPessoa, turno);
+		assertNotNull(jornada);
+	}
 
 	@Test
 	void testJornadaIntegerLocalDateIntTurno() {
