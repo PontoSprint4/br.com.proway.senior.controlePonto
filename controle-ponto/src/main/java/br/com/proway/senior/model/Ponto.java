@@ -18,8 +18,6 @@ public class Ponto {
     private Integer idPonto;
     @Column(name = "momentoPonto")
     private LocalDateTime momentoPonto;    
-    
-    private Jornada jornada;
 
     public Ponto() {}
 
