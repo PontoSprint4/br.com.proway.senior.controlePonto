@@ -33,7 +33,7 @@ class JornadaControllerTest {
         Jornada jornada = new Jornada(174, LocalDate.of(2020, 3, 3),
                 pessoa, turno);
         int tamanhoInicial = dao.getAll().size();
-        controller.insert(jornada);
+        controller.create(jornada);
         int tamanhoFinal = dao.getAll().size();
 
         Assertions.assertEquals(tamanhoInicial + 1, tamanhoFinal);
@@ -48,7 +48,7 @@ class JornadaControllerTest {
         turnoDAO.insert(turno);
         Jornada jornada = new Jornada(25, LocalDate.of(2555, 12, 29),
                 pessoa, turno);
-        controller.insert(jornada);
+        controller.create(jornada);
 
         Assertions.assertEquals(2555, controller.get(26).getData().getYear());
     }
@@ -67,7 +67,7 @@ class JornadaControllerTest {
         turnoDAO.insert(turno);
         Jornada jornada = new Jornada(25, LocalDate.of(2555, 12, 29),
                 pessoa, turno);
-        controller.insert(jornada);
+        controller.create(jornada);
         int tamanhoInicial = controller.getAll().size();
         controller.delete(jornada);
 

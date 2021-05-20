@@ -34,21 +34,21 @@ public class PontoController {
 	}
 
 	/**
-	 * Método para inserir no banco de dados através do {@link PontoDAO}, um
-	 * objeto do tipo {@link Ponto}.
+	 * Método para inserir no banco de dados através do {@link PontoDAO}, um objeto
+	 * do tipo {@link Ponto}.
 	 * 
 	 * @param ponto do tipo Ponto
 	 * @throws Exception
 	 */
-	public void insert(Ponto ponto) {
+	public void create(Ponto ponto) {
 		pdao.insert(ponto);
 	}
 
 	/**
 	 * Método que busca todas os {@link Ponto}'s filtrados pelo idJornada.
 	 *
-	 * Método para buscar no banco de dados através do {@link PontoDAO}, todos
-	 * os {@link Ponto}'s onde o idJornada é o mesmo que o index recebido como
+	 * Método para buscar no banco de dados através do {@link PontoDAO}, todos os
+	 * {@link Ponto}'s onde o idJornada é o mesmo que o index recebido como
 	 * parâmetro.
 	 *
 	 * @param index
@@ -72,8 +72,11 @@ public class PontoController {
 	 * @return objeto de ponto
 	 * @throws Exception
 	 */
-	public Ponto get(int index) throws Exception{
+	public Ponto get(int index) throws Exception {
+		if ((pdao.get(index) != null)) {
 			return pdao.get(index);
+		}
+		throw new Exception("Indice invalido.");
 	}
 
 	/**
@@ -85,7 +88,7 @@ public class PontoController {
 	public ArrayList<Ponto> getAll() {
 		return (ArrayList<Ponto>) pdao.getAll();
 	}
-	
+
 	/**
 	 * Método para atualizar um objeto do tipo {@link Ponto}, no banco de dados
 	 * através do {@link PontoDAO}, recebendo como parâmetro um {@link Ponto}.
@@ -104,6 +107,6 @@ public class PontoController {
 	 * @return true || false
 	 */
 	public void delete(Ponto ponto) {
-			pdao.delete(ponto);
+		pdao.delete(ponto);
 	}
 }

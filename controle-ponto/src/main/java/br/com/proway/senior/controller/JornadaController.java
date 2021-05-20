@@ -4,7 +4,10 @@ import br.com.proway.senior.DAO.JornadaDAO;
 import br.com.proway.senior.model.Jornada;
 import org.hibernate.Session;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Classe responsável por receber as requisições, tratá-las e encaminhar para o
@@ -36,7 +39,7 @@ public class JornadaController {
      *
      * @param jornadaASerInserida Jornada que será inserida no banco.
      */
-    public void insert(Jornada jornadaASerInserida) {
+    public void create(Jornada jornadaASerInserida) {
         dao.insert(jornadaASerInserida);
     }
 
@@ -70,5 +73,5 @@ public class JornadaController {
     public void delete(Jornada jornadaASerDeletada) {
         dao.delete(jornadaASerDeletada);
     }
-
+    
 }

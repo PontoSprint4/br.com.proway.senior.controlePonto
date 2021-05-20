@@ -24,9 +24,10 @@ public class Ponto {
 
     public Ponto() {}
 
-    public Ponto(Integer idPonto, LocalDateTime momentoPonto) {
+    public Ponto(Integer idPonto, LocalDateTime momentoPonto) { //jogar jornada aqui dentro
         this.idPonto = idPonto;
         this.momentoPonto = momentoPonto;
+        
     }
 
     public Integer getIdPonto() {

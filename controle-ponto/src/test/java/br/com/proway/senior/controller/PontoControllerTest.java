@@ -36,8 +36,8 @@ class PontoControllerTest {
 		Ponto ponto = new Ponto(null, LocalDateTime.of(1997, 5, 13, 23, 59));
 		Ponto ponto1 = new Ponto(null, LocalDateTime.of(2005, 5, 13, 23, 59));
 		ArrayList<Ponto> listaPontos = pontoController.getAll();
-		pontoController.insert(ponto);
-		pontoController.insert(ponto1);
+		pontoController.create(ponto);
+		pontoController.create(ponto1);
 		assertEquals((listaPontos.size() + 2), pontoController.getAll().size());
 	}
 
@@ -46,8 +46,8 @@ class PontoControllerTest {
 		Ponto ponto = new Ponto(null, LocalDateTime.of(2009, 5, 13, 23, 59));
 		Ponto ponto1 = new Ponto(null, LocalDateTime.of(2020, 5, 13, 23, 59));
 		ArrayList<Ponto> listaPontos = pontoController.getAll();
-		pontoController.insert(ponto);
-		pontoController.insert(ponto1);
+		pontoController.create(ponto);
+		pontoController.create(ponto1);
 		assertNotEquals(listaPontos.size(), pontoController.getAll());
 	}
 

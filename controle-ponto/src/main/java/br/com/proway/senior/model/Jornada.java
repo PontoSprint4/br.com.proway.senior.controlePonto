@@ -8,9 +8,9 @@ import java.util.Objects;
 
 /**
  * Classe que estrutura a entidade Jornada.
- * Possui um id único e uma data no formato {@link LocalDate}. Toda Jornada é
- * única para uma uma única {@link PessoaDoPonto}
- * ({@link OneToOne}) e possui um conjunto de no máximo 4 {@link Ponto}s,
+ * Possui um id ï¿½nico e uma data no formato {@link LocalDate}. Toda Jornada ï¿½
+ * ï¿½nica para uma uma ï¿½nica {@link PessoaDoPonto}
+ * ({@link OneToOne}) e possui um conjunto de no mï¿½ximo 4 {@link Ponto}s,
  * ({@link OneToMany}).
  *
  * @author Lucas Walim <lucas.walim@senior.com.br>
@@ -94,7 +94,7 @@ public class Jornada {
 
     @Override
     public String toString() {
-        return "Jornada Nº " + id + ", Data da Jornada: " + data + ", \n" +
+        return "Jornada Nï¿½ " + id + ", Data da Jornada: " + data + ", \n" +
                 "Colaborador: " + pessoa +
                 ", Turno: " + turno + ",\n Pontos registrados: {"
                 + listaPonto + "}";
