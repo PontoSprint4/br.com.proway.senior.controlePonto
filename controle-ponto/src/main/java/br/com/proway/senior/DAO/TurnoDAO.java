@@ -1,7 +1,8 @@
 package br.com.proway.senior.DAO;
 
 import br.com.proway.senior.model.Turno;
-import br.com.proway.senior.utils.ICRUD;
+import br.com.proway.senior.model.interfaces.ICRUD;
+
 import org.hibernate.Session;
 
 import javax.persistence.criteria.CriteriaBuilder;

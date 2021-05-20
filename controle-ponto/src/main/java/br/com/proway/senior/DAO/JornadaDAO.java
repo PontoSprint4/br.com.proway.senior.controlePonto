@@ -2,8 +2,9 @@ package br.com.proway.senior.DAO;
 
 import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.Ponto;
+import br.com.proway.senior.model.interfaces.ICRUD;
 import br.com.proway.senior.model.interfaces.IPessoa;
-import br.com.proway.senior.utils.ICRUD;
+
 import org.hibernate.Session;
 
 import javax.persistence.Query;

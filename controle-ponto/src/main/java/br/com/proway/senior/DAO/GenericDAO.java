@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import br.com.proway.senior.dbpersistence.DBConnection;
-import br.com.proway.senior.utils.ICRUD;
+import br.com.proway.senior.model.interfaces.ICRUD;
 
 /**
  * Classe Generica com Metodos de interacao com a HibernateConnection

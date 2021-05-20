@@ -1,4 +1,4 @@
-package br.com.proway.senior.utils;
+package br.com.proway.senior.model.interfaces;
 
 import java.util.List;
 
