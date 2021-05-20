@@ -3,11 +3,14 @@ package br.com.proway.senior.controller;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Session;
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -29,52 +32,55 @@ class TurnoControllerTest {
 	}
 
 	@Test
-	void testInsert() {
+	void testCreate() {
 		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno Comercial");
 		Turno turno2 = new Turno(null, LocalTime.now().plusHours(8), LocalTime.now().plusHours(16), "Segundo Turno");
-		ArrayList<Turno> listaTurnos = (ArrayList<Turno>) turnoController.getAll();
-		turnoController.insert(turno);
-		turnoController.insert(turno2);
+		List<Turno> listaTurnos = turnoController.getAll();
+		turnoController.create(turno);
+		turnoController.create(turno2);
 		assertEquals((listaTurnos.size() + 2), turnoController.getAll().size());
 	}
 	
 	@Test
-	void testInsertNotEquals() {
-		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno Comercial");
-		ArrayList<Turno> listaTurnos = (ArrayList<Turno>) turnoController.getAll();
-		turnoController.insert(turno);
-		assertNotEquals(listaTurnos.size(), turnoController.getAll().size());
-	}
-
-	@Test
 	void testGet() throws Exception {
-		int idCapturado = 0;
-		ArrayList<Turno> listaTurnos = (ArrayList<Turno>) turnoController.getAll();
-		for (int i = 0; i < listaTurnos.size(); i++) {
-			if ((i+1) == 1) {
-				idCapturado = listaTurnos.get(1).getId();
-			}
-		}
-		assertNotNull(turnoController.get(idCapturado));
+		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno vespertino");
+		turnoController.create(turno);
+		Turno turnoConsultado = turnoController.get(turno.getId());
+		assertEquals(turno.getNomeTurno(), turnoConsultado.getNomeTurno());
 	}
-
+	
+	@Test
+	void testGetIdInvalido() {
+		assertThrows(Exception.class, () -> turnoController.get(0));
+	}
+	
 	@Test
 	void testGetAll() {
 		assertNotNull(turnoController.getAll());
 	}
 	
 	@Test
-	void testGetAllPorTamanhoDaLista() {
-		ArrayList<Turno> listaTurnos = (ArrayList<Turno>) turnoController.getAll();
-		assertEquals(listaTurnos.size(), turnoController.getAll().size());
+	void testUpdate() throws Exception {
+		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno2");
+		int id =turnoController.create(turno);
+		
+		Turno turnoParaAlterar = turnoController.get(id);
+		Turno turnoNovo = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno Teste");
+		
+		turnoController.update(turnoParaAlterar.getId(), turnoNovo);
+		Turno turnoAlterado = turnoController.get(turnoParaAlterar.getId());
+		
+		assertEquals("Turno Teste",turnoAlterado.getNomeTurno());
 	}
-
+	
 	@Test
-	void testDelete() {
-		ArrayList<Turno> listaTurnos = (ArrayList<Turno>) turnoController.getAll();
-		Turno turno = turnoController.getAll().get(1);
-		turnoController.delete(turno);
-		assertEquals((listaTurnos.size() - 1), turnoController.getAll().size());
+	void testDelete() throws Exception {
+		List<Turno> listaTurnos = turnoController.getAll();
+		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno");
+		turnoController.create(turno);
+		turnoController.delete(turno.getId());
+		List<Turno> listaTurnosPosDeletar = turnoController.getAll();
+		assertEquals((listaTurnos.size()), listaTurnosPosDeletar.size());
 	}
 
 }
