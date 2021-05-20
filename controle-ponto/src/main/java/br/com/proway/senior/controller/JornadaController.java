@@ -1,13 +1,11 @@
 package br.com.proway.senior.controller;
 
-import br.com.proway.senior.DAO.JornadaDAO;
-import br.com.proway.senior.model.Jornada;
+import java.util.ArrayList;
+
 import org.hibernate.Session;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
+import br.com.proway.senior.DAO.JornadaDAO;
+import br.com.proway.senior.model.Jornada;
 
 /**
  * Classe responsável por receber as requisições, tratá-las e encaminhar para o
