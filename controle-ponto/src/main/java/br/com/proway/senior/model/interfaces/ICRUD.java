@@ -1,4 +1,4 @@
-package br.com.proway.senior.utils;
+package br.com.proway.senior.model.interfaces;
 
 import java.util.List;
 
@@ -17,14 +17,16 @@ import java.util.List;
  */
 public interface ICRUD<T> {
 
-	void insert(T obj);
+	Integer create(T entidade);
 
-	T get(int index) throws Exception;
+	T get(Class<T> classeTabela, int id) throws Exception;
 
-	List<T> getAll();
+	boolean update(T objetoAtualizado);
 
-	boolean update(T obj);
-
-	boolean delete(T obj);
+	boolean delete(Class<T> classeTabela,int id);
+	
+	List<T> getAll(Class<T> classeTabela);
+	
+	boolean deleteAll(String nomeTabela);
 
 }

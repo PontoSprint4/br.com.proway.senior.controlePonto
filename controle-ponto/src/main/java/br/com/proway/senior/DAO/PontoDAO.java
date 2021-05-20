@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 
 import br.com.proway.senior.model.Ponto;
-import br.com.proway.senior.utils.ICRUD;
+import br.com.proway.senior.model.interfaces.ICRUD;
 
 /**
  * @author Samuel Levi <samuel.levi@senior.com.br>
