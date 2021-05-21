@@ -78,7 +78,11 @@ public class TurnoController {
 			throw new Exception("O Turno não existe no banco de dados.");
 		if (Validadores.ehObjetoNulo(turno))
 			throw new Exception("O Turno não pode ser nulo.");
-		tdao.update(turno);
+		Turno persistido = tdao.get(idDoTurnoASerAlterado);
+		persistido.setHoraFim(turno.getHoraFim());
+		persistido.setHoraInicio(turno.getHoraInicio());
+		persistido.setNomeTurno(turno.getNomeTurno());
+		tdao.update(persistido);
 		return true;
 	}
 

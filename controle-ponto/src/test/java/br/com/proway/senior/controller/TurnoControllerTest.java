@@ -70,9 +70,9 @@ class TurnoControllerTest {
 	void testUpdate() throws Exception {
 		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno Update");
 		Integer idCadastrado = turnoController.create(turno);
-		//Turno turnoNovo = new Turno(idCadastrado, LocalTime.now(), LocalTime.now(), "Turno3");
-		Turno turnoNovo = turnoController.get(idCadastrado);
-		turnoNovo.setNomeTurno("Turno3");
+		Turno turnoNovo = new Turno(idCadastrado, LocalTime.now(), LocalTime.now(), "Turno3");
+		//Turno turnoNovo = turnoController.get(idCadastrado);
+		//turnoNovo.setNomeTurno("Turno3");
 		boolean sucesso = turnoController.update(idCadastrado, turnoNovo);
 		assertTrue(sucesso);
 		assertEquals("Turno3", turnoController.get(idCadastrado).getNomeTurno());
