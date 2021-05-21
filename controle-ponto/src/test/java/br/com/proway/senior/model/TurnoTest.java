@@ -33,6 +33,12 @@ class TurnoTest {
 	}
 
 	@Test
+	void testTurnoConstructor3() {
+		Turno instancia = new Turno(inicio, fim, nome);
+		assertNotNull(instancia);
+	}
+	
+	@Test
 	void testTurnoIntegerLocalTimeLocalTimeString() {
 		Turno instancia = new Turno(id, inicio, fim, nome);
 		assertNotNull(instancia);

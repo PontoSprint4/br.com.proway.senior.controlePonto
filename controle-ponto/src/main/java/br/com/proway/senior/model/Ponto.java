@@ -21,8 +21,7 @@ public class Ponto {
 	@Column(name = "momentoPonto")
 	private LocalDateTime momentoPonto;
 
-	public Ponto() {
-	}
+	public Ponto() {}
 
 	public Ponto(LocalDateTime momentoPonto) {
 		this.momentoPonto = momentoPonto;
