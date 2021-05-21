@@ -54,6 +54,12 @@ public class Jornada {
         this.turno = turno;
     }
     
+    public Jornada(LocalDate data, int idPessoa, Turno turno) {
+        this.data = data;
+        this.idPessoa = idPessoa;
+        this.turno = turno;
+    }
+    
     public int getId() {
         return id;
     }
@@ -93,5 +99,9 @@ public class Jornada {
 	public void setListaPonto(Ponto ponto) {
 		this.listaPonto.add(ponto);
 	}	
+	
+	public void trocarListaPonto(List<Ponto> listaPontos) {
+		this.listaPonto = listaPontos;
+	}
 
 }
