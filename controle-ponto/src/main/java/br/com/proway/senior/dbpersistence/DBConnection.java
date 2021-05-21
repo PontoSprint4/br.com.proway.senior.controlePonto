@@ -34,10 +34,10 @@ public class DBConnection {
 					.setProperty("hibernate.show__sql", "true").setProperty("hibernate.format_sql", "true")
 					.setProperty("hibernate.hbm2ddl.auto", "update")
 					.setProperty("hibernate.connection.autocommit", "true").setProperty("hibernate.sql", "false")
-					.addAnnotatedClass(Jornada.class).addAnnotatedClass(PessoaDoPonto.class)
-					.addAnnotatedClass(Ponto.class).addAnnotatedClass(Turno.class)
-					.addAnnotatedClass(PessoaDoPonto.class).addAnnotatedClass(Ponto.class)
-					.addAnnotatedClass(Turno.class).buildSessionFactory();
+					.addAnnotatedClass(Jornada.class)
+					.addAnnotatedClass(Ponto.class)
+					.addAnnotatedClass(Turno.class)
+					.buildSessionFactory();
 		} catch (Throwable e) {
 			System.err.println("Initial SessionFactory creation failed: " + e.getMessage());
 			throw new ExceptionInInitializerError(e.toString());
