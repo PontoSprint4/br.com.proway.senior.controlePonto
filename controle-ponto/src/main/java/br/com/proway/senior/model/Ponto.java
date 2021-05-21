@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 /**
  * Classe Ponto. Estrutura e define o ponto como objeto.
+ * 
  * @version Sprint 5
  * @author Samuel Levi <samuel.levi@senior.com.br>
  * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
@@ -12,35 +13,39 @@ import java.time.LocalDateTime;
 @Entity
 public class Ponto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")    
-    private Integer idPonto;
-    
-    @Column(name = "momentoPonto")
-    private LocalDateTime momentoPonto;    
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer idPonto;
 
-    public Ponto() {}
+	@Column(name = "momentoPonto")
+	private LocalDateTime momentoPonto;
 
-    public Ponto(Integer idPonto, LocalDateTime momentoPonto) {
-        this.idPonto = idPonto;
-        this.momentoPonto = momentoPonto;
-    }
+	public Ponto() {
+	}
 
-    public Integer getIdPonto() {
-        return idPonto;
-    }
+	public Ponto(LocalDateTime momentoPonto) {
+		this.momentoPonto = momentoPonto;
+	}
 
-    public void setIdPonto(Integer idPonto) {
-        this.idPonto = idPonto;
-    }
+	public Ponto(Integer idPonto, LocalDateTime momentoPonto) {
+		this.idPonto = idPonto;
+		this.momentoPonto = momentoPonto;
+	}
 
-    public LocalDateTime getMomentoPonto() {
-        return momentoPonto;
-    }
+	public Integer getIdPonto() {
+		return idPonto;
+	}
 
-    public void setMomentoPonto(LocalDateTime momentoPonto) {
-        this.momentoPonto = momentoPonto;
-    }
+	public void setIdPonto(Integer idPonto) {
+		this.idPonto = idPonto;
+	}
+
+	public LocalDateTime getMomentoPonto() {
+		return momentoPonto;
+	}
+
+	public void setMomentoPonto(LocalDateTime momentoPonto) {
+		this.momentoPonto = momentoPonto;
+	}
 }
-

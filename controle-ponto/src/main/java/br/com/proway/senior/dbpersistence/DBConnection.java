@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import br.com.proway.senior.model.Jornada;
-import br.com.proway.senior.model.PessoaDoPonto;
 import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.Turno;
 
