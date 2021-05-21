@@ -29,10 +29,11 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 * @return int Id :  identificador do objeto inserido.
 	 */
 	public Integer create(T entidade) {
-		Session sessao = DBConnection.getSession();
-		if (!sessao.getTransaction().isActive())
+		Session sessao = DBConnection.getSession();		
+		if (!sessao.getTransaction().isActive()) {
 			sessao.beginTransaction();
-
+		}
+		
 		Integer idCadastrado = (Integer) sessao.save(entidade);
 		sessao.getTransaction().commit();
 		return idCadastrado;
@@ -59,16 +60,11 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	public boolean update(T objetoAtualizado) {
         if (!DBConnection.getSession().getTransaction().isActive()) {
         	DBConnection.getSession().beginTransaction();
-        }
-
-        try {
-        	DBConnection.getSession().update(objetoAtualizado);
-        	DBConnection.getSession().getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            e.getMessage();
-            return false;
-        }
+        } 
+        
+        DBConnection.getSession().update(objetoAtualizado);
+    	DBConnection.getSession().getTransaction().commit();
+        return true;
     }
 	
 	/**
@@ -85,6 +81,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 		if (!DBConnection.getSession().getTransaction().isActive()) {
 			DBConnection.getSession().beginTransaction();
 		}
+		
 		DBConnection.getSession().delete(cargo);
 		DBConnection.getSession().getTransaction().commit();
 		return true;
@@ -117,6 +114,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
+		
 		int modificados = session.createSQLQuery("DELETE FROM "+nomeTabela).executeUpdate();
 		session.getTransaction().commit();
 		return modificados > 0 ? true : false;
@@ -289,7 +287,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 */
 	public List<T> listarPorValorDeColunaExato(
 			Class<T> classeTabela, String nomeColuna, boolean valorColuna) 
-		{
+	{
 		Session session = DBConnection.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
