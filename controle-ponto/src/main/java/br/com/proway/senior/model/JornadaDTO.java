@@ -17,7 +17,7 @@ public class JornadaDTO {
         this.data = jornada.getData();
         this.turno = jornada.getTurno();
         this.listaPonto = jornada.getListaPonto();
-        this.idPessoa = jornada.getId();        
+        this.idPessoa = jornada.getIdPessoa();        
     }
 
 	public int getId() {
