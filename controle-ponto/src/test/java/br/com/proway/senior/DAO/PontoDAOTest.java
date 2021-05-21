@@ -3,7 +3,7 @@ package br.com.proway.senior.DAO;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+
 
 import java.time.LocalDateTime;
 
@@ -45,17 +45,21 @@ class PontoDAOTest {
 		Ponto ponto = new Ponto(LocalDateTime.now());
 		Integer id = pdao.create(ponto);
 		pdao.delete(id);
-		assertNull(id);
+		assertNull(pdao.get(id));
 	}
 
 	@Test
 	void testGetInt() {
-		fail("Not yet implemented");
+		Ponto ponto = new Ponto(LocalDateTime.now());
+		Integer id = pdao.create(ponto);
+		assertNotNull(pdao.get(id));
 	}
 
 	@Test
 	void testGetAll() {
-		fail("Not yet implemented");
+		Ponto ponto = new Ponto(LocalDateTime.now());
+		Integer id = pdao.create(ponto);
+		assertNotNull(pdao.get(id));
 	}
 
 }
