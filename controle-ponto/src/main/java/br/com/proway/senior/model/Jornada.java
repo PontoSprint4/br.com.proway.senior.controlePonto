@@ -24,7 +24,7 @@ public class Jornada {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_jornada")
-    private int id;
+    private Integer id;
 
     @Column(name = "data")
     private LocalDate data;     
@@ -36,7 +36,7 @@ public class Jornada {
     public List<Ponto> listaPonto = new ArrayList<Ponto>();
     
     @Column(name = "pessoa_id")
-    private int idPessoa;
+    private Integer idPessoa;
 
     public Jornada() {
     }

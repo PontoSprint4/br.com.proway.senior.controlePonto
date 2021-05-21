@@ -78,13 +78,13 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 * @return boolean para sucesso da operacao
 	 */
 	public boolean delete(Class<T> classeTabela,int id) {
-		T cargo = get(classeTabela,id);
+		T entrada = get(classeTabela,id);
 
 		if (!DBConnection.getSession().getTransaction().isActive()) {
 			DBConnection.getSession().beginTransaction();
 		}
 		
-		DBConnection.getSession().delete(cargo);
+		DBConnection.getSession().delete(entrada);
 		DBConnection.getSession().getTransaction().commit();
 		return true;
 	}
@@ -122,18 +122,18 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 		return modificados > 0 ? true : false;
 	}
 	
-	public Boolean deleteAll2(Class<T> classeTabela) {
-		Session session = DBConnection.getSession();
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
-		}
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-		CriteriaDelete<T> criteria = criteriaBuilder.createCriteriaDelete(classeTabela);
-		criteria.from(classeTabela);
-		int results = session.createQuery(criteria).executeUpdate();
-		session.getTransaction().commit();
-		return results > 0 ? true : false;
-	}
+//	public Boolean deleteAllViaCriteria(Class<T> classeTabela) {
+//		Session session = DBConnection.getSession();
+//		if (!session.getTransaction().isActive()) {
+//			session.beginTransaction();
+//		}
+//		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+//		CriteriaDelete<T> criteria = criteriaBuilder.createCriteriaDelete(classeTabela);
+//		criteria.from(classeTabela);
+//		int results = session.createQuery(criteria).executeUpdate();
+//		session.getTransaction().commit();
+//		return results > 0 ? true : false;
+//	}
 	
 	/**
 	 * Seleciona entradas de 
@@ -300,21 +300,21 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 * @param boolean : valorColuna
 	 * @return
 	 */
-	public List<T> listarPorValorDeColunaExato(
-			Class<T> classeTabela, String nomeColuna, boolean valorColuna) 
-	{
-		Session session = DBConnection.getSession();
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
-		Root<T> root = criteria.from(classeTabela);
-		Expression<T> selectedColumn = root.get(nomeColuna);
-		criteria.select(root)
-			.where(criteriaBuilder.equal(selectedColumn, valorColuna));
-			
-		Query<T> query = session.createQuery(criteria);
-		List<T> results = query.getResultList();
-		return new ArrayList<T>(results);
-	}
+//	public List<T> listarPorValorDeColunaExato(
+//			Class<T> classeTabela, String nomeColuna, boolean valorColuna) 
+//	{
+//		Session session = DBConnection.getSession();
+//		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+//		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
+//		Root<T> root = criteria.from(classeTabela);
+//		Expression<T> selectedColumn = root.get(nomeColuna);
+//		criteria.select(root)
+//			.where(criteriaBuilder.equal(selectedColumn, valorColuna));
+//			
+//		Query<T> query = session.createQuery(criteria);
+//		List<T> results = query.getResultList();
+//		return new ArrayList<T>(results);
+//	}
 	
 	/**
 	 * Funcoes e suas respectivas Overloads para poder selecionar entradas de 
@@ -335,20 +335,20 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 * @param Double : valorColuna
 	 * @return
 	 */
-	public List<T> listarPorValorDeColunaExato(
-		Class<T> classeTabela, String nomeColuna, Double valorColuna) 
-	{
-		Session session = DBConnection.getSession();
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
-		Root<T> root = criteria.from(classeTabela);
-		Expression<T> selectedColumn = root.get(nomeColuna);
-		criteria.select(root)
-			.where(criteriaBuilder.equal(selectedColumn, valorColuna));
-			
-		Query<T> query = session.createQuery(criteria);
-		List<T> results = query.getResultList();
-		return new ArrayList<T>(results);
-	}
+//	public List<T> listarPorValorDeColunaExato(
+//		Class<T> classeTabela, String nomeColuna, Double valorColuna) 
+//	{
+//		Session session = DBConnection.getSession();
+//		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+//		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
+//		Root<T> root = criteria.from(classeTabela);
+//		Expression<T> selectedColumn = root.get(nomeColuna);
+//		criteria.select(root)
+//			.where(criteriaBuilder.equal(selectedColumn, valorColuna));
+//			
+//		Query<T> query = session.createQuery(criteria);
+//		List<T> results = query.getResultList();
+//		return new ArrayList<T>(results);
+//	}
 	
 }

@@ -119,7 +119,7 @@ public class TurnoDAO extends GenericDAO<Turno> {
 	 * da operacao.
 	 */
 	public boolean deleteAll() {
-		return super.deleteAll2(Turno.class);
+		return super.deleteAll("turno");
 	}
 
 }
