@@ -21,6 +21,7 @@ import br.com.proway.senior.model.interfaces.ICRUD;
  * @param <T> : Classe que serve de base para a Tabela do Hibernate (@Entity)
  */
 public abstract class GenericDAO<T> implements ICRUD<T> {
+	static String schema = "public";
 	
 	/***
 	 * Insere no banco de dados o registro de um objeto.

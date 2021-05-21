@@ -35,7 +35,8 @@ public class DBConnection {
 					.setProperty("hibernate.connection.autocommit", "true").setProperty("hibernate.sql", "false")
 					.addAnnotatedClass(Jornada.class)
 					.addAnnotatedClass(Ponto.class)
-					.addAnnotatedClass(Turno.class).buildSessionFactory();
+					.addAnnotatedClass(Turno.class)
+					.buildSessionFactory();
 		} catch (Throwable e) {
 			System.err.println("Initial SessionFactory creation failed: " + e.getMessage());
 			throw new ExceptionInInitializerError(e.toString());

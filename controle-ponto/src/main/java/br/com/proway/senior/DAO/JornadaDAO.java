@@ -128,6 +128,10 @@ public final class JornadaDAO extends GenericDAO<Jornada>  {
     	return super.getAll(Jornada.class);
     }
     
+    /**
+     * Remove todos os elementos do tipo {@link Jornada} e retorna um boolean
+     * para sucesso da operacao.
+     */
     public boolean deleteAll() {
     	return super.deleteAll("jornada");
     }
@@ -163,78 +167,5 @@ public final class JornadaDAO extends GenericDAO<Jornada>  {
         Query query = session.createQuery(criteria);
         Expression<Object> idJornada = root.get("id");
         return query.getResultList();
-    }
-
-    
-
-    /**
-     * Retorna o valor em minutos entre dois momentos no tempo.
-     *
-     * @param registroInicial LocalDateTime,
-     * @param registroFinal
-     * @return
-     */
-    public Long tempoEntreRegistros(LocalDateTime registroInicial,
-                                    LocalDateTime registroFinal) throws Exception {
-
-        if (registroInicial.isBefore(registroFinal)) {
-            return ChronoUnit.MINUTES.between(registroInicial, registroFinal);
-        }
-        throw new Exception("A data inicial deve ser anterior a data final");
-    }
-
-    /**
-     * Retorna o tempo formatado baseado no tempo informado.
-     * Exibe até a ordem de grandeza de dias.
-     *
-     * @param quantidade   Long Quantidade do tempo
-     * @param unidadeTempo {@link TimeUnit} É a definição da ordem de
-     *                     grandeza da quantidade de tempo.
-     * @version Sprint5
-     * @author Lucas Walim <lucas.walim@senior.com.br>
-     * @author Samuel Levi <samuel.levi@senior.com.br>
-     * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
-     * https://stackoverflow.com/questions/5387371/how-to-convert-minutes-to-hours-and-minutes-hhmm-in-java
-     */
-    public String minutosParaTempoTotal(long quantidade, TimeUnit unidadeTempo) {
-        long dia = unidadeTempo.toDays(quantidade);
-        long hora = unidadeTempo.toHours(quantidade) % 24;
-        long minuto = unidadeTempo.toMinutes(quantidade) % 60;
-        long segundo = unidadeTempo.toSeconds(quantidade) % 60;
-        if (dia > 0) {
-            return String.format("%d dia(s) %02d:%02d:%02d", dia, hora, minuto,
-                    segundo);
-        } else if (hora > 0) {
-            return String.format("%d:%02d:%02d", hora, minuto, segundo);
-        } else if (minuto > 0) {
-            return String.format("%d:%02d", minuto, segundo);
-        } else {
-            return String.format("%02d", segundo);
-        }
-    }
-
-    /**
-     * Retorna o tempo formatado baseado no tempo informado.
-     * Exibe apenas até a ordem de grandeza das horas.
-     *
-     * @param quantidade   Long Quantidade do tempo
-     * @param unidadeTempo {@link TimeUnit} É a definição da ordem de
-     *                     grandeza da quantidade de tempo.
-     * @version Sprint5
-     * @author Lucas Walim <lucas.walim@senior.com.br>
-     * @author Samuel Levi <samuel.levi@senior.com.br>
-     * @author Vanderlei Kleinschmidt <vanderlei.klein@senior.com.br>
-     */
-    public String minutosParaTempoSemDias(long quantidade, TimeUnit unidadeTempo) {
-        long hora = unidadeTempo.toHours(quantidade);
-        long minuto = unidadeTempo.toMinutes(quantidade) % 60;
-        long segundo = unidadeTempo.toSeconds(quantidade) % 60;
-        if (hora > 0) {
-            return String.format("%02d:%02d:%02d", hora, minuto, segundo);
-        } else if (minuto > 0) {
-            return String.format("%d:%02d", minuto, segundo);
-        } else {
-            return String.format("%02d", segundo);
-        }
     }
 }
