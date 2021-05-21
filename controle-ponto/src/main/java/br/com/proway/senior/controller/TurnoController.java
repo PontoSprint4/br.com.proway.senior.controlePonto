@@ -1,22 +1,23 @@
 package br.com.proway.senior.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Session;
 
 import br.com.proway.senior.DAO.TurnoDAO;
 import br.com.proway.senior.model.Turno;
+import br.com.proway.senior.utils.Validadores;
 
 /**
  * Classe responsável por tratar de pedidos de visualização e ações.
  * 
- * @author Tharlys de Souza Dias <tharlys.dias@senior.com.br>
+ * @author Thiago Luiz Barbieri <thiago.barbieri@senior.com.br>
  * @author Vitor Gehrke <vitor.gehrke@senior.com.br>
- * @version Sprint5
+ * @version Sprint6
  *
  */
 public class TurnoController {
-	
+
 	private TurnoDAO tdao;
 
 	/**
@@ -31,14 +32,14 @@ public class TurnoController {
 	}
 
 	/**
-	 * Método para inserir no banco de dados através do {@link TurnoDAO}, um
-	 * objeto do tipo {@link Turno}.
+	 * Método para inserir no banco de dados através do {@link TurnoDAO}, um objeto
+	 * do tipo {@link Turno}.
 	 * 
 	 * @param turno do tipo {@link Turno}
-	 * @throws Exception
 	 */
-	public void insert(Turno turno) {
-		tdao.insert(turno);
+	public Integer create(Turno turno) {
+		tdao.create(turno);
+		return turno.getId();
 	}
 
 	/**
@@ -49,7 +50,9 @@ public class TurnoController {
 	 * @return objeto de {@link Turno}
 	 * @throws Exception
 	 */
-	public Turno get(int index) throws Exception{
+	public Turno get(int index) throws Exception {
+		if (Validadores.ehZeroOuNulo(index))
+			throw new Exception("Id invalido.");
 		return tdao.get(index);
 	}
 
@@ -59,27 +62,61 @@ public class TurnoController {
 	 * 
 	 * @return ArrayList<Turno>
 	 */
-	public ArrayList<Turno> getAll() {
-		return (ArrayList<Turno>) tdao.getAll();
+	public List<Turno> getAll() {
+		return tdao.getAll();
 	}
-	
+
 	/**
 	 * Método para atualizar um objeto do tipo {@link Turno}, no banco de dados
 	 * através do {@link TurnoDAO}
 	 * 
 	 * @param turno do tipo {@link Turno}
+	 * @throws Exception
 	 */
-	public void update(Turno turno) {
-		tdao.update(turno);
+	public boolean update(int idDoTurnoASerAlterado, Turno turno) throws Exception {
+		if (Validadores.ehObjetoNulo(get(idDoTurnoASerAlterado)))
+			throw new Exception("O Turno não existe no banco de dados.");
+		if (Validadores.ehObjetoNulo(turno))
+			throw new Exception("O Turno não pode ser nulo.");
+		Turno persistido = tdao.get(idDoTurnoASerAlterado);
+		persistido.setHoraFim(turno.getHoraFim());
+		persistido.setHoraInicio(turno.getHoraInicio());
+		persistido.setNomeTurno(turno.getNomeTurno());
+		tdao.update(persistido);
+		return true;
 	}
 
 	/**
 	 * Método para apagar do banco de dados através do {@link TurnoDAO}, um objeto
 	 * do tipo {@link Turno}.
 	 * 
-	 * @param turno do tipo {@link Turno} a ser apagado.
+	 * @param id do {@link Turno} a ser apagado.
+	 * @throws Exception
 	 */
-	public void delete(Turno ponto) {
-		tdao.delete(ponto);
+	/**
+	 * Método para apagar do banco de dados através do {@link TurnoDAO}, um objeto
+	 * do tipo {@link Turno}.
+	 * 
+	 * @param id do {@link Turno} a ser apagado.
+	 * @return boolean
+	 * @throws Exception
+	 */
+	public boolean delete(int id) throws Exception {
+		if (Validadores.ehZeroOuNulo(id)) 
+			throw new Exception("Id invaliddo.");
+		if (Validadores.ehObjetoNulo(get(id)))
+			throw new Exception("O Turno não existe no banco de dados.");
+		tdao.delete(id);
+		return true;
+	}
+	
+	/**
+	 * Método para apagar do banco de dados todos os registros atraves do {@link TurnoDAO}, 
+	 * os objetos do tipo {@link Turno}.
+	 * 
+	 * @return boolean
+	 */
+	public boolean deleteAll() {
+		return tdao.deleteAll();
 	}
 }
