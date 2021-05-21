@@ -40,6 +40,12 @@ public class Jornada {
     public Jornada() {
     }
 
+    public Jornada(LocalDate data, int idPessoa, Turno turno) {       
+        this.data = data;
+        this.idPessoa = idPessoa;
+        this.turno = turno;
+    }
+    
     public Jornada(Integer id, LocalDate data, int idPessoa, Turno turno) {
         this.id = id;
         this.data = data;
