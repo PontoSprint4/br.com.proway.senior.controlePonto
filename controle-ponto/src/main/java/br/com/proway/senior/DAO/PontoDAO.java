@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
 
+import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.interfaces.ICRUD;
 
@@ -126,6 +127,14 @@ public final class PontoDAO extends GenericDAO<Ponto> {
 
 	public List<Ponto> getAll() {
 		return super.getAll(Ponto.class);
+	}
+	
+	/**
+     * Remove todos os elementos do tipo {@link Jornada} e retorna um boolean
+     * para sucesso da operacao.
+     */
+	public boolean deleteAll() {
+		return super.deleteAll("ponto");
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
@@ -21,6 +22,7 @@ import br.com.proway.senior.model.interfaces.ICRUD;
  * @param <T> : Classe que serve de base para a Tabela do Hibernate (@Entity)
  */
 public abstract class GenericDAO<T> implements ICRUD<T> {
+	static String schema = "public";
 	
 	/***
 	 * Insere no banco de dados o registro de um objeto.
@@ -29,10 +31,11 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 * @return int Id :  identificador do objeto inserido.
 	 */
 	public Integer create(T entidade) {
-		Session sessao = DBConnection.getSession();
-		if (!sessao.getTransaction().isActive())
+		Session sessao = DBConnection.getSession();		
+		if (!sessao.getTransaction().isActive()) {
 			sessao.beginTransaction();
-
+		}
+		
 		Integer idCadastrado = (Integer) sessao.save(entidade);
 		sessao.getTransaction().commit();
 		return idCadastrado;
@@ -59,16 +62,11 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	public boolean update(T objetoAtualizado) {
         if (!DBConnection.getSession().getTransaction().isActive()) {
         	DBConnection.getSession().beginTransaction();
-        }
-
-        try {
-        	DBConnection.getSession().update(objetoAtualizado);
-        	DBConnection.getSession().getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            e.getMessage();
-            return false;
-        }
+        } 
+        
+        DBConnection.getSession().update(objetoAtualizado);
+    	DBConnection.getSession().getTransaction().commit();
+        return true;
     }
 	
 	/**
@@ -85,6 +83,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 		if (!DBConnection.getSession().getTransaction().isActive()) {
 			DBConnection.getSession().beginTransaction();
 		}
+		
 		DBConnection.getSession().delete(cargo);
 		DBConnection.getSession().getTransaction().commit();
 		return true;
@@ -117,9 +116,23 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
+		
 		int modificados = session.createSQLQuery("DELETE FROM "+nomeTabela).executeUpdate();
 		session.getTransaction().commit();
 		return modificados > 0 ? true : false;
+	}
+	
+	public Boolean deleteAll2(Class<T> classeTabela) {
+		Session session = DBConnection.getSession();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
+		}
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaDelete<T> criteria = criteriaBuilder.createCriteriaDelete(classeTabela);
+		criteria.from(classeTabela);
+		int results = session.createQuery(criteria).executeUpdate();
+		session.getTransaction().commit();
+		return results > 0 ? true : false;
 	}
 	
 	/**
@@ -289,7 +302,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 */
 	public List<T> listarPorValorDeColunaExato(
 			Class<T> classeTabela, String nomeColuna, boolean valorColuna) 
-		{
+	{
 		Session session = DBConnection.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
