@@ -1,6 +1,7 @@
 package br.com.proway.senior.controller;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,7 +12,9 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.junit.Ignore;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.proway.senior.DAO.TurnoDAO;
@@ -30,23 +33,26 @@ class TurnoControllerTest {
 		turnoController = new TurnoController(session);
 		tdao = TurnoDAO.getInstance(session);
 	}
+	
+	@AfterEach
+	void before() {
+		turnoController.deleteAll();
+	}
 
 	@Test
 	void testCreate() {
+		assertEquals(0, turnoController.getAll().size());
 		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno Comercial");
-		Turno turno2 = new Turno(null, LocalTime.now().plusHours(8), LocalTime.now().plusHours(16), "Segundo Turno");
-		List<Turno> listaTurnos = turnoController.getAll();
-		turnoController.create(turno);
-		turnoController.create(turno2);
-		assertEquals((listaTurnos.size() + 2), turnoController.getAll().size());
+		assertNotNull(turnoController.create(turno));
+		assertEquals(1, turnoController.getAll().size());
 	}
 	
 	@Test
 	void testGet() throws Exception {
 		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno vespertino");
-		turnoController.create(turno);
-		Turno turnoConsultado = turnoController.get(turno.getId());
-		assertEquals(turno.getNomeTurno(), turnoConsultado.getNomeTurno());
+		Integer idTurnoCadastrado = turnoController.create(turno);
+		Turno turnoConsultado = turnoController.get(idTurnoCadastrado);
+		assertEquals("Turno vespertino", turnoConsultado.getNomeTurno());
 	}
 	
 	@Test
@@ -56,31 +62,58 @@ class TurnoControllerTest {
 	
 	@Test
 	void testGetAll() {
-		assertNotNull(turnoController.getAll());
+		assertEquals(0, turnoController.getAll().size());
+		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno1");
+		turnoController.create(turno);
+		Turno turno2 = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno2");
+		turnoController.create(turno2);
+		assertEquals(2, turnoController.getAll().size());
+		
 	}
 	
 	@Test
 	void testUpdate() throws Exception {
-		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno2");
-		int id =turnoController.create(turno);
-		
-		Turno turnoParaAlterar = turnoController.get(id);
-		Turno turnoNovo = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno Teste");
-		
-		turnoController.update(turnoParaAlterar.getId(), turnoNovo);
-		Turno turnoAlterado = turnoController.get(turnoParaAlterar.getId());
-		
-		assertEquals("Turno Teste",turnoAlterado.getNomeTurno());
+		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno Update");
+		Integer idCadastrado = turnoController.create(turno);
+		//Turno turnoNovo = new Turno(idCadastrado, LocalTime.now(), LocalTime.now(), "Turno3");
+		Turno turnoNovo = turnoController.get(idCadastrado);
+		turnoNovo.setNomeTurno("Turno3");
+		boolean sucesso = turnoController.update(idCadastrado, turnoNovo);
+		assertTrue(sucesso);
+		assertEquals("Turno3", turnoController.get(idCadastrado).getNomeTurno());
+	}
+
+	@Test
+	void testUpdateInvalidoNulo() {
+		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno4");
+		Integer idCadastrado = turnoController.create(turno);
+		Turno turnoNovo = null;
+		assertThrows(Exception.class, () -> turnoController.update(idCadastrado, turnoNovo));
+	}
+	
+	@Test
+	void testUpdateInvalidoIdInexistente() {
+		Turno turnoNovo = new Turno();
+		assertThrows(Exception.class, () -> turnoController.update(0, turnoNovo));
 	}
 	
 	@Test
 	void testDelete() throws Exception {
-		List<Turno> listaTurnos = turnoController.getAll();
-		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno");
-		turnoController.create(turno);
-		turnoController.delete(turno.getId());
-		List<Turno> listaTurnosPosDeletar = turnoController.getAll();
-		assertEquals((listaTurnos.size()), listaTurnosPosDeletar.size());
+		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno5");
+		Integer idCadastrado = turnoController.create(turno);
+		assertEquals(1, turnoController.getAll().size());
+		turnoController.delete(idCadastrado);
+		assertEquals(0, turnoController.getAll().size());
 	}
-
+	
+	@Test
+	void testDeleteInvalidoIdInexistente() {
+		assertEquals(0, turnoController.getAll().size());
+		assertThrows(Exception.class, () -> turnoController.delete(100));
+	}
+	
+	@Test
+	void testDeleteInvalidoIdIgualAZero() {
+		assertThrows(Exception.class, () -> turnoController.delete(0));
+	}
 }

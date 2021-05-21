@@ -89,6 +89,14 @@ public class TurnoController {
 	 * @param id do {@link Turno} a ser apagado.
 	 * @throws Exception
 	 */
+	/**
+	 * Método para apagar do banco de dados através do {@link TurnoDAO}, um objeto
+	 * do tipo {@link Turno}.
+	 * 
+	 * @param id do {@link Turno} a ser apagado.
+	 * @return boolean
+	 * @throws Exception
+	 */
 	public boolean delete(int id) throws Exception {
 		if (Validadores.ehZeroOuNulo(id)) 
 			throw new Exception("Id invaliddo.");
@@ -96,5 +104,15 @@ public class TurnoController {
 			throw new Exception("O Turno não existe no banco de dados.");
 		tdao.delete(id);
 		return true;
+	}
+	
+	/**
+	 * Método para apagar do banco de dados todos os registros atraves do {@link TurnoDAO}, 
+	 * os objetos do tipo {@link Turno}.
+	 * 
+	 * @return boolean
+	 */
+	public boolean deleteAll() {
+		return tdao.deleteAll();
 	}
 }
