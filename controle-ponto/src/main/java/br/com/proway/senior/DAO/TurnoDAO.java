@@ -1,13 +1,10 @@
 package br.com.proway.senior.DAO;
 
-import br.com.proway.senior.model.Turno;
-import br.com.proway.senior.model.interfaces.ICRUD;
+import java.util.List;
 
 import org.hibernate.Session;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import java.util.List;
+import br.com.proway.senior.model.Turno;
 
 /**
  * Classe responsavel pela persistencia do objeto {@link Turno} no banco de
@@ -115,6 +112,14 @@ public class TurnoDAO extends GenericDAO<Turno> {
 	 */
 	public List<Turno> getAll() {
 		return super.getAll(Turno.class);
+	}
+	
+	/**
+	 * Remove os elementos do tipo {@link Turno} e retorna um boolean indicando sucesso
+	 * da operacao.
+	 */
+	public boolean deleteAll() {
+		return super.deleteAll2(Turno.class);
 	}
 
 }

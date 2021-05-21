@@ -1,13 +1,13 @@
 package br.com.proway.senior.DAO;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 
-import org.hibernate.Session;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,64 +15,93 @@ import br.com.proway.senior.dbpersistence.DBConnection;
 import br.com.proway.senior.model.Turno;
 
 class TurnoDAOTest {
+	static LocalTime inicio;
+	static LocalTime fim ;
+	static String nome ;
 	
-	static Turno turno;
-	static Session session;
-	static TurnoDAO tdao;
-
+	static TurnoDAO dao;
+	
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-		session = DBConnection.getSession();
-		tdao = TurnoDAO.getInstance(session);
-	}
-
-	@Test
-	void testInsert() {
-		ArrayList<Turno> listaTurnos = (ArrayList<Turno>) tdao.getAll();
-		Turno turno1 = new Turno(0, LocalTime.now(), LocalTime.now().plusHours(7), "Primeiro Turno");
-		Turno turno2 = new Turno(0, LocalTime.now().plusHours(2), LocalTime.now().plusHours(9), "Segundo Turno");
-		Turno turno3 = new Turno(0, LocalTime.now().plusHours(4), LocalTime.now().plusHours(11), "Terceiro Turno");
-		Turno turno4 = new Turno(0, LocalTime.now().plusHours(6), LocalTime.now().plusHours(13), "Turno Comercial");
-		Turno turno5 = new Turno(0, LocalTime.now().plusHours(8), LocalTime.now().plusHours(15), "Turno Noturno");
-		tdao.insert(turno1);
-		tdao.insert(turno2);
-		tdao.insert(turno3);
-		tdao.insert(turno4);
-		tdao.insert(turno5);
-		assertEquals((listaTurnos.size() + 5), tdao.getAll().size());
-	}
-
-	@Test
-	void testUpdate() {
-		session.clear();
-		Turno turnoASerAtualizado = tdao.getAll().get(1);
-		turnoASerAtualizado.setHoraInicio(LocalTime.now());
-		turnoASerAtualizado.setHoraFim(LocalTime.now().plusHours(8));
-		assertTrue(tdao.update(turnoASerAtualizado));
-	}
-
-	@Test
-	void testDelete() {
-		ArrayList<Turno> listaTurnos = (ArrayList<Turno>) tdao.getAll();
-		tdao.delete(tdao.getAll().get(3));
-		assertEquals((listaTurnos.size() - 1), tdao.getAll().size());
-	}
-
-	@Test
-	void testGet() {
-		int idCapturado = tdao.getAll().get(1).getId();
-		assertEquals(idCapturado, tdao.getAll().get(1).getId());
+	static void prepararVariaveisStatic() {
+		dao = TurnoDAO.getInstance(DBConnection.getSession());
+		
+		inicio = LocalTime.now();
+		fim = LocalTime.now().plusHours(7);
+		nome = "Turno Teste";
 	}
 	
+	@AfterAll
+	static void after() {
+		dao.deleteAll();
+	}
+	
+	@Test
+	void testGetInstance() {
+		assertNotNull(dao);
+	}
+
+	@Test
+	void testCreateTurno() {
+		
+		Turno instancia = new Turno(inicio, fim, nome);
+		int id = dao.create(instancia);
+		assertNotNull(id);
+	}
+
+	@Test
+	void testUpdateTurno() {
+		Turno instancia = new Turno(inicio, fim, nome);
+		int id = dao.create(instancia);
+		Turno armazenado = dao.get(id);
+		
+		// Temos que usar o objeto obtido do BD, nao criar um novo.
+		//Turno armazenado = new Turno(id, inicio, fim, nome);
+		
+		String novoNome = "wah";
+		armazenado.setNomeTurno(novoNome);
+		assertTrue(dao.update(armazenado));
+		assertEquals(novoNome, dao.get(id).getNomeTurno());
+		
+	}
+
+	@Test
+	void testDeleteInt() {
+		int tamanhoAntes = dao.getAll().size();
+		Turno instancia = new Turno(inicio, fim, nome);
+		int id = dao.create(instancia);
+		
+		dao.delete(id);
+		assertEquals(tamanhoAntes, dao.getAll().size());
+		assertNull(dao.get(id));
+		
+	}
+
+	@Test
+	void testGetInt() {
+		Turno instancia = new Turno(inicio, fim, nome);
+		int id = dao.create(instancia);
+		assertNotNull(dao.get(id));
+	}
+
 	@Test
 	void testGetAll() {
-		ArrayList<Turno> listaTurnos = (ArrayList<Turno>) tdao.getAll();
-		assertEquals(listaTurnos.size(), tdao.getAll().size());
+		int tamanhoAntes = dao.getAll().size();
+		Turno instancia = new Turno(inicio, fim, nome);
+		Turno instancia2 = new Turno(inicio, fim, nome);
+		dao.create(instancia);
+		dao.create(instancia2);
+		assertEquals(tamanhoAntes+2, dao.getAll().size());
 	}
-
+	
 	@Test
-	void testGetAllNotNull() {
-		assertNotNull(tdao.getAll());
+	void testDeleteAll() {
+		Turno instancia = new Turno(inicio, fim, nome);
+		Turno instancia2 = new Turno(inicio, fim, nome);
+		dao.create(instancia);
+		dao.create(instancia2);
+		int tamanhoAntes = dao.getAll().size();
+		dao.deleteAll();
+		assertEquals(0, dao.getAll().size());
 	}
 
 }
