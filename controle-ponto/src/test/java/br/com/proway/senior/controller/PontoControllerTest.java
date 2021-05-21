@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.hibernate.Session;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -28,76 +29,97 @@ class PontoControllerTest {
 		session = DBConnection.getSession();
 		pontoController = new PontoController(session);
 		pdao = PontoDAO.getInstance(session);
-
+	}
+	
+	@AfterEach
+	void limpaBanco() {
+		pontoController.deleteAll();
 	}
 
 	@Test
-	void testInsert() {
-		Ponto ponto = new Ponto(null, LocalDateTime.of(1997, 5, 13, 23, 59));
-		Ponto ponto1 = new Ponto(null, LocalDateTime.of(2005, 5, 13, 23, 59));
-		ArrayList<Ponto> listaPontos = pontoController.getAll();
+	void testCreate() {
+		assertEquals(0, pontoController.getAll().size());
+		Ponto ponto = new Ponto(null, LocalDateTime.now());
 		pontoController.create(ponto);
-		pontoController.create(ponto1);
-		assertEquals((listaPontos.size() + 2), pontoController.getAll().size());
-	}
-
-	@Test
-	void testInsertNotEquals() {
-		Ponto ponto = new Ponto(null, LocalDateTime.of(2009, 5, 13, 23, 59));
-		Ponto ponto1 = new Ponto(null, LocalDateTime.of(2020, 5, 13, 23, 59));
-		ArrayList<Ponto> listaPontos = pontoController.getAll();
-		pontoController.create(ponto);
-		pontoController.create(ponto1);
-		assertNotEquals(listaPontos.size(), pontoController.getAll());
+		assertNotNull(pontoController.getAll());
+		assertEquals(1, pontoController.getAll().size());
+		
 	}
 
 	@Test
 	void testGet() throws Exception {
-		int idCapturado = 0;
-		ArrayList<Ponto> listaPontos = (ArrayList<Ponto>) pdao.getAll();
-		for (int i = 0; i < listaPontos.size(); i++) {
-			if ((i+1) == 1) {
-				idCapturado = listaPontos.get(1).getIdPonto();
-			}
-		}
-		assertNotNull(pontoController.get(idCapturado));
-	}
-
-	@Test
-	void testGetFail() {
-		assertThrows(Exception.class, () -> pontoController.get(999));
+		Ponto ponto = new Ponto(null, LocalDateTime.of(2021, 05, 21, 9, 40));
+		Integer idCadastrado = pontoController.create(ponto);
+		Ponto pontoConsultado = pontoController.get(idCadastrado);
+		assertEquals(LocalDateTime.of(2021, 05, 21, 9, 40), pontoConsultado.getMomentoPonto());
 	}
 	
 	@Test
-	void testGetFailNegativo() {
-		assertThrows(Exception.class, () -> pontoController.get(-22));
+	void testGetIdInvalido() {
+		assertThrows(Exception.class, () -> pontoController.get(0));
 	}
 
 	@Test
-	void testGetAllPorTamanhoDaLista() {
-		ArrayList<Ponto> listaPontos = pontoController.getAll();
-		assertEquals(listaPontos.size(), pontoController.getAll().size());
-	}
-
-	@Test
-	void testGetAllListaNaoPodeSerNull() {
-		assertNotNull(pontoController.getAll());
-
+	void testUpdate() throws Exception {
+		Ponto ponto = new Ponto(null, LocalDateTime.of(2021, 05, 21, 9, 40));
+		Integer idCadastrado = pontoController.create(ponto);
+		Ponto pontoNovo = pontoController.get(idCadastrado);
+		pontoNovo.setMomentoPonto(LocalDateTime.of(2021, 05, 21, 10, 4));
+		boolean sucesso = pontoController.update(pontoNovo, idCadastrado);
+		assertTrue(sucesso);
+		assertEquals(LocalDateTime.of(2021, 05, 21, 10, 4), pontoController.get(idCadastrado).getMomentoPonto());
 	}
 	
 	@Test
-	void testUpdate() {
-		Ponto ponto = pontoController.getAll().get(1);
-		ponto.setMomentoPonto(LocalDateTime.now().plusHours(4));
-		assertTrue(pdao.update(ponto));
+	void testUpdateObjetoInexistente() throws Exception {
+		Ponto ponto = new Ponto(null, LocalDateTime.of(2021, 5, 21, 10, 9));
+		Integer idCadastrado = pontoController.create(ponto);
+		Ponto pontoNovo = pontoController.get(idCadastrado);
+		assertThrows(Exception.class, () -> pontoController.update(pontoNovo, 10));
+	}
+	
+	@Test
+	void testUpdateInvalidoNulo() {
+		Ponto ponto = new Ponto(null, LocalDateTime.of(2021, 5, 21, 10, 14));
+		Integer idCadastrado = pontoController.create(ponto);
+		Ponto pontoNovo = null;
+		assertThrows(Exception.class, () -> pontoController.update(pontoNovo, idCadastrado));		
+	}
+	
+	@Test
+	void testUpdateInvalidoIdInexistente() {
+		Ponto ponto = new Ponto(null, LocalDateTime.of(2021, 5, 21, 10, 14));
+		assertThrows(Exception.class, () -> pontoController.update(ponto, 0));
 	}
 
 	@Test
-	void testDelete() {
-		Ponto ponto = pontoController.getAll().get(1);
-		ArrayList<Ponto> listaPontos = pontoController.getAll();
-		pontoController.delete(ponto);
-		assertEquals((listaPontos.size() - 1), pontoController.getAll().size());
+	void testDelete() throws Exception {
+		Ponto ponto = new Ponto(null, LocalDateTime.of(2021, 5, 21, 10, 26));
+		Integer idCadastrado = pontoController.create(ponto);
+		assertEquals(1, pontoController.getAll().size());
+		pontoController.delete(idCadastrado);
+		assertEquals(0, pontoController.getAll().size());
 	}
-
+	
+	@Test
+	void testDeleteInvalidoIdInexistente() {
+		assertEquals(0,  pontoController.getAll().size());
+		assertThrows(Exception.class, () -> pontoController.delete(100));
+	}
+	
+	@Test
+	void testDeleteInvalidoIgualAZero() {
+		assertThrows(Exception.class, () -> pontoController.delete(0));
+	}
+	
+	@Test
+	void testDeleteAll() {
+		Ponto ponto = new Ponto(null, LocalDateTime.of(2021, 5, 21, 10, 48));
+		pontoController.create(ponto);
+		Ponto ponto2 = new Ponto(null, LocalDateTime.of(2021, 5, 21, 10, 49));
+		pontoController.create(ponto2);
+		assertEquals(2, pontoController.getAll().size());
+		pontoController.deleteAll();
+		assertEquals(0, pontoController.getAll().size());
+	}
 }
