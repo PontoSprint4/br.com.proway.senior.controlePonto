@@ -1,21 +1,18 @@
 package br.com.proway.senior.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Session;
 
 import br.com.proway.senior.DAO.PontoDAO;
-import br.com.proway.senior.DAO.TurnoDAO;
 import br.com.proway.senior.model.Ponto;
-import br.com.proway.senior.model.Turno;
+import br.com.proway.senior.utils.Validadores;
 
 /**
- * Classe responsável por tratar de pedidos de visualização e ações.
+ * Classe responsavel por tratar de pedidos de visualizacao e acoes.
  * 
- * @author Lucas Walim da Silva <lucas.walim@senior.com.br>
- * @author Tharlys de Souza Dias <tharlys.dias@senior.com.br>
  * @author Vitor Gehrke <vitor.gehrke@senior.com.br>
- * @version Sprint5
+ * @version Sprint6
  *
  */
 public class PontoController {
@@ -23,8 +20,8 @@ public class PontoController {
 	private PontoDAO pdao;
 
 	/**
-	 * Construtor que instancia um Controller fazendo uma integração com o
-	 * {@link PontoDAO}, espera uma sessão como parametro para repassar ao
+	 * Construtor que instancia um Controller fazendo uma integracao com o
+	 * {@link PontoDAO}, espera uma sessao como parametro para repassar ao
 	 * {@link PontoDAO} retornando um Controller.
 	 * 
 	 * @param session Session
@@ -34,79 +31,80 @@ public class PontoController {
 	}
 
 	/**
-	 * Método para inserir no banco de dados através do {@link PontoDAO}, um objeto
-	 * do tipo {@link Ponto}.
+	 * Metodo para inserir no banco de dados atraves do {@link PontoDAO} um objeto
+	 * do tipo {@link Ponto}. Retorna seu id cadastrado no DB.
 	 * 
-	 * @param ponto do tipo Ponto
-	 * @throws Exception
+	 * @param ponto
+	 * @return idCadastrado
 	 */
-	public void create(Ponto ponto) {
-		pdao.insert(ponto);
+	public Integer create(Ponto ponto) {
+		return pdao.create(ponto);
 	}
 
 	/**
-	 * Método que busca todas os {@link Ponto}'s filtrados pelo idJornada.
-	 *
-	 * Método para buscar no banco de dados através do {@link PontoDAO}, todos os
-	 * {@link Ponto}'s onde o idJornada é o mesmo que o index recebido como
-	 * parâmetro.
-	 *
-	 * @param index
-	 * @return ArrayList<Ponto>
-	 * @throws Exception
-	 */
-//	public ArrayList<Ponto> readByIdJornada(int index) throws Exception {
-//		if (pdao.readByIdJornada(index) != null) {
-//			return pdao.readByIdJornada(index);
-//		}
-//		throw new Exception("Index Inexistente");
-
-	// TODO
-//	}
-
-	/**
-	 * Método para buscar no banco de dados através do {@link PontoDAO}, um objeto
-	 * do tipo {@link Ponto}, usando seu index.
+	 * Metodo para buscar no banco de dados atraves do {@link PontoDAO} um objeto
+	 * do tipo {@link Ponto} usando seu index.
 	 * 
 	 * @param index
-	 * @return objeto de ponto
-	 * @throws Exception
+	 * @return ponto
+	 * @throws Exception Id invalido
 	 */
 	public Ponto get(int index) throws Exception {
-		if ((pdao.get(index) != null)) {
-			return pdao.get(index);
-		}
-		throw new Exception("Indice invalido.");
+		if(Validadores.ehZeroOuNulo(index)) 
+			throw new Exception("Id invalido");
+		return pdao.get(index);
 	}
 
 	/**
-	 * Método para buscar todos os objetos do tipo {@link Ponto}, no banco de dados
-	 * através do {@link PontoDAO}.
+	 * Metodo para buscar todos os objetos do tipo {@link Ponto} no banco de dados
+	 * atraves do {@link PontoDAO}.
 	 * 
-	 * @return ArrayList<Ponto>
+	 * @return List<Ponto>
 	 */
-	public ArrayList<Ponto> getAll() {
-		return (ArrayList<Ponto>) pdao.getAll();
+	public List<Ponto> getAll() {
+		return pdao.getAll();
 	}
 
 	/**
-	 * Método para atualizar um objeto do tipo {@link Ponto}, no banco de dados
-	 * através do {@link PontoDAO}, recebendo como parâmetro um {@link Ponto}.
+	 * Metodo para atualizar um objeto do tipo {@link Ponto} no banco de dados
+	 * atraves do {@link PontoDAO}.
 	 * 
-	 * @param ponto {@link Ponto}
+	 * @param ponto
+	 * @param id do Ponto.
+	 * @return true || false se atualizado com sucesso ou não.
+	 * @throws Exception Ponto não existe no banco de dados.
+	 * @throws Exception Ponto nulo.
 	 */
-	public void update(Ponto ponto) {
-		pdao.update(ponto);
+	public boolean update(Ponto ponto, int id) throws Exception {
+		if (Validadores.ehObjetoNulo(get(id)))
+			throw new Exception("O Ponto não existe no banco de dados.");
+		if (Validadores.ehObjetoNulo(ponto))
+			throw new Exception("O Ponto não pode ser nulo.");
+		return pdao.update(ponto); // pdao.update chama GenericDAO.update que retorna boolean
 	}
 
 	/**
-	 * Método para apagar do banco de dados através do {@link PontoDAO}, um objeto
-	 * do tipo {@link Ponto}, recebendo como parâmetro o mesmo para apagar.
+	 * Metodo para apagar do banco de dados atraves do {@link PontoDAO} um objeto
+	 * do tipo {@link Ponto}.
 	 * 
-	 * @param ponto do tipo Ponto a ser apagado.
-	 * @return true || false
+	 * @param id do ponto a ser apagado.
+	 * @return true || false se apagado com sucesso ou não.
+	 * @throws Exception Id invalido.
+	 * @throws Exception Ponto nao existe no banco de dados.
 	 */
-	public void delete(Ponto ponto) {
-		pdao.delete(ponto);
+	public boolean delete(int id) throws Exception {
+		if(Validadores.ehZeroOuNulo(id))
+			throw new Exception("Id invalido");
+		if(Validadores.ehObjetoNulo(get(id)))
+			throw new Exception("O ponto nao existe no banco de dados");
+		return pdao.delete(id); // pdao.delete chama GenericDAO.delete que retorna boolean
 	}
+	
+	/**
+	 * Metodo para apagar do banco de dados atraves do {@link PontoDAO} todos os {@link Pont}s 	
+	 * @return boolean
+	 */
+	public boolean deleteAll() {
+		return pdao.deleteAll("ponto");
+			}
 }
