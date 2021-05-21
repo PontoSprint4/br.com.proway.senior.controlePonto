@@ -1,41 +1,50 @@
 package br.com.proway.senior.dbpersistence;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import br.com.proway.senior.DAO.PontoDAO;
 
 class DBConnectionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		DBConnection db = new DBConnection();
-		SessionFactory session = db.getSessionFactory();
-		assertNotNull(session);
 	}
 
-//	@AfterEach
-//	void testShutdown() throws Exception {
-//		DBConnection db = new DBConnection();
-//		Session session = db.getSession();
-//		db.shutdown();
-//
-//		PontoDAO pdao = PontoDAO.getInstance(session);
-//		assertThrows(Exception.class, () -> pdao.get(149));
-//	}
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+	}
+
+	@Test
+	void initialize() {
+		assertNotNull(new DBConnection());
+	}
+	@Test
+	void testGetSessionFactory() {
+		assertNotNull(DBConnection.getSessionFactory());
+	}
+	
+	@Test
+	void testGetSessionFactorySenhaErrada() throws Exception {
+		DBConnection.clearDBConnection();
+		DBConnection.setPassword("errado");
+		assertThrows( ExceptionInInitializerError.class, () -> DBConnection.getSessionFactory());
+		DBConnection.setPassword("admin");
+	}
+
+	@Test
+	void testShutdown() throws Exception {
+		DBConnection.shutdown();
+		assertFalse(DBConnection.getSession().isConnected());
+		assertTrue(DBConnection.getSessionFactory().isClosed());
+		
+	}
 
 	@Test
 	void testGetSession() {
-		DBConnection db = new DBConnection();
-		Session session = db.getSession();
-
-		assertNotNull(session);
+		assertNotNull(DBConnection.getSession());
 	}
 
 }

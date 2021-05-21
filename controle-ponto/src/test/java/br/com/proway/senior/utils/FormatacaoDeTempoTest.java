@@ -1,5 +1,6 @@
 package br.com.proway.senior.utils;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -11,6 +12,10 @@ import org.junit.jupiter.api.Test;
 
 class FormatacaoDeTempoTest {
 
+	@Test
+	void instancia() {
+		assertNotNull(new FormatacaoDeTempo());
+	}
 	@Test
 	void testTempoEntreRegistros() throws Exception {
 		LocalDateTime hoje = LocalDateTime.of(2021, 5, 20, 11, 3, 0);
