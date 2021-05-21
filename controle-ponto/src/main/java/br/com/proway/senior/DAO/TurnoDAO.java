@@ -116,5 +116,13 @@ public class TurnoDAO extends GenericDAO<Turno> {
 	public List<Turno> getAll() {
 		return super.getAll(Turno.class);
 	}
+	
+	/**
+	 * Remove os elementos do tipo {@link Turno} e retorna um boolean indicando sucesso
+	 * da operacao.
+	 */
+	public boolean deleteAll() {
+		return super.deleteAll("turno");
+	}
 
 }

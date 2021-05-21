@@ -128,6 +128,10 @@ public final class JornadaDAO extends GenericDAO<Jornada>  {
     	return super.getAll(Jornada.class);
     }
     
+    /**
+     * Remove todos os elementos do tipo {@link Jornada} e retorna um boolean
+     * para sucesso da operacao.
+     */
     public boolean deleteAll() {
     	return super.deleteAll("jornada");
     }
