@@ -78,7 +78,6 @@ class PontoDAOTest {
 		pdao.create(ponto2);
 		int pontoAntes = pdao.getAll().size();
 		pdao.deleteAll();
-		assertTrue(pontoAntes > pdao.getAll().size());
 		assertEquals(0, pdao.getAll().size());
 	}
 

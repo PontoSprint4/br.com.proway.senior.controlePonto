@@ -16,7 +16,7 @@ import br.com.proway.senior.model.interfaces.ICRUD;
  * @author Tharlys de Souza Dias <tharlys.dias@senior.com.br>
  * @author Lucas Walim <lucas.walim@senior.com.br>
  * @version Sprint5
- * @author Vitor Andr� Gehrke <vitor.gehrke@senior.com.br>
+ * @author Vitor Gehrke <vitor.gehrke@senior.com.br>
  * @version Sprint5 Testes
  * @version Sprint6
  * @author Leonardo Pereira <leonardo.pereira@senior.com.br>

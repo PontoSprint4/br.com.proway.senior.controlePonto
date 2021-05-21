@@ -101,7 +101,6 @@ class TurnoDAOTest {
 		dao.create(instancia2);
 		int tamanhoAntes = dao.getAll().size();
 		dao.deleteAll();
-		assertTrue(tamanhoAntes > dao.getAll().size());
 		assertEquals(0, dao.getAll().size());
 	}
 
