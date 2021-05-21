@@ -1,10 +1,12 @@
 package br.com.proway.senior.controller;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.Ponto;
+import br.com.proway.senior.model.Turno;
 import br.com.proway.senior.utils.FormatacaoDeTempo;
 import br.com.proway.senior.utils.Validadores;
 
@@ -41,5 +43,92 @@ public class JornadaAPI {
 		}
 		return minutosTrabalhados;
 	}
+	
+	/**
+     * <h1>Funcao que informa se o {@link Ponto} desejado se enquadra dentro do periodo
+     * estabelecido pelo {@link Turno}.</h1>
+     * 
+     * <br>
+     * Existem dois casos:
+     * <br>
+     * Caso 1 : O turno nao cruza a meia noite.
+     * <br>
+     * Caso 2 : O turno cruza a meia noite.
+     * <br>
+     * 
+     * @param ponto
+     * @param turno
+     * @return boolean : ponto pertence ao turno
+     */
+    public static boolean pontoDentroDoTurno(Ponto ponto, Turno turno) {
+    	// Manter apenas horario comercial
+    	LocalDateTime horaPonto = ponto.getMomentoPonto();
+    	
+    	LocalTime horaPontoLocal = LocalTime.of(horaPonto.getHour(), horaPonto.getMinute(), horaPonto.getSecond());
+    	LocalTime inicioTurno = turno.getHoraInicio();
+    	LocalTime fimTurno = turno.getHoraFim();
+    	
+    	if (inicioTurno.isBefore(fimTurno)) {
+    		// CASO1 - inicio e fim de Turno no mesmo dia
+    		if (horaPontoLocal.isBefore(fimTurno) && 
+        			horaPontoLocal.isAfter(inicioTurno)) {
+        		return true;
+        	}
+    	}
+    	else {
+    		// CASO 2 - inicio e fim de turno em dias diferentes (madrugada)
+    		if (horaPontoLocal.isBefore(inicioTurno) && 
+        			horaPontoLocal.isBefore(fimTurno)) {
+        		return true;
+        	}
+    	return false;	
+    	}
+    	return false;
+    	
+    }
+    
+    /**
+     * <h1>Funcao que informa se o {@link Ponto} desejado se enquadra dentro do periodo
+     * estabelecido pelo {@link Turno} com uma tolerancia estabecida em MINUTOS.</h1>
+     * 
+     * <br>
+     * Existem dois casos:
+     * <br>
+     * Caso 1 : O turno nao cruza a meia noite.
+     * <br>
+     * Caso 2 : O turno cruza a meia noite.
+     * <br>
+     * 
+     * @param Ponto : ponto
+     * @param Turno : turno
+     * @param int: Tolerancia em minutos
+     * @return boolean : ponto pertence ao turno
+     */
+    public static boolean pontoDentroDoTurno(Ponto ponto, Turno turno, int toleranciaMinutos) {
+    	// Manter apenas horario comercial
+    	LocalDateTime horaPonto = ponto.getMomentoPonto();
+    	
+    	LocalTime horaPontoLocal = LocalTime.of(horaPonto.getHour(), horaPonto.getMinute(), horaPonto.getSecond());
+    	LocalTime inicioTurno = turno.getHoraInicio();
+    	LocalTime fimTurno = turno.getHoraFim();
+    	
+    	if (inicioTurno.isBefore(fimTurno)) {
+    		// CASO1 - inicio e fim de Turno no mesmo dia
+    		if (horaPontoLocal.isBefore(fimTurno.plusMinutes(toleranciaMinutos)) && 
+        			horaPontoLocal.isAfter(inicioTurno.minusMinutes(toleranciaMinutos))) {
+        		return true;
+        	}
+    	}
+    	else {
+    		// CASO 2 - inicio e fim de turno em dias diferentes (madrugada)
+    		if (horaPontoLocal.isBefore(inicioTurno.minusMinutes(toleranciaMinutos)) && 
+        			horaPontoLocal.isBefore(fimTurno.plusMinutes(toleranciaMinutos))) {
+        		return true;
+        	}
+    	return false;	
+    	}
+    	return false;
+    	
+    }
 
 }

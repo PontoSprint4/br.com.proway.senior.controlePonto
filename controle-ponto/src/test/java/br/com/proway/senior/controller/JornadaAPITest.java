@@ -1,6 +1,8 @@
 package br.com.proway.senior.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,6 +36,65 @@ class JornadaAPITest {
 	@Test
 	void testCalcularHorasTrabalhadas() throws Exception {
 		assertEquals(12*60, JornadaAPI.calcularHorasTrabalhadas(jornada), 5);
+	}
+	
+	@Test
+	void testVerificaSePontoEstaNaJornada() throws Exception{
+		LocalTime inicio = LocalTime.of(15, 0);
+		LocalTime fim = LocalTime.of(22, 0);
+		Turno caso1 = new Turno(inicio, fim, "Turno diario");
+		
+		Ponto ponto = new Ponto(1, LocalDateTime.of(2021,5,21, 18,0,0));
+		
+		assertTrue(JornadaAPI.pontoDentroDoTurno(ponto, caso1));
+	}
+	
+	@Test
+	void testVerificaSePontoEstaNaJornadaDaMadruga() throws Exception{
+		LocalTime inicio = LocalTime.of(22, 0);
+		LocalTime fim = LocalTime.of(4, 0);
+		Turno caso2 = new Turno(inicio, fim, "Turno diario");
+		
+		Ponto ponto = new Ponto(1, LocalDateTime.of(2021,5,29, 3,0,0));
+		
+		assertTrue(JornadaAPI.pontoDentroDoTurno(ponto, caso2));
+	}
+	
+	@Test
+	void testVerificaSePontoNaoEstaNaJornadaDaMadruga() throws Exception{
+		LocalTime inicio = LocalTime.of(22, 0);
+		LocalTime fim = LocalTime.of(4, 0);
+		Turno caso2 = new Turno(inicio, fim, "Turno diario");
+		
+		Ponto ponto1 = new Ponto(1, LocalDateTime.of(2021,5,21, 4,20,0));
+		Ponto ponto2 = new Ponto(1, LocalDateTime.of(2021,5,21, 21,20,0));
+		
+		assertFalse(JornadaAPI.pontoDentroDoTurno(ponto1, caso2));
+		assertFalse(JornadaAPI.pontoDentroDoTurno(ponto2, caso2));
+	}
+	
+	@Test
+	void testVerificaSePontoEstaNaJornadaComTolerancia() throws Exception{
+		LocalTime inicio = LocalTime.of(15, 0);
+		LocalTime fim = LocalTime.of(22, 0);
+		Turno caso1 = new Turno(inicio, fim, "Turno diario");
+		
+		Ponto ponto = new Ponto(1, LocalDateTime.of(2021,5,21, 14,50,1));
+		
+		int tolerancia = 10; //minutos
+		assertTrue(JornadaAPI.pontoDentroDoTurno(ponto, caso1, tolerancia));
+	}
+	
+	@Test
+	void testVerificaSePontoEstaNaJornadaDaMadrugaComTolerancia() throws Exception{
+		LocalTime inicio = LocalTime.of(22, 0);
+		LocalTime fim = LocalTime.of(4, 0);
+		Turno caso2 = new Turno(inicio, fim, "Turno diario");
+		
+		Ponto ponto = new Ponto(1, LocalDateTime.of(2021,5,29, 4,9,59));
+		
+		int tolerancia = 10; //minutos
+		assertTrue(JornadaAPI.pontoDentroDoTurno(ponto, caso2, tolerancia));
 	}
 
 }
