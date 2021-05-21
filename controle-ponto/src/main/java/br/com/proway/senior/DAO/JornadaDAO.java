@@ -146,26 +146,17 @@ public final class JornadaDAO extends GenericDAO<Jornada>  {
      * @param pessoa Pessoa de quem se quer obter todas as jornadas.
      * @return jornadasPorIdPessoa Lista de jornadas da pessoa.
      */
-    public List<Jornada> readByIdPessoa(IPessoa pessoa) {
+    public List<Jornada> readByIdPessoa(int idPessoa) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
         Root<Jornada> root = criteria.from(Jornada.class);
         Query query = session.createQuery(criteria);
 
         CriteriaQuery<Jornada> rootQuery = criteria.select(root);
-        Expression<Object> idPessoa = root.get("pessoa_id");
-        criteria.select(root).where(builder.equal(idPessoa, pessoa.getId()));
+        Expression<Object> idRef = root.get("idPessoa");
+        criteria.select(root).where(builder.equal(idRef, idPessoa));
 
         List<Jornada> jornadasPorIdPessoa = query.getResultList();
         return jornadasPorIdPessoa;
-    }
-
-    public List buscarPontosDaJornada(Jornada jornadaQueEuQueroOsPontos) {
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Ponto> criteria = builder.createQuery(Ponto.class);
-        Root<Ponto> root = criteria.from(Ponto.class);
-        Query query = session.createQuery(criteria);
-        Expression<Object> idJornada = root.get("id");
-        return query.getResultList();
     }
 }

@@ -35,6 +35,7 @@ public class Jornada {
     @OneToMany(targetEntity = Ponto.class, cascade = CascadeType.ALL)
     public List<Ponto> listaPonto = new ArrayList<Ponto>();
     
+    @Column(name = "pessoa_id")
     private int idPessoa;
 
     public Jornada() {
