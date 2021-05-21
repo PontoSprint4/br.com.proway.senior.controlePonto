@@ -83,7 +83,7 @@ public class JornadaController {
 		jornadaPersistida.setTurno(jornada.getTurno());
 		jornadaPersistida.setIdPessoa(jornada.getIdPessoa());
 		jornadaPersistida.trocarListaPonto(jornada.getListaPonto());
-		dao.update(jornada);
+		dao.update(jornadaPersistida);
 		return true;
 	}
 

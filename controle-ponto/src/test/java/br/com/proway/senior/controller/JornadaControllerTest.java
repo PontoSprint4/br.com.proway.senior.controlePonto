@@ -82,7 +82,7 @@ class JornadaControllerTest {
 		tdao.create(turno);
     	Jornada jornada = new Jornada(LocalDate.of(2021, 5, 20), 5, turno);
 		Integer idCadastrado = jornadaController.create(jornada);
-		Jornada jornadaNova = new Jornada(idCadastrado, LocalDate.of(2021, 4, 15), 6, turno);
+		Jornada jornadaNova = new Jornada(LocalDate.of(2021, 4, 15), 5, turno);
 		jornadaController.update(idCadastrado, jornadaNova);
 		assertEquals("Turno5", jornadaController.get(idCadastrado).getTurno().getNomeTurno());
 		assertEquals(LocalDate.of(2021, 4, 15), jornadaController.get(idCadastrado).getData());
