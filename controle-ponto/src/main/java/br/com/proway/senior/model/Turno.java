@@ -38,6 +38,12 @@ public class Turno implements ITurno {
 
 	public Turno() {}
 
+	public Turno(LocalTime horaInicio, LocalTime horaFim, String nomeTurno) {
+		this.horaInicio = horaInicio;
+		this.horaFim = horaFim;
+		this.nomeTurno = nomeTurno;
+	}
+	
 	public Turno(Integer id, LocalTime horaInicio, LocalTime horaFim, String nomeTurno) {
 		this.id = id;
 		this.horaInicio = horaInicio;
