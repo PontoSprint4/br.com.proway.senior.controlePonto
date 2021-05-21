@@ -9,6 +9,13 @@ public class TurnoDTO {
 	private LocalTime horaFim;
 	private String nomeTurno;	
 	
+	/**
+     * Construtor do {@link TurnoDTO}, recebe um objeto {@link Turno} vindo do BD.
+     * 
+     * @see DBConnection
+     * 
+     * @param Turno : turno
+     */
 	public TurnoDTO(Turno turno) {
 		this.id = turno.getId();
 		this.horaInicio = turno.getHoraInicio();
