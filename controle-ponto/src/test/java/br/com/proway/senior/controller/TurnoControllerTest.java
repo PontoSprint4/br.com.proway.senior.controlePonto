@@ -3,18 +3,13 @@ package br.com.proway.senior.controller;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Session;
-import org.junit.Ignore;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.proway.senior.DAO.TurnoDAO;
@@ -84,6 +79,14 @@ class TurnoControllerTest {
 	}
 
 	@Test
+	void testUpdateObjetoInexistente() throws Exception {
+		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno Update 2");
+		Integer idCadastrado = turnoController.create(turno);
+		Turno turnoNovo = turnoController.get(idCadastrado);
+		assertThrows(Exception.class, () -> turnoController.update(10, turnoNovo));
+	}
+
+	@Test
 	void testUpdateInvalidoNulo() {
 		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno4");
 		Integer idCadastrado = turnoController.create(turno);
@@ -115,5 +118,16 @@ class TurnoControllerTest {
 	@Test
 	void testDeleteInvalidoIdIgualAZero() {
 		assertThrows(Exception.class, () -> turnoController.delete(0));
+	}
+	
+	@Test
+	void testDeleteAll() {
+		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno1");
+		turnoController.create(turno);
+		Turno turno2 = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno2");
+		turnoController.create(turno2);
+		assertEquals(2, turnoController.getAll().size());
+		turnoController.deleteAll();
+		assertEquals(0, turnoController.getAll().size());
 	}
 }
