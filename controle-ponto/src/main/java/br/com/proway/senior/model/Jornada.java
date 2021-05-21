@@ -93,8 +93,8 @@ public class Jornada {
 		this.listaPonto.add(ponto);
 	}	
 	
-	public void trocarListaPonto(List<Ponto> ponto) {
-		this.listaPonto = ponto;
+	public void trocarListaPonto(List<Ponto> listaPontos) {
+		this.listaPonto = listaPontos;
 	}
 
 }
