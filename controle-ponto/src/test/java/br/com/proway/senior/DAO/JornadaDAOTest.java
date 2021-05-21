@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import br.com.proway.senior.dbpersistence.DBConnection;
@@ -19,13 +20,18 @@ import br.com.proway.senior.model.Turno;
 
 class JornadaDAOTest {
 	
-	JornadaDAO dao = JornadaDAO.getInstance(DBConnection.getSession());
+	static JornadaDAO dao = JornadaDAO.getInstance(DBConnection.getSession());
 	
 	LocalDate data = LocalDate.now();
 	int idPessoa = 12;
 	Turno turnoPadrao = new Turno(LocalTime.now(), LocalTime.now().plusMinutes(42), "Turno Teste");
 	Ponto ponto1 = new Ponto(LocalDateTime.now());
 	Ponto ponto2 = new Ponto(LocalDateTime.now().plusMinutes(42));
+	
+	@AfterAll
+	static void after() {
+		dao.deleteAll();
+	}
 	
 	@Test
 	void testGetInstance() {

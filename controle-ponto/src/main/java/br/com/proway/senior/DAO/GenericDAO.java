@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
@@ -119,6 +120,19 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 		int modificados = session.createSQLQuery("DELETE FROM "+nomeTabela).executeUpdate();
 		session.getTransaction().commit();
 		return modificados > 0 ? true : false;
+	}
+	
+	public Boolean deleteAll2(Class<T> classeTabela) {
+		Session session = DBConnection.getSession();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
+		}
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaDelete<T> criteria = criteriaBuilder.createCriteriaDelete(classeTabela);
+		criteria.from(classeTabela);
+		int results = session.createQuery(criteria).executeUpdate();
+		session.getTransaction().commit();
+		return results > 0 ? true : false;
 	}
 	
 	/**

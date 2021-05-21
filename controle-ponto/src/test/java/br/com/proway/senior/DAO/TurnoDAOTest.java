@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalTime;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +28,11 @@ class TurnoDAOTest {
 		inicio = LocalTime.now();
 		fim = LocalTime.now().plusHours(7);
 		nome = "Turno Teste";
+	}
+	
+	@AfterAll
+	static void after() {
+		dao.deleteAll();
 	}
 	
 	@Test

@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDateTime;
 
 import org.hibernate.Session;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import br.com.proway.senior.dbpersistence.DBConnection;
@@ -18,6 +19,11 @@ class PontoDAOTest {
 	static Session session = DBConnection.getSession();
 	static PontoDAO pdao = PontoDAO.getInstance(session);
 
+	@AfterAll
+	static void after() {
+		pdao.deleteAll();
+	}
+	
 	@Test
 	void testGetInstance() {
 		assertNotNull(PontoDAO.getInstance(DBConnection.getSession()));
