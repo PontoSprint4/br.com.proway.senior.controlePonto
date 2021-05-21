@@ -1,9 +1,9 @@
 package br.com.proway.senior.DAO;
 
 import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 import java.time.LocalDateTime;
 
@@ -57,9 +57,23 @@ class PontoDAOTest {
 
 	@Test
 	void testGetAll() {
+		int pontoAntes = pdao.getAll().size();
 		Ponto ponto = new Ponto(LocalDateTime.now());
-		Integer id = pdao.create(ponto);
-		assertNotNull(pdao.get(id));
+		Ponto ponto2 = new Ponto(LocalDateTime.now());
+		pdao.create(ponto);
+		pdao.create(ponto2);
+		assertEquals(pontoAntes+2, pdao.getAll().size());
+	}
+	@Test
+	void testdeleteAll() {
+		Ponto ponto = new Ponto(LocalDateTime.now());
+		Ponto ponto2 = new Ponto(LocalDateTime.now());
+		pdao.create(ponto);
+		pdao.create(ponto2);
+		int pontoAntes = pdao.getAll().size();
+		pdao.deleteAll();
+		assertTrue(pontoAntes > pdao.getAll().size());
+		assertEquals(0, pdao.getAll().size());
 	}
 
 }
