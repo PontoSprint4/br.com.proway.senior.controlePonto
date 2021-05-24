@@ -123,8 +123,34 @@ class JornadaControllerTest {
 		Ponto pontoRetornado = PontoDAO.getInstance(DBConnection.getSession()).get(idPonto);
 		
 		assertTrue(jornadaController.adicionarPontoNaJornada(idCadastrado, pontoRetornado));
+		assertTrue(jornadaController.get(idCadastrado).getListaPonto().contains(pontoRetornado));
+	}
+	
+	@Test
+	void adicionarPontoNaJornadaInexistenteTest() throws Exception{
+		Turno turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(8), "Turno Top");
+		tdao.create(turno);
 		
-		//assertTrue(jornadaController.get(idCadastrado).getListaPonto().contains(pontoRetornado));
+    	Jornada jornada = new Jornada(LocalDate.of(2021, 5, 20), 666, turno);
+		Integer idCadastrado = jornadaController.create(jornada);
+		jornadaController.delete(idCadastrado);
+		
+		Ponto ponto = new Ponto(12 ,666, LocalDateTime.now().plusMinutes(44));
+		Integer idPonto = PontoDAO.getInstance(DBConnection.getSession()).create(ponto);
+		Ponto pontoRetornado = PontoDAO.getInstance(DBConnection.getSession()).get(idPonto);
+		
+		assertThrows(Exception.class, () -> jornadaController.adicionarPontoNaJornada(idCadastrado, pontoRetornado));
+	}
+	
+	@Test
+	void adicionarPontoInexistenteNaJornadaTest() throws Exception{
+		Turno turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(8), "Turno Top");
+		tdao.create(turno);
+		
+    	Jornada jornada = new Jornada(LocalDate.of(2021, 5, 20), 666, turno);
+		Integer idCadastrado = jornadaController.create(jornada);
+		
+		assertThrows(Exception.class, () -> jornadaController.adicionarPontoNaJornada(idCadastrado, null));
 	}
 	
 	@Test
@@ -155,6 +181,21 @@ class JornadaControllerTest {
 		jornadaController.delete(idCadastrado);
 		assertEquals(tamanho -1, jornadaController.getAll().size());
 	}
+	
+	@Test
+	void testDeleteAll() throws Exception {
+		int tamanhoInicial = jornadaController.getAll().size();
+		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno8");
+		tdao.create(turno);
+    	Jornada jornada = new Jornada(LocalDate.of(2021, 5, 20), 8, turno);
+		Integer idCadastrado = jornadaController.create(jornada);
+		
+		
+		jornadaController.deleteAll();
+		
+		assertEquals(tamanhoInicial, jornadaController.getAll().size());
+	}
+	
 	
 	@Test
 	void testDeleteInvalidoIdInexistente() {

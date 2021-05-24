@@ -60,7 +60,6 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 * @return boolean para sucesso da operacao
 	 */
 	public boolean update(T objetoAtualizado) {
-		DBConnection.getSession().clear();
         if (!DBConnection.getSession().getTransaction().isActive()) {
         	DBConnection.getSession().beginTransaction();
         } 

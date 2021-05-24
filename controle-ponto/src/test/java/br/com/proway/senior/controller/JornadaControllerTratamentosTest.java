@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -60,14 +61,42 @@ class JornadaControllerTratamentosTest {
 	
 	@Test
 	void testCalcularHorasTrabalhadasJornadaPontosImpar() throws Exception {
-		Jornada jornad = new Jornada(LocalDate.now(), 1, turno);
-		jornad.setListaPonto(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
-		assertEquals(0, controller.calcularHorasTrabalhadas(jornad));
+		Jornada jornada = new Jornada(LocalDate.now(), 1, turno);
+		jornada.setListaPonto(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
+		assertEquals(0, controller.calcularHorasTrabalhadas(jornada));
+	}
+	
+	@Test
+	void testCalculaHorasTrabalhadasListaDeJornada() throws Exception{
+		ArrayList<Jornada> jornadas = new ArrayList<Jornada>();
+		
+		Jornada jornada1 = new Jornada(LocalDate.now(), 1, turno);
+		jornada1.setListaPonto(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
+		jornada1.setListaPonto(new Ponto(1, null, LocalDateTime.now().plusHours(4)));
+		jornada1.setListaPonto(new Ponto(2, null, LocalDateTime.now().plusHours(6)));
+		jornada1.setListaPonto(new Ponto(3, null, LocalDateTime.now().plusHours(10)));
+		
+		Jornada jornada2 = new Jornada(LocalDate.now(), 1, turno);
+		jornada2.setListaPonto(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
+		jornada2.setListaPonto(new Ponto(1, null, LocalDateTime.now().plusHours(4)));
+		jornada2.setListaPonto(new Ponto(2, null, LocalDateTime.now().plusHours(6)));
+		jornada2.setListaPonto(new Ponto(3, null, LocalDateTime.now().plusHours(10)));
+		
+		jornadas.add(jornada1);
+		jornadas.add(jornada2);
+		
+		assertEquals(16*60, controller.calcularHorasTrabalhadas(jornadas));
+	}
+	
+	@Test
+	void testCalcularHorasTrabalhadasListaNulaDeJornadas() throws Exception {
+		ArrayList<Jornada> jornadas = new ArrayList<Jornada>();
+		assertThrows(Exception.class, () -> controller.calcularHorasTrabalhadas(jornadas));
 	}
 	
 	
 	@Test
-	void testVerificaSePontoEstaNaJornada() throws Exception{
+	void testVerificaSePontoEstaNaTurno() throws Exception{
 		LocalTime inicio = LocalTime.of(15, 0);
 		LocalTime fim = LocalTime.of(22, 0);
 		Turno caso1 = new Turno(inicio, fim, "Turno diario");
@@ -78,7 +107,7 @@ class JornadaControllerTratamentosTest {
 	}
 	
 	@Test
-	void testVerificaSePontoEstaForaJornada() throws Exception{
+	void testVerificaSePontoEstaForaTurno() throws Exception{
 		LocalTime inicio = LocalTime.of(15, 0);
 		LocalTime fim = LocalTime.of(22, 0);
 		Turno caso1 = new Turno(inicio, fim, "Turno diario");
@@ -89,7 +118,7 @@ class JornadaControllerTratamentosTest {
 	}
 	
 	@Test
-	void testVerificaSePontoEstaNaJornadaComTolerancia() throws Exception{
+	void testVerificaSePontoEstaNoTurnoComTolerancia() throws Exception{
 		LocalTime inicio = LocalTime.of(15, 0);
 		LocalTime fim = LocalTime.of(22, 0);
 		Turno caso1 = new Turno(inicio, fim, "Turno diario");
@@ -101,7 +130,7 @@ class JornadaControllerTratamentosTest {
 	}
 	
 	@Test
-	void testVerificaSePontoEstaNaJornadaDaMadruga() throws Exception{
+	void testVerificaSePontoEstaNoTurnoDaMadruga() throws Exception{
 		LocalTime inicio = LocalTime.of(22, 0);
 		LocalTime fim = LocalTime.of(4, 0);
 		Turno caso2 = new Turno(inicio, fim, "Turno da madruga");
@@ -114,7 +143,7 @@ class JornadaControllerTratamentosTest {
 	}
 	
 	@Test
-	void testVerificaSePontoNaoEstaNaJornadaDaMadruga() throws Exception{
+	void testVerificaSePontoNaoEstaNoTurnoDaMadruga() throws Exception{
 		LocalTime inicio = LocalTime.of(22, 0);
 		LocalTime fim = LocalTime.of(4, 0);
 		Turno caso2 = new Turno(inicio, fim, "Turno noturno");
@@ -129,7 +158,7 @@ class JornadaControllerTratamentosTest {
 	
 	
 	@Test
-	void testVerificaSePontoEstaNaJornadaDaMadrugaComTolerancia() throws Exception{
+	void testVerificaSePontoEstaNoTurnoDaMadrugaComTolerancia() throws Exception{
 		LocalTime inicio = LocalTime.of(22, 0);
 		LocalTime fim = LocalTime.of(4, 0);
 		int tolerancia = 10; //minutos
@@ -142,5 +171,35 @@ class JornadaControllerTratamentosTest {
 		assertTrue(controller.pontoDentroDoTurno(ponto, caso2, tolerancia));
 		assertTrue(controller.pontoDentroDoTurno(ponto2, caso2, tolerancia));
 	}
+	
+	@Test
+	void testVerificaSePontoEstaNoTurnoDaMadrugaExcessaoTurno() throws Exception{
+		int tolerancia = 10; //minutos
+		Ponto ponto = new Ponto(1, null, LocalDateTime.of(2021,5,29, 21,50,1));
+		
+		assertThrows(Exception.class, () -> controller.pontoDentroDoTurno(ponto, null, tolerancia));
+	}
+	
+	@Test
+	void testVerificaSePontoEstaNoTurnoDaMadrugaExcessaoPonto() throws Exception{
+		LocalTime inicio = LocalTime.of(22, 0);
+		LocalTime fim = LocalTime.of(4, 0);
+		int tolerancia = 10; //minutos
+		Turno caso2 = new Turno(inicio, fim, "Turno com tolerancia");
+	
+		assertThrows(Exception.class, () -> controller.pontoDentroDoTurno(null, caso2, tolerancia));
+	}
+	
+	@Test
+	void testVerificaSePontoEstaNoTurnoDaMadrugaExcessaoTolerancia() throws Exception{
+		LocalTime inicio = LocalTime.of(22, 0);
+		LocalTime fim = LocalTime.of(4, 0);
+		Ponto ponto = new Ponto(1, null, LocalDateTime.of(2021,5,29, 21,50,1));
+		int tolerancia = -666; //minutos
+		Turno caso2 = new Turno(inicio, fim, "Turno com tolerancia");
+	
+		assertThrows(Exception.class, () -> controller.pontoDentroDoTurno(ponto, caso2, tolerancia));
+	}
+	
 
 }

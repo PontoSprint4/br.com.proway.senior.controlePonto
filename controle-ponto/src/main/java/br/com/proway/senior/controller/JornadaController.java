@@ -220,12 +220,6 @@ public class JornadaController {
 	 * @throws Exception 
      */
     public boolean pontoDentroDoTurno(Ponto ponto, Turno turno) throws Exception {
-    	if(Validadores.ehObjetoNulo(ponto)) {
-    		throw new Exception("Ponto invalido.");
-    	}
-    	if(Validadores.ehObjetoNulo(turno)) {
-    		throw new Exception("Turno invalido.");
-    	}
     	return pontoDentroDoTurno(ponto, turno, 0);
     }
     
@@ -296,11 +290,6 @@ public class JornadaController {
      * @throws Exception
      */
     public List<Jornada> obterTodasJornadasDaPessoa(int idPessoa) throws Exception{
-    	if(Validadores.ehObjetoNulo(dao.get(idPessoa)))
-    		throw new Exception("Id invalido.");
-    	if(dao.readByIdPessoa(idPessoa).isEmpty()) {
-    		throw new Exception("Não possui jornadas fechadas.");
-    	}
     	return dao.readByIdPessoa(idPessoa);
     }
     
@@ -313,9 +302,8 @@ public class JornadaController {
      * @throws Exception
      */
     public List<Jornada> obterJornadasDoDia(int idPessoa, LocalDate data) throws Exception{
-    	if(Validadores.ehObjetoNulo(dao.get(idPessoa))) throw new Exception("Id invalido.");
     	if(Validadores.ehObjetoNulo(data)) throw new Exception("Data invalida.");
-    	return dao.obterJornadasDoDia(idPessoa, data);
+    	return obterJornadasEntreDatas(idPessoa, data, data);
     }
 
     /**
@@ -328,14 +316,10 @@ public class JornadaController {
      * @throws Exception
      */
     public List<Jornada> obterJornadasEntreDatas(int idPessoa, LocalDate inicio, LocalDate fim) throws Exception{
-    	if(Validadores.ehObjetoNulo(dao.get(idPessoa)))
-    		throw new Exception("Id invalido.");
     	if(Validadores.ehObjetoNulo(inicio)) 
     		throw new Exception("Data inicio invalida.");
     	if(Validadores.ehObjetoNulo(fim)) 
     		throw new Exception("Data fim invalida.");
-    	if(!inicio.isBefore(fim)) 
-    		throw new Exception("Data Inicio/Fim invalida.");
     	return dao.obterJornadasEntreDatas(idPessoa, inicio, fim);
     }
     
