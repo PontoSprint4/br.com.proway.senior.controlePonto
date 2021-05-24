@@ -49,7 +49,7 @@ class JornadaAPITest {
 	void testCalcularHorasTrabalhadasJornadaPontosImpar() throws Exception {
 		Jornada jornad = new Jornada(LocalDate.now(), 1, turno);
 		jornad.setListaPonto(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
-		assertThrows(Exception.class, () -> JornadaAPI.calcularHorasTrabalhadas(jornad));
+		assertEquals(0, JornadaAPI.calcularHorasTrabalhadas(jornad));
 	}
 	
 	

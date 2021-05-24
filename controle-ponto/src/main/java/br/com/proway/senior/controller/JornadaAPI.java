@@ -28,7 +28,8 @@ public class JornadaAPI {
 		
 		List<Ponto> pontosDaJornada = jornada.getListaPonto();
 		if (pontosDaJornada.size() % 2 != 0 ) {
-			throw(new Exception("A Jornada tem um numero impar de pontos e esta incompleta!"));
+			return 0;
+			// throw(new Exception("A Jornada tem um numero impar de pontos e esta incompleta!"));
 		}
 		
 		long minutosTrabalhados = 0;
@@ -42,6 +43,24 @@ public class JornadaAPI {
 			pointer+=2; // Temos que considerar os intervalos entre pares de pontos!
 		}
 		return minutosTrabalhados;
+	}
+	
+	/**
+	 * Calcula o tempo trabalhado durante UM CONJUNTO DE {@link Jornada} FECHADAS (numero par de pontos)
+	 * e retorna esse valor em MINUTOS.
+	 * 
+	 * @param Jornada : jornada
+	 * @return long : Minutos trabalhados na Jornada.
+	 * 
+	 * @see FormatacaoDeTempo
+	 * @throws Exception
+	 */
+	public static long calcularHorasTrabalhadas(List<Jornada> listaDeJornadas) throws Exception{
+		long sum = 0;
+		for (Jornada jornada : listaDeJornadas) {
+			sum += calcularHorasTrabalhadas(jornada);
+		}
+		return sum;
 	}
 	
 	/**
