@@ -1,0 +1,27 @@
+INDEX VERSION 1.131+S:\vanderlei_kleinschmidt\br.com.proway.senior.controlePonto\.metadata\.plugins\org.eclipse.jdt.core
+1201160227.index
+3242587067.index
+896864770.index
+2767484622.index
+1830256109.index
+619119727.index
+1566702158.index
+2375201054.index
+999671492.index
+881007305.index
+3877706529.index
+989198777.index
+4175662032.index
+3631850949.index
+3944429623.index
+2716499776.index
+2576747683.index
+3100870908.index
+1580459641.index
+708665032.index
+3532416417.index
+2964774487.index
+2239929858.index
+1039604040.index
+73118237.index
+4010920012.index
