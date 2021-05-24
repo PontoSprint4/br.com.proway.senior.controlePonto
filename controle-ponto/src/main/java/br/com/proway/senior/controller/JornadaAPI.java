@@ -118,6 +118,7 @@ public class JornadaAPI {
         			horaPontoLocal.isAfter(inicioTurno.minusMinutes(toleranciaMinutos))) {
         		return true;
         	}
+    		return false;
     	}
     	else {
     		// CASO 2 - inicio e fim de turno em dias diferentes (madrugada)
@@ -125,9 +126,9 @@ public class JornadaAPI {
         			horaPontoLocal.isBefore(fimTurno.plusMinutes(toleranciaMinutos))) {
         		return true;
         	}
-    	return false;	
+    		return false;	
     	}
-    	return false;
+    	
     	
     }
 

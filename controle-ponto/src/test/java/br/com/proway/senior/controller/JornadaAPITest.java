@@ -2,6 +2,7 @@ package br.com.proway.senior.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
@@ -39,6 +40,20 @@ class JornadaAPITest {
 	}
 	
 	@Test
+	void testCalcularHorasTrabalhadasJornadaNula() throws Exception {
+		Jornada jorn = null;
+		assertThrows(Exception.class, () -> JornadaAPI.calcularHorasTrabalhadas(jorn));
+	}
+	
+	@Test
+	void testCalcularHorasTrabalhadasJornadaPontosImpar() throws Exception {
+		Jornada jornad = new Jornada(LocalDate.now(), 1, turno);
+		jornad.setListaPonto(new Ponto(0, LocalDateTime.now().plusHours(0)));
+		assertThrows(Exception.class, () -> JornadaAPI.calcularHorasTrabalhadas(jornad));
+	}
+	
+	
+	@Test
 	void testVerificaSePontoEstaNaJornada() throws Exception{
 		LocalTime inicio = LocalTime.of(15, 0);
 		LocalTime fim = LocalTime.of(22, 0);
@@ -47,6 +62,17 @@ class JornadaAPITest {
 		Ponto ponto = new Ponto(1, LocalDateTime.of(2021,5,21, 18,0,0));
 		
 		assertTrue(JornadaAPI.pontoDentroDoTurno(ponto, caso1));
+	}
+	
+	@Test
+	void testVerificaSePontoEstaForaJornada() throws Exception{
+		LocalTime inicio = LocalTime.of(15, 0);
+		LocalTime fim = LocalTime.of(22, 0);
+		Turno caso1 = new Turno(inicio, fim, "Turno diario");
+		
+		Ponto ponto = new Ponto(1, LocalDateTime.of(2021,5,21, 14,0,0));
+		
+		assertFalse(JornadaAPI.pontoDentroDoTurno(ponto, caso1));
 	}
 	
 	@Test
