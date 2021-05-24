@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.proway.senior.controller.JornadaAPI;
+import br.com.proway.senior.controller.JornadaController;
+import br.com.proway.senior.dbpersistence.DBConnection;
 import br.com.proway.senior.enums.EstadosJornada;
 
 /**
@@ -20,7 +22,7 @@ public class JornadaDTO {
 	// Do objeto Jornada
     private int id;
     private LocalDate data; 
-    private Turno turno;    
+    private Turno turno;    // Possui as informacoes de comeco e fim do turno
     public List<Ponto> listaPonto = new ArrayList<Ponto>();        
     private int idPessoa;
     
@@ -30,7 +32,8 @@ public class JornadaDTO {
     public short ano;
     
     public long minutosTrabalhados;
-    public EstadosJornada estado;
+    
+    public EstadosJornada estado; // Ainda nao muda!
     
     /**
      * Construtor do {@link JornadaDTO}, recebe um objeto {@link Jornada} vindo do BD.
@@ -54,7 +57,7 @@ public class JornadaDTO {
         this.ano = (short) this.data.getYear();
         
         if(this.listaPonto.size() % 2 == 0) {
-        	this.minutosTrabalhados = JornadaAPI.calcularHorasTrabalhadas(jornada);
+        	this.minutosTrabalhados = new JornadaController(DBConnection.getSession()).calcularHorasTrabalhadas(jornada);
         	this.estado = EstadosJornada.FECHADO;
         }
         else {
