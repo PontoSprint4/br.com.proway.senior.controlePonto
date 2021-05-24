@@ -29,9 +29,5 @@ class JornadaControllerPreparaParaDTOTest {
 	static void tearDownAfterClass() throws Exception {
 	}
 
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
 
 }

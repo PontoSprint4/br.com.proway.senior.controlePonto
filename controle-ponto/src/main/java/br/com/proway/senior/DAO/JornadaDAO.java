@@ -132,7 +132,7 @@ public final class JornadaDAO extends GenericDAO<Jornada>  {
      * para sucesso da operacao.
      */
     public boolean deleteAll() {
-    	return super.deleteAll("jornada");
+    	return super.deleteAll(Jornada.class);
     }
 
     /**

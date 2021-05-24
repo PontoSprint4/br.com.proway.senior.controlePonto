@@ -116,7 +116,7 @@ public class JornadaController {
 		
 		Jornada jornadaPersistida = dao.get(idJornada);
 		jornadaPersistida.setListaPonto(ponto);
-		dao.update(jornadaPersistida);
+		update(idJornada, jornadaPersistida);
 		return true;
 	}
 

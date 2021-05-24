@@ -105,6 +105,6 @@ public class PontoController {
 	 * @return boolean
 	 */
 	public boolean deleteAll() {
-		return pdao.deleteAll("ponto");
-			}
+		return pdao.deleteAll();
+	}
 }

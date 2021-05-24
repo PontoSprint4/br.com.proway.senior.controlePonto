@@ -60,6 +60,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 * @return boolean para sucesso da operacao
 	 */
 	public boolean update(T objetoAtualizado) {
+		DBConnection.getSession().clear();
         if (!DBConnection.getSession().getTransaction().isActive()) {
         	DBConnection.getSession().beginTransaction();
         } 
@@ -111,29 +112,29 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 	 * @param classeTabela Class classe da entidade
 	 * @return Boolean para sucesso da operacao 
 	 */
-	public boolean deleteAll(String nomeTabela) {
-		Session session = DBConnection.getSession();
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
-		}
-		
-		int modificados = session.createSQLQuery("DELETE FROM "+nomeTabela).executeUpdate();
-		session.getTransaction().commit();
-		return modificados > 0 ? true : false;
-	}
-	
-//	public Boolean deleteAllViaCriteria(Class<T> classeTabela) {
+//	public boolean deleteAll(String nomeTabela) {
 //		Session session = DBConnection.getSession();
 //		if (!session.getTransaction().isActive()) {
 //			session.beginTransaction();
 //		}
-//		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-//		CriteriaDelete<T> criteria = criteriaBuilder.createCriteriaDelete(classeTabela);
-//		criteria.from(classeTabela);
-//		int results = session.createQuery(criteria).executeUpdate();
+//		
+//		int modificados = session.createSQLQuery("DELETE FROM "+nomeTabela).executeUpdate();
 //		session.getTransaction().commit();
-//		return results > 0 ? true : false;
+//		return modificados > 0 ? true : false;
 //	}
+	
+	public boolean deleteAll(Class<T> classeTabela) {
+		Session session = DBConnection.getSession();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
+		}
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaDelete<T> criteria = criteriaBuilder.createCriteriaDelete(classeTabela);
+		criteria.from(classeTabela);
+		int results = session.createQuery(criteria).executeUpdate();
+		session.getTransaction().commit();
+		return results > 0 ? true : false;
+	}
 	
 	/**
 	 * Seleciona entradas de 

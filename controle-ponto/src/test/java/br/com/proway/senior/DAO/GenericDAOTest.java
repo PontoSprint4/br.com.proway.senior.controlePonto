@@ -34,6 +34,7 @@ class GenericDAOTest {
 		daot = TurnoDAO.getInstance(DBConnection.getSession());
 		turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(3), "Turno Noturno");
 	
+		JornadaDAO.getInstance(DBConnection.getSession()).deleteAll();
 		daop.deleteAll();
 		daot.deleteAll();
 	}
