@@ -50,7 +50,7 @@ public class PontoController {
 	 * @throws Exception Id invalido
 	 */
 	public Ponto get(int index) throws Exception {
-		if(Validadores.ehZeroOuNulo(index)) 
+		if(Validadores.ehMenorIgualZeroOuNulo(index)) 
 			throw new Exception("Id invalido");
 		return pdao.get(index);
 	}
@@ -93,7 +93,7 @@ public class PontoController {
 	 * @throws Exception Ponto nao existe no banco de dados.
 	 */
 	public boolean delete(int id) throws Exception {
-		if(Validadores.ehZeroOuNulo(id))
+		if(Validadores.ehMenorIgualZeroOuNulo(id))
 			throw new Exception("Id invalido");
 		if(Validadores.ehObjetoNulo(get(id)))
 			throw new Exception("O ponto nao existe no banco de dados");

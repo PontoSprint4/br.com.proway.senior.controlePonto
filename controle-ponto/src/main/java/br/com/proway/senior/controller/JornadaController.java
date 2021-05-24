@@ -44,8 +44,15 @@ public class JornadaController {
      *
      * @param jornadaASerInserida Jornada que será inserida no banco.
      * @return id Id da Jornada inserida no banco.
+     * @throws Exception 
      */
-	public Integer create(Jornada jornadaASerInserida) {
+	public Integer create(Jornada jornadaASerInserida) throws Exception {
+		if (Validadores.ehObjetoNulo(jornadaASerInserida.getTurno())) {
+			throw new Exception("O turno da jornada nao pode ser nulo.");
+		} 
+		if (Validadores.ehObjetoNulo(jornadaASerInserida.getData())) {
+			throw new Exception("A data da jornada nao pode ser nula.");
+		}
 		return dao.create(jornadaASerInserida);
 	}
 
@@ -56,7 +63,7 @@ public class JornadaController {
      * @return retorna o objeto Jornada.
      */
 	public Jornada get(int index) throws Exception {
-		if (Validadores.ehZeroOuNulo(index))
+		if (Validadores.ehMenorIgualZeroOuNulo(index))
 			throw new Exception("Id inexistente");
 		return dao.get(index);
 	}
@@ -118,8 +125,11 @@ public class JornadaController {
      * Método que deleta uma jornada.
      *
      * @param jornadaASerDeletada Jornada que será deletada do banco.
+     * @throws Exception 
      */
-    public void delete(int id) {
+    public void delete(int id) throws Exception {
+    	if(Validadores.ehObjetoNulo(dao.get(id)))
+    		throw new Exception("Id invalido.");
         dao.delete(id);
     }
     
@@ -182,6 +192,9 @@ public class JornadaController {
 	 * @throws Exception
 	 */
 	public long calcularHorasTrabalhadas(List<Jornada> listaDeJornadas) throws Exception{
+		if(listaDeJornadas.isEmpty()) {
+    		throw new Exception("Não possui jornadas fechadas.");
+    	}
 		long sum = 0;
 		for (Jornada jornada : listaDeJornadas) {
 			sum += calcularHorasTrabalhadas(jornada);
@@ -204,8 +217,15 @@ public class JornadaController {
      * @param ponto
      * @param turno
      * @return boolean : ponto pertence ao turno
+	 * @throws Exception 
      */
-    public boolean pontoDentroDoTurno(Ponto ponto, Turno turno) {
+    public boolean pontoDentroDoTurno(Ponto ponto, Turno turno) throws Exception {
+    	if(Validadores.ehObjetoNulo(ponto)) {
+    		throw new Exception("Ponto invalido.");
+    	}
+    	if(Validadores.ehObjetoNulo(turno)) {
+    		throw new Exception("Turno invalido.");
+    	}
     	return pontoDentroDoTurno(ponto, turno, 0);
     }
     
@@ -225,8 +245,18 @@ public class JornadaController {
      * @param Turno : turno
      * @param int: Tolerancia em minutos
      * @return boolean : ponto pertence ao turno
+     * @throws Exception 
      */
-    public boolean pontoDentroDoTurno(Ponto ponto, Turno turno, int toleranciaMinutos) {
+    public boolean pontoDentroDoTurno(Ponto ponto, Turno turno, int toleranciaMinutos) throws Exception {
+    	if(Validadores.ehObjetoNulo(ponto)) {
+    		throw new Exception("Ponto invalido.");
+    	}
+    	if(Validadores.ehObjetoNulo(turno)) {
+    		throw new Exception("Turno invalido.");
+    	}
+    	if(toleranciaMinutos < 0) {
+    		throw new Exception("Tolerância invalida.");
+    	}
     	// Manter apenas horario comercial
     	LocalDateTime horaPonto = ponto.getMomentoPonto();
     	
@@ -258,16 +288,54 @@ public class JornadaController {
     	}	
     }
     
-    public List<Jornada> obterTodasJornadasDaPessoa(int idPessoa){
-    	// verificacoes e validacoes!!!!!
+    /**
+     * Retorna uma lista de todas as jornadas da pessoa.
+     * 
+     * @param idPessoa
+     * @return obterTodasJornadasDaPessoa : lista de jornadas da pessoa consultada
+     * @throws Exception
+     */
+    public List<Jornada> obterTodasJornadasDaPessoa(int idPessoa) throws Exception{
+    	if(Validadores.ehObjetoNulo(dao.get(idPessoa)))
+    		throw new Exception("Id invalido.");
+    	if(dao.readByIdPessoa(idPessoa).isEmpty()) {
+    		throw new Exception("Não possui jornadas fechadas.");
+    	}
     	return dao.readByIdPessoa(idPessoa);
     }
     
-    public List<Jornada> obterJornadasDoDia(int idPessoa, LocalDate data){
+    /**
+     * Retorna uma lista de jornadas do dia desejado de uma pessoa.
+     * 
+     * @param idPessoa
+     * @param data
+     * @return List<Jornada>
+     * @throws Exception
+     */
+    public List<Jornada> obterJornadasDoDia(int idPessoa, LocalDate data) throws Exception{
+    	if(Validadores.ehObjetoNulo(dao.get(idPessoa))) throw new Exception("Id invalido.");
+    	if(Validadores.ehObjetoNulo(data)) throw new Exception("Data invalida.");
     	return dao.obterJornadasDoDia(idPessoa, data);
     }
-    
-    public List<Jornada> obterJornadasEntreDatas(int idPessoa, LocalDate inicio, LocalDate fim){
+
+    /**
+     * Retorna uma lista de jornadas num intervalo de datas (inclusive) de uma pessoa.
+     * 
+     * @param idPessoa
+     * @param inicio
+     * @param fim
+     * @return List<Jornada>
+     * @throws Exception
+     */
+    public List<Jornada> obterJornadasEntreDatas(int idPessoa, LocalDate inicio, LocalDate fim) throws Exception{
+    	if(Validadores.ehObjetoNulo(dao.get(idPessoa)))
+    		throw new Exception("Id invalido.");
+    	if(Validadores.ehObjetoNulo(inicio)) 
+    		throw new Exception("Data inicio invalida.");
+    	if(Validadores.ehObjetoNulo(fim)) 
+    		throw new Exception("Data fim invalida.");
+    	if(!inicio.isBefore(fim)) 
+    		throw new Exception("Data Inicio/Fim invalida.");
     	return dao.obterJornadasEntreDatas(idPessoa, inicio, fim);
     }
     

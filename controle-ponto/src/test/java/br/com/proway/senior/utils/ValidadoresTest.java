@@ -25,8 +25,8 @@ class ValidadoresTest {
 	void testEhZeroOuNulo() {
 		Integer testing = 0;
 		Integer nulled = null;
-		assertTrue(Validadores.ehZeroOuNulo(testing));
-		assertTrue(Validadores.ehZeroOuNulo(nulled));
+		assertTrue(Validadores.ehMenorIgualZeroOuNulo(testing));
+		assertTrue(Validadores.ehMenorIgualZeroOuNulo(nulled));
 	}
 
 	@Test
