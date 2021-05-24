@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.hibernate.Session;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -27,13 +27,13 @@ class JornadaControllerTest {
 	static void setUpBeforeClass() throws Exception {
 		session = DBConnection.getSession();
 		jornadaController = new JornadaController(session);
-		jdao = JornadaDAO.getInstance(session);
 		tdao = TurnoDAO.getInstance(session);
 	}
 
-	@AfterAll
-	static void before() {
+	@AfterEach
+	void before() {
 		jornadaController.deleteAll();
+		tdao.deleteAll();
 	}
 	
     @Test

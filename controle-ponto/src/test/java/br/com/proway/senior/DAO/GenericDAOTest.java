@@ -40,6 +40,8 @@ class GenericDAOTest {
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
+		daop.deleteAll();
+		daot.deleteAll();
 	}
 
 	@Test

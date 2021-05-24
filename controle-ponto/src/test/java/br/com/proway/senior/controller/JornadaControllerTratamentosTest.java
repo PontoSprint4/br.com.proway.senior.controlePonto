@@ -9,9 +9,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import br.com.proway.senior.DAO.JornadaDAO;
+import br.com.proway.senior.DAO.PontoDAO;
+import br.com.proway.senior.DAO.TurnoDAO;
 import br.com.proway.senior.dbpersistence.DBConnection;
 import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.Ponto;
@@ -34,6 +38,13 @@ class JornadaControllerTratamentosTest {
 		jornada.setListaPonto(new Ponto(3, null, LocalDateTime.now().plusHours(10)));
 		jornada.setListaPonto(new Ponto(4, null, LocalDateTime.now().plusHours(12)));
 		jornada.setListaPonto(new Ponto(5, null, LocalDateTime.now().plusHours(16)));
+	}
+	
+	@AfterEach
+	void cleanDB() {
+		JornadaDAO.getInstance(DBConnection.getSession()).deleteAll();
+		TurnoDAO.getInstance(DBConnection.getSession()).deleteAll();
+		PontoDAO.getInstance(DBConnection.getSession()).deleteAll();
 	}
 
 	@Test
