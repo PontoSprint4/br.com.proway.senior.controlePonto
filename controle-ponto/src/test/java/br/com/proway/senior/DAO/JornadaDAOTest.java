@@ -9,8 +9,10 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import br.com.proway.senior.dbpersistence.DBConnection;
@@ -22,15 +24,29 @@ class JornadaDAOTest {
 	
 	static JornadaDAO dao = JornadaDAO.getInstance(DBConnection.getSession());
 	
-	LocalDate data = LocalDate.now();
-	int idPessoa = 12;
-	Turno turnoPadrao = new Turno(LocalTime.now(), LocalTime.now().plusMinutes(42), "Turno Teste");
-	Ponto ponto1 = new Ponto(LocalDateTime.now());
-	Ponto ponto2 = new Ponto(LocalDateTime.now().plusMinutes(42));
+	static LocalDate data;
+	static int idPessoa;
+	static Turno turnoPadrao;
+	static Ponto ponto1;
+	static Ponto ponto2;
 	
-	@AfterAll
-	static void after() {
+	static void popularDados() {
+		data = LocalDate.now();
+		idPessoa = 12;
+		turnoPadrao = new Turno(LocalTime.now(), LocalTime.now().plusMinutes(42), "Turno Teste");
+		ponto1 = new Ponto(LocalDateTime.now());
+		ponto2 = new Ponto(LocalDateTime.now().plusMinutes(42));
+	}
+	
+	@BeforeAll
+	public static void before() {
+		popularDados();
+	}
+	
+	@AfterEach
+	public void after() {
 		dao.deleteAll();
+		popularDados();
 	}
 	
 	@Test
@@ -97,6 +113,38 @@ class JornadaDAOTest {
 		Jornada retornado = dao.get(idCriado);
 		
 		assertTrue(dao.readByIdPessoa(idPessoa).contains(retornado));
+		
+	}
+	
+	@Test
+	void testBuscarPorData() {
+		LocalDate dia = LocalDate.of(2021, 12, 21);
+		
+		dao.create(new Jornada(LocalDate.of(2021, 11, 8), idPessoa, turnoPadrao));
+		dao.create(new Jornada(LocalDate.of(2021, 12, 8), idPessoa, turnoPadrao));
+		dao.create(new Jornada(LocalDate.of(2021, 12, 21), idPessoa, turnoPadrao));
+		
+		List<Jornada> jornadas = dao.obterJornadasDoDia(idPessoa, dia);
+		assertEquals(1, jornadas.size());
+		
+	}
+	
+	@Test
+	void testBuscarPorIntervaloDatas() {
+		LocalDate inicioFiltro = LocalDate.of(2021, 8, 7);
+		LocalDate fimFiltro = LocalDate.of(2021, 9, 7);
+		
+		dao.create(new Jornada(LocalDate.of(2021, 4, 8), idPessoa, turnoPadrao));
+		dao.create(new Jornada(LocalDate.of(2021, 2, 8), idPessoa, turnoPadrao));
+		int id = dao.create(new Jornada(LocalDate.of(2021, 5, 21), idPessoa, turnoPadrao));
+		
+		dao.create(new Jornada(LocalDate.of(2021, 8, 8), idPessoa, turnoPadrao));
+		dao.create(new Jornada(LocalDate.of(2021, 8, 16), idPessoa, turnoPadrao));
+		dao.create(new Jornada(LocalDate.of(2021, 8, 21), idPessoa, turnoPadrao));
+		dao.create(new Jornada(LocalDate.of(2021, 9, 4), idPessoa, turnoPadrao));
+		
+		List<Jornada> jornadas = dao.obterJornadasEntreDatas(idPessoa, inicioFiltro, fimFiltro);
+		assertEquals(4, jornadas.size());
 		
 	}
 }
