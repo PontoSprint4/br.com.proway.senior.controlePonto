@@ -61,30 +61,7 @@ public class JornadaAPI {
      * @return boolean : ponto pertence ao turno
      */
     public static boolean pontoDentroDoTurno(Ponto ponto, Turno turno) {
-    	// Manter apenas horario comercial
-    	LocalDateTime horaPonto = ponto.getMomentoPonto();
-    	
-    	LocalTime horaPontoLocal = LocalTime.of(horaPonto.getHour(), horaPonto.getMinute(), horaPonto.getSecond());
-    	LocalTime inicioTurno = turno.getHoraInicio();
-    	LocalTime fimTurno = turno.getHoraFim();
-    	
-    	if (inicioTurno.isBefore(fimTurno)) {
-    		// CASO1 - inicio e fim de Turno no mesmo dia
-    		if (horaPontoLocal.isBefore(fimTurno) && 
-        			horaPontoLocal.isAfter(inicioTurno)) {
-        		return true;
-        	}
-    	}
-    	else {
-    		// CASO 2 - inicio e fim de turno em dias diferentes (madrugada)
-    		if (horaPontoLocal.isBefore(inicioTurno) && 
-        			horaPontoLocal.isBefore(fimTurno)) {
-        		return true;
-        	}
-    	return false;	
-    	}
-    	return false;
-    	
+    	return pontoDentroDoTurno(ponto, turno, 0);
     }
     
     /**
@@ -127,9 +104,7 @@ public class JornadaAPI {
         		return true;
         	}
     		return false;	
-    	}
-    	
-    	
+    	}	
     }
 
 }
