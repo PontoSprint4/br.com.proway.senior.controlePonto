@@ -161,10 +161,25 @@ public final class JornadaDAO extends GenericDAO<Jornada>  {
     
     // https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/criteria-api-date-time-operations.html
     
+    /**
+     * Retorna uma lista de jornadas do dia desejado de uma pessoa.
+     * 
+     * @param idPessoa
+     * @param data
+     * @return List<Jornada>
+     */
     public List<Jornada> obterJornadasDoDia(int idPessoa, LocalDate data) {
         return obterJornadasEntreDatas(idPessoa, data, data);
     }
     
+    /**
+     * Retorna uma lista de jornadas num intervalo de datas (inclusive) de uma pessoa.
+     * 
+     * @param idPessoa
+     * @param inicio
+     * @param fim
+     * @return List<Jornada>
+     */
     public List<Jornada> obterJornadasEntreDatas(int idPessoa, LocalDate inicio, LocalDate fim) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
