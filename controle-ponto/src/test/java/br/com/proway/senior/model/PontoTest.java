@@ -32,19 +32,19 @@ class PontoTest {
 
 	@Test
 	void testPontoIntegerLocalDateTime() {
-		Ponto ponto = new Ponto(id, momentoPonto);
+		Ponto ponto = new Ponto(id, null, momentoPonto);
 		assertNotNull(ponto);
 	}
 
 	@Test
 	void testGetIdPonto() {
-		Ponto ponto = new Ponto(id, momentoPonto);
+		Ponto ponto = new Ponto(id, null, momentoPonto);
 		assertEquals(id, ponto.getIdPonto());
 	}
 
 	@Test
 	void testSetIdPonto() {
-		Ponto ponto = new Ponto(id, momentoPonto);
+		Ponto ponto = new Ponto(id, null, momentoPonto);
 		int novoId = 2;
 		ponto.setIdPonto(novoId);
 		assertNotEquals(id, ponto.getIdPonto());
@@ -53,13 +53,13 @@ class PontoTest {
 
 	@Test
 	void testGetMomentoPonto() {
-		Ponto ponto = new Ponto(id, momentoPonto);
+		Ponto ponto = new Ponto(id, null, momentoPonto);
 		assertEquals(momentoPonto, ponto.getMomentoPonto());
 	}
 
 	@Test
 	void testSetMomentoPonto() {
-		Ponto ponto = new Ponto(id, momentoPonto);
+		Ponto ponto = new Ponto(id, null, momentoPonto);
 		LocalDateTime novoMomentoPonto = LocalDateTime.now().plusHours(2);
 		ponto.setMomentoPonto(novoMomentoPonto);
 		assertNotEquals(momentoPonto, ponto.getMomentoPonto());

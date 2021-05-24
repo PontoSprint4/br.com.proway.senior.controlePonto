@@ -2,6 +2,8 @@ package br.com.proway.senior.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+
 /**
  * DTO da entidade {@link Ponto} com os atributos relevantes para interface com outras
  * partes do sistema.
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 public class PontoDTO {
 	
 	private Integer idPonto;
+    private Integer idPessoa;
 	private LocalDateTime momentoPonto;
 
 	/**
@@ -25,6 +28,7 @@ public class PontoDTO {
      */
 	public PontoDTO(Ponto ponto) {
 		this.idPonto = ponto.getIdPonto();
+		this.idPessoa = ponto.getIdPessoa();
 		this.momentoPonto = ponto.getMomentoPonto();
 	}
 

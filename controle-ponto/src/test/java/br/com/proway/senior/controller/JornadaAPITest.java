@@ -26,12 +26,12 @@ class JornadaAPITest {
 	static void setUpBeforeClass() throws Exception {
 		turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(16), "Turno 1");
 		jornada = new Jornada(LocalDate.now(), 1, turno);
-		jornada.setListaPonto(new Ponto(0, LocalDateTime.now().plusHours(0)));
-		jornada.setListaPonto(new Ponto(1, LocalDateTime.now().plusHours(4)));
-		jornada.setListaPonto(new Ponto(2, LocalDateTime.now().plusHours(6)));
-		jornada.setListaPonto(new Ponto(3, LocalDateTime.now().plusHours(10)));
-		jornada.setListaPonto(new Ponto(4, LocalDateTime.now().plusHours(12)));
-		jornada.setListaPonto(new Ponto(5, LocalDateTime.now().plusHours(16)));
+		jornada.setListaPonto(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
+		jornada.setListaPonto(new Ponto(1, null, LocalDateTime.now().plusHours(4)));
+		jornada.setListaPonto(new Ponto(2, null, LocalDateTime.now().plusHours(6)));
+		jornada.setListaPonto(new Ponto(3, null, LocalDateTime.now().plusHours(10)));
+		jornada.setListaPonto(new Ponto(4, null, LocalDateTime.now().plusHours(12)));
+		jornada.setListaPonto(new Ponto(5, null, LocalDateTime.now().plusHours(16)));
 	}
 
 	@Test
@@ -48,7 +48,7 @@ class JornadaAPITest {
 	@Test
 	void testCalcularHorasTrabalhadasJornadaPontosImpar() throws Exception {
 		Jornada jornad = new Jornada(LocalDate.now(), 1, turno);
-		jornad.setListaPonto(new Ponto(0, LocalDateTime.now().plusHours(0)));
+		jornad.setListaPonto(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
 		assertThrows(Exception.class, () -> JornadaAPI.calcularHorasTrabalhadas(jornad));
 	}
 	
@@ -59,7 +59,7 @@ class JornadaAPITest {
 		LocalTime fim = LocalTime.of(22, 0);
 		Turno caso1 = new Turno(inicio, fim, "Turno diario");
 		
-		Ponto ponto = new Ponto(1, LocalDateTime.of(2021,5,21, 18,0,0));
+		Ponto ponto = new Ponto(1, null, LocalDateTime.of(2021,5,21, 18,0,0));
 		
 		assertTrue(JornadaAPI.pontoDentroDoTurno(ponto, caso1));
 	}
@@ -70,7 +70,7 @@ class JornadaAPITest {
 		LocalTime fim = LocalTime.of(22, 0);
 		Turno caso1 = new Turno(inicio, fim, "Turno diario");
 		
-		Ponto ponto = new Ponto(1, LocalDateTime.of(2021,5,21, 14,0,0));
+		Ponto ponto = new Ponto(1, null, LocalDateTime.of(2021,5,21, 14,0,0));
 		
 		assertFalse(JornadaAPI.pontoDentroDoTurno(ponto, caso1));
 	}
@@ -81,7 +81,7 @@ class JornadaAPITest {
 		LocalTime fim = LocalTime.of(4, 0);
 		Turno caso2 = new Turno(inicio, fim, "Turno diario");
 		
-		Ponto ponto = new Ponto(1, LocalDateTime.of(2021,5,29, 3,0,0));
+		Ponto ponto = new Ponto(1, null, LocalDateTime.of(2021,5,29, 3,0,0));
 		
 		assertTrue(JornadaAPI.pontoDentroDoTurno(ponto, caso2));
 	}
@@ -92,8 +92,8 @@ class JornadaAPITest {
 		LocalTime fim = LocalTime.of(4, 0);
 		Turno caso2 = new Turno(inicio, fim, "Turno diario");
 		
-		Ponto ponto1 = new Ponto(1, LocalDateTime.of(2021,5,21, 4,20,0));
-		Ponto ponto2 = new Ponto(1, LocalDateTime.of(2021,5,21, 21,20,0));
+		Ponto ponto1 = new Ponto(1, null, LocalDateTime.of(2021,5,21, 4,20,0));
+		Ponto ponto2 = new Ponto(1, null, LocalDateTime.of(2021,5,21, 21,20,0));
 		
 		assertFalse(JornadaAPI.pontoDentroDoTurno(ponto1, caso2));
 		assertFalse(JornadaAPI.pontoDentroDoTurno(ponto2, caso2));
@@ -105,7 +105,7 @@ class JornadaAPITest {
 		LocalTime fim = LocalTime.of(22, 0);
 		Turno caso1 = new Turno(inicio, fim, "Turno diario");
 		
-		Ponto ponto = new Ponto(1, LocalDateTime.of(2021,5,21, 14,50,1));
+		Ponto ponto = new Ponto(1, null, LocalDateTime.of(2021,5,21, 14,50,1));
 		
 		int tolerancia = 10; //minutos
 		assertTrue(JornadaAPI.pontoDentroDoTurno(ponto, caso1, tolerancia));
@@ -117,7 +117,7 @@ class JornadaAPITest {
 		LocalTime fim = LocalTime.of(4, 0);
 		Turno caso2 = new Turno(inicio, fim, "Turno diario");
 		
-		Ponto ponto = new Ponto(1, LocalDateTime.of(2021,5,29, 4,9,59));
+		Ponto ponto = new Ponto(1, null, LocalDateTime.of(2021,5,29, 4,9,59));
 		
 		int tolerancia = 10; //minutos
 		assertTrue(JornadaAPI.pontoDentroDoTurno(ponto, caso2, tolerancia));
