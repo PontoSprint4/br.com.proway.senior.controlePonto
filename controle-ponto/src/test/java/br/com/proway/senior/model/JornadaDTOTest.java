@@ -28,10 +28,10 @@ class JornadaDTOTest {
 		data = LocalDate.now();
 		idPessoa = 42;
 		turno = new Turno(22, LocalTime.now(), LocalTime.now().plusMinutes(12), "Turno de Teste");
-		ponto = new Ponto(LocalDateTime.now());
-		jornada = new Jornada(id, data, idPessoa, turno);
-		jornada.setListaPonto(ponto);
 		
+		jornada = new Jornada(id, data, idPessoa, turno);
+		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now()));
+		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now().plusHours(3)));
 		jornadaDTO = new JornadaDTO(jornada);
 	}
 
@@ -41,6 +41,14 @@ class JornadaDTOTest {
 
 	@Test
 	void testJornadaDTO() {
+		// Garantir que os pontos da lista de pontos na Jornada foram feitos na ORDEM CERTA.
+		assertNotNull(jornadaDTO);
+	}
+	
+	@Test
+	void testJornadaDTOComPontosImpares() throws Exception {
+		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now().plusHours(8)));
+		jornadaDTO = new JornadaDTO(jornada);
 		assertNotNull(jornadaDTO);
 	}
 
@@ -61,7 +69,7 @@ class JornadaDTOTest {
 
 	@Test
 	void testGetListaPonto() {
-		assertEquals(1, jornadaDTO.getListaPonto().size());
+		assertEquals(2, jornadaDTO.getListaPonto().size());
 	}
 
 	@Test

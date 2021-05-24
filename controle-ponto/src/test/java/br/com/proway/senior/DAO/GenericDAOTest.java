@@ -21,6 +21,7 @@ import br.com.proway.senior.model.Turno;
 class GenericDAOTest {
 	static PontoDAO daop;
 	static Ponto ponto;
+	static int idPessoa;
 	
 	static TurnoDAO daot;
 	static Turno turno;
@@ -28,6 +29,7 @@ class GenericDAOTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		daop = PontoDAO.getInstance(DBConnection.getSession());
+		idPessoa = 155;
 		
 		daot = TurnoDAO.getInstance(DBConnection.getSession());
 		turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(3), "Turno Noturno");
@@ -42,19 +44,19 @@ class GenericDAOTest {
 
 	@Test
 	void testCreate() {
-		Integer newId = daop.create(new Ponto(LocalDateTime.now()));
+		Integer newId = daop.create(new Ponto(idPessoa, LocalDateTime.now()));
 		assertNotNull(newId);
 	}
 
 	@Test
 	void testGet() {
-		Integer newId = daop.create(new Ponto(LocalDateTime.now()));
+		Integer newId = daop.create(new Ponto(idPessoa, LocalDateTime.now()));
 		assertNotNull(daop.get(newId));
 	}
 
 	@Test
 	void testUpdate() {
-		Integer newId = daop.create(new Ponto(LocalDateTime.now()));
+		Integer newId = daop.create(new Ponto(idPessoa, LocalDateTime.now()));
 		Ponto instancia = daop.get(newId);
 		LocalDateTime novaHora = LocalDateTime.now().plusHours(2);
 		instancia.setMomentoPonto(novaHora);
@@ -64,7 +66,7 @@ class GenericDAOTest {
 
 	@Test
 	void testDelete() {
-		int id = daop.create(new Ponto(LocalDateTime.now()));
+		int id = daop.create(new Ponto(idPessoa, LocalDateTime.now()));
 		assertTrue(daop.delete(id));
 		assertNull(daop.get(id));
 	}
@@ -72,13 +74,13 @@ class GenericDAOTest {
 	@Test
 	void testGetAll() {
 		int tamanhoAntes = daop.getAll().size();
-		daop.create(new Ponto(LocalDateTime.now()));
+		daop.create(new Ponto(idPessoa,LocalDateTime.now()));
 		assertEquals(tamanhoAntes + 1 , daop.getAll().size());
 	}
 
 	@Test
 	void testDeleteAll() {
-		daop.create(new Ponto(LocalDateTime.now()));
+		daop.create(new Ponto(idPessoa, LocalDateTime.now()));
 		assertTrue(daop.deleteAll());
 		assertFalse(daop.deleteAll());
 		assertEquals(0, daop.getAll().size());

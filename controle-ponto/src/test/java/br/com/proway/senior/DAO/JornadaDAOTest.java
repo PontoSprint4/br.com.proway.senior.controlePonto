@@ -34,8 +34,8 @@ class JornadaDAOTest {
 		data = LocalDate.now();
 		idPessoa = 12;
 		turnoPadrao = new Turno(LocalTime.now(), LocalTime.now().plusMinutes(42), "Turno Teste");
-		ponto1 = new Ponto(LocalDateTime.now());
-		ponto2 = new Ponto(LocalDateTime.now().plusMinutes(42));
+		ponto1 = new Ponto(idPessoa, LocalDateTime.now());
+		ponto2 = new Ponto(idPessoa, LocalDateTime.now().plusMinutes(42));
 	}
 	
 	@BeforeAll

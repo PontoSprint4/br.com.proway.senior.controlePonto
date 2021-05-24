@@ -10,11 +10,14 @@ import org.junit.jupiter.api.Test;
 class PontoTest {
 
 	static int id;
+	static int idPessoa;
 	static LocalDateTime momentoPonto;
 	
 	@BeforeClass
 	void setUp() {
 		id = 1;
+		idPessoa = 12;
+		
 		momentoPonto = LocalDateTime.now().plusHours(1);
 	}
 	
@@ -26,13 +29,13 @@ class PontoTest {
 	
 	@Test
 	void testPontoConstructor3() {
-		Ponto ponto = new Ponto(momentoPonto);
+		Ponto ponto = new Ponto(idPessoa ,momentoPonto);
 		assertNotNull(ponto);
 	}
 
 	@Test
 	void testPontoIntegerLocalDateTime() {
-		Ponto ponto = new Ponto(id, null, momentoPonto);
+		Ponto ponto = new Ponto(id, idPessoa, momentoPonto);
 		assertNotNull(ponto);
 	}
 

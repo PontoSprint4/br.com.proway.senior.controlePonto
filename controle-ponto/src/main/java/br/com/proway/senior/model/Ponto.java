@@ -26,8 +26,9 @@ public class Ponto {
 	
 	public Ponto() {}
 
-	public Ponto(LocalDateTime momentoPonto) {
+	public Ponto(Integer idPessoa, LocalDateTime momentoPonto) {
 		this.momentoPonto = momentoPonto;
+		this.idPessoa = idPessoa;
 	}
 
 	public Ponto(Integer idPonto, Integer idPessoa, LocalDateTime momentoPonto) {
