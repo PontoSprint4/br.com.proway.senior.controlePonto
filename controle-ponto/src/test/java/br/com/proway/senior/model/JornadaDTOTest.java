@@ -11,9 +11,16 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import br.com.proway.senior.enums.EstadosJornada;
+
 class JornadaDTOTest {
 	static int id;
+	
 	static LocalDate data;
+	static int ano;
+	static int mes;
+	static int dia;
+	
 	static int idPessoa;
 	static Turno turno;
 	static Ponto ponto;
@@ -25,10 +32,15 @@ class JornadaDTOTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		id = 12;
-		data = LocalDate.now();
 		idPessoa = 42;
-		turno = new Turno(22, LocalTime.now(), LocalTime.now().plusMinutes(12), "Turno de Teste");
 		
+		dia = 15;
+		mes = 4;
+		ano = 2022;
+		
+		data = LocalDate.of(ano, mes, dia);
+		
+		turno = new Turno(22, LocalTime.now(), LocalTime.now().plusMinutes(12), "Turno de Teste");
 		jornada = new Jornada(id, data, idPessoa, turno);
 		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now()));
 		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now().plusHours(3)));
@@ -75,6 +87,40 @@ class JornadaDTOTest {
 	@Test
 	void testGetIdPessoa() {
 		assertEquals(idPessoa, jornadaDTO.getIdPessoa());
+	}
+	
+	@Test
+	void testGetDia() {
+		assertEquals(dia, jornadaDTO.getDia());
+	}
+	
+	@Test
+	void testGetMes() {
+		assertEquals(mes, jornadaDTO.getMes());
+	}
+	
+	@Test
+	void testGetAno() {
+		assertEquals(ano, jornadaDTO.getAno());
+	}
+	
+	@Test
+	void testGetMinutosTrabalhados() throws Exception {
+		jornada = new Jornada(id, data, idPessoa, turno);
+		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now()));
+		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now().plusHours(3)));
+		JornadaDTO jornadaDTO = new JornadaDTO(jornada);
+		assertEquals(3*60, jornadaDTO.getMinutosTrabalhados());
+	}
+	
+	@Test
+	void testGetEstado() throws Exception {
+		jornada = new Jornada(id, data, idPessoa, turno);
+		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now()));
+		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now().plusHours(3)));
+		JornadaDTO jornadaDTO = new JornadaDTO(jornada);
+		
+		assertEquals(EstadosJornada.FECHADO, jornadaDTO.getEstado());
 	}
 
 }

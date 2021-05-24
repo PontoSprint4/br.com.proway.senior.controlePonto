@@ -59,6 +59,13 @@ class PontoTest {
 		Ponto ponto = new Ponto(id, null, momentoPonto);
 		assertEquals(momentoPonto, ponto.getMomentoPonto());
 	}
+	
+	@Test
+	void testSetIdPessoa() {
+		Ponto ponto = new Ponto(id, null, momentoPonto);
+		ponto.setIdPessoa(42);
+		assertEquals(42, ponto.getIdPessoa());
+	}
 
 	@Test
 	void testSetMomentoPonto() {
