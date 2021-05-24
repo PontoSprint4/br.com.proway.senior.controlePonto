@@ -134,7 +134,7 @@ public final class PontoDAO extends GenericDAO<Ponto> {
      * para sucesso da operacao.
      */
 	public boolean deleteAll() {
-		return super.deleteAll("ponto");
+		return super.deleteAll(Ponto.class);
 	}
 
 }

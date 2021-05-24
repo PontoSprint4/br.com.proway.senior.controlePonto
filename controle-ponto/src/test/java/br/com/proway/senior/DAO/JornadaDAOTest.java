@@ -12,7 +12,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.proway.senior.dbpersistence.DBConnection;
@@ -23,6 +23,7 @@ import br.com.proway.senior.model.Turno;
 class JornadaDAOTest {
 	
 	static JornadaDAO dao = JornadaDAO.getInstance(DBConnection.getSession());
+	static TurnoDAO daot = TurnoDAO.getInstance(DBConnection.getSession());
 	
 	static LocalDate data;
 	static int idPessoa;
@@ -33,20 +34,20 @@ class JornadaDAOTest {
 	static void popularDados() {
 		data = LocalDate.now();
 		idPessoa = 12;
-		turnoPadrao = new Turno(LocalTime.now(), LocalTime.now().plusMinutes(42), "Turno Teste");
-		ponto1 = new Ponto(LocalDateTime.now());
-		ponto2 = new Ponto(LocalDateTime.now().plusMinutes(42));
+		turnoPadrao = new Turno(LocalTime.now(), LocalTime.now().plusMinutes(42), "Turno Teste Jornada");
+		ponto1 = new Ponto(idPessoa, LocalDateTime.now());
+		ponto2 = new Ponto(idPessoa, LocalDateTime.now().plusMinutes(42));
 	}
 	
-	@BeforeAll
-	public static void before() {
+	@BeforeEach
+	public void before() {
 		popularDados();
 	}
 	
 	@AfterEach
 	public void after() {
 		dao.deleteAll();
-		popularDados();
+		daot.deleteAll();
 	}
 	
 	@Test

@@ -8,8 +8,8 @@ public class Validadores {
 	 * @param numero Integer Numero a ser validado.
 	 * @return boolean Retorna false se o numero for nulo ou igual a zero.
 	 */
-	static public boolean ehZeroOuNulo(Integer numero) {
-		if (numero == null || numero == 0)
+	static public boolean ehMenorIgualZeroOuNulo(Integer numero) {
+		if (numero == null || numero <= 0)
 			return true;
 		return false;
 	}

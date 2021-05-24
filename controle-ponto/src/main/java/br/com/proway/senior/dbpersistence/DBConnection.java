@@ -57,7 +57,7 @@ public class DBConnection {
 	 * @return sessionFactory
 	 */
 	public static SessionFactory getSessionFactory() {
-		if (sessionFactory == null) {
+		if (sessionFactory == null || sessionFactory.isClosed()) {
 			sessionFactory = buildSessionFactory();
 		}
 		return sessionFactory;
@@ -82,7 +82,7 @@ public class DBConnection {
 	 */
 	public static Session getSession() {
 		getSessionFactory();
-		if (session == null) {
+		if (session == null || !session.isOpen()) {
 			session = sessionFactory.openSession();
 		}
 		return session;

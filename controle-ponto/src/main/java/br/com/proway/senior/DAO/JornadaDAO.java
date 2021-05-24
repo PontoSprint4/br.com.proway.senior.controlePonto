@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
+import br.com.proway.senior.dbpersistence.DBConnection;
 import br.com.proway.senior.model.Jornada;
 import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.interfaces.IPessoa;
@@ -132,7 +133,7 @@ public final class JornadaDAO extends GenericDAO<Jornada>  {
      * para sucesso da operacao.
      */
     public boolean deleteAll() {
-    	return super.deleteAll("jornada");
+    	return super.deleteAll(Jornada.class);
     }
 
     /**
@@ -146,31 +147,37 @@ public final class JornadaDAO extends GenericDAO<Jornada>  {
      * @return jornadasPorIdPessoa Lista de jornadas da pessoa.
      */
     public List<Jornada> readByIdPessoa(int idPessoa) {
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
-        Root<Jornada> root = criteria.from(Jornada.class);
-        Query query = session.createQuery(criteria);
-
-        CriteriaQuery<Jornada> rootQuery = criteria.select(root);
-        Expression<Object> idRef = root.get("idPessoa");
-        criteria.select(root).where(builder.equal(idRef, idPessoa));
-
-        List<Jornada> jornadasPorIdPessoa = query.getResultList();
-        return jornadasPorIdPessoa;
+        return super.listarPorValorDeColunaExato(Jornada.class, "idPessoa", idPessoa);
     }
     
     // https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/criteria-api-date-time-operations.html
     
+    /**
+     * Retorna uma lista de jornadas do dia desejado de uma pessoa.
+     * 
+     * @param idPessoa
+     * @param data
+     * @return List<Jornada>
+     */
     public List<Jornada> obterJornadasDoDia(int idPessoa, LocalDate data) {
         return obterJornadasEntreDatas(idPessoa, data, data);
     }
     
+    /**
+     * Retorna uma lista de jornadas num intervalo de datas (inclusive) de uma pessoa.
+     * 
+     * @param idPessoa
+     * @param inicio
+     * @param fim
+     * @return List<Jornada>
+     */
     public List<Jornada> obterJornadasEntreDatas(int idPessoa, LocalDate inicio, LocalDate fim) {
-        CriteriaBuilder builder = session.getCriteriaBuilder();
+    	Session session = DBConnection.getSession();
+    	
+    	CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Jornada> criteria = builder.createQuery(Jornada.class);
         Root<Jornada> root = criteria.from(Jornada.class);
         
-
         Predicate procuraPessoa = builder.equal(root.get("idPessoa"), idPessoa);
         Predicate procuraData = builder.between(root.get("data"), builder.literal(inicio), builder.literal(fim));
         
