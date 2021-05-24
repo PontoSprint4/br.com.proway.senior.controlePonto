@@ -1,5 +1,6 @@
 package br.com.proway.senior.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -255,6 +256,19 @@ public class JornadaController {
         	}
     		return false;	
     	}	
+    }
+    
+    public List<Jornada> obterTodasJornadasDaPessoa(int idPessoa){
+    	// verificacoes e validacoes!!!!!
+    	return dao.readByIdPessoa(idPessoa);
+    }
+    
+    public List<Jornada> obterJornadasDoDia(int idPessoa, LocalDate data){
+    	return dao.obterJornadasDoDia(idPessoa, data);
+    }
+    
+    public List<Jornada> obterJornadasEntreDatas(int idPessoa, LocalDate inicio, LocalDate fim){
+    	return dao.obterJornadasEntreDatas(idPessoa, inicio, fim);
     }
     
 }
