@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.proway.senior.controlePonto.model.IntervaloTempo;
+import br.com.proway.senior.controlePonto.model.Jornada;
 import br.com.proway.senior.controlePonto.model.JornadaDTO;
 import br.com.proway.senior.controlePonto.model.Ponto;
 import br.com.proway.senior.controlePonto.services.JornadaService;
@@ -26,6 +27,8 @@ public class JornadaAPI {
 		this.jornadaService = service;
 	}
 	
+	// Actions
+	
 	@PostMapping("/marcarPonto/{idPessoa}")
 	void marcarPonto(
 			@PathVariable("idPessoa") Integer idPessoa,
@@ -33,6 +36,16 @@ public class JornadaAPI {
 	)throws Exception 
 	{
 		jornadaService.marcarPonto(idPessoa, ponto);
+	}
+	
+	// CRUD Jornada
+	
+	@PostMapping("/jornada/")
+	Integer criarJornada(
+			@RequestBody Jornada jornada
+	)throws Exception 
+	{
+		return jornadaService.createJornada(jornada);
 	}
 	
 	@GetMapping("/jornada/{idJornada}")
@@ -43,6 +56,15 @@ public class JornadaAPI {
 		return jornadaService.getJornada(idJornada);
 	}
 	
+	@PostMapping("/jornada/{jornadaId}")
+	boolean atualizarJornada(
+			@RequestBody Jornada jornada,
+			@PathVariable("idJornada") Integer idJornada
+	)throws Exception 
+	{
+		return jornadaService.updateJornada(idJornada, jornada);
+	}
+	
 	@DeleteMapping("/jornada/{idJornada}")
 	boolean deleteJornada(
 			@PathVariable("idJornada") Integer idJornada
@@ -50,6 +72,8 @@ public class JornadaAPI {
 	{
 		return jornadaService.deleteJornada(idJornada);
 	}
+	
+	// Filtrando Jornadas
 	
 	@GetMapping("/jornadas/{idPessoa}")
 	ArrayList<JornadaDTO> todasJornadas(

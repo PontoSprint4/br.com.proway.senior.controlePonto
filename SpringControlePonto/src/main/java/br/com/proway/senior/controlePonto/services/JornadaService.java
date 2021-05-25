@@ -26,34 +26,31 @@ public class JornadaService {
 	JornadaDTOController controllerDTOJornada = 
 			new JornadaDTOController();
 	
+	//CRUDZAO
+	public Integer createJornada(Jornada jornada) throws Exception {
+		return controllerJornada.create(jornada);
+	}
 	
 	public JornadaDTO getJornada(Integer idJornada) throws Exception {
 		return controllerDTOJornada.getJornada(idJornada);
+	}
+	
+	public boolean updateJornada(Integer idJornada, Jornada jornada) 
+		throws Exception 
+	{
+		return controllerJornada.update(idJornada, jornada);
 	}
 	
 	public boolean deleteJornada(Integer idJornada) throws Exception {
 		return controllerJornada.delete(idJornada);
 	}
 	
-	public JornadaDTO jornadaDoDia(Integer idPessoa) throws Exception {
-		LocalDate dataAtual = LocalDate.now();
-		ArrayList<Jornada> retorno = (ArrayList<Jornada>) 
-				controllerJornada.obterJornadasDoDia(idPessoa, dataAtual);
-		
-		switch(retorno.size()) {
-			case 1 : {
-				return controllerDTOJornada.getJornada(retorno.get(0).getId());
-			}
-			default: {
-				throw new Exception("Nenhuma ou Multiplas Jornadas nesse dia!");
-			}
-		}
-	}
-	
 	public ArrayList<JornadaDTO> todasJornadas(Integer idPessoa) throws Exception {
 		return (ArrayList<JornadaDTO>) 
 				controllerDTOJornada.getTodasJornadasDaPessoa(idPessoa);
 	}
+	
+	// Filtrando Jornadas
 	
 	public ArrayList<JornadaDTO> jornadasPorPeriodo(
 			Integer idPessoa, LocalDate inicio, LocalDate fim
@@ -73,6 +70,23 @@ public class JornadaService {
 				idPessoa, inicio, fim
 		);
 	}
+	
+	public JornadaDTO jornadaDoDia(Integer idPessoa) throws Exception {
+		LocalDate dataAtual = LocalDate.now();
+		ArrayList<Jornada> retorno = (ArrayList<Jornada>) 
+				controllerJornada.obterJornadasDoDia(idPessoa, dataAtual);
+		
+		switch(retorno.size()) {
+			case 1 : {
+				return controllerDTOJornada.getJornada(retorno.get(0).getId());
+			}
+			default: {
+				throw new Exception("Nenhuma ou Multiplas Jornadas nesse dia!");
+			}
+		}
+	}
+	
+	// ACTIONS
 	
 	public void marcarPonto(Integer idPessoa, Ponto ponto) throws Exception {
 		LocalDate dataAtual = ponto.getMomentoPonto().toLocalDate();
