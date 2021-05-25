@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import org.hibernate.Session;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.proway.senior.DAO.JornadaDAO;
@@ -36,11 +36,11 @@ class JornadaControllerTest {
 		tdao = TurnoDAO.getInstance(session);
 	}
 
-	@BeforeEach
+	@AfterEach
 	void cleanDB() {
-//		PontoDAO.getInstance(DBConnection.getSession()).deleteAll();
-//		TurnoDAO.getInstance(DBConnection.getSession()).deleteAll();
 		JornadaDAO.getInstance(DBConnection.getSession()).deleteAll();
+		TurnoDAO.getInstance(DBConnection.getSession()).deleteAll();
+		PontoDAO.getInstance(DBConnection.getSession()).deleteAll();
 	}
 	
     @Test
