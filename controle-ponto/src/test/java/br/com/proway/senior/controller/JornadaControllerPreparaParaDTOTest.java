@@ -30,7 +30,6 @@ class JornadaControllerPreparaParaDTOTest {
 		JornadaDAO.getInstance(DBConnection.getSession()).deleteAll();
 		TurnoDAO.getInstance(DBConnection.getSession()).deleteAll();
 		PontoDAO.getInstance(DBConnection.getSession()).deleteAll();
-		
 	}
 
 	@Test
