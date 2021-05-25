@@ -3,9 +3,9 @@ package br.com.proway.senior.model;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
@@ -102,6 +102,24 @@ class TurnoTest {
 		instancia.setNomeTurno(novoNome);
 		assertNotEquals(nome, instancia.getNomeTurno());
 		assertEquals(novoNome, instancia.getNomeTurno());
+	}
+	
+	@Test
+	void testSetListaPessoas() {
+		Turno instancia = new Turno(id, inicio, fim, nome);
+		instancia.setPessoasNoTurno(12);
+		assertEquals(1, instancia.getPessoasNoTurno().size());
+	}
+	
+	@Test
+	void testUpdateListaPessoas() {
+		Turno instancia = new Turno(id, inicio, fim, nome);
+		ArrayList<Integer> pessoas = new ArrayList<Integer>();
+		pessoas.add(12);
+		pessoas.add(42);
+		
+		instancia.trocarListaPessoasNoTurno(pessoas);
+		assertEquals(2, instancia.getPessoasNoTurno().size());
 	}
 
 }

@@ -27,6 +27,8 @@ class TurnoDTOTest {
 		nome = "Turno Teste";
 		
 		turno = new Turno(id, inicio, fim, nome);
+		turno.setPessoasNoTurno(12);
+		
 		turnoDTO = new TurnoDTO(turno);
 		
 	}
@@ -58,6 +60,11 @@ class TurnoDTOTest {
 	@Test
 	void testGetNomeTurno() {
 		assertEquals(nome, turnoDTO.getNomeTurno());
+	}
+	
+	@Test
+	void testPessoas() {
+		assertEquals(1, turnoDTO.getPessoasNoTurno().size());
 	}
 
 }

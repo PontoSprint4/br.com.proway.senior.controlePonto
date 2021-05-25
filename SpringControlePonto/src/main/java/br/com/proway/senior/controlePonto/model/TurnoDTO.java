@@ -1,7 +1,9 @@
-package br.com.proway.senior.model;
+package br.com.proway.senior.controlePonto.model;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+
+import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
 
 public class TurnoDTO {
 

@@ -57,7 +57,7 @@ class JornadaDAOTest {
 
 	@Test
 	void testCreateJornada() {
-		Jornada instancia = new Jornada(data, idPessoa, turnoPadrao);
+		Jornada instancia = new Jornada(data, 58, turnoPadrao);
 		Integer idCriado = dao.create(instancia);
 		assertNotNull(idCriado);
 	}
