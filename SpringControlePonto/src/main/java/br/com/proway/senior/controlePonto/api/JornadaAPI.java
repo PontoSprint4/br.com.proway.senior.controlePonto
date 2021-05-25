@@ -18,7 +18,7 @@ import br.com.proway.senior.controlePonto.services.JornadaService;
 
 
 @RestController
-@RequestMapping(path = "api/jornada")
+@RequestMapping(path = "api/")
 public class JornadaAPI {
 
 	private final JornadaService jornadaService;
