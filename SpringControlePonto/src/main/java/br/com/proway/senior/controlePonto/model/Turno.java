@@ -31,10 +31,16 @@ public class Turno implements ITurno {
 	@Column(name = "id_turno")
 	private Integer id;
 
+	@Column(name = "hora_inicio")
 	private LocalTime horaInicio;
+	
+	@Column(name = "hora_fim")
 	private LocalTime horaFim;
+	
+	@Column(name = "nome_turno")
 	private String nomeTurno;	
 	
+	@Column(name = "pessoas_no_turno")
 	private ArrayList<Integer> pessoasNoTurno;
 
 	public Turno() {this.pessoasNoTurno = new ArrayList<Integer>();}

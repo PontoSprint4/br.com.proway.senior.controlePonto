@@ -76,7 +76,7 @@ public class TurnoDAO extends GenericDAO<Turno> {
 	public boolean update(Turno turnoASerAtualizado) {
 		return super.update(turnoASerAtualizado);
 	}
-
+ 
 	/**
 	 * Recebe um objeto {@link Turno} e deleta no banco de dados. E realizado um
 	 * teste para saber se a transacaoo atual esta ativa, se estiver e retornada,
@@ -122,4 +122,7 @@ public class TurnoDAO extends GenericDAO<Turno> {
 		return super.deleteAll(Turno.class);
 	}
 
+	public List<Turno> turnoDaPessoa(int idPessoa) {
+		return super.listarPorValorDeColunaExato(Turno.class, "pessoasNoTurno", idPessoa);
+	}
 }
