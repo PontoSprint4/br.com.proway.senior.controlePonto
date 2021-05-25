@@ -1,6 +1,7 @@
 package br.com.proway.senior.model;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,6 +36,8 @@ public class Turno implements ITurno {
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
 	private String nomeTurno;	
+	
+	private ArrayList<Integer> pessoasNoTurno;
 
 	public Turno() {}
 
@@ -42,6 +45,8 @@ public class Turno implements ITurno {
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
 		this.nomeTurno = nomeTurno;
+		
+		this.pessoasNoTurno = new ArrayList<Integer>();
 	}
 	
 	public Turno(Integer id, LocalTime horaInicio, LocalTime horaFim, String nomeTurno) {
@@ -49,6 +54,8 @@ public class Turno implements ITurno {
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
 		this.nomeTurno = nomeTurno;
+		
+		this.pessoasNoTurno = new ArrayList<Integer>();
 	}
 
 	public Integer getId() {
@@ -81,6 +88,18 @@ public class Turno implements ITurno {
 
 	public void setNomeTurno(String nomeTurno) {
 		this.nomeTurno = nomeTurno;
+	}
+
+	public ArrayList<Integer> getPessoasNoTurno() {
+		return pessoasNoTurno;
+	}
+
+	public void setPessoasNoTurno(Integer idPessoa) {
+		this.pessoasNoTurno.add(idPessoa);
 	}	
+	
+	public void trocarListaPessoasNoTurno(ArrayList<Integer> pessoasNoTurno) {
+		this.pessoasNoTurno= pessoasNoTurno;
+	}
 	
 }

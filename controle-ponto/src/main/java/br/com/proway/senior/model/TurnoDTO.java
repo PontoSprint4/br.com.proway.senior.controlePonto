@@ -1,6 +1,7 @@
 package br.com.proway.senior.model;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class TurnoDTO {
 
@@ -8,6 +9,8 @@ public class TurnoDTO {
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
 	private String nomeTurno;	
+	
+	private ArrayList<Integer> pessoasNoTurno;
 	
 	/**
      * Construtor do {@link TurnoDTO}, recebe um objeto {@link Turno} vindo do BD.
@@ -21,6 +24,7 @@ public class TurnoDTO {
 		this.horaInicio = turno.getHoraInicio();
 		this.horaFim = turno.getHoraFim();
 		this.nomeTurno = turno.getNomeTurno();
+		this.pessoasNoTurno = turno.getPessoasNoTurno();
 	}
 
 	public Integer getId() {
@@ -39,4 +43,7 @@ public class TurnoDTO {
 		return nomeTurno;
 	}	
 	
+	public ArrayList<Integer> getPessoasNoTurno() {
+		return pessoasNoTurno;
+	}
 }
