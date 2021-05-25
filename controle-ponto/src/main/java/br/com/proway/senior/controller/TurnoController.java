@@ -38,8 +38,8 @@ public class TurnoController {
 	 * @param turno do tipo {@link Turno}
 	 */
 	public Integer create(Turno turno) {
-		tdao.create(turno);
-		return turno.getId();
+		int id = tdao.create(turno);
+		return id;
 	}
 
 	/**

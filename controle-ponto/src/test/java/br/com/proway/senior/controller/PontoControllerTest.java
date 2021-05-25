@@ -3,18 +3,18 @@ package br.com.proway.senior.controller;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import org.hibernate.Session;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import br.com.proway.senior.DAO.JornadaDAO;
 import br.com.proway.senior.DAO.PontoDAO;
+import br.com.proway.senior.DAO.TurnoDAO;
 import br.com.proway.senior.dbpersistence.DBConnection;
 import br.com.proway.senior.model.Ponto;
 
@@ -32,8 +32,10 @@ class PontoControllerTest {
 	}
 	
 	@AfterEach
-	void limpaBanco() {
-		pontoController.deleteAll();
+	void cleanDB() {
+		JornadaDAO.getInstance(DBConnection.getSession()).deleteAll();
+		TurnoDAO.getInstance(DBConnection.getSession()).deleteAll();
+		PontoDAO.getInstance(DBConnection.getSession()).deleteAll();
 	}
 
 	@Test
