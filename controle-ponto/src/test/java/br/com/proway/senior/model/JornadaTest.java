@@ -28,7 +28,7 @@ class JornadaTest {
 		data = LocalDate.of(2020, 3, 3);		
 		idPessoa = 2;
 		turno = new Turno(1, LocalTime.now().plusHours(1), LocalTime.now().plusHours(2), "Teste Turno");
-		ponto = new Ponto(8, LocalDateTime.of(2050, 6, 19, 53, 19));
+		ponto = new Ponto(8, null,  LocalDateTime.of(2050, 6, 19, 53, 19));
 	}
 	@Test
 	void testJornada() {
@@ -118,7 +118,7 @@ class JornadaTest {
 	@Test
 	void testSetListaPonto() {
 		Jornada jornada = new Jornada(id, data, idPessoa, turno);
-		Ponto novoPonto = new Ponto(3, LocalDateTime.of(2021, 5, 13, 23, 59));
+		Ponto novoPonto = new Ponto(3, null, LocalDateTime.of(2021, 5, 13, 23, 59));
 		jornada.setListaPonto(novoPonto);
 		assertNotEquals(ponto, jornada.listaPonto.get(0));
 		assertEquals(novoPonto, jornada.listaPonto.get(0));

@@ -2,19 +2,23 @@ package br.com.proway.senior.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import org.hibernate.Session;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import br.com.proway.senior.DAO.JornadaDAO;
+import br.com.proway.senior.DAO.PontoDAO;
 import br.com.proway.senior.DAO.TurnoDAO;
 import br.com.proway.senior.dbpersistence.DBConnection;
 import br.com.proway.senior.model.Jornada;
+import br.com.proway.senior.model.Ponto;
 import br.com.proway.senior.model.Turno;
 
 class JornadaControllerTest {
@@ -23,27 +27,45 @@ class JornadaControllerTest {
     static JornadaDAO jdao;
     static TurnoDAO tdao;
     
+    static PontoController pcontroller;
+    
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		session = DBConnection.getSession();
 		jornadaController = new JornadaController(session);
-		jdao = JornadaDAO.getInstance(session);
 		tdao = TurnoDAO.getInstance(session);
 	}
 
-	@AfterAll
-	static void before() {
-		jornadaController.deleteAll();
+	@AfterEach
+	void cleanDB() {
+		JornadaDAO.getInstance(DBConnection.getSession()).deleteAll();
+		TurnoDAO.getInstance(DBConnection.getSession()).deleteAll();
+		PontoDAO.getInstance(DBConnection.getSession()).deleteAll();
 	}
 	
     @Test
-    void testCreate() {
+    void testCreate() throws Exception {
     	int tamanho = jornadaController.getAll().size();
     	Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno1");
     	tdao.create(turno);
     	Jornada jornada = new Jornada(LocalDate.now(), 1, turno);
     	jornadaController.create(jornada);
     	assertEquals(tamanho + 1, jornadaController.getAll().size());
+    }
+    
+    @Test
+    void testCreateExceptionTurnoNulo() throws Exception {
+    	Jornada jornada = new Jornada(LocalDate.now(), 1, null);
+    	assertThrows(Exception.class, ()-> jornadaController.create(jornada));
+    }
+    
+    @Test
+    void testCreateExceptionJornadaSemData() throws Exception {
+    	Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno1");
+    	tdao.create(turno);
+    	Jornada jornada = new Jornada(null, 1, turno);
+    	assertThrows(Exception.class, ()-> jornadaController.create(jornada));
+
     }
 
     @Test
@@ -63,7 +85,7 @@ class JornadaControllerTest {
 	}
 
     @Test
-    void testGetAll() {
+    void testGetAll() throws Exception {
     	int tamanho = jornadaController.getAll().size();
 		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno3");
 		tdao.create(turno);
@@ -89,6 +111,49 @@ class JornadaControllerTest {
 	}
 	
 	@Test
+	void adicionarPontoNaJornadaTest() throws Exception{
+		Turno turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(8), "Turno Top");
+		tdao.create(turno);
+		
+    	Jornada jornada = new Jornada(LocalDate.of(2021, 5, 20), 666, turno);
+		Integer idCadastrado = jornadaController.create(jornada);
+		
+		Ponto ponto = new Ponto(12 ,666, LocalDateTime.now().plusMinutes(44));
+		Integer idPonto = PontoDAO.getInstance(DBConnection.getSession()).create(ponto);
+		Ponto pontoRetornado = PontoDAO.getInstance(DBConnection.getSession()).get(idPonto);
+		
+		assertTrue(jornadaController.adicionarPontoNaJornada(idCadastrado, pontoRetornado));
+		assertTrue(jornadaController.get(idCadastrado).getListaPonto().contains(pontoRetornado));
+	}
+	
+	@Test
+	void adicionarPontoNaJornadaInexistenteTest() throws Exception{
+		Turno turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(8), "Turno Top");
+		tdao.create(turno);
+		
+    	Jornada jornada = new Jornada(LocalDate.of(2021, 5, 20), 666, turno);
+		Integer idCadastrado = jornadaController.create(jornada);
+		jornadaController.delete(idCadastrado);
+		
+		Ponto ponto = new Ponto(12 ,666, LocalDateTime.now().plusMinutes(44));
+		Integer idPonto = PontoDAO.getInstance(DBConnection.getSession()).create(ponto);
+		Ponto pontoRetornado = PontoDAO.getInstance(DBConnection.getSession()).get(idPonto);
+		
+		assertThrows(Exception.class, () -> jornadaController.adicionarPontoNaJornada(idCadastrado, pontoRetornado));
+	}
+	
+	@Test
+	void adicionarPontoInexistenteNaJornadaTest() throws Exception{
+		Turno turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(8), "Turno Top");
+		tdao.create(turno);
+		
+    	Jornada jornada = new Jornada(LocalDate.of(2021, 5, 20), 666, turno);
+		Integer idCadastrado = jornadaController.create(jornada);
+		
+		assertThrows(Exception.class, () -> jornadaController.adicionarPontoNaJornada(idCadastrado, null));
+	}
+	
+	@Test
 	void testUpdateInvalidoIdInexistente() {
 		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno7");
 		tdao.create(turno);
@@ -97,7 +162,7 @@ class JornadaControllerTest {
 	}
 	
 	@Test
-	void testUpdateInvalidoNulo() {
+	void testUpdateInvalidoNulo() throws Exception {
 		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno6");
 		tdao.create(turno);
     	Jornada jornada = new Jornada(LocalDate.of(2021, 5, 20), 15, turno);
@@ -116,6 +181,21 @@ class JornadaControllerTest {
 		jornadaController.delete(idCadastrado);
 		assertEquals(tamanho -1, jornadaController.getAll().size());
 	}
+	
+	@Test
+	void testDeleteAll() throws Exception {
+		int tamanhoInicial = jornadaController.getAll().size();
+		Turno turno = new Turno(null, LocalTime.now(), LocalTime.now().plusHours(8), "Turno8");
+		tdao.create(turno);
+    	Jornada jornada = new Jornada(LocalDate.of(2021, 5, 20), 8, turno);
+		Integer idCadastrado = jornadaController.create(jornada);
+		
+		
+		jornadaController.deleteAll();
+		
+		assertEquals(tamanhoInicial, jornadaController.getAll().size());
+	}
+	
 	
 	@Test
 	void testDeleteInvalidoIdInexistente() {

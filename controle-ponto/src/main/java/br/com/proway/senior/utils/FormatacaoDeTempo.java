@@ -1,8 +1,12 @@
 package br.com.proway.senior.utils;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
+
+import br.com.proway.senior.model.Ponto;
+import br.com.proway.senior.model.Turno;
 
 /**
  * Classe utilitária de tratamento de tempo.

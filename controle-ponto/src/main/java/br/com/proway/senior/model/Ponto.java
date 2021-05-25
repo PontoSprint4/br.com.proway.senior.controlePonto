@@ -20,15 +20,20 @@ public class Ponto {
 
 	@Column(name = "momentoPonto")
 	private LocalDateTime momentoPonto;
-
+	
+	@Column(name = "pessoa_id")
+    private Integer idPessoa;
+	
 	public Ponto() {}
 
-	public Ponto(LocalDateTime momentoPonto) {
+	public Ponto(Integer idPessoa, LocalDateTime momentoPonto) {
 		this.momentoPonto = momentoPonto;
+		this.idPessoa = idPessoa;
 	}
 
-	public Ponto(Integer idPonto, LocalDateTime momentoPonto) {
+	public Ponto(Integer idPonto, Integer idPessoa, LocalDateTime momentoPonto) {
 		this.idPonto = idPonto;
+		this.idPessoa = idPessoa;
 		this.momentoPonto = momentoPonto;
 	}
 
@@ -38,6 +43,14 @@ public class Ponto {
 
 	public void setIdPonto(Integer idPonto) {
 		this.idPonto = idPonto;
+	}
+	
+	public Integer getIdPessoa() {
+		return idPessoa;
+	}
+
+	public void setIdPessoa(Integer idPessoa) {
+		this.idPessoa = idPessoa;
 	}
 
 	public LocalDateTime getMomentoPonto() {

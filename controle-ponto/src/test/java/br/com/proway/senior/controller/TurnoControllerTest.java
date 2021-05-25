@@ -12,6 +12,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import br.com.proway.senior.DAO.JornadaDAO;
+import br.com.proway.senior.DAO.PontoDAO;
 import br.com.proway.senior.DAO.TurnoDAO;
 import br.com.proway.senior.dbpersistence.DBConnection;
 import br.com.proway.senior.model.Turno;
@@ -30,8 +32,10 @@ class TurnoControllerTest {
 	}
 	
 	@AfterEach
-	void before() {
-		turnoController.deleteAll();
+	void cleanDB() {
+		JornadaDAO.getInstance(DBConnection.getSession()).deleteAll();
+		TurnoDAO.getInstance(DBConnection.getSession()).deleteAll();
+		PontoDAO.getInstance(DBConnection.getSession()).deleteAll();
 	}
 
 	@Test

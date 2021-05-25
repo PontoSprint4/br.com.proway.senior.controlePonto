@@ -38,8 +38,8 @@ public class TurnoController {
 	 * @param turno do tipo {@link Turno}
 	 */
 	public Integer create(Turno turno) {
-		tdao.create(turno);
-		return turno.getId();
+		int id = tdao.create(turno);
+		return id;
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class TurnoController {
 	 * @throws Exception
 	 */
 	public Turno get(int index) throws Exception {
-		if (Validadores.ehZeroOuNulo(index))
+		if (Validadores.ehMenorIgualZeroOuNulo(index))
 			throw new Exception("Id invalido.");
 		return tdao.get(index);
 	}
@@ -102,7 +102,7 @@ public class TurnoController {
 	 * @throws Exception
 	 */
 	public boolean delete(int id) throws Exception {
-		if (Validadores.ehZeroOuNulo(id)) 
+		if (Validadores.ehMenorIgualZeroOuNulo(id)) 
 			throw new Exception("Id invaliddo.");
 		if (Validadores.ehObjetoNulo(get(id)))
 			throw new Exception("O Turno não existe no banco de dados.");

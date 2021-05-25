@@ -27,6 +27,6 @@ public interface ICRUD<T> {
 	
 	List<T> getAll(Class<T> classeTabela);
 	
-	boolean deleteAll(String nomeTabela);
+	boolean deleteAll(Class<T> classeTabela);
 
 }

@@ -1,8 +1,12 @@
 package br.com.proway.senior.dbpersistence;
 
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,6 +19,7 @@ class DBConnectionTest {
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
+		
 	}
 
 	@Test
@@ -36,9 +41,12 @@ class DBConnectionTest {
 
 	@Test
 	void testShutdown() throws Exception {
+		Session session = DBConnection.getSession();
+		SessionFactory sessionFac = DBConnection.getSessionFactory();
 		DBConnection.shutdown();
-		assertFalse(DBConnection.getSession().isConnected());
-		assertTrue(DBConnection.getSessionFactory().isClosed());
+		assertFalse(session.isConnected());
+		assertTrue(sessionFac.isClosed());
+		DBConnection.getSession();
 		
 	}
 

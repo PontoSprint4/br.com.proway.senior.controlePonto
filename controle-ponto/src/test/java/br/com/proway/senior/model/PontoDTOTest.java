@@ -21,7 +21,7 @@ class PontoDTOTest {
 	static void setUpBeforeClass() throws Exception {
 		id = 666;
 		hora = LocalDateTime.now();
-		ponto = new Ponto(id, hora);
+		ponto = new Ponto(id, null, hora);
 		
 		pontoDTO = new PontoDTO(ponto);
 	}
