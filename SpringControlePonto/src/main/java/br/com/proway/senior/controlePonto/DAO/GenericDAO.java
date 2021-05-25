@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.dbpersistence.DBConnection;
+import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
 import br.com.proway.senior.model.controlePonto.interfaces.ICRUD;
 
 /**

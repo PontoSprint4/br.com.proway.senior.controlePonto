@@ -1,7 +1,12 @@
 package br.com.proway.senior.controlePonto.model;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Classe Ponto. Estrutura e define o ponto como objeto.

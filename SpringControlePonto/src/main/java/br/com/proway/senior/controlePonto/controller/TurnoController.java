@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import br.com.proway.senior.DAO.TurnoDAO;
+import br.com.proway.senior.controlePonto.DAO.TurnoDAO;
 import br.com.proway.senior.controlePonto.model.Turno;
-import br.com.proway.senior.controlePonto.utils.Validadores;
+import br.com.proway.senior.utils.Validadores;
 
 /**
  * Classe responsável por tratar de pedidos de visualização e ações.

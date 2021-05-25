@@ -4,10 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.proway.senior.controller.JornadaAPI;
-import br.com.proway.senior.controller.JornadaController;
-import br.com.proway.senior.dbpersistence.DBConnection;
-import br.com.proway.senior.enums.EstadosJornada;
+import br.com.proway.senior.controlePonto.controller.JornadaController;
+import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
+import br.com.proway.senior.controlePonto.enums.EstadosJornada;
 
 /**
  * DTO da entidade {@link Jornada} com os atributos relevantes para interface com outras

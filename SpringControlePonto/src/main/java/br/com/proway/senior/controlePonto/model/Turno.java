@@ -2,9 +2,7 @@ package br.com.proway.senior.controlePonto.model;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +37,7 @@ public class Turno implements ITurno {
 	
 	private ArrayList<Integer> pessoasNoTurno;
 
-	public Turno() {}
+	public Turno() {this.pessoasNoTurno = new ArrayList<Integer>();}
 
 	public Turno(LocalTime horaInicio, LocalTime horaFim, String nomeTurno) {
 		this.horaInicio = horaInicio;

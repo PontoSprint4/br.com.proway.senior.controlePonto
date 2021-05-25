@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import br.com.proway.senior.DAO.PontoDAO;
+import br.com.proway.senior.controlePonto.DAO.PontoDAO;
 import br.com.proway.senior.controlePonto.model.Ponto;
-import br.com.proway.senior.controlePonto.utils.Validadores;
+import br.com.proway.senior.utils.Validadores;
 
 /**
  * Classe responsavel por tratar de pedidos de visualizacao e acoes.

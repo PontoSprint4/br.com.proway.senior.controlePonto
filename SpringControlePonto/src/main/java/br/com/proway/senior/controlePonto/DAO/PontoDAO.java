@@ -2,14 +2,10 @@ package br.com.proway.senior.controlePonto.DAO;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-
 import org.hibernate.Session;
 
 import br.com.proway.senior.controlePonto.model.Jornada;
 import br.com.proway.senior.controlePonto.model.Ponto;
-import br.com.proway.senior.model.controlePonto.interfaces.ICRUD;
 
 /**
  * @author Samuel Levi <samuel.levi@senior.com.br>

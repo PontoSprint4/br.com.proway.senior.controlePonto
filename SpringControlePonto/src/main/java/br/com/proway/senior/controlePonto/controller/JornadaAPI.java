@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
 import br.com.proway.senior.controlePonto.model.Jornada;
 import br.com.proway.senior.controlePonto.model.JornadaDTO;
-import br.com.proway.senior.dbpersistence.DBConnection;
 
 public class JornadaAPI {
 	JornadaController controller = new JornadaController(DBConnection.getSession());

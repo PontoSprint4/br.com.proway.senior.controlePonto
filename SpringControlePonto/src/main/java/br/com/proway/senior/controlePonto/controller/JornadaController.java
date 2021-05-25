@@ -7,12 +7,12 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import br.com.proway.senior.DAO.JornadaDAO;
+import br.com.proway.senior.controlePonto.DAO.JornadaDAO;
 import br.com.proway.senior.controlePonto.model.Jornada;
 import br.com.proway.senior.controlePonto.model.Ponto;
 import br.com.proway.senior.controlePonto.model.Turno;
-import br.com.proway.senior.controlePonto.utils.FormatacaoDeTempo;
-import br.com.proway.senior.controlePonto.utils.Validadores;
+import br.com.proway.senior.utils.FormatacaoDeTempo;
+import br.com.proway.senior.utils.Validadores;
 
 /**
  * Classe responsável por receber as requisições, tratá-las e encaminhar para o

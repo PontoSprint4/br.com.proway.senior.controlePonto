@@ -2,7 +2,7 @@ package br.com.proway.senior.controlePonto.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
+import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
 
 /**
  * DTO da entidade {@link Ponto} com os atributos relevantes para interface com outras
