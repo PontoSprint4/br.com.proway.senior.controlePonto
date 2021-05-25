@@ -127,10 +127,10 @@ public class JornadaController {
      * @param jornadaASerDeletada Jornada que será deletada do banco.
      * @throws Exception 
      */
-    public void delete(int id) throws Exception {
+    public boolean delete(int id) throws Exception {
     	if(Validadores.ehObjetoNulo(dao.get(id)))
     		throw new Exception("Id invalido.");
-        dao.delete(id);
+        return dao.delete(id);
     }
     
     /**
@@ -320,7 +320,9 @@ public class JornadaController {
     		throw new Exception("Data inicio invalida.");
     	if(Validadores.ehObjetoNulo(fim)) 
     		throw new Exception("Data fim invalida.");
-    	return dao.obterJornadasEntreDatas(idPessoa, inicio, fim);
+    	
+    	List<Jornada> retorno = dao.obterJornadasEntreDatas(idPessoa, inicio, fim);
+    	return retorno;
     }
     
 }
