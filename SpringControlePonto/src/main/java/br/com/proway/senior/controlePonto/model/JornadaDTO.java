@@ -21,7 +21,7 @@ public class JornadaDTO {
 	// Do objeto Jornada
     private int id;
     private LocalDate data; 
-    private Turno turno;    // Possui as informacoes de comeco e fim do turno
+    private TurnoDTO turno;    // Possui as informacoes de comeco e fim do turno
     public List<Ponto> listaPonto = new ArrayList<Ponto>();        
     private int idPessoa;
     
@@ -47,7 +47,8 @@ public class JornadaDTO {
     public JornadaDTO(Jornada jornada) throws Exception {
         this.id = jornada.getId();
         this.data = jornada.getData();
-        this.turno = jornada.getTurno();
+   
+        this.turno = new TurnoDTO(jornada.getTurno());
         this.listaPonto = jornada.getListaPonto();
         this.idPessoa = jornada.getIdPessoa(); 
         
@@ -73,7 +74,7 @@ public class JornadaDTO {
 		return data;
 	}
 
-	public Turno getTurno() {
+	public TurnoDTO getTurno() {
 		return turno;
 	}
 

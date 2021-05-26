@@ -34,12 +34,12 @@ class JornadaControllerTratamentosTest {
 	static void setUpBeforeClass() throws Exception {
 		turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(16), "Turno 1");
 		jornada = new Jornada(LocalDate.now(), 1, turno);
-		jornada.setListaPonto(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
-		jornada.setListaPonto(new Ponto(1, null, LocalDateTime.now().plusHours(4)));
-		jornada.setListaPonto(new Ponto(2, null, LocalDateTime.now().plusHours(6)));
-		jornada.setListaPonto(new Ponto(3, null, LocalDateTime.now().plusHours(10)));
-		jornada.setListaPonto(new Ponto(4, null, LocalDateTime.now().plusHours(12)));
-		jornada.setListaPonto(new Ponto(5, null, LocalDateTime.now().plusHours(16)));
+		jornada.adicionaPontoNaLista(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
+		jornada.adicionaPontoNaLista(new Ponto(1, null, LocalDateTime.now().plusHours(4)));
+		jornada.adicionaPontoNaLista(new Ponto(2, null, LocalDateTime.now().plusHours(6)));
+		jornada.adicionaPontoNaLista(new Ponto(3, null, LocalDateTime.now().plusHours(10)));
+		jornada.adicionaPontoNaLista(new Ponto(4, null, LocalDateTime.now().plusHours(12)));
+		jornada.adicionaPontoNaLista(new Ponto(5, null, LocalDateTime.now().plusHours(16)));
 	}
 	
 	@AfterEach
@@ -63,7 +63,7 @@ class JornadaControllerTratamentosTest {
 	@Test
 	void testCalcularHorasTrabalhadasJornadaPontosImpar() throws Exception {
 		Jornada jornada = new Jornada(LocalDate.now(), 1, turno);
-		jornada.setListaPonto(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
+		jornada.adicionaPontoNaLista(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
 		assertEquals(0, controller.calcularHorasTrabalhadas(jornada));
 	}
 	
@@ -72,16 +72,16 @@ class JornadaControllerTratamentosTest {
 		ArrayList<Jornada> jornadas = new ArrayList<Jornada>();
 		
 		Jornada jornada1 = new Jornada(LocalDate.now(), 1, turno);
-		jornada1.setListaPonto(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
-		jornada1.setListaPonto(new Ponto(1, null, LocalDateTime.now().plusHours(4)));
-		jornada1.setListaPonto(new Ponto(2, null, LocalDateTime.now().plusHours(6)));
-		jornada1.setListaPonto(new Ponto(3, null, LocalDateTime.now().plusHours(10)));
+		jornada1.adicionaPontoNaLista(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
+		jornada1.adicionaPontoNaLista(new Ponto(1, null, LocalDateTime.now().plusHours(4)));
+		jornada1.adicionaPontoNaLista(new Ponto(2, null, LocalDateTime.now().plusHours(6)));
+		jornada1.adicionaPontoNaLista(new Ponto(3, null, LocalDateTime.now().plusHours(10)));
 		
 		Jornada jornada2 = new Jornada(LocalDate.now(), 1, turno);
-		jornada2.setListaPonto(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
-		jornada2.setListaPonto(new Ponto(1, null, LocalDateTime.now().plusHours(4)));
-		jornada2.setListaPonto(new Ponto(2, null, LocalDateTime.now().plusHours(6)));
-		jornada2.setListaPonto(new Ponto(3, null, LocalDateTime.now().plusHours(10)));
+		jornada2.adicionaPontoNaLista(new Ponto(0, null, LocalDateTime.now().plusHours(0)));
+		jornada2.adicionaPontoNaLista(new Ponto(1, null, LocalDateTime.now().plusHours(4)));
+		jornada2.adicionaPontoNaLista(new Ponto(2, null, LocalDateTime.now().plusHours(6)));
+		jornada2.adicionaPontoNaLista(new Ponto(3, null, LocalDateTime.now().plusHours(10)));
 		
 		jornadas.add(jornada1);
 		jornadas.add(jornada2);

@@ -100,7 +100,7 @@ public class Jornada {
         return listaPonto;
     }  
 	
-	public void setListaPonto(Ponto ponto) {
+	public void adicionaPontoNaLista(Ponto ponto) {
 		this.listaPonto.add(ponto);
 	}	
 	
@@ -108,8 +108,5 @@ public class Jornada {
 		this.listaPonto = listaPontos;
 	}	
 	
-	public void trocarListaPonto(List<Ponto> listaPontos) {
-		this.listaPonto = listaPontos;
-	}
 
 }

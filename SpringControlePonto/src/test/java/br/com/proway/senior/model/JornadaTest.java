@@ -112,7 +112,7 @@ class JornadaTest {
 	@Test
 	void testGetListaPonto() {
 		Jornada jornada = new Jornada(id, data, idPessoa, turno);				
-		jornada.setListaPonto(ponto);		
+		jornada.adicionaPontoNaLista(ponto);		
 		assertEquals(ponto, jornada.getListaPonto().get(0)  );
 	}
 
@@ -120,7 +120,7 @@ class JornadaTest {
 	void testSetListaPonto() {
 		Jornada jornada = new Jornada(id, data, idPessoa, turno);
 		Ponto novoPonto = new Ponto(3, null, LocalDateTime.of(2021, 5, 13, 23, 59));
-		jornada.setListaPonto(novoPonto);
+		jornada.adicionaPontoNaLista(novoPonto);
 		assertNotEquals(ponto, jornada.listaPonto.get(0));
 		assertEquals(novoPonto, jornada.listaPonto.get(0));
 	}
