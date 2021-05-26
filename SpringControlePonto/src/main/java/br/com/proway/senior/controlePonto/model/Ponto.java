@@ -23,7 +23,7 @@ public class Ponto {
 	@Column(name = "id")
 	private Integer idPonto;
 
-	@Column(name = "momentoPonto")
+	@Column(name = "momento_ponto")
 	private LocalDateTime momentoPonto;
 	
 	@Column(name = "pessoa_id")
