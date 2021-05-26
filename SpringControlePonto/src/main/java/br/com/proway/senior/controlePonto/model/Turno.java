@@ -98,16 +98,14 @@ public class Turno implements ITurno {
 	public ArrayList<Integer> getPessoasNoTurno() {
 		return pessoasNoTurno;
 	}
-
+	
+	// Esse com lista é o correto
 	public void setPessoasNoTurno(ArrayList<Integer> idPessoa) {
 		this.pessoasNoTurno = idPessoa;
 	}	
 	
-	public void setPessoasNoTurno(Integer idPessoa) {
+	public void adicionaPessoaNoTurno(Integer idPessoa) {
 		this.pessoasNoTurno.add(idPessoa);
 	}	
-	public void trocarListaPessoasNoTurno(ArrayList<Integer> pessoasNoTurno) {
-		this.pessoasNoTurno= pessoasNoTurno;
-	}
-	
+
 }

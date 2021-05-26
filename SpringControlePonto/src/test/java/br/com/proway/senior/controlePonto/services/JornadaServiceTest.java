@@ -168,12 +168,14 @@ class JornadaServiceTest {
 	@Test
 	void testMarcarPontoCase0() throws Exception { //falta implementar
 		Turno turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(8), "Turno teste");
+		turno.adicionaPessoaNoTurno(70);
+		
 		controllerTurno.create(turno);
 		LocalDate hoje = LocalDate.now();
 		Ponto ponto = new Ponto(70, LocalDateTime.of(hoje, LocalTime.now()));
+		Integer idPonto = controllerPonto.create(ponto);
 		
-		
-		jService.marcarPonto(70, ponto);
+		jService.marcarPonto(70, controllerPonto.get(idPonto));
 		ArrayList<Jornada> jornadasDoDia = (ArrayList<Jornada>) controllerJornada.obterJornadasDoDia(70, hoje);
 		assertEquals(1, jornadasDoDia.size());
 	}
@@ -197,14 +199,18 @@ class JornadaServiceTest {
 		Turno turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(8), "Turno teste");
 		controllerTurno.create(turno);
 		LocalDate hoje = LocalDate.now();
+		
 		Ponto ponto = new Ponto(70, LocalDateTime.of(hoje, LocalTime.now()));
-		controllerPonto.create(ponto);
-		jService.marcarPonto(70, ponto);
+		Integer idPonto = controllerPonto.create(ponto);
+		
 		Jornada jornada1 = new Jornada(hoje, 70, turno);
 		jService.createJornada(jornada1);
 		Jornada jornada2 = new Jornada(hoje, 70, turno);
 		jService.createJornada(jornada2);
-		assertThrows(Exception.class, () -> jService.marcarPonto(70, ponto));
+		
+		assertThrows(Exception.class, 
+				() ->jService.marcarPonto(70, 
+					controllerPonto.get(idPonto)));
 	}
 
 }

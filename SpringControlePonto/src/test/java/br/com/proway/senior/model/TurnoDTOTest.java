@@ -30,7 +30,7 @@ class TurnoDTOTest {
 		nome = "Turno Teste";
 		
 		turno = new Turno(id, inicio, fim, nome);
-		turno.setPessoasNoTurno(12);
+		turno.adicionaPessoaNoTurno(12);
 		
 		turnoDTO = new TurnoDTO(turno);
 		
