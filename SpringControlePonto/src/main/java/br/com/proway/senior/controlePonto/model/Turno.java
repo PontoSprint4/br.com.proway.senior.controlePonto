@@ -2,6 +2,7 @@ package br.com.proway.senior.controlePonto.model;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -98,10 +99,13 @@ public class Turno implements ITurno {
 		return pessoasNoTurno;
 	}
 
+	public void setPessoasNoTurno(ArrayList<Integer> idPessoa) {
+		this.pessoasNoTurno = idPessoa;
+	}	
+	
 	public void setPessoasNoTurno(Integer idPessoa) {
 		this.pessoasNoTurno.add(idPessoa);
 	}	
-	
 	public void trocarListaPessoasNoTurno(ArrayList<Integer> pessoasNoTurno) {
 		this.pessoasNoTurno= pessoasNoTurno;
 	}

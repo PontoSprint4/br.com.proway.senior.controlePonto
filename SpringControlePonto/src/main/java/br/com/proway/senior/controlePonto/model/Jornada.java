@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * Classe que estrutura a entidade Jornada.
  * Possui um id �nico e uma data no formato {@link LocalDate}. Toda Jornada �
@@ -39,7 +41,7 @@ public class Jornada {
     @OneToOne(cascade = CascadeType.ALL)
     private Turno turno;
 
-    @OneToMany(targetEntity = Ponto.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Jornada.class, cascade = CascadeType.ALL)
     public List<Ponto> listaPonto = new ArrayList<Ponto>();
     
     @Column(name = "pessoa_id")
