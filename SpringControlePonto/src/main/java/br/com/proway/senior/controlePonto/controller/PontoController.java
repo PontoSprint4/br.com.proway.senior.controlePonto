@@ -80,7 +80,11 @@ public class PontoController {
 			throw new Exception("O Ponto não existe no banco de dados.");
 		if (Validadores.ehObjetoNulo(ponto))
 			throw new Exception("O Ponto não pode ser nulo.");
-		return pdao.update(ponto); // pdao.update chama GenericDAO.update que retorna boolean
+		Ponto pontoPersistido = pdao.get(id);
+		pontoPersistido.setIdPessoa(ponto.getIdPessoa());
+		pontoPersistido.setIdPonto(ponto.getIdPonto());
+		pontoPersistido.setMomentoPonto(ponto.getMomentoPonto());
+		return pdao.update(pontoPersistido); // pdao.update chama GenericDAO.update que retorna boolean
 	}
 
 	/**
