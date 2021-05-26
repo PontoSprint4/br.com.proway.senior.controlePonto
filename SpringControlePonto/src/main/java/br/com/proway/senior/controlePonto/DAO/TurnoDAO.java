@@ -121,8 +121,4 @@ public class TurnoDAO extends GenericDAO<Turno> {
 	public boolean deleteAll() {
 		return super.deleteAll(Turno.class);
 	}
-
-	public List<Turno> turnoDaPessoa(int idPessoa) {
-		return super.listarPorValorDeColunaExato(Turno.class, "pessoasNoTurno", idPessoa);
-	}
 }

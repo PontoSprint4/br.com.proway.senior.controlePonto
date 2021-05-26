@@ -63,8 +63,17 @@ public class TurnoService {
 	}
 	
 	public List<Turno> turnoDaPessoa(int idPessoa) throws Exception {
-		List<Turno> listaTurno = controllerTurno.turnoDaPessoa(idPessoa);
-		return listaTurno;
+		List<Turno> listaDeTurnoDoBanco = controllerTurno.getAll();
+		List<Turno> listaDeTurnosDaPessoa = new ArrayList<Turno>();
+		for (Turno turno : listaDeTurnoDoBanco) {
+			List<Integer> listaDePessoasDoTurno = turno.getPessoasNoTurno();
+			for (Integer idDaPessoaNoTurno : listaDePessoasDoTurno) {
+				if(idPessoa == idDaPessoaNoTurno) {
+					listaDeTurnosDaPessoa.add(turno);
+				}
+			}
+		}
+		return listaDeTurnosDaPessoa;
 	}
 	
 }
