@@ -97,10 +97,16 @@ public class JornadaService {
 		switch(jornadasDoDia.size()) {
 			case 0 : {
 				int pontoId = controllerPonto.create(ponto);
-				// Instancia uma nova Jornada
+				
 				// Obtem o turno que possui idPessoa
+				TurnoService serviceTurno = new TurnoService();
+				Turno turno = serviceTurno.turnoDaPessoa(idPessoa).get(0);
+				// Instancia uma nova Jornada
+				Jornada jornada = new Jornada(LocalDate.now(), idPessoa, turno);
+				Integer idJornada = controllerJornada.create(jornada);
+				
 				// Instancia a jornada
-				//controllerJornada.adicionarPontoNaJornada(jornada.getId(), controllerPonto.get(pontoId));
+				controllerJornada.adicionarPontoNaJornada(idJornada, controllerPonto.get(pontoId));
 				break;
 			} 
 			case 1 : {

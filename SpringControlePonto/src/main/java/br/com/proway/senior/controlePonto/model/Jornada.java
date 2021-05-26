@@ -41,7 +41,8 @@ public class Jornada {
     @OneToOne(cascade = CascadeType.ALL)
     private Turno turno;
 
-    @OneToMany(targetEntity = Jornada.class, cascade = CascadeType.ALL)
+    @Column(name = "lista_ponto")
+    @OneToMany(targetEntity = Ponto.class, cascade = CascadeType.ALL)
     public List<Ponto> listaPonto = new ArrayList<Ponto>();
     
     @Column(name = "pessoa_id")
@@ -101,6 +102,10 @@ public class Jornada {
 	
 	public void setListaPonto(Ponto ponto) {
 		this.listaPonto.add(ponto);
+	}	
+	
+	public void setListaPonto(List<Ponto> listaPontos) {
+		this.listaPonto = listaPontos;
 	}	
 	
 	public void trocarListaPonto(List<Ponto> listaPontos) {
