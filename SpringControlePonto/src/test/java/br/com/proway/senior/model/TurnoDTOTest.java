@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -62,6 +63,11 @@ class TurnoDTOTest {
 	@Test
 	void testGetNomeTurno() {
 		assertEquals(nome, turnoDTO.getNomeTurno());
+	}
+	
+	@Test
+	void testMinutosTrabalho() {
+		assertEquals(inicio.until(fim, ChronoUnit.MINUTES), turnoDTO.getMinutosTrabalho());
 	}
 	
 	@Test
