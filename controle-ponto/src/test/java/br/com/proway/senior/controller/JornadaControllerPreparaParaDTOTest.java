@@ -79,6 +79,7 @@ class JornadaControllerPreparaParaDTOTest {
     	jornadaController.create(new Jornada(LocalDate.of(2021,6,11), idPessoa, turno));
     	jornadaController.create(new Jornada(LocalDate.of(2021,6,19), idPessoa, turno));
     	jornadaController.create(new Jornada(LocalDate.of(2021,6,26), idPessoa, turno));
+    	jornadaController.create(new Jornada(LocalDate.of(2021,12,26), idPessoa, turno));
     	
     	assertEquals(3, jornadaController.obterJornadasEntreDatas(idPessoa, LocalDate.of(2021,6,11), LocalDate.of(2021,6,30)).size());
 	}
