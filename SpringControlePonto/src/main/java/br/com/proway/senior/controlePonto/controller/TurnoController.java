@@ -120,10 +120,4 @@ public class TurnoController {
 	public boolean deleteAll() {
 		return tdao.deleteAll();
 	}
-	
-	public List<Turno> turnoDaPessoa(int idPessoa) throws Exception {
-		if (Validadores.ehMenorIgualZeroOuNulo(idPessoa)) 
-			throw new Exception("Id invaliddo.");
-		return tdao.turnoDaPessoa(idPessoa);
-	}
 }
