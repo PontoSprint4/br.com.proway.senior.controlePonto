@@ -105,7 +105,7 @@ class TurnoTest {
 	@Test
 	void testSetListaPessoas() {
 		Turno instancia = new Turno(id, inicio, fim, nome);
-		instancia.setPessoasNoTurno(12);
+		instancia.adicionaPessoaNoTurno(12);
 		assertEquals(1, instancia.getPessoasNoTurno().size());
 	}
 	
@@ -116,7 +116,7 @@ class TurnoTest {
 		pessoas.add(12);
 		pessoas.add(42);
 		
-		instancia.trocarListaPessoasNoTurno(pessoas);
+		instancia.setPessoasNoTurno(pessoas);
 		assertEquals(2, instancia.getPessoasNoTurno().size());
 	}
 

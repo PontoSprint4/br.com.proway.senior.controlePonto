@@ -82,7 +82,7 @@ public class TurnoController {
 		persistido.setHoraFim(turno.getHoraFim());
 		persistido.setHoraInicio(turno.getHoraInicio());
 		persistido.setNomeTurno(turno.getNomeTurno());
-		persistido.trocarListaPessoasNoTurno(turno.getPessoasNoTurno());
+		persistido.setPessoasNoTurno(turno.getPessoasNoTurno());
 		tdao.update(persistido);
 		return true;
 	}

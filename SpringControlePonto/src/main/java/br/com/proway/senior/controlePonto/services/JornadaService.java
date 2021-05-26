@@ -13,6 +13,7 @@ import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
 import br.com.proway.senior.controlePonto.model.Jornada;
 import br.com.proway.senior.controlePonto.model.JornadaDTO;
 import br.com.proway.senior.controlePonto.model.Ponto;
+import br.com.proway.senior.controlePonto.model.Turno;
 
 @Service
 public class JornadaService {
@@ -100,6 +101,11 @@ public class JornadaService {
 				
 				// Obtem o turno que possui idPessoa
 				TurnoService serviceTurno = new TurnoService();
+				
+				ArrayList<Turno> turnosDaPessoa = (ArrayList<Turno>) serviceTurno.turnoDaPessoa(idPessoa);
+				
+				if(turnosDaPessoa.size()==0) throw new Exception("Sem turnos registrados para essa Pessoa!");
+				
 				Turno turno = serviceTurno.turnoDaPessoa(idPessoa).get(0);
 				// Instancia uma nova Jornada
 				Jornada jornada = new Jornada(LocalDate.now(), idPessoa, turno);

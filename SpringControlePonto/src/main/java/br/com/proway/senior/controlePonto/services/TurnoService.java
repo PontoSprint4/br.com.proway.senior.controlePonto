@@ -45,7 +45,7 @@ public class TurnoService {
 	
 	public void adicionarPessoa(Integer idPessoa, int idTurno) throws Exception {
 		Turno turno = controllerTurno.get(idTurno);
-		turno.setPessoasNoTurno(idPessoa);
+		turno.adicionaPessoaNoTurno(idPessoa);
 		controllerTurno.update(idTurno, turno);
 	}
 	
