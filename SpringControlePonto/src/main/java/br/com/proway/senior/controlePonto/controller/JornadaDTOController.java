@@ -8,7 +8,7 @@ import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
 import br.com.proway.senior.controlePonto.model.Jornada;
 import br.com.proway.senior.controlePonto.model.JornadaDTO;
 
-public class JornadaAPI {
+public class JornadaDTOController {
 	JornadaController controller = new JornadaController(DBConnection.getSession());
 	
 	public List<JornadaDTO> converteListaParaDTO ( List<Jornada> jornadasObtidas ) throws Exception{
@@ -45,7 +45,13 @@ public class JornadaAPI {
 	}
 	
 	public JornadaDTO getJornadaDaPessoaNoDia(int idPessoa, LocalDate data) throws Exception {
-		return new JornadaDTO(controller.obterJornadasDoDia(idPessoa, data).get(0));
+		List<Jornada> retorno = controller.obterJornadasDoDia(idPessoa, data);
+		switch(retorno.size()) {
+		case 0: throw new Exception("Sem jornadas nesse dia!");
+		default: 
+			return new JornadaDTO(retorno.get(0));
+		}
+		
 	}
 
 }
