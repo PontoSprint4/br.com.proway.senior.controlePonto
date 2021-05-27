@@ -24,6 +24,13 @@ class FormatacaoDeTempoTest {
 	}
 	
 	@Test
+	void testTempoEntreRegistrosMadruga() throws Exception {
+		LocalDateTime hoje = LocalDateTime.of(2021, 5, 20, 23,0, 0);
+		LocalDateTime amanha = LocalDateTime.of(2021,5,21, 1,0,0);
+		assertEquals(120, FormatacaoDeTempo.tempoEntreRegistros(hoje, amanha));
+	}
+	
+	@Test
 	void testTempoEntreRegistrosInvalido(){
 		LocalDateTime hoje = LocalDateTime.of(2021, 5, 20, 11, 3, 0);
 		LocalDateTime hojeMaisCedo = hoje.minusHours(3);

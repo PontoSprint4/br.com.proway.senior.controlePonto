@@ -1,10 +1,10 @@
 package br.com.proway.senior.controlePonto.model;
 
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
+import br.com.proway.senior.utils.FormatacaoDeTempo;
 
 public class TurnoDTO {
 
@@ -23,6 +23,7 @@ public class TurnoDTO {
      * @see DBConnection
      * 
      * @param Turno : turno
+	 * @throws  
      */
 	public TurnoDTO(Turno turno) {
 		this.id = turno.getId();
@@ -30,8 +31,7 @@ public class TurnoDTO {
 		this.horaFim = turno.getHoraFim();
 		this.nomeTurno = turno.getNomeTurno();
 		this.pessoasNoTurno = turno.getPessoasNoTurno();
-		
-		this.minutosTrabalho = this.horaInicio.until(horaFim, ChronoUnit.MINUTES);
+		this.minutosTrabalho = FormatacaoDeTempo.calculaMinutosEsperadosNoTurno(horaInicio, horaFim);
 	}
 
 	public Integer getId() {
