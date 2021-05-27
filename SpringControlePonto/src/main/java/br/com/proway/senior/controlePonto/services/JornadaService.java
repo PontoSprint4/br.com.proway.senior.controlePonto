@@ -85,10 +85,16 @@ public class JornadaService {
 				throw new Exception("Nenhuma ou Multiplas Jornadas nesse dia!");
 			}
 		}
-	}
+	}	
 	
-	// ACTIONS
-	
+	/**
+	 * Instancia o momento do {@link Ponto};
+	 * Instancia as {@link Jornada} da 'pessoa' ('ID' passado como parametro), tendo como filtro,
+	 * um periodo (momento definido anteriormente)  
+	 * @param idPessoa
+	 * @param ponto
+	 * @throws Exception
+	 */
 	public void marcarPonto(Integer idPessoa, Ponto ponto) throws Exception {
 		LocalDate dataAtual = ponto.getMomentoPonto().toLocalDate();
 		
