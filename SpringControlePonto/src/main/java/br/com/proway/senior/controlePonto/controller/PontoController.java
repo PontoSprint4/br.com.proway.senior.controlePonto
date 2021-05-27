@@ -82,7 +82,6 @@ public class PontoController {
 			throw new Exception("O Ponto não pode ser nulo.");
 		Ponto pontoPersistido = pdao.get(id);
 		pontoPersistido.setIdPessoa(ponto.getIdPessoa());
-		pontoPersistido.setIdPonto(ponto.getIdPonto());
 		pontoPersistido.setMomentoPonto(ponto.getMomentoPonto());
 		return pdao.update(pontoPersistido); // pdao.update chama GenericDAO.update que retorna boolean
 	}

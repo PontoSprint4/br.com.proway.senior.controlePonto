@@ -48,12 +48,24 @@ class PontoServiceTest {
 	void testUpdatePonto() throws Exception {
 		Ponto ponto = new Ponto(70, LocalDateTime.now());
 		Integer idPonto = pService.createPonto(ponto);
+		
 		Ponto pontoAtualizado = new Ponto(70, LocalDateTime.now().plusMinutes(30));
+		
 		assertTrue(pService.updatePonto(idPonto, pontoAtualizado));
 	}
 
 	@Test
 	void testDeletePonto() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void testGetPonto() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void testGetAllPonto() {
 		fail("Not yet implemented");
 	}
 
