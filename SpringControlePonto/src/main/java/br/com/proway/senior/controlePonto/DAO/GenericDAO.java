@@ -35,10 +35,10 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 		if (!sessao.getTransaction().isActive()) {
 			sessao.beginTransaction();
 		}
-		
+		sessao.clear();
 		Integer idCadastrado = (Integer) sessao.save(entidade);
 		sessao.getTransaction().commit();
-		sessao.clear();
+		
 		return idCadastrado;
 	}
 	
@@ -64,7 +64,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
         if (!DBConnection.getSession().getTransaction().isActive()) {
         	DBConnection.getSession().beginTransaction();
         } 
-        
+        DBConnection.getSession().clear();
         DBConnection.getSession().update(objetoAtualizado);
     	DBConnection.getSession().getTransaction().commit();
         return true;
@@ -84,7 +84,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 		if (!DBConnection.getSession().getTransaction().isActive()) {
 			DBConnection.getSession().beginTransaction();
 		}
-		
+		DBConnection.getSession().clear();
 		DBConnection.getSession().delete(entrada);
 		DBConnection.getSession().getTransaction().commit();
 		return true;
@@ -131,6 +131,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaDelete<T> criteria = criteriaBuilder.createCriteriaDelete(classeTabela);
 		criteria.from(classeTabela);
+		session.clear();
 		int results = session.createQuery(criteria).executeUpdate();
 		session.getTransaction().commit();
 		return results > 0 ? true : false;
