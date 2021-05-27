@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.proway.senior.controlePonto.model.ListaDePessoas;
 import br.com.proway.senior.controlePonto.model.Turno;
 import br.com.proway.senior.controlePonto.model.TurnoDTO;
 import br.com.proway.senior.controlePonto.services.TurnoService;
@@ -53,14 +54,14 @@ public class TurnoAPI {
 		return turnoService.obter(id);
 	}
 	
-	@PutMapping("/adicionarPessoas/{idPessoa}/{idTurno}")
-	void adicionarPessoaNoTurno(@PathVariable Integer idPessoa, @PathVariable int idTurno) throws Exception{
+	@PutMapping("/adicionarPessoas/{idTurno}")
+	void adicionarPessoaNoTurno(@RequestBody ListaDePessoas idPessoa, @PathVariable int idTurno) throws Exception{
 		turnoService.adicionarPessoa(idPessoa, idTurno);
 	}
 	
-	@PutMapping("/removerPessoas/{idPessoa}/{idTurno}")
-	void removerPessoaNoTurno(@PathVariable Integer idPessoa, @PathVariable int idTurno) throws Exception{
-		turnoService.removerPessoa(idPessoa, idTurno);
+	@PutMapping("/removerPessoas/{idTurno}")
+	void removerPessoaNoTurno(@RequestBody ListaDePessoas objetoListaPessoa, @PathVariable int idTurno) throws Exception{
+		turnoService.removerPessoa(objetoListaPessoa, idTurno);
 	}
 	
 	@GetMapping("/obter/todasPessoas/{idTurno}")
