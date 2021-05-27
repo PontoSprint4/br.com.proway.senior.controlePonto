@@ -2,7 +2,6 @@ package br.com.proway.senior.controlePonto.api;
 
 import java.util.ArrayList;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.proway.senior.controlePonto.controller.TurnoController;
+import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
 import br.com.proway.senior.controlePonto.model.IntervaloTempo;
 import br.com.proway.senior.controlePonto.model.Jornada;
 import br.com.proway.senior.controlePonto.model.JornadaDTO;
 import br.com.proway.senior.controlePonto.model.Ponto;
+import br.com.proway.senior.controlePonto.model.Turno;
 import br.com.proway.senior.controlePonto.services.JornadaService;
 
 @RestController
@@ -39,6 +41,9 @@ public class JornadaAPI {
 
 	@PostMapping("/jornada/")
 	Integer criarJornada(@RequestBody Jornada jornada) throws Exception {
+		Integer idTurno = jornada.getTurno().getId();
+		Turno turno = new TurnoController(DBConnection.getSession()).get(idTurno);
+		jornada.setTurno(turno);
 		return jornadaService.createJornada(jornada);
 	}
 

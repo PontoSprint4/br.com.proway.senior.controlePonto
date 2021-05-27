@@ -29,6 +29,9 @@ public class JornadaService {
 	
 	//CRUDZAO
 	public Integer createJornada(Jornada jornada) throws Exception {
+		Integer idTurno = jornada.getTurno().getId();
+		Turno turno = new TurnoController(DBConnection.getSession()).get(idTurno);
+		jornada.setTurno(turno);
 		return controllerJornada.create(jornada);
 	}
 	
