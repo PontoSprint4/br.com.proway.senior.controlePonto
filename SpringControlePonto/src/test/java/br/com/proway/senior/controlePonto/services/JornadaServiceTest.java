@@ -146,6 +146,9 @@ class JornadaServiceTest {
 
 		Jornada jornada1 = new Jornada(hoje, 62, turno);
 		jService.createJornada(jornada1);
+		
+		Jornada jornada2 = new Jornada(hoje, 9, turno);
+		jService.createJornada(jornada2);
 
 		assertEquals(LocalDate.now(), jService.jornadaDoDia(62).getData());
 	}
