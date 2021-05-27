@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.proway.senior.controlePonto.controller.TurnoController;
 import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
+import br.com.proway.senior.controlePonto.model.ListaDePessoas;
 import br.com.proway.senior.controlePonto.model.Turno;
 import br.com.proway.senior.controlePonto.model.TurnoDTO;
 
@@ -43,15 +44,31 @@ public class TurnoService {
 		return(new TurnoDTO(turno));
 	}
 	
-	public void adicionarPessoa(Integer idPessoa, int idTurno) throws Exception {
-		Turno turno = controllerTurno.get(idTurno);
-		turno.adicionaPessoaNoTurno(idPessoa);
+	/**
+	 * Metodo de adicionar Pessoas na lista de pessoa do tuno.
+	 * 
+	 * @param objetoListaPessoa
+	 * @param idTurno
+	 * @throws Exception
+	 */
+	public void adicionarPessoa(ListaDePessoas objetoListaPessoa, int idTurno) throws Exception {
+		Turno turno = controllerTurno.get(idTurno);	
+		for(Integer id : objetoListaPessoa.listaDeIdPessoa) {
+			if(turno.getPessoasNoTurno().contains(id)) {
+				continue;
+			}
+			turno.adicionaPessoaNoTurno(id);			
+		}		
 		controllerTurno.update(idTurno, turno);
 	}
 	
-	public void removerPessoa(Integer idPessoa, int idTurno) throws Exception {
+	public void removerPessoa(ListaDePessoas objetoListaPessoa, int idTurno) throws Exception {
 		Turno turno = controllerTurno.get(idTurno);
-		turno.getPessoasNoTurno().remove(idPessoa);
+		for(Integer id : objetoListaPessoa.listaDeIdPessoa) {
+			//if(turno.getPessoasNoTurno().contains(id)) {
+				turno.getPessoasNoTurno().remove(id);
+			//}									
+		}
 		controllerTurno.update(idTurno, turno);
 	}
 
