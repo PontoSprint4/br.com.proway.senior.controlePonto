@@ -1,14 +1,17 @@
 package br.com.proway.senior.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import br.com.proway.senior.controlePonto.model.Turno;
+import br.com.proway.senior.controlePonto.model.TurnoDTO;
 
 class TurnoDTOTest {
 	static Integer id;
@@ -27,7 +30,7 @@ class TurnoDTOTest {
 		nome = "Turno Teste";
 		
 		turno = new Turno(id, inicio, fim, nome);
-		turno.setPessoasNoTurno(12);
+		turno.adicionaPessoaNoTurno(12);
 		
 		turnoDTO = new TurnoDTO(turno);
 		
@@ -60,6 +63,11 @@ class TurnoDTOTest {
 	@Test
 	void testGetNomeTurno() {
 		assertEquals(nome, turnoDTO.getNomeTurno());
+	}
+	
+	@Test
+	void testMinutosTrabalho() {
+		assertEquals(inicio.until(fim, ChronoUnit.MINUTES), turnoDTO.getMinutosTrabalho());
 	}
 	
 	@Test

@@ -1,10 +1,9 @@
-package br.com.proway.senior.model;
+package br.com.proway.senior.controlePonto.model;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import br.com.proway.senior.model.interfaces.ITurno;
+import br.com.proway.senior.model.controlePonto.interfaces.ITurno;
 
 /**
  * Classe que estrutura a entidade Turno.
@@ -33,13 +32,19 @@ public class Turno implements ITurno {
 	@Column(name = "id_turno")
 	private Integer id;
 
+	@Column(name = "hora_inicio")
 	private LocalTime horaInicio;
+	
+	@Column(name = "hora_fim")
 	private LocalTime horaFim;
+	
+	@Column(name = "nome_turno")
 	private String nomeTurno;	
 	
+	@Column(name = "pessoas_no_turno")
 	private ArrayList<Integer> pessoasNoTurno;
 
-	public Turno() {}
+	public Turno() {this.pessoasNoTurno = new ArrayList<Integer>();}
 
 	public Turno(LocalTime horaInicio, LocalTime horaFim, String nomeTurno) {
 		this.horaInicio = horaInicio;
@@ -93,13 +98,14 @@ public class Turno implements ITurno {
 	public ArrayList<Integer> getPessoasNoTurno() {
 		return pessoasNoTurno;
 	}
-
-	public void setPessoasNoTurno(Integer idPessoa) {
-		this.pessoasNoTurno.add(idPessoa);
+	
+	// Esse com lista é o correto
+	public void setPessoasNoTurno(ArrayList<Integer> idPessoa) {
+		this.pessoasNoTurno = idPessoa;
 	}	
 	
-	public void trocarListaPessoasNoTurno(ArrayList<Integer> pessoasNoTurno) {
-		this.pessoasNoTurno= pessoasNoTurno;
-	}
-	
+	public void adicionaPessoaNoTurno(Integer idPessoa) {
+		this.pessoasNoTurno.add(idPessoa);
+	}	
+
 }

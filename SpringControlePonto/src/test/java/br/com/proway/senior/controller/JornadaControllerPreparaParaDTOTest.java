@@ -10,12 +10,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import br.com.proway.senior.DAO.JornadaDAO;
-import br.com.proway.senior.DAO.PontoDAO;
-import br.com.proway.senior.DAO.TurnoDAO;
-import br.com.proway.senior.dbpersistence.DBConnection;
-import br.com.proway.senior.model.Jornada;
-import br.com.proway.senior.model.Turno;
+import br.com.proway.senior.controlePonto.DAO.JornadaDAO;
+import br.com.proway.senior.controlePonto.DAO.PontoDAO;
+import br.com.proway.senior.controlePonto.DAO.TurnoDAO;
+import br.com.proway.senior.controlePonto.controller.JornadaController;
+import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
+import br.com.proway.senior.controlePonto.model.Jornada;
+import br.com.proway.senior.controlePonto.model.Turno;
 
 class JornadaControllerPreparaParaDTOTest {
 	static JornadaController jornadaController;
@@ -79,7 +80,6 @@ class JornadaControllerPreparaParaDTOTest {
     	jornadaController.create(new Jornada(LocalDate.of(2021,6,11), idPessoa, turno));
     	jornadaController.create(new Jornada(LocalDate.of(2021,6,19), idPessoa, turno));
     	jornadaController.create(new Jornada(LocalDate.of(2021,6,26), idPessoa, turno));
-    	jornadaController.create(new Jornada(LocalDate.of(2021,12,26), idPessoa, turno));
     	
     	assertEquals(3, jornadaController.obterJornadasEntreDatas(idPessoa, LocalDate.of(2021,6,11), LocalDate.of(2021,6,30)).size());
 	}

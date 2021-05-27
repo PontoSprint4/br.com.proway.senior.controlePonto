@@ -1,10 +1,10 @@
 package br.com.proway.senior.DAO;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,10 +15,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.proway.senior.dbpersistence.DBConnection;
-import br.com.proway.senior.model.Jornada;
-import br.com.proway.senior.model.Ponto;
-import br.com.proway.senior.model.Turno;
+import br.com.proway.senior.controlePonto.DAO.JornadaDAO;
+import br.com.proway.senior.controlePonto.DAO.TurnoDAO;
+import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
+import br.com.proway.senior.controlePonto.model.Jornada;
+import br.com.proway.senior.controlePonto.model.Ponto;
+import br.com.proway.senior.controlePonto.model.Turno;
 
 class JornadaDAOTest {
 	

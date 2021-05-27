@@ -1,14 +1,12 @@
 package br.com.proway.senior.model;
 
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.time.LocalTime;
 import java.util.ArrayList;
-
-import org.junit.BeforeClass;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import br.com.proway.senior.controlePonto.model.Turno;
 
 class TurnoTest {
 
@@ -17,8 +15,8 @@ class TurnoTest {
 	static LocalTime fim ;
 	static String nome ;
 	
-	@BeforeClass
-	void prepararVariaveisStatic() {
+	@BeforeAll
+	static void prepararVariaveisStatic() {
 		id = 1;
 		inicio = LocalTime.now();
 		fim = LocalTime.now().plusHours(7);
@@ -107,7 +105,7 @@ class TurnoTest {
 	@Test
 	void testSetListaPessoas() {
 		Turno instancia = new Turno(id, inicio, fim, nome);
-		instancia.setPessoasNoTurno(12);
+		instancia.adicionaPessoaNoTurno(12);
 		assertEquals(1, instancia.getPessoasNoTurno().size());
 	}
 	
@@ -118,7 +116,7 @@ class TurnoTest {
 		pessoas.add(12);
 		pessoas.add(42);
 		
-		instancia.trocarListaPessoasNoTurno(pessoas);
+		instancia.setPessoasNoTurno(pessoas);
 		assertEquals(2, instancia.getPessoasNoTurno().size());
 	}
 
