@@ -41,9 +41,6 @@ public class JornadaAPI {
 
 	@PostMapping("/jornada/")
 	Integer criarJornada(@RequestBody Jornada jornada) throws Exception {
-		Integer idTurno = jornada.getTurno().getId();
-		Turno turno = new TurnoController(DBConnection.getSession()).get(idTurno);
-		jornada.setTurno(turno);
 		return jornadaService.createJornada(jornada);
 	}
 

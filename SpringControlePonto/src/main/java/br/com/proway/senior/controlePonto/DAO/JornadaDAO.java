@@ -2,6 +2,7 @@ package br.com.proway.senior.controlePonto.DAO;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -185,6 +186,8 @@ public final class JornadaDAO extends GenericDAO<Jornada>  {
 	    
         Query query = session.createQuery(criteria);
         List<Jornada> jornadasPorIdPessoa = query.getResultList();
-        return jornadasPorIdPessoa;
+        return jornadasPorIdPessoa.stream()
+        		  .filter(c -> c.getIdPessoa() == idPessoa)
+        		  .collect(Collectors.toList());
     }
 }
