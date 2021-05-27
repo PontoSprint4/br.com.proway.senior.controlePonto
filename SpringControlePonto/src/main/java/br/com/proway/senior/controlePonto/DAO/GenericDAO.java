@@ -38,6 +38,7 @@ public abstract class GenericDAO<T> implements ICRUD<T> {
 		
 		Integer idCadastrado = (Integer) sessao.save(entidade);
 		sessao.getTransaction().commit();
+		sessao.clear();
 		return idCadastrado;
 	}
 	
