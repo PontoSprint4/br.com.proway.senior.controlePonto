@@ -1,6 +1,8 @@
 package br.com.proway.senior.controlePonto.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +16,7 @@ import br.com.proway.senior.controlePonto.DAO.TurnoDAO;
 import br.com.proway.senior.controlePonto.controller.PontoController;
 import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
 import br.com.proway.senior.controlePonto.model.Ponto;
+import br.com.proway.senior.controlePonto.model.PontoDTO;
 
 class PontoServiceTest {
 
@@ -44,7 +47,7 @@ class PontoServiceTest {
 	@Test
 	void testUpdatePonto() throws Exception {
 		Ponto ponto = new Ponto(70, LocalDateTime.now());
-		int idPonto = pService.createPonto(ponto);
+		Integer idPonto = pService.createPonto(ponto);
 		Ponto pontoAtualizado = new Ponto(70, LocalDateTime.now().plusMinutes(30));
 		assertTrue(pService.updatePonto(idPonto, pontoAtualizado));
 	}

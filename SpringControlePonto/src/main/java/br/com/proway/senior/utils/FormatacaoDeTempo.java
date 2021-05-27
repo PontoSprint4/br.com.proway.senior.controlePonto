@@ -1,5 +1,6 @@
 package br.com.proway.senior.utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -27,20 +28,31 @@ public class FormatacaoDeTempo {
 	public static Long tempoEntreRegistros(LocalDateTime registroInicial, LocalDateTime registroFinal)
 			throws Exception {
 		if (registroInicial.isBefore(registroFinal)) {
-			if (registroInicial.getDayOfMonth() == registroFinal.getDayOfMonth()) {
+			//if (registroInicial.getDayOfMonth() == registroFinal.getDayOfMonth()) {
 				// CASO1 - inicio e fim do turno no mesmo dia
 				return ChronoUnit.MINUTES.between(registroInicial, registroFinal);
-			} else {
+			//} else {
 				// CASO 2 - inicio e fim de turno em dias diferentes (madrugada)
-				return calculaMadrugada(registroInicial.toLocalTime(), registroFinal.toLocalTime());
+				//return calculaMadrugada(registroInicial.toLocalTime(), registroFinal.toLocalTime());
 				//return (ChronoUnit.MINUTES.between(registroInicial, registroFinal));
-			}
+			//}
 		}
 		throw new Exception("A data inicial deve ser anterior a data final");
 	}
 	
-	public static Long calculaMadrugada(LocalTime registroInicial, LocalTime registroFinal) throws Exception{
-		return ChronoUnit.MINUTES.between(registroInicial, registroFinal);
+	public static Long calculaMinutosEsperadosNoTurno(LocalTime horaInicio, LocalTime horaFim) {
+		if(horaInicio.isBefore(horaFim)) {
+			//CASO1 - Turno num dia só
+			LocalDateTime horaInicioTurno = horaInicio.atDate(LocalDate.now());
+			LocalDateTime horaFimTurno = horaFim.atDate(LocalDate.now());
+			return ChronoUnit.MINUTES.between(horaInicioTurno, horaFimTurno);
+		} else {
+			//CASO2 - Turno atravessa o dia (if(horaInicio.isAfter(horaFim)
+			LocalDateTime horaInicioTurno = horaInicio.atDate(LocalDate.now());
+			LocalDateTime horaFimTurno = horaFim.atDate(LocalDate.now().plusDays(1));
+			return ChronoUnit.MINUTES.between(horaInicioTurno, horaFimTurno);
+		}
+		
 	}
 
 	/**
