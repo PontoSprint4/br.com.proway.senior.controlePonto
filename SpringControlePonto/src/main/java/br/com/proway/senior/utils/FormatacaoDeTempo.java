@@ -39,15 +39,24 @@ public class FormatacaoDeTempo {
 		}
 		throw new Exception("A data inicial deve ser anterior a data final");
 	}
-	
+	/**
+	 * Metodo que retorna os minutos esperados num turno.
+	 * por exemplo iniciando as 22:00 de um dia e finalizando as 04:00 do proximo dia.
+	 * CASO 1 - Faz o calculo normal quando o turno esta entre 00:00 e 23:59.
+	 * CASO 2 - Faz o calculo com o adicional de 1 dia (LocalDate.now().plusDays(1), quando se localizar
+	 * entre os dias.
+	 * @param horaInicio
+	 * @param horaFim
+	 * @return
+	 */
 	public static Long calculaMinutosEsperadosNoTurno(LocalTime horaInicio, LocalTime horaFim) {
 		if(horaInicio.isBefore(horaFim)) {
-			//CASO1 - Turno num dia só
+			//CASO1
 			LocalDateTime horaInicioTurno = horaInicio.atDate(LocalDate.now());
 			LocalDateTime horaFimTurno = horaFim.atDate(LocalDate.now());
 			return ChronoUnit.MINUTES.between(horaInicioTurno, horaFimTurno);
 		} else {
-			//CASO2 - Turno atravessa o dia (if(horaInicio.isAfter(horaFim)
+			//CASO2
 			LocalDateTime horaInicioTurno = horaInicio.atDate(LocalDate.now());
 			LocalDateTime horaFimTurno = horaFim.atDate(LocalDate.now().plusDays(1));
 			return ChronoUnit.MINUTES.between(horaInicioTurno, horaFimTurno);
