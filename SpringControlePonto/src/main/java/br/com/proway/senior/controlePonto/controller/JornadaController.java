@@ -100,7 +100,7 @@ public class JornadaController {
 		jornadaPersistida.setData(jornada.getData());
 		jornadaPersistida.setTurno(jornada.getTurno());
 		jornadaPersistida.setIdPessoa(jornada.getIdPessoa());
-		jornadaPersistida.trocarListaPonto(jornada.getListaPonto());
+		jornadaPersistida.setListaPonto(jornada.getListaPonto());
 		dao.update(jornadaPersistida);
 		return true;
 	}
@@ -120,7 +120,7 @@ public class JornadaController {
 			throw new Exception("O Ponto nao pode ser nulo.");
 		
 		Jornada jornadaPersistida = dao.get(idJornada);
-		jornadaPersistida.setListaPonto(ponto);
+		jornadaPersistida.adicionaPontoNaLista(ponto);
 		update(idJornada, jornadaPersistida);
 		return true;
 	}

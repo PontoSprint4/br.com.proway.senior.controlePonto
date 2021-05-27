@@ -16,6 +16,7 @@ import br.com.proway.senior.controlePonto.model.Jornada;
 import br.com.proway.senior.controlePonto.model.JornadaDTO;
 import br.com.proway.senior.controlePonto.model.Ponto;
 import br.com.proway.senior.controlePonto.model.Turno;
+import br.com.proway.senior.controlePonto.model.TurnoDTO;
 
 class JornadaDTOTest {
 	static int id;
@@ -32,6 +33,7 @@ class JornadaDTOTest {
 	static Jornada jornada;
 	
 	static JornadaDTO jornadaDTO;
+	static TurnoDTO turnoDaJornada;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -46,9 +48,11 @@ class JornadaDTOTest {
 		
 		turno = new Turno(22, LocalTime.now(), LocalTime.now().plusMinutes(12), "Turno de Teste");
 		jornada = new Jornada(id, data, idPessoa, turno);
-		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now()));
-		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now().plusHours(3)));
+		jornada.adicionaPontoNaLista(new Ponto(12 , LocalDateTime.now()));
+		jornada.adicionaPontoNaLista(new Ponto(12 , LocalDateTime.now().plusHours(3)));
 		jornadaDTO = new JornadaDTO(jornada);
+		turnoDaJornada = jornadaDTO.getTurno();
+		
 	}
 
 	@AfterAll
@@ -63,7 +67,7 @@ class JornadaDTOTest {
 	
 	@Test
 	void testJornadaDTOComPontosImpares() throws Exception {
-		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now().plusHours(8)));
+		jornada.adicionaPontoNaLista(new Ponto(12 , LocalDateTime.now().plusHours(8)));
 		jornadaDTO = new JornadaDTO(jornada);
 		assertNotNull(jornadaDTO);
 	}
@@ -80,7 +84,7 @@ class JornadaDTOTest {
 
 	@Test
 	void testGetTurno() {
-		assertEquals(turno, jornadaDTO.getTurno());
+		assertEquals(turnoDaJornada, jornadaDTO.getTurno());
 	}
 
 	@Test
@@ -111,8 +115,8 @@ class JornadaDTOTest {
 	@Test
 	void testGetMinutosTrabalhados() throws Exception {
 		jornada = new Jornada(id, data, idPessoa, turno);
-		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now()));
-		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now().plusHours(3)));
+		jornada.adicionaPontoNaLista(new Ponto(12 , LocalDateTime.now()));
+		jornada.adicionaPontoNaLista(new Ponto(12 , LocalDateTime.now().plusHours(3)));
 		JornadaDTO jornadaDTO = new JornadaDTO(jornada);
 		assertEquals(3*60, jornadaDTO.getMinutosTrabalhados());
 	}
@@ -120,8 +124,8 @@ class JornadaDTOTest {
 	@Test
 	void testGetEstado() throws Exception {
 		jornada = new Jornada(id, data, idPessoa, turno);
-		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now()));
-		jornada.setListaPonto(new Ponto(12 , LocalDateTime.now().plusHours(3)));
+		jornada.adicionaPontoNaLista(new Ponto(12 , LocalDateTime.now()));
+		jornada.adicionaPontoNaLista(new Ponto(12 , LocalDateTime.now().plusHours(3)));
 		JornadaDTO jornadaDTO = new JornadaDTO(jornada);
 		
 		assertEquals(EstadosJornada.FECHADO, jornadaDTO.getEstado());
