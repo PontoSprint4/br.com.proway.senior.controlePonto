@@ -16,6 +16,7 @@ import br.com.proway.senior.controlePonto.model.Jornada;
 import br.com.proway.senior.controlePonto.model.JornadaDTO;
 import br.com.proway.senior.controlePonto.model.Ponto;
 import br.com.proway.senior.controlePonto.model.Turno;
+import br.com.proway.senior.controlePonto.model.TurnoDTO;
 
 class JornadaDTOTest {
 	static int id;
@@ -32,6 +33,7 @@ class JornadaDTOTest {
 	static Jornada jornada;
 	
 	static JornadaDTO jornadaDTO;
+	static TurnoDTO turnoDaJornada;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -49,6 +51,8 @@ class JornadaDTOTest {
 		jornada.adicionaPontoNaLista(new Ponto(12 , LocalDateTime.now()));
 		jornada.adicionaPontoNaLista(new Ponto(12 , LocalDateTime.now().plusHours(3)));
 		jornadaDTO = new JornadaDTO(jornada);
+		turnoDaJornada = jornadaDTO.getTurno();
+		
 	}
 
 	@AfterAll
@@ -80,7 +84,7 @@ class JornadaDTOTest {
 
 	@Test
 	void testGetTurno() {
-		assertEquals(turno, jornadaDTO.getTurno());
+		assertEquals(turnoDaJornada, jornadaDTO.getTurno());
 	}
 
 	@Test
