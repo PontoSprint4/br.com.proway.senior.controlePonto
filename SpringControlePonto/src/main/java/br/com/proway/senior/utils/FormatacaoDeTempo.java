@@ -28,14 +28,7 @@ public class FormatacaoDeTempo {
 	public static Long tempoEntreRegistros(LocalDateTime registroInicial, LocalDateTime registroFinal)
 			throws Exception {
 		if (registroInicial.isBefore(registroFinal)) {
-			//if (registroInicial.getDayOfMonth() == registroFinal.getDayOfMonth()) {
-				// CASO1 - inicio e fim do turno no mesmo dia
 				return ChronoUnit.MINUTES.between(registroInicial, registroFinal);
-			//} else {
-				// CASO 2 - inicio e fim de turno em dias diferentes (madrugada)
-				//return calculaMadrugada(registroInicial.toLocalTime(), registroFinal.toLocalTime());
-				//return (ChronoUnit.MINUTES.between(registroInicial, registroFinal));
-			//}
 		}
 		throw new Exception("A data inicial deve ser anterior a data final");
 	}
