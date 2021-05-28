@@ -70,7 +70,7 @@ public class TurnoAPI {
 	}
 	
 	@GetMapping("/obter/turnoDaPessoa/{idPessoa}")
-	List<Turno> turnoDaPessoa(@PathVariable int idPessoa) throws Exception{
+	Turno turnoDaPessoa(@PathVariable int idPessoa) throws Exception{
 		return turnoService.turnoDaPessoa(idPessoa);
 	}	
 }

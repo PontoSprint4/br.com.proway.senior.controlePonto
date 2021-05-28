@@ -79,7 +79,7 @@ public class TurnoService {
 		return listaPessoas; 
 	}
 	
-	public List<Turno> turnoDaPessoa(int idPessoa) throws Exception {
+	public Turno turnoDaPessoa(int idPessoa) throws Exception {
 		List<Turno> listaDeTurnoDoBanco = controllerTurno.getAll();
 		List<Turno> listaDeTurnosDaPessoa = new ArrayList<Turno>();
 		for (Turno turno : listaDeTurnoDoBanco) {
@@ -90,7 +90,11 @@ public class TurnoService {
 				}
 			}
 		}
-		return listaDeTurnosDaPessoa;
+		switch (listaDeTurnosDaPessoa.size()) {
+			case (0) : throw new Exception("Pessoa nao esta registrada em nenhum turno!");
+			case (1) : return listaDeTurnosDaPessoa.get(0);
+			default : throw new Exception("Pessoa registrada em multiplos turnos!");
+		}
 	}
-	
 }
+

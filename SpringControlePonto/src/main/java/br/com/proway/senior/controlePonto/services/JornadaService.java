@@ -1,6 +1,7 @@
 package br.com.proway.senior.controlePonto.services;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
@@ -93,29 +94,46 @@ public class JornadaService {
 	// ACTIONS
 	
 	public void marcarPonto(Integer idPessoa, Ponto ponto) throws Exception {
-		LocalDate dataAtual = ponto.getMomentoPonto().toLocalDate();
+		Integer toleranciaDeHorarioEmMinutos = 20;
 		
-		ArrayList<Jornada> jornadasDoDia = (ArrayList<Jornada>) 
-				controllerJornada.obterJornadasDoDia(idPessoa, dataAtual);
+		// Obtem o turno que possui idPessoa
+		TurnoService serviceTurno = new TurnoService();
+		Turno turno = serviceTurno.turnoDaPessoa(idPessoa);
+		LocalTime inicioTurno = turno.getHoraInicio();
+		
+		// Informacoes do Ponto
+		LocalDate dataPonto = ponto.getMomentoPonto().toLocalDate();
+		LocalTime horaPonto = ponto.getMomentoPonto().toLocalTime();
+		
+		// Esse ponto esta sendo marcado em um horario permitido?
+		if(!controllerJornada.pontoDentroDoTurno(ponto, turno, toleranciaDeHorarioEmMinutos)) {
+			throw new Exception("Ponto fora do Turno considerando uma tolerancia de "+toleranciaDeHorarioEmMinutos);
+		}
+		
+		// Verifica se o Turno pertence a jornada do dia atual ou anterior (caso madrugada);
+		ArrayList<Jornada> jornadasDoDia;
+		if(horaPonto.isAfter(inicioTurno)) {
+			jornadasDoDia = (ArrayList<Jornada>) 
+					controllerJornada.obterJornadasDoDia(idPessoa, dataPonto);
+		}
+		// Se o Ponto foi marcado em um horario anterior ao inicio do turno
+		// Ele pertence a jornada anterior (caso madrugada)
+		else {
+			jornadasDoDia = (ArrayList<Jornada>) 
+					controllerJornada.obterJornadasDoDia(idPessoa, dataPonto.minusDays(1));
+		}
 		
 		switch(jornadasDoDia.size()) {
 			case 0 : {
 				int pontoId = controllerPonto.create(ponto);
-				
-				// Obtem o turno que possui idPessoa
-				TurnoService serviceTurno = new TurnoService();
-				
-				ArrayList<Turno> turnosDaPessoa = (ArrayList<Turno>) serviceTurno.turnoDaPessoa(idPessoa);
-				
-				if(turnosDaPessoa.size()==0) throw new Exception("Sem turnos registrados para essa Pessoa!");
-				
-				Turno turno = serviceTurno.turnoDaPessoa(idPessoa).get(0);
+
 				// Instancia uma nova Jornada
 				Jornada jornada = new Jornada(LocalDate.now(), idPessoa, turno);
 				Integer idJornada = controllerJornada.create(jornada);
 				
 				// Instancia a jornada
-				controllerJornada.adicionarPontoNaJornada(idJornada, controllerPonto.get(pontoId));
+				controllerJornada.adicionarPontoNaJornada(
+						idJornada, controllerPonto.get(pontoId));
 				break;
 			} 
 			case 1 : {
