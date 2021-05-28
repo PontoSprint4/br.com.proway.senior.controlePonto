@@ -261,5 +261,26 @@ class JornadaServiceTest {
 		List<Ponto> listaJornada = jService.getJornada(idJornada).getListaPonto();
 		assertEquals(1, listaJornada.size());
 	}
+	
+	@Test
+	void testMarcarPontoMultiplasJornadasNoDia() throws Exception {
+		Turno turno = new Turno(LocalTime.of(23,0), LocalTime.of(4,00), "Turno teste");
+		turno.adicionaPessoaNoTurno(70);
+		controllerTurno.create(turno);
+		
+		LocalDate hoje = LocalDate.now();
+		
+		Ponto ponto = new Ponto(70, LocalDateTime.of(hoje, LocalTime.of(3,59)));
+		Integer idPonto = controllerPonto.create(ponto);
+		
+		Jornada jornada1 = new Jornada(hoje.minusDays(1), 70, turno);
+		Jornada jornada2 = new Jornada(hoje.minusDays(1), 70, turno);
+		jService.createJornada(jornada1);
+		jService.createJornada(jornada2);
+		
+		assertThrows(Exception.class, 
+				() ->jService.marcarPonto(70, 
+					controllerPonto.get(idPonto)));
+	}
 
 }
