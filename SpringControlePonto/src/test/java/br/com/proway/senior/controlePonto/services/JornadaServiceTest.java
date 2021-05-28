@@ -176,33 +176,47 @@ class JornadaServiceTest {
 
 	@Test
 	void testMarcarPontoCase0() throws Exception {
-		Turno turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(8), "Turno teste");
-		turno.adicionaPessoaNoTurno(70);
+		LocalTime inicio = LocalTime.of(13, 0);
+		LocalTime fim = LocalTime.of(18, 0);
+		Integer idPessoa = 69;
 		
+		Turno turno = new Turno(inicio, fim, "Turno teste");
+		turno.adicionaPessoaNoTurno(idPessoa);
 		controllerTurno.create(turno);
+		
 		LocalDate hoje = LocalDate.now();
-		Ponto ponto = new Ponto(70, LocalDateTime.of(hoje, LocalTime.now()));
+		Ponto ponto = new Ponto(idPessoa, LocalDateTime.of(hoje, inicio.plusHours(1)));
 		Integer idPonto = controllerPonto.create(ponto);
 		
-		jService.marcarPonto(70, controllerPonto.get(idPonto));
-		ArrayList<Jornada> jornadasDoDia = (ArrayList<Jornada>) controllerJornada.obterJornadasDoDia(70, hoje);
+		jService.marcarPonto(idPessoa, controllerPonto.get(idPonto));
+		ArrayList<Jornada> jornadasDoDia = (ArrayList<Jornada>) 
+				controllerJornada.obterJornadasDoDia(idPessoa, hoje);
+		
 		assertEquals(1, jornadasDoDia.size());
 	}
 
 	@Test
 	void testMarcarPontoCase1() throws Exception {
-		Integer idPessoa = 70;
-		Turno turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(8), "Turno teste");
+		LocalTime inicio = LocalTime.of(13, 0);
+		LocalTime fim = LocalTime.of(18, 0);
+		Integer idPessoa = 69;
+		
+		Turno turno = new Turno(inicio, fim, "Turno teste");
 		turno.adicionaPessoaNoTurno(idPessoa);
 		controllerTurno.create(turno);
+		
 		LocalDate hoje = LocalDate.now();
-		Ponto ponto = new Ponto(idPessoa, LocalDateTime.of(hoje, LocalTime.now()));
+		Ponto ponto = new Ponto(idPessoa, LocalDateTime.of(hoje, inicio.plusHours(1)));
+		Integer idPonto = controllerPonto.create(ponto);
+		
 		Jornada jornada1 = new Jornada(hoje, idPessoa, turno);
 		jService.createJornada(jornada1);
-		jService.marcarPonto(idPessoa, ponto);
-		int idJornada = jService.jornadaDoDia(idPessoa).getId();
-		List<Ponto> listaJornada = jService.getJornada(idJornada).getListaPonto();
-		assertEquals(1, listaJornada.size());
+		
+		jService.marcarPonto(idPessoa, controllerPonto.get(idPonto));
+		ArrayList<Jornada> jornadasDoDia = (ArrayList<Jornada>) 
+				controllerJornada.obterJornadasDoDia(idPessoa, hoje);
+		
+		assertEquals(1, jornadasDoDia.size());
 	}
 
 	@Test

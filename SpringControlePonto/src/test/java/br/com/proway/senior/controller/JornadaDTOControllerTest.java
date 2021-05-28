@@ -110,6 +110,15 @@ class JornadaDTOControllerTest {
 	}
 	
 	@Test
+	public void getJornadaDaPessoaNoDiaExcessaoSemJornadaTest() throws Exception {
+		turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(20), "Turno da API");
+		controllerT.create(turno);
+		int idPessoa= 123;
+		
+		assertThrows(Exception.class, () -> jornadaDTOController.getJornadaDaPessoaNoDia(idPessoa, LocalDate.of(2021, 8, 12)));
+	}
+	
+	@Test
 	public void getHorasTrabalhadasDaPessoaPorPeriodo() throws Exception {
 		turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(20), "Turno da API");
 		
