@@ -19,8 +19,6 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Go to Directory
-      run: cd SpringControlePonto/
     - name: Cache Maven packages
       uses: actions/cache@v2
       with:
@@ -28,5 +26,5 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     - name: Run tests with Maven
-      run: mvn --batch-mode --update-snapshots test
+      run: mvn --batch-mode --update-snapshots -f ./SpringControlePonto/pom.xml test
       
