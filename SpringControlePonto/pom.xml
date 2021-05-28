@@ -44,48 +44,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
-			<plugin>
-			   <groupId>io.fabric8</groupId>
-			   <artifactId>docker-maven-plugin</artifactId>
-			   <version>0.36.0</version>
-			   <configuration>
-			      <images>
-			         <image>
-			            <name>${it.postgresql.image}</name>
-			            <run>
-			               <ports>
-			                  <port>${it.postgresql.port}:5432</port>
-			               </ports>
-			               <env>
-			                  <POSTGRES_USER>${it.postgresql.username}</POSTGRES_USER>
-			                  <POSTGRES_PASSWORD>${it.postgresql.password}</POSTGRES_PASSWORD>
-			                  <POSTGRES_DB>${it.postgresql.db}</POSTGRES_DB>
-			               </env>
-			               <wait>
-			                  <log>database system is ready to accept connections</log>
-			               </wait>
-			            </run>
-			         </image>
-			      </images>
-			   </configuration>
-			   <executions>
-			      <execution>
-			         <id>start</id>
-			         <phase>pre-integration-test</phase>
-			         <goals>
-			            <goal>start</goal>
-			         </goals>
-			      </execution>
-			      <execution>
-			         <id>stop</id>
-			         <phase>post-integration-test</phase>
-			         <goals>
-			            <goal>stop</goal>
-			         </goals>
-			      </execution>
-			   </executions>
-			</plugin>
 		</plugins>
 	</build>
 

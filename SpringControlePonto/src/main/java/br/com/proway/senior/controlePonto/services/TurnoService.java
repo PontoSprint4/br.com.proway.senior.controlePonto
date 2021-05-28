@@ -31,8 +31,8 @@ public class TurnoService {
 		return controllerTurno.create(turno);
 	}
 	
-	public void deletar(int id) throws Exception {
-		controllerTurno.delete(id);
+	public boolean deletar(int id) throws Exception {
+		return controllerTurno.delete(id);
 	}
 	
 	public void alterar(int id, Turno turno) throws Exception {

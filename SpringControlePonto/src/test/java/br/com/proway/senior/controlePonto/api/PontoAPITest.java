@@ -19,9 +19,7 @@ import br.com.proway.senior.controlePonto.services.PontoService;
 
 class PontoAPITest {
 	PontoAPI api = new PontoAPI(new PontoService());
-	
-	PontoController controllerP = new PontoController(DBConnection.getSession());
-	
+
 	@AfterEach
 	void cleanDB() {
 		JornadaDAO.getInstance(DBConnection.getSession()).deleteAll();
