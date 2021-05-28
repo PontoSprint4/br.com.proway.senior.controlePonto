@@ -27,8 +27,8 @@ public class TurnoService {
 		return listaDTO;
 	}
 	
-	public void salvar(Turno turno) {
-		controllerTurno.create(turno);
+	public Integer salvar(Turno turno) {
+		return controllerTurno.create(turno);
 	}
 	
 	public void deletar(int id) throws Exception {

@@ -66,6 +66,19 @@ public class JornadaDTOController {
 	}
 	
 	/**
+	 * Procura todos os objeto da classe {@link Jornada}, e ao encontra-los, chama o método 
+	 * 'ConverteListaParaDTO' referente aos mesmos (retorna as suas versoes {@link JornadaDTO}).
+	 * 
+	 * @return jornada; (List) todos referentes a pessoa especificada.
+	 * @throws Exception; ha a possibilidade de excecoes. 
+	 */
+	public List<JornadaDTO> getAll() throws Exception{
+		List<Jornada> jornadasObtidas = controller.getAll();
+		return converteListaParaDTO(jornadasObtidas);
+	}
+	
+	
+	/**
 	 * Consulta e retorna todos os objetos da classe {@link Jornada} persistidos no banco de dados, conforme filtro.
 	 * Filtro: ID do dono das mesmas e período em que elas se encontram. conforme desejado. 
 	 * 
