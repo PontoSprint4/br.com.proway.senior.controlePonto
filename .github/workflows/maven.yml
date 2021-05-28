@@ -19,6 +19,8 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: Go to Directory
+      run: cd SpringControlePonto/
     - name: Cache Maven packages
       uses: actions/cache@v2
       with:
