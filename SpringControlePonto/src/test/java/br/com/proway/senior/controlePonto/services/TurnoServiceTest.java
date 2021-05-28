@@ -3,8 +3,8 @@ package br.com.proway.senior.controlePonto.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -185,9 +185,30 @@ class TurnoServiceTest {
 		listaPessoas.add(64);
 		
 		serviceTurno.adicionarPessoa(listaPessoas, id);
+		//Aumenta cobertura ao checar pessoas ja adicionadas
+		serviceTurno.adicionarPessoa(listaPessoas, id);
 		assertNotNull(serviceTurno.turnoDaPessoa(42));
 		assertNotNull(serviceTurno.turnoDaPessoa(52));
 		assertNotNull(serviceTurno.turnoDaPessoa(64));
+	}
+	
+	@Test
+	void testTurnoRepetidoParaPessoa() throws Exception {
+		LocalTime inicio = LocalTime.now();
+		LocalTime fim = inicio.plusHours(4);
+		Turno turno = new Turno(inicio, fim, "Service");
+		
+		Integer turno1 = serviceTurno.salvar(turno);
+		Integer turno2 = serviceTurno.salvar(turno);
+		
+		ListaDePessoas listaPessoas = new ListaDePessoas();
+		listaPessoas.add(42);
+		
+		serviceTurno.adicionarPessoa(listaPessoas, turno1);
+		//Aumenta cobertura ao checar pessoas ja adicionadas
+		serviceTurno.adicionarPessoa(listaPessoas, turno2);
+		
+		assertThrows(Exception.class, () -> serviceTurno.turnoDaPessoa(42));
 	}
 
 }
