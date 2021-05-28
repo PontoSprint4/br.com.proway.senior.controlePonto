@@ -31,7 +31,9 @@ public class PontoAPI {
 	}
 
 	@GetMapping("/buscar/{idPonto}")
-	PontoDTO getPonto(@PathVariable("idPonto") Integer idPonto) throws Exception {
+	PontoDTO getPonto(
+				@PathVariable("idPonto") Integer idPonto
+			) throws Exception {
 		return pontoService.getPonto(idPonto);
 	}
 	
@@ -41,12 +43,17 @@ public class PontoAPI {
 	}
 
 	@PutMapping("/atualizar/{idPonto}")
-	boolean atualizarPonto(@PathVariable("idPonto") Integer idPonto, @RequestBody Ponto Ponto) throws Exception {
+	boolean atualizarPonto(
+				@PathVariable("idPonto") Integer idPonto, 
+				@RequestBody Ponto Ponto
+			) throws Exception {
 		return pontoService.updatePonto(idPonto, Ponto);
 	}
 
 	@DeleteMapping("/remover/{idPonto}")
-	boolean deletePonto(@PathVariable("idPonto") Integer idPonto) throws Exception {
+	boolean deletePonto(
+				@PathVariable("idPonto") Integer idPonto
+			) throws Exception {
 		return pontoService.deletePonto(idPonto);
 	}
 

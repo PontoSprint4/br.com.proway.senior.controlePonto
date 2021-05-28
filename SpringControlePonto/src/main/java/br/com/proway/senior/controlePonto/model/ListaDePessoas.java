@@ -13,15 +13,6 @@ public class ListaDePessoas {
 		return listaDeIdPessoa;
 	}
 	
-	public List<Integer> remove(Integer id){
-		listaDeIdPessoa.remove(id);
-		return listaDeIdPessoa;
-	}
-	
-	public List<Integer> get(){
-		return listaDeIdPessoa;
-	}
-	
 	public List<Integer> listaDeIdPessoa;
 	
 }

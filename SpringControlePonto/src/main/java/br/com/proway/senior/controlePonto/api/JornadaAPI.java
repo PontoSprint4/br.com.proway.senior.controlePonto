@@ -33,7 +33,10 @@ public class JornadaAPI {
 	// Actions
 
 	@PostMapping("/marcarPonto/{idPessoa}")
-	void marcarPonto(@PathVariable("idPessoa") Integer idPessoa, @RequestBody Ponto ponto) throws Exception {
+	void marcarPonto(
+				@PathVariable("idPessoa") Integer idPessoa, 
+				@RequestBody Ponto ponto
+			) throws Exception {
 		jornadaService.marcarPonto(idPessoa, ponto);
 	}
 
@@ -45,42 +48,56 @@ public class JornadaAPI {
 	}
 
 	@GetMapping("/jornada/{idJornada}")
-	JornadaDTO getJornada(@PathVariable("idJornada") Integer idJornada) throws Exception {
+	JornadaDTO getJornada(
+				@PathVariable("idJornada") Integer idJornada
+			) throws Exception {
 		return jornadaService.getJornada(idJornada);
 	}
 
 	@PutMapping("/jornada/{idJornada}")
-	boolean atualizarJornada(@RequestBody Jornada jornada, @PathVariable("idJornada") Integer idJornada)
-			throws Exception {
+	boolean atualizarJornada(
+				@RequestBody Jornada jornada, 
+				@PathVariable("idJornada") Integer idJornada
+			) throws Exception {
 		return jornadaService.updateJornada(idJornada, jornada);
 	}
 
 	@DeleteMapping("/jornada/{idJornada}")
-	boolean deleteJornada(@PathVariable("idJornada") Integer idJornada) throws Exception {
+	boolean deleteJornada(
+				@PathVariable("idJornada") Integer idJornada
+			) throws Exception {
 		return jornadaService.deleteJornada(idJornada);
 	}
 
 	// Filtrando Jornadas
 
 	@GetMapping("/jornadas/{idPessoa}")
-	ArrayList<JornadaDTO> todasJornadas(@PathVariable("idPessoa") Integer idPessoa) throws Exception {
+	ArrayList<JornadaDTO> todasJornadas(
+				@PathVariable("idPessoa") Integer idPessoa
+			) throws Exception {
 		return jornadaService.todasJornadas(idPessoa);
 	}
 
 	@GetMapping("/jornadaDoDia/{idPessoa}")
-	JornadaDTO jornadaDoDia(@PathVariable("idPessoa") Integer idPessoa) throws Exception {
+	JornadaDTO jornadaDoDia(
+				@PathVariable("idPessoa") Integer idPessoa
+			) throws Exception {
 		return jornadaService.jornadaDoDia(idPessoa);
 	}
 
 	@GetMapping("/jornadasPorPeriodo/{idPessoa}")
-	ArrayList<JornadaDTO> jornadasPorPeriodo(@PathVariable("idPessoa") Integer idPessoa,
-			@RequestBody IntervaloTempo intervalo) throws Exception {
+	ArrayList<JornadaDTO> jornadasPorPeriodo(
+				@PathVariable("idPessoa") Integer idPessoa,
+				@RequestBody IntervaloTempo intervalo
+			) throws Exception {
 		return jornadaService.jornadasPorPeriodo(idPessoa, intervalo.inicio, intervalo.fim);
 	}
 
 	@GetMapping("/minutosTrabalhadosPorPeriodo/{idPessoa}")
-	long minutosTrabalhadosNoPeriodo(@PathVariable("idPessoa") Integer idPessoa, @RequestBody IntervaloTempo intervalo)
-			throws Exception {
+	long minutosTrabalhadosNoPeriodo(
+				@PathVariable("idPessoa") Integer idPessoa, 
+				@RequestBody IntervaloTempo intervalo
+			) throws Exception {
 		return jornadaService.minutosTrabalhadosNoPeriodo(idPessoa, intervalo.inicio, intervalo.fim);
 	}
 

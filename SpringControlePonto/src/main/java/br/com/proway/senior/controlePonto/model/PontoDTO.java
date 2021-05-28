@@ -38,6 +38,10 @@ public class PontoDTO {
 
 	public LocalDateTime getMomentoPonto() {
 		return momentoPonto;
+	}
+
+	public Integer getIdPessoa() {
+		return idPessoa;
 	}	
 	
 }
