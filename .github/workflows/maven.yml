@@ -1,7 +1,6 @@
 name: Java CI
-
 on: 
-  [pull_request]:
+  pull_request:
     branches: [ sprint7 ]
 
 jobs:
