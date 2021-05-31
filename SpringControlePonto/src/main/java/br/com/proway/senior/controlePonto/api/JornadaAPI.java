@@ -30,16 +30,6 @@ public class JornadaAPI {
 		this.jornadaService = service;
 	}
 
-	// Actions
-
-	@PostMapping("/marcarPonto/{idPessoa}")
-	void marcarPonto(
-				@PathVariable("idPessoa") Integer idPessoa, 
-				@RequestBody Ponto ponto
-			) throws Exception {
-		jornadaService.marcarPonto(idPessoa, ponto);
-	}
-
 	// CRUD Jornada
 
 	@PostMapping("/jornada/")
@@ -70,22 +60,22 @@ public class JornadaAPI {
 	}
 
 	// Filtrando Jornadas
-
-	@GetMapping("/jornadas/{idPessoa}")
+	
+	@GetMapping("/jornada/dia/{idPessoa}")
+	JornadaDTO jornadaDoDia(
+				@PathVariable("idPessoa") Integer idPessoa
+			) throws Exception {
+		return jornadaService.jornadaDoDia(idPessoa);
+	}
+	
+	@GetMapping("/jornadas/todas/{idPessoa}")
 	ArrayList<JornadaDTO> todasJornadas(
 				@PathVariable("idPessoa") Integer idPessoa
 			) throws Exception {
 		return jornadaService.todasJornadas(idPessoa);
 	}
 
-	@GetMapping("/jornadaDoDia/{idPessoa}")
-	JornadaDTO jornadaDoDia(
-				@PathVariable("idPessoa") Integer idPessoa
-			) throws Exception {
-		return jornadaService.jornadaDoDia(idPessoa);
-	}
-
-	@GetMapping("/jornadasPorPeriodo/{idPessoa}")
+	@GetMapping("/jornadas/periodo/{idPessoa}")
 	ArrayList<JornadaDTO> jornadasPorPeriodo(
 				@PathVariable("idPessoa") Integer idPessoa,
 				@RequestBody IntervaloTempo intervalo
@@ -93,12 +83,22 @@ public class JornadaAPI {
 		return jornadaService.jornadasPorPeriodo(idPessoa, intervalo.inicio, intervalo.fim);
 	}
 
-	@GetMapping("/minutosTrabalhadosPorPeriodo/{idPessoa}")
-	long minutosTrabalhadosNoPeriodo(
-				@PathVariable("idPessoa") Integer idPessoa, 
-				@RequestBody IntervaloTempo intervalo
-			) throws Exception {
-		return jornadaService.minutosTrabalhadosNoPeriodo(idPessoa, intervalo.inicio, intervalo.fim);
-	}
+	// Actions
+
+		@PostMapping("/jornada/marcarPonto/{idPessoa}")
+		void marcarPonto(
+					@PathVariable("idPessoa") Integer idPessoa, 
+					@RequestBody Ponto ponto
+				) throws Exception {
+			jornadaService.marcarPonto(idPessoa, ponto);
+		}
+		
+		@GetMapping("/jornadas/periodo/trabalhado/{idPessoa}")
+		long minutosTrabalhadosNoPeriodo(
+					@PathVariable("idPessoa") Integer idPessoa, 
+					@RequestBody IntervaloTempo intervalo
+				) throws Exception {
+			return jornadaService.minutosTrabalhadosNoPeriodo(idPessoa, intervalo.inicio, intervalo.fim);
+		}
 
 }

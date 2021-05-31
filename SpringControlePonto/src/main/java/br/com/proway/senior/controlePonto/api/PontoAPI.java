@@ -16,7 +16,7 @@ import br.com.proway.senior.controlePonto.model.PontoDTO;
 import br.com.proway.senior.controlePonto.services.PontoService;
 
 @RestController
-@RequestMapping(path = "api/ponto")
+@RequestMapping(path = "api/")
 public class PontoAPI {
 
 	private final PontoService pontoService;
@@ -25,24 +25,19 @@ public class PontoAPI {
 		this.pontoService = service;
 	}
 
-	@PostMapping("/criar")
+	@PostMapping("/ponto")
 	Integer criarPonto(@RequestBody Ponto Ponto) throws Exception {
 		return pontoService.createPonto(Ponto);
 	}
 
-	@GetMapping("/buscar/{idPonto}")
+	@GetMapping("/ponto/{idPonto}")
 	PontoDTO getPonto(
 				@PathVariable("idPonto") Integer idPonto
 			) throws Exception {
 		return pontoService.getPonto(idPonto);
 	}
 	
-	@GetMapping("/buscarTodos")
-	List<PontoDTO> getAllPontos() throws Exception {
-		return pontoService.getAll();
-	}
-
-	@PutMapping("/atualizar/{idPonto}")
+	@PutMapping("ponto/{idPonto}")
 	boolean atualizarPonto(
 				@PathVariable("idPonto") Integer idPonto, 
 				@RequestBody Ponto Ponto
@@ -50,11 +45,16 @@ public class PontoAPI {
 		return pontoService.updatePonto(idPonto, Ponto);
 	}
 
-	@DeleteMapping("/remover/{idPonto}")
+	@DeleteMapping("ponto/{idPonto}")
 	boolean deletePonto(
 				@PathVariable("idPonto") Integer idPonto
 			) throws Exception {
 		return pontoService.deletePonto(idPonto);
+	}
+	
+	@GetMapping("/pontos")
+	List<PontoDTO> getAllPontos() throws Exception {
+		return pontoService.getAll();
 	}
 
 }

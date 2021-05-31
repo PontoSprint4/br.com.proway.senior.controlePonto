@@ -20,7 +20,7 @@ import br.com.proway.senior.controlePonto.services.TurnoService;
 
 
 @RestController
-@RequestMapping(path = "api/turno")
+@RequestMapping(path = "api/")
 public class TurnoAPI {
 
 	private final TurnoService turnoService;
@@ -29,22 +29,17 @@ public class TurnoAPI {
 		this.turnoService = service;
 	}
 	
-	@GetMapping("/obterTodos")
-	ArrayList<TurnoDTO> obterTodos(){
-		return turnoService.obterTodos();
-	}
-	
-	@PostMapping("/salvar/")
+	@PostMapping("/turno")
 	Integer salvar(@RequestBody Turno turno) {
 		return turnoService.salvar(turno);
 	}
 	
-	@DeleteMapping("/deletar/{id}")
+	@DeleteMapping("/turno/{id}")
 	boolean deletar(@PathVariable Integer id) throws Exception {
 		return turnoService.deletar(id);
 	}
 	
-	@PutMapping("/alterar/{id}")
+	@PutMapping("/turno/{id}")
 	void alterar(
 				@PathVariable Integer id, 
 				@RequestBody Turno turno
@@ -52,12 +47,19 @@ public class TurnoAPI {
 		turnoService.alterar(id, turno);
 	}
 	
-	@GetMapping("/obter/{id}")
+	@GetMapping("/turno/{id}")
 	TurnoDTO obter(@PathVariable Integer id) throws Exception{
 		return turnoService.obter(id);
 	}
 	
-	@PutMapping("/adicionarPessoas/{idTurno}")
+	@GetMapping("turnos/")
+	ArrayList<TurnoDTO> obterTodos(){
+		return turnoService.obterTodos();
+	}
+	
+	// Actions
+	
+	@PutMapping("/turno/pessoasAdd/{idTurno}")
 	void adicionarPessoaNoTurno(
 				@RequestBody ListaDePessoas idPessoa,
 				@PathVariable Integer idTurno
@@ -65,7 +67,7 @@ public class TurnoAPI {
 		turnoService.adicionarPessoa(idPessoa, idTurno);
 	}
 	
-	@PutMapping("/removerPessoas/{idTurno}")
+	@PutMapping("/turno/pessoasRemove/{idTurno}")
 	void removerPessoaNoTurno(
 				@RequestBody ListaDePessoas objetoListaPessoa,
 				@PathVariable Integer idTurno
@@ -73,14 +75,16 @@ public class TurnoAPI {
 		turnoService.removerPessoa(objetoListaPessoa, idTurno);
 	}
 	
-	@GetMapping("/obter/todasPessoas/{idTurno}")
+	// Filtros
+	
+	@GetMapping("/turno/pessoas/{idTurno}")
 	ArrayList<Integer> todasPessoasDoTurno(
 				@PathVariable Integer idTurno
 			) throws Exception{
 		return turnoService.obterTodasPessoasDoTurno(idTurno);
 	}
 	
-	@GetMapping("/obter/turnoDaPessoa/{idPessoa}")
+	@GetMapping("/turno/pessoa/{idPessoa}")
 	Turno turnoDaPessoa(@PathVariable Integer idPessoa) throws Exception{
 		return turnoService.turnoDaPessoa(idPessoa);
 	}	
