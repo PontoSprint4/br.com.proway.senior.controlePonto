@@ -1,8 +1,8 @@
 name: Java CI with Maven
 
 on:
-#  push:
-#    branches: [ sprint7 ]
+  push:
+    branches: [ sprint7 ]
   pull_request:
     branches: [ sprint7 ]
 
