@@ -1,4 +1,3 @@
-name: Java CI
 on: 
   pull_request:
     branches: [ sprint7 ]
