@@ -1,6 +1,6 @@
 package br.com.proway.senior.controlePonto.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -16,7 +16,6 @@ import br.com.proway.senior.controlePonto.DAO.TurnoDAO;
 import br.com.proway.senior.controlePonto.controller.PontoController;
 import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
 import br.com.proway.senior.controlePonto.model.Ponto;
-import br.com.proway.senior.controlePonto.model.PontoDTO;
 
 class PontoServiceTest {
 
@@ -55,18 +54,31 @@ class PontoServiceTest {
 	}
 
 	@Test
-	void testDeletePonto() {
-		fail("Not yet implemented");
+	void testDeletePonto() throws Exception {
+		Integer tamanhoAntes = pService.getAll().size();
+		
+		Ponto ponto = new Ponto(70, LocalDateTime.now());
+		Integer idPonto = pService.createPonto(ponto);
+		
+		pService.deletePonto(idPonto);
+		assertEquals(tamanhoAntes, pService.getAll().size());
 	}
 	
 	@Test
-	void testGetPonto() {
-		fail("Not yet implemented");
+	void testGetPonto() throws Exception {
+		Ponto ponto = new Ponto(70, LocalDateTime.now());
+		Integer idPonto = pService.createPonto(ponto);
+		assertNotNull(pService.getPonto(idPonto));
 	}
 	
 	@Test
-	void testGetAllPonto() {
-		fail("Not yet implemented");
+	void testGetAllPonto() throws Exception {
+		Integer tamanhoAntes = pService.getAll().size();
+		Ponto ponto = new Ponto(70, LocalDateTime.now());
+		pService.createPonto(ponto);
+		pService.createPonto(ponto);
+		pService.createPonto(ponto);
+		assertEquals(tamanhoAntes+3, pService.getAll().size());
 	}
 
 }

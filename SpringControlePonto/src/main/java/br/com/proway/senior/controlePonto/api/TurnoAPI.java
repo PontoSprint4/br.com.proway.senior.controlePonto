@@ -34,43 +34,54 @@ public class TurnoAPI {
 		return turnoService.obterTodos();
 	}
 	
-	@PostMapping("/salvar/")////////////////////////////////
-	void salvar(@RequestBody Turno turno) {
-		turnoService.salvar(turno);
+	@PostMapping("/salvar/")
+	Integer salvar(@RequestBody Turno turno) {
+		return turnoService.salvar(turno);
 	}
 	
-	@DeleteMapping("/deletar/{id}")///////////////////////////
-	void deletar(@PathVariable int id) throws Exception {
-		turnoService.deletar(id);
+	@DeleteMapping("/deletar/{id}")
+	boolean deletar(@PathVariable Integer id) throws Exception {
+		return turnoService.deletar(id);
 	}
 	
 	@PutMapping("/alterar/{id}")
-	void alterar(@PathVariable int id, @RequestBody Turno turno) throws Exception{
+	void alterar(
+				@PathVariable Integer id, 
+				@RequestBody Turno turno
+			) throws Exception{
 		turnoService.alterar(id, turno);
 	}
 	
 	@GetMapping("/obter/{id}")
-	TurnoDTO obter(@PathVariable int id) throws Exception{
+	TurnoDTO obter(@PathVariable Integer id) throws Exception{
 		return turnoService.obter(id);
 	}
 	
 	@PutMapping("/adicionarPessoas/{idTurno}")
-	void adicionarPessoaNoTurno(@RequestBody ListaDePessoas idPessoa, @PathVariable int idTurno) throws Exception{
+	void adicionarPessoaNoTurno(
+				@RequestBody ListaDePessoas idPessoa,
+				@PathVariable Integer idTurno
+			) throws Exception{
 		turnoService.adicionarPessoa(idPessoa, idTurno);
 	}
 	
 	@PutMapping("/removerPessoas/{idTurno}")
-	void removerPessoaNoTurno(@RequestBody ListaDePessoas objetoListaPessoa, @PathVariable int idTurno) throws Exception{
+	void removerPessoaNoTurno(
+				@RequestBody ListaDePessoas objetoListaPessoa,
+				@PathVariable Integer idTurno
+			) throws Exception{
 		turnoService.removerPessoa(objetoListaPessoa, idTurno);
 	}
 	
 	@GetMapping("/obter/todasPessoas/{idTurno}")
-	ArrayList<Integer> todasPessoasDoTurno(@PathVariable int idTurno) throws Exception{
+	ArrayList<Integer> todasPessoasDoTurno(
+				@PathVariable Integer idTurno
+			) throws Exception{
 		return turnoService.obterTodasPessoasDoTurno(idTurno);
 	}
 	
 	@GetMapping("/obter/turnoDaPessoa/{idPessoa}")
-	Turno turnoDaPessoa(@PathVariable int idPessoa) throws Exception{
+	Turno turnoDaPessoa(@PathVariable Integer idPessoa) throws Exception{
 		return turnoService.turnoDaPessoa(idPessoa);
 	}	
 }

@@ -3,6 +3,7 @@ package br.com.proway.senior.controlePonto.services;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -50,12 +51,16 @@ public class JornadaService {
 		return controllerJornada.delete(idJornada);
 	}
 	
+	public List<JornadaDTO> getAll() throws Exception{
+		return controllerDTOJornada.getAll();
+	}
+	
+	// Filtrando Jornadas
+	
 	public ArrayList<JornadaDTO> todasJornadas(Integer idPessoa) throws Exception {
 		return (ArrayList<JornadaDTO>) 
 				controllerDTOJornada.getTodasJornadasDaPessoa(idPessoa);
 	}
-	
-	// Filtrando Jornadas
 	
 	public ArrayList<JornadaDTO> jornadasPorPeriodo(
 			Integer idPessoa, LocalDate inicio, LocalDate fim
