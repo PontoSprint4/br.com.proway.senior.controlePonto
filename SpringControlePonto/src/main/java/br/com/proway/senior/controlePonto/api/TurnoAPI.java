@@ -59,7 +59,7 @@ public class TurnoAPI {
 	
 	// Actions
 	
-	@PutMapping("/turno/pessoasAdd/{idTurno}")
+	@PutMapping("/turno/pessoas_add/{idTurno}")
 	void adicionarPessoaNoTurno(
 				@RequestBody ListaDePessoas idPessoa,
 				@PathVariable Integer idTurno
@@ -67,7 +67,7 @@ public class TurnoAPI {
 		turnoService.adicionarPessoa(idPessoa, idTurno);
 	}
 	
-	@PutMapping("/turno/pessoasRemove/{idTurno}")
+	@PutMapping("/turno/pessoas_remove/{idTurno}")
 	void removerPessoaNoTurno(
 				@RequestBody ListaDePessoas objetoListaPessoa,
 				@PathVariable Integer idTurno

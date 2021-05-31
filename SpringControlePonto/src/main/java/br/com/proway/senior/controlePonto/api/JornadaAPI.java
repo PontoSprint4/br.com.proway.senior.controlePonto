@@ -85,7 +85,7 @@ public class JornadaAPI {
 
 	// Actions
 
-		@PostMapping("/jornada/marcarPonto/{idPessoa}")
+		@PostMapping("/jornada/marcar_ponto/{idPessoa}")
 		void marcarPonto(
 					@PathVariable("idPessoa") Integer idPessoa, 
 					@RequestBody Ponto ponto
