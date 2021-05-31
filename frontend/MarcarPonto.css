@@ -1,34 +1,66 @@
 body{
     background-color: #009999;
-    position: relative;
+}
+
+.baterPonto{
+    position: absolute;
+    top: 50%;
+	left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#teste{
+    background-color: #31d0d0;
+    width: 508.67px;
+    height: 492.12px;
+    border-radius: 50%;
+    position: absolute;
 }
 
 .cl-circulo{
-    justify-content: center;
+    border-radius: 50%;
 }
 
 #vetor3{
-    background-color: #1ab0b0;
-    width: 1404px;
-    height: 1344px;
-    border-radius: 50%;
+    background-color: #31d0d0;
+    box-shadow: 0px 96px 96px
+    rgba(7, 48, 163, 0.16);
+    width: 400px;
+    height: 400px;
+
     position: absolute;
-    margin: -70px 0 0 170px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #vetor2{
-    background-color: #0dbebe;
-    width: 1063px;
-    height: 1038px;
-    border-radius: 50%;
+    background-color: #081111;
+    box-shadow: 0px 96px 96px
+    rgba(7, 48, 163, 0.16);
+    width: 600px;
+    height: 600px;
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #vetor1{
-    background-color: #31d0d0;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+     width: 800px;
+    height: 800px;
+    background-color: #1ab0b0;
+    box-shadow: 0px 96px 96px
+     rgba(7, 48, 163, 0.16);
+
+     position: absolute;
 }
+
 
 #id-ver-historico{
     background-color: #008080;
