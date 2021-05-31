@@ -206,8 +206,36 @@ class JornadaAPITest {
 	}
 
 	@Test
-	void testMinutosTrabalhadosNoPeriodo() {
-		fail("Not yet implemented");
+	void testMinutosTrabalhadosNoPeriodo() throws Exception {
+		Integer idPessoa = 44;
+		
+		LocalTime horaInicio = LocalTime.now();
+		LocalTime horaFim = horaInicio.plusHours(8);
+		String nomeTurno = "Wawawewa";
+		
+		Turno turno = new Turno(horaInicio, horaFim, nomeTurno);
+		turno.adicionaPessoaNoTurno(idPessoa);
+		turnoService.salvar(turno);
+		
+		LocalDate data = LocalDate.now();
+		
+		Jornada jornada = new Jornada(data, idPessoa, turno);
+		api.criarJornada(jornada);
+		
+		IntervaloTempo intervalo = new IntervaloTempo();
+		intervalo.inicio = data.minusDays(1);
+		intervalo.fim = data.plusDays(1);
+		
+		LocalDateTime momentoPonto = LocalDateTime.now().plusHours(2);
+		Ponto ponto = new Ponto(idPessoa, momentoPonto);
+		
+		LocalDateTime momentoPonto2 = LocalDateTime.now().plusHours(4);
+		Ponto ponto2 = new Ponto(idPessoa, momentoPonto2);
+		
+		api.marcarPonto(idPessoa, ponto);
+		api.marcarPonto(idPessoa, ponto2);
+		
+		assertEquals(2*60, api.minutosTrabalhadosNoPeriodo(idPessoa, intervalo));
 	}
 
 }
