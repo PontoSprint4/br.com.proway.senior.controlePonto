@@ -4,20 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar Ponto</title>
 </head>
 <body>
-    <div>
+    
+    <h1>Editar ponto</h1>
+    <main>
+        <div class="Opcoes">
+            <button class="Retornar_botao">Retornar</button>
+        </div>
         <form>
             <div class="momento-ponto"><label for="momento-ponto">Momento do ponto:</label>
-                <input type="datetime-local" id="momento-ponto" name="momento-ponto">
+                <input type="datetime-local" id="momento-ponto" name="momento-ponto" value="2021-05-31T13:55:00">
             </div>
             <br>
             <div class="id-pessoa"><label for="id-pessoa">ID do colaborador:</label>
-                <input type="number" id="id-pessoa" name="id-pessoa">
+                <input type="number" id="id-pessoa" name="id-pessoa" value="10" min="1">
             </div>
-            <p><input type="submit" value="Criar ponto"></p>
+            <p><input type="submit" value="Editar ponto"></p>
         </form>
-    </div>
+    </main>
 </body>
 </html>
