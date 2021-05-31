@@ -1,0 +1,41 @@
+body{
+    background-color: #009999;
+    position: relative;
+}
+
+.cl-circulo{
+    justify-content: center;
+}
+
+#vetor3{
+    background-color: #1ab0b0;
+    width: 1404px;
+    height: 1344px;
+    border-radius: 50%;
+    position: absolute;
+    margin: -70px 0 0 170px;
+}
+
+#vetor2{
+    background-color: #0dbebe;
+    width: 1063px;
+    height: 1038px;
+    border-radius: 50%;
+}
+
+#vetor1{
+    background-color: #31d0d0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+#id-ver-historico{
+    background-color: #008080;
+    color: white;
+}
+
+#id-registrar-ponto{
+    background-color: #009999;
+    color: white;
+}
