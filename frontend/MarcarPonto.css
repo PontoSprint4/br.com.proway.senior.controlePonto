@@ -1,5 +1,16 @@
 body{
     background-color: #009999;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+   
+    justify-content: center;
+    align-content: center;
+}
+
+main{
+    height: 90vh;
+    width: 90vh;
 }
 
 .cl-circulo{
@@ -8,27 +19,41 @@ body{
     border-radius: 50%;
 }
 
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   
+    justify-content: center;
+    align-content: center;
+}
+
+.teste{
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+
 .baterPonto{
-    position: absolute;
-    top: 50%;
-	left: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
     align-items: center;
+    justify-items: center;
 }
 
 .Ponto-botao{
     background-color: #008080;
     color: white;
     box-shadow: 0px 32px 32px -12px rgba(7, 48, 163, 0.24);
-    height: 50px;
+    height: 20%;
     border-radius: 16px;
     padding: 24px 48px;
+    border-width: 0px;
+
     display: flex;
     flex-direction: row;
     align-items: center;
     font-family: Roboto;
-    border-width: 0px;
+    
 }
 
 #baterPonto-hora{
@@ -61,33 +86,56 @@ body{
 }
 
 #vetor3{
-    width: 800px;
-    height: 800px;
+    width: 100%;
+    height: 100%;
     background-color: #1ab0b0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    animation: change-background 2s linear infinite alternate;
+}
+
+@keyframes change-background{
+    0%{
+        background:#31d0d0 ;
+    }50%{
+        background: #0cb1b1;
+    }100%{
+        background: #189b9b ;
+    }
 }
 
 #vetor2{
     background-color: #0DBEBE;
-    width: 600px;
-    height: 600px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    animation: change-background 2s linear infinite alternate;
+    animation-delay: 1s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes change-background{
+    0%{
+        background:#31d0d0 ;
+    }50%{
+        background: #0cb1b1;
+    }100%{
+        background: #189b9b ;
+    }
 }
 
 #vetor1{
     background-color: #31d0d0;
-    width: 400px;
-    height: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    animation: change-background 2s linear infinite alternate;
+    animation-delay: 0s;
+}
+@keyframes change-background{
+    0%{
+        background:#31d0d0 ;
+    }50%{
+        background: #0cb1b1;
+    }100%{
+        background: #23b8b8 ;
+    }
 }
 
 #id-registrar-ponto{
@@ -99,9 +147,16 @@ body{
     text-transform: uppercase;
 }
 
+#id-registrar-ponto:hover{
+    background-color: #2EE6B7;
+}
+
 #id-ver-historico{
     font-size: 16px;
     letter-spacing: 1px;
-    margin-top: 52%;
-    margin-left: 86%;
+    text-decoration: none;
+}
+
+#id-ver-historico:hover{
+    background-color: #2EE6B7;
 }

@@ -6,57 +6,78 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historico</title>
+    <link rel="stylesheet" type="text/css" href=JornadaHistorico.css>
 </head>
 
 <body>
     <nav>
-        <button class="Retornar_botao">Retornar</button>
+        <a class="cl-Retornar-botao" id="id-Retornar-botao" href=MarcarPonto.html>Retornar</a>
     </nav>
     <main>
-        <article>
-            <select class="Meses_select">
+        <div class="container-row-reverse">
+            <select class="Meses-select">
                 <option value="Maio">Maio</option>
                 <option value="Abril">Abril</option>
                 <option value="Março">Março</option>
                 <option value="Fevereiro">Fevereiro</option>
                 <option value="Janeiro">Janeiro</option>
             </select>
-            </arcticle>
-            <article>
-                <table>
+        </div>
 
-                    <section>
-                        <tr>
-                            <th>Data</th>
-                            <th>Horas Trabalhadas</th>
-                            <th>Status</th>
-                            <th>Opções</th>
-                        </tr>
-                    </section>
+        <article>
+            <div class="entrada-resumida">
+                <div>31/05/2021</div>
+                <div>08:01</div>
+                <div>Fechado</div>
+                <div>...</div>
+            </div>
+        </arcticle>
 
-                    <article>
-                        <tr class="EntradaJornada">
-                            <td>31/05/2021</td>
-                            <td>08:01</td>
-                            <td>Fechado</td>
-                            <td>...</td>
+        <article class = "linha">
+            <div class="entrada-resumida">
+                <div>31/05/2021</div>
+                <div>08:01</div>
+                <div>Fechado</div>
+                <div>...</div>
+            </div>
+            <div class="entrada-datalhada">
+                <section>
+                    <h4> Turno </h4>
+                    <strong> Inicio : </strong> 08:00:00
+                    <br>
+                    <strong> Fim : </strong> 18:00:00
+                </section>
 
-                        </tr>
-                        <section>
-                            <tr class="EntradaJornada-dropdown">
-                                <th> </th>
-                                <th>Id ponto</th>
-                                <th>Momento ponto</th>
-                            <tr>
-                                <td> </td>
-                                <td>1</td>
-                                <td>2021-05-31 08:01:00</td>
-                            </tr>
-                            </tr>
-                        </section>
-                    </article>
-                </table>
-                </arcticle>
+                <section>
+                    <h4> Pontos </h4>
+                    <div class ="entrada-ponto"> <strong> id 1 : </strong> <em> 01/06/2021 -  08:00:00 </em></div>
+                    <div class ="entrada-ponto"> <strong> id 62 : </strong> <em> 01/06/2021 -  12:00:00 </em></div>
+                    <div class ="entrada-ponto"> <strong> id 178 : </strong> <em> 01/06/2021 -  13:30:00 </em></div>
+                    <div class ="entrada-ponto"> <strong> id 420 : </strong> <em> 01/06/2021 -  18:00:00 </em></div>
+                </section>
+            </div>
+        </arcticle>
+
+        <article>
+            <div class="entrada-resumida">
+                <div>31/05/2021</div>
+                <div>08:01</div>
+                <div>Fechado</div>
+                <div>...</div>
+            </div>
+        </arcticle>
+
+        <article>
+            <div class="entrada-resumida">
+                <div>31/05/2021</div>
+                <div>08:01</div>
+                <div>Fechado</div>
+                <div>...</div>
+            </div>
+        </arcticle>
+
+        
+        
     </main>
 </body>
 
