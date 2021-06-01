@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turno</title>    
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="formulario.css">
     <style>   
         body {
             font-size: 20px;
             font-family: Arial, Helvetica, sans-serif;
         } 
 
-        h1, #img {
+        #img {
             text-align: center;
         }  
 
@@ -100,6 +101,11 @@
            margin-right: 10px;
         }
 
+        div#formularioTurno {
+            display: flex;            
+            justify-content: center;            
+        }
+        
     </style>
 </head>
 <body>
@@ -108,7 +114,7 @@
           
     <div id="buttonTurno">
         <button id="criarTurno">
-            <a href="pagina2.html" target="_self" rel="next" hreflang="pt-br">Criar Turno</a>
+            Criar Turno
         </button>       
         <button>
             <a href="pagina2.html" target="_self" rel="next" hreflang="pt-br">Salvar Turno</a>
@@ -173,18 +179,10 @@
             <td><button class="delete button"><div class="font-color">Delete</div></button></td>
 		</tr>
     </table>
-    <div id="formularioTurno">
+    <div id="formularioTurno">  
 
-    </div>
-    <script>        
-        var tests = document.getElementsByClassName('delete')         
-    
-        for(test of tests) {
-            test.addEventListener('click', function(){                  
-                confirm('Deseja mesmo fazer a deletação?')}                     
-            )
-        }
-         
-    </script>       
+    </div>    
+    <script src="criarTurno.js"></script>
+    <script src="deletarTurno.js"></script> 
 </body>
 </html>

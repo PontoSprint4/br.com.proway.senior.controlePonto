@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 body {    
-    background-color: #009999;
-    
+    background-color: #009999;    
 }
-h1, h2 , h3{
+h1{
     color: darkslategray;
+    text-align: center;
 }
