@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="formulario.css">
     <link rel="stylesheet" href="table.css">
+    <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="img.css">
     <style>
         
         textarea:hover {
@@ -23,7 +25,15 @@
     </style>
 </head>
 <body>
-
+    <h1>ADMINISTRAÇÃO TURNOS</h1>    
+    <div class="img"><img style="border-radius: 10px;" src="imagens/cabecalho_site.png" alt="Ícone Usuário"></div>  
+    <br>      
+    <div id="buttonTurno">
+        <button id="criarTurno">
+            Criar Turno
+        </button>  
+    </div> 
+   <br>
     <table>
 		<tr>
 			<th>ID</th>
@@ -33,28 +43,27 @@
 		<tr>
 			<td>1</td>
 			<td>Turno1</td>			
-            <td><button class="delete button"><div class="font-color">Delete</div></button></td>
-
+            <td><button class="delete button">Delete</button></td>
 		</tr>
 		<tr>
 			<td>2</td>
 			<td>Turno2</td>			
-            <td><button class="delete button"><div class="font-color">Delete</div></button></td>
+            <td><button class="delete button">Delete</button></td>
 		</tr>
 		<tr>
 			<td>3</td>
 			<td>Turno3</td>			
-            <td><button class="delete button"><div class="font-color">Delete</div></button></td>	
+            <td><button class="delete button">Delete</button></td>	
 		</tr>
 		<tr>
 			<td>4</td>
 			<td>Turno4</td>			
-            <td><button class="delete button"><div class="font-color">Delete</div></button></td>		
+            <td><button class="delete button">Delete</button></td>		
 		</tr>
 		<tr>
 			<td>5</td>
 			<td>Turno1</td>			
-            <td><button class="delete button"><div class="font-color">Delete</div></button></td>
+            <td><button class="delete button">Delete</button></td>
 		</tr>
     </table>
 
@@ -62,5 +71,6 @@
     <p style="text-align: center;"><a href="index.html" target="_self" rel="prev" hreflang="pt-br"><img src="imagens/voltar.png" alt="Voltar para Index"></a></p>
     <hr>
 
+    <script src="deletarPessoaTurno.js"></script>
 </body>
 </html>
