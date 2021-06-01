@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Gerencia Ponto</title>
-    </head>
-    <body>
-        <div class="Opcoes">
-            <button class="Retornar_botao">Retornar</button>
-            <button class="NovoPonto_botao">Novo ponto</button>
-            <select class="Meses_select">
-                <option value="Maio">Maio</option>
-                <option value="Abril">Abril</option>
-                <option value="Março">Março</option>
-                <option value="Fevereiro">Fevereiro</option>
-                <option value="Janeiro">Janeiro</option>
-            </select>
-        </div>
 
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Momento do Ponto</th>
-                <th>ID Pessoa</th>
-                <th>Ações</th>
-            </tr>
-            <tr class="EntradaPonto">
-                <td>#101</td>
-                <td>2021/05/31 13:28:30</td>
-                <td>#10</td>
-                <td><button>Editar</button><button>Excluir</button></td>
-            </tr>
-        </table>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href=PontoGerenciar.css>
+    <title>Gerencia Ponto</title>
+</head>
+
+<body>
+    <label class="Opcoes">
+        <button class="Retornar_botao"><a href=index.html>Retornar</a></button>
+        <button class="NovoPonto_botao"><a href=PontoCriar.html target="_blank">Novo ponto</a></button>
+        <input class="buscarPontoPorId" placeholder="Buscar ponto por ID" type="number" min="1">
+        <select class="Meses_select">
+            <option value="Maio">Maio</option>
+            <option value="Abril">Abril</option>
+            <option value="Março">Março</option>
+            <option value="Fevereiro">Fevereiro</option>
+            <option value="Janeiro">Janeiro</option>
+        </select>
+    </label>
+     <article class="tabelaPonto">
+        <article class="entradaPonto">
+            <section>#101</section>
+            <section>2021/05/31 13:28:30</section>
+            <section>ID Colaborador: #10</section>
+            <section class="acoes"><button><a href=PontoEditar.html>Editar</a></button><button>Excluir</button></section>
+        </article>
+    </article>
+</body>
+
 </html>

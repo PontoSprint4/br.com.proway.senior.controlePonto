@@ -1,0 +1,40 @@
+            body {
+                background-color: #009999;
+            }
+            
+            body > .Opcoes {
+                display: flex;
+            }
+
+            body > .Opcoes > .Meses_select{
+                margin-left: auto;
+            }
+
+            body > .Opcoes > button{
+                margin: 2px;
+            }
+
+            body > .Opcoes > input{
+                margin: 2px;
+            }
+
+            .entradaPonto{
+                background: whitesmoke;
+                border-radius: 16px;
+                border: 16px;
+                margin:16px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .entradaPonto > section{
+                padding: 8px
+            }
+
+            .entradaPonto > .acoes{
+                margin-left: auto;
+            }
+
+            .entradaPonto > .acoes > button{
+                margin: 2px;
+            }
