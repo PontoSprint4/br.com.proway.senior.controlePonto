@@ -1,12 +1,29 @@
 body{
-    background-color: #009999;
+    background: linear-gradient( 135deg, #79c7c7, #028181, #027a7a, #025353 );
+    background-size: 400% 400%;
+    animation: gradient 14s ease infinite;
+
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
    
     justify-content: center;
     align-content: center;
+
 }
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 80% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 
 main{
     height: 90vh;
@@ -89,16 +106,22 @@ main{
     width: 100%;
     height: 100%;
     background-color: #1ab0b0;
-    animation: change-background 2s linear infinite alternate;
+    animation: change-background 5s linear infinite alternate;
+    animation-delay: 2s;
+    animation-timing-function: ease-in-out;
 }
 
 @keyframes change-background{
     0%{
-        background:#31d0d0 ;
+        background:#58e0e07c ;
+    }25%{
+        background:#26aaaa ;
     }50%{
         background: #0cb1b1;
+    }75%{
+        background:rgb(41, 165, 165) 
     }100%{
-        background: #189b9b ;
+        background: #128080 ;
     }
 }
 
@@ -106,37 +129,30 @@ main{
     background-color: #0DBEBE;
     width: 80%;
     height: 80%;
-    animation: change-background 2s linear infinite alternate;
+    animation: change-background 5s linear infinite alternate;
     animation-delay: 1s;
     animation-timing-function: ease-in-out;
 }
 
-@keyframes change-background{
+@keyframes heartbeat {
     0%{
-        background:#31d0d0 ;
+        transform: scale(1);
     }50%{
-        background: #0cb1b1;
+        transform: scale(1.05);
     }100%{
-        background: #189b9b ;
+        transform: scale(1);
     }
 }
+
 
 #vetor1{
     background-color: #31d0d0;
     width: 80%;
     height: 80%;
-    animation: change-background 2s linear infinite alternate;
     animation-delay: 0s;
+    animation: heartbeat 2s infinite, change-background 5s linear infinite alternate;
 }
-@keyframes change-background{
-    0%{
-        background:#31d0d0 ;
-    }50%{
-        background: #0cb1b1;
-    }100%{
-        background: #23b8b8 ;
-    }
-}
+
 
 #id-registrar-ponto{
     background-color: #009999;
