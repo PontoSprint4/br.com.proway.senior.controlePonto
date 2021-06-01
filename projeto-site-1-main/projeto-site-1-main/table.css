@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+table, th{
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: #05CB90;                            
+}
+
+table {
+    border-width: 4px;   
+    margin: auto;  
+} 
+
+tr { 
+    border: none;             
+}
+
+th, td {            
+    padding: 10px 10px;            
+    font-family: 'Times New Roman', Times, serif;
+}
+
+th {
+    background-color: rgb(187, 181, 181);   
+    color: rgb(150, 94, 22); 
+    font-size: 20px;
+    border-width: 4px;                      
+} 
+
+td {
+    border-right: solid 4px #05CB90; 
+    border-left: solid 4px #05CB90;
+    
+    background-color: white;
+    text-align: center;
+    font-size: 16px;
+}
+
+.button {
+    width: 120px;
+    height: 30px;
+    border-radius: 10px;  
+    font-size: 16px;
+    color: white;                              
+}
+
+.delete {            
+    background-color: red; 
+} 

@@ -6,10 +6,12 @@
     <title>Turno</title>    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="formulario.css">
+    <link rel="stylesheet" href="table.css">
     <style>   
+
         body {
             font-size: 20px;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;            
         } 
 
         #img {
@@ -19,78 +21,28 @@
         p {
             color:peru;
         }  
-
+ 
+        a {
+            color: white;
+            font-size: 16px;
+        }
+        
         button {
             width: 160px;
             height: 40px;
             background-color: #31D0D0;   
-            border: 5px solid #05CB90;  
+            border: 4px solid #05CB90;  
             border-radius: 10px;
-        }
+        }        
 
-        a {
+        #criarTurno, #salvarTurno {
+            font-size: 16px;
             color: white;
-        } 
-
-        table, th{
-            border-collapse: collapse;
-            border-style: solid;
-            border-color: #05CB90;                            
         }
-        
-        table {
-            border-width: 4px;   
-            margin: auto;  
-        }            
-        
-        th, td {            
-            padding: 10px 10px;            
-            font-family: 'Times New Roman', Times, serif;
-        }
-
-        th {
-            background-color: rgb(187, 181, 181);   
-            color: rgb(150, 94, 22); 
-            font-size: 20px;
-            border-width: 4px;                      
-        }   
-
-        button.button {
-            width: 120px;
-            height: 30px;
-            border-radius: 10px;            
-        } 
-
-        .delete {            
-            background-color: red; 
-        } 
 
         .details {            
             background-color: blue; 
-        } 
-
-        a {
-            color: white;
-            font-size: 16px;
-        }
-
-        tr { 
-            border: none;             
-        }
-
-        td {
-            border-right: solid 4px #05CB90; 
-            border-left: solid 4px #05CB90;
-            
-            background-color: white;
-            text-align: center;
-            font-size: 16px;
-        } 
-
-        div.font-color {
-            font-size: 16px;
-            color: white;
-        } 
+        }         
 
         #buttonTurno {
             display: flex;
@@ -98,10 +50,10 @@
         }
 
         #criarTurno {
-           margin-right: 10px;
-        }
+        margin-right: 10px;
+        }        
 
-        div#formularioTurno {
+       #formularioTurno {
             display: flex;            
             justify-content: center;            
         }
@@ -111,17 +63,12 @@
 <body>
     <h1>ADMINISTRAÇÃO TURNOS</h1>    
     <div id="img"><img style="border-radius: 10px;" src="imagens/cabecalho_site.png" alt="Ícone Usuário"></div>  
-          
+    <br>      
     <div id="buttonTurno">
         <button id="criarTurno">
             Criar Turno
-        </button>       
-        <button>
-            <a href="pagina2.html" target="_self" rel="next" hreflang="pt-br">Salvar Turno</a>
-        </button>
-    </div>  
-    <p>Para se inscrever no evento:<a href="pagina2.html" target="_self" rel="next" hreflang="pt-br">clique aqui</a>.</p>
-    
+        </button>  
+    </div> 
    <br>
     <table>
 		<tr>
@@ -139,7 +86,7 @@
 			<td>111</td>
 			<td>11:11:11</td>
             <td>11:11:11</td>
-            <td><button class="details button"><div class="font-color">Details</div></button></td>
+            <td><button class="details button"><a href="detailsTurno.html" target="_self" rel="next" hreflang="pt-br">Details</a></button></td>
             <td><button class="delete button"><div class="font-color">Delete</div></button></td>
 
 		</tr>
