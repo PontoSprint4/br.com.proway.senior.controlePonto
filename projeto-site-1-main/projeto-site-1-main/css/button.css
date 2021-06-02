@@ -8,11 +8,8 @@ button {
     border-radius: 10px;
 }      
 
-button:hover {
-    background-color: yellowgreen;   
-    border: 4px solid #05CB90;  
-    transition: 2s;
-    transform: scale(1.04);
+button:hover {   
+    transform: scale(1.05);
 }
 
 .delete:hover{

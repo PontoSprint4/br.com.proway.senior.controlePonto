@@ -9,7 +9,7 @@ input {
 } 
 input:hover {
     background-color: rgb(224, 224, 224);
-    transition: 2s;
+    transition: 2s;    
 }
 legend {
     font-size: 30px;

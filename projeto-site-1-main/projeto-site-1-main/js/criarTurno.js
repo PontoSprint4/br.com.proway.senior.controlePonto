@@ -23,7 +23,10 @@ function verificar(){
     // Na página principal, adiciona o botão: salvarTurno (obrigatório para haver o registro de um mesmo).
     var button = document.getElementById('buttonTurno')
     button.append(elemento)
-    elemento.innerHTML = 'Salvar Turno' 
+    elemento.innerHTML = 'Salvar Turno'
+    
+    editarT.setAttribute("style", "background-color: black;")
+    criarT.setAttribute("style", "background-color: black;")
     
     // Linka o evento 'click' no botão: salvarTurno.
     // "Chama" a função SALVAR.
@@ -46,5 +49,8 @@ function salvar(){
 
     // Habilita o botão: editarTurno.
     document.getElementById('editarTurno').disabled = false 
+
+    editarT.setAttribute("style", "background-color: #31D0D0;   ")
+    criarT.setAttribute("style", "background-color: #31D0D0;   ")
     
 } 

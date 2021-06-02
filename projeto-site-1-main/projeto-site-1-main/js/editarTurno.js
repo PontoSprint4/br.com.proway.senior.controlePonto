@@ -1,6 +1,8 @@
 var editarT = document.getElementById('editarTurno')
 editarT.addEventListener('click', verificar2) 
 
+var criarT = document.getElementById('criarTurno')
+
 function verificar2(){  
     
     // Desabilita o botão: criarTurno.
@@ -23,8 +25,11 @@ function verificar2(){
     // Na página principal, adiciona o botão: salvarTurno (obrigatório para haver a atualização de um mesmo).
     var button = document.getElementById('buttonTurno')
     button.append(elemento)
-    elemento.innerHTML = 'Salvar Turno' 
+    elemento.innerHTML = 'Salvar Turno'     
     
+    editarT.setAttribute("style", "background-color: black;")
+    criarT.setAttribute("style", "background-color: black;")
+
     // Linka o evento 'click' no botão: salvarTurno.
     // "Chama" a função SALVAR.
     elemento.addEventListener('click', salvar2)
@@ -46,5 +51,8 @@ function salvar2(){
 
     // Habilita o botão: criarTurno.
     document.getElementById('criarTurno').disabled = false 
+
+    editarT.setAttribute("style", "background-color: #31D0D0;")
+    criarT.setAttribute("style", "background-color: #31D0D0;")
     
 } 
