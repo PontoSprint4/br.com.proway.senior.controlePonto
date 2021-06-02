@@ -70,4 +70,5 @@ a{
 
 #id-Retornar-botao:hover{
     background-color: #2EE6B7;
+    transform: scale(1.04);
 }

@@ -1,6 +1,7 @@
             body {
                 background-color: #009999;
                 font-family: Roboto;
+                color: black;
             }
 
             
@@ -34,6 +35,7 @@
             
             #id-Retornar-botao:hover{
                 background-color: #2EE6B7;
+                transform: scale(1.04);
             }
 
             .cl-Novo-botao{
@@ -61,6 +63,7 @@
             
             #id-Novo-botao:hover{
                 background-color: #2EE6B7;
+                transform: scale(1.04);
             }
 
             .entradaPonto{
@@ -70,6 +73,7 @@
                 margin:16px;
                 display: flex;
                 justify-content: space-between;
+                box-shadow: 0px 32px 32px -12px rgba(7, 48, 163, 0.24);
             }
 
             .entradaPonto > section{
@@ -99,10 +103,20 @@
                 margin:  2px;
             }
 
+            .buscarPontoPorId{
+                border-radius: 20px;
+            }
+
             .Meses_select{
                 margin-left: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 4px;
+                border-radius: 20px;
             }
 
             #id-buscar{
+                padding: 4px;
                 align-items: center;
             }
