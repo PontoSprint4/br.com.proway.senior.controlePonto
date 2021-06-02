@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turno</title>    
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="formulario.css">
-    <link rel="stylesheet" href="table.css">
-    <link rel="stylesheet" href="button.css">
-    <link rel="stylesheet" href="img.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/formulario.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/img.css">
     <style>   
 
         body {
@@ -25,7 +25,7 @@
             font-size: 16px;
         }                   
 
-        #criarTurno, #salvarTurno {
+        #criarTurno, #editarTurno, #salvarTurno {
             font-size: 16px;
             color: white;
         }
@@ -40,24 +40,35 @@
         }
 
         #criarTurno {
-        margin-right: 10px;
-        }        
+            margin-right: 10px;
+        }  
+        
+        #editarTurno {
+            margin-right: 10px;
+        }  
 
        #formularioTurno {
             display: flex;            
             justify-content: center;            
+        }
+
+        table {
+            min-width: 1000px;
         }
         
     </style>
 </head>
 <body>
     <h1>ADMINISTRAÇÃO TURNOS</h1>    
-    <div id="img"><img style="border-radius: 10px;" src="imagens/cabecalho_site.png" alt="Ícone Usuário"></div>  
+    <div class="img"><img style="border-radius: 10px;" src="imagens/cabecalho_site.png" alt="Ícone Usuário"></div>  
     <br>      
     <div id="buttonTurno">
         <button id="criarTurno">
             Criar Turno
-        </button>  
+        </button> 
+        <button id="editarTurno">
+            Editar Turno
+        </button>   
     </div> 
    <br>
     <table>
@@ -120,7 +131,8 @@
     <div id="formularioTurno">  
 
     </div>    
-    <script src="criarTurno.js"></script>
-    <script src="deletarTurno.js"></script> 
+    <script src="js/criarTurno.js"></script>
+    <script src="js/editarTurno.js"></script> 
+    <script src="js/deletarTurno.js"></script> 
 </body>
 </html>

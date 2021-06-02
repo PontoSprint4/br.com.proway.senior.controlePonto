@@ -63,7 +63,13 @@
 
     <fieldset id="endereco"><legend>Endereço do Usuário</legend>
         <p><label for="cLograd">Logradouro: </label><input type="text" name="tLograd" id="cLograd" size="50" maxlength="50" placeholder="Rua, Av, Trav, ..."></p>
-        <p><label for="cNum">Número: </label><input type="number" name="tNum" id="cNum" min="0" max="999999"></p>
+
+
+
+        <p><label for="cIDp">ID: </label><input type="number" name="tIDp" id="cIDp" min="1"></p>
+
+
+
         <p><label for="cEst">Estado: </label><select name="tEst" id="cEst">            
             <optgroup label="Região Sul">
                 <option value="SC">Santa Catarina</option>
@@ -74,12 +80,29 @@
         <p><label for="cCid">Cidade: </label><input type="text" name="tCid" id="cCid" size="50" maxlength="50" list="cidades"></p> 
         <datalist id="cidades">
             <option value="Brusque"></option>
-        </datalist>       
+        </datalist>  
+        
+        
+
+
+
+
+
+    
+    <fieldset id="dadosPessoa"><legend>ID do(s) colaborador(es): </legend>        
+        <p><label for="cIDp">Resumo: </label><textarea name="tIDp" id="cIDp" cols="50" rows="10" placeholder="Para a inserçaõ de vários IDs, separe cada um deles com vírgula..."></textarea></p>
     </fieldset>
-    <fieldset id="trabalho"><legend>Trabalho: </legend>
-        <p><label for="cTemp">Tempo da Apresentaço (minutos): 0</label><input type="range" name="tTemp" id="cTemp" min="0" max="15" step="5">15</p>
-        <p><label for="cMens">Resumo: </label><textarea name="tMens" id="cMens" cols="50" rows="10" placeholder="Título e Tópicos"></textarea></p>
-    </fieldset>
+
+
+
+
+
+
+
+
+
+
+
     <fieldset id="pProduto"><legend>Produto (opcional)</legend>
         <p><input type="checkbox" name="tPed" id="cPed"><label for="cPed">Gostaria de adquirir uma camisa exclusiva do Evento</label></p>
         <p><label for="cTam">Tamanho: </label><select name="tTam" id="cTam">            

@@ -8,7 +8,7 @@ function verificar(){
     // Troca o conteúdo (vazia) da <div>: formularioPessoa.
     // Por um formulário: registroPessoa. 
     var formularioPessoa = document.getElementById('formularioPessoa') 
-    formularioPessoa.innerHTML = '<form id="registroPessoa"><fieldset id="dadosPessoa"><legend>Registro de Turno</legend><p><label for="cNomeT">Nome do Turno: </label><input type="text" name="tNomeT" id="cNomeT" size="20" maxlength="20" placeholder="..."></p><p><label for="cHoraI">Hora de Início: </label><input type="time" name="tHoraI" id="cHoraI"></p><p><label for="cHoraF">Hora do Fim: </label><input type="time" name="tHoraF" id="cHoraF"></p></fieldset></form>'
+    formularioPessoa.innerHTML = '<form id="registroPessoa"><fieldset id="dadosPessoa"><legend>Adicionar colaborador(es): </legend><p><label for="cIDp">ID(s): </label><textarea name="tIDp" id="cIDp" cols="50" rows="10" placeholder="Para a inserçaõ de vários IDs, separe cada um deles com vírgula..."></textarea></p></fieldset></form>'
     
     // Cria um botão.
     var elemento = document.createElement('button');
@@ -19,7 +19,7 @@ function verificar(){
     // Na página determinada, adiciona o botão: salvarPessoa (obrigatório para haver o registro de um mesmo).
     var button = document.getElementById('buttonPessoaTurno')
     button.append(elemento)
-    elemento.innerHTML = 'Salvar Pessoa/s' 
+    elemento.innerHTML = 'Salvar Pessoa(s)' 
     
     // Linka o evento 'click' no botão: salvarPessoa.
     // "Chama" a função SALVAR.
