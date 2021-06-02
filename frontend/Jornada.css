@@ -28,6 +28,11 @@ main{
     box-shadow: 0px 32px 32px -12px rgba(7, 48, 163, 0.24);
 }
 
+.criarPonto_botao{
+    display: flex;
+    justify-content: center;
+}
+
 article{
     display: flex;
 }
@@ -52,6 +57,7 @@ a{
     align-items: center;
     font-family: Roboto;
     border-width: 0px;
+    
 }
 
 #id-Retornar-botao{
@@ -65,9 +71,4 @@ a{
 #id-Retornar-botao:hover{
     background-color: #2EE6B7;
     transform: scale(1.04);
-}
-
-.editarPonto_botao{
-    display: flex;
-    justify-content: center;
 }
