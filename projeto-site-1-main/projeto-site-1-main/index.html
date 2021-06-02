@@ -25,7 +25,7 @@
             font-size: 16px;
         }                   
 
-        #criarTurno, #salvarTurno {
+        #criarTurno, #editarTurno, #salvarTurno {
             font-size: 16px;
             color: white;
         }
@@ -40,8 +40,12 @@
         }
 
         #criarTurno {
-        margin-right: 10px;
-        }        
+            margin-right: 10px;
+        }  
+        
+        #editarTurno {
+            margin-right: 10px;
+        }  
 
        #formularioTurno {
             display: flex;            
@@ -61,7 +65,10 @@
     <div id="buttonTurno">
         <button id="criarTurno">
             Criar Turno
-        </button>  
+        </button> 
+        <button id="editarTurno">
+            Editar Turno
+        </button>   
     </div> 
    <br>
     <table>
@@ -125,6 +132,7 @@
 
     </div>    
     <script src="js/criarTurno.js"></script>
+    <script src="js/editarTurno.js"></script> 
     <script src="js/deletarTurno.js"></script> 
 </body>
 </html>

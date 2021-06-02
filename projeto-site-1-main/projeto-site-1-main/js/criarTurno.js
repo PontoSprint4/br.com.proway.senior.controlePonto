@@ -1,14 +1,18 @@
 var criarT = document.getElementById('criarTurno')
 criarT.addEventListener('click', verificar) 
 
-function verificar(){  
+function verificar(){ 
+    debugger;
+    // Desabilita o botão: editarTurno.
+    document.getElementById('editarTurno').disabled = true;
+ 
     // Desabilita o botão: criarTurno.
     document.getElementById('criarTurno').disabled = true;
-
+    
     // Troca o conteúdo (vazia) da <div>: formularioTurno.
     // Por um formulário: registroTurno. 
     var formularioTurno = document.getElementById('formularioTurno') 
-    formularioTurno.innerHTML = '<form id="registroTurno"><fieldset id="dadosTurno"><legend>Registro de Turno</legend>    <p><label for="cNomeT">Nome do Turno: </label><input type="text" name="tNomeT" id="cNomeT" size="20" maxlength="20" placeholder="..."></p><p><label for="cHoraI">Hora de Início: </label><input type="time" name="tHoraI" id="cHoraI"></p><p><label for="cHoraF">Hora do Fim: </label><input type="time" name="tHoraF" id="cHoraF"></p></fieldset></form>'
+    formularioTurno.innerHTML = '<form id="registroTurno"><fieldset id="dadosTurno"><legend>Registro de Turno</legend><p><label for="cNomeT">Nome do Turno: </label><input type="text" name="tNomeT" id="cNomeT" size="20" maxlength="20" placeholder="..."></p><p><label for="cHoraI">Hora de Início: </label><input type="time" name="tHoraI" id="cHoraI"></p><p><label for="cHoraF">Hora do Fim: </label><input type="time" name="tHoraF" id="cHoraF"></p></fieldset></form>'
     
     // Cria um botão.
     var elemento = document.createElement('button');
@@ -39,5 +43,8 @@ function salvar(){
 
     // Habilita o botão: criarTurno.
     document.getElementById('criarTurno').disabled = false 
+
+    // Habilita o botão: editarTurno.
+    document.getElementById('editarTurno').disabled = false 
     
 } 
