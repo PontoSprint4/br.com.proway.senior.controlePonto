@@ -9,7 +9,7 @@ body {
 }
 
 nav{
-    align-self: flex-start;
+    justify-content: flex-start;
     margin: 2px;
     font-family: Roboto, sans-serif;
 }

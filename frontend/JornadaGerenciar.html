@@ -4,76 +4,85 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Gerenciar Jornada</title>
+        <link rel="stylesheet" type="text/css" href=JornadaGerenciar.css>
     </head>
     <body>
         <nav>
-            <button class="Retornar_botao">Retornar</button>
+                <section><a href=MarcarPonto.html    class="Retornar_botao botao"><button class="cl-Retornar-botao"
+                    id="id-Retornar-botao">Retornar</button></a></section>
+                <section><a href=JornadaCriar.html target="_blank" class="NovoPonto_botao botao"><button class="cl-Novo-botao"
+                    id="id-Novo-botao">Nova Jornada</button></a></section>
         </nav>
 
-        <article class="Opcoes">
-            <button class="NovoPonto_botao">Novo ponto</button>
-            <select class="Meses_select">
-                <option value="Maio">Maio</option>
-                <option value="Abril">Abril</option>
-                <option value="Março">Março</option>
-                <option value="Fevereiro">Fevereiro</option>
-                <option value="Janeiro">Janeiro</option>
-            </select>
-        </article>
+        <main>
+            <div class="container-row-reverse">
+                <select class="Meses-select">
+                    <option value="Maio">Maio</option>
+                    <option value="Abril">Abril</option>
+                    <option value="Março">Março</option>
+                    <option value="Fevereiro">Fevereiro</option>
+                    <option value="Janeiro">Janeiro</option>
+                </select>
+            </div>
+    
+            <article>
+                <div class="entrada-resumida">
+                    <div>31/05/2021</div>
+                    <div>08:01</div>
+                    <div>Fechado</div>
+                    <div>...</div>
+                </div>
+            </arcticle>
+    
+            <article class = "linha">
+                <div class="entrada-resumida">
+                    <div>31/05/2021</div>
+                    <div>08:01</div>
+                    <div>Fechado</div>
+                    <div>...</div>
+                </div>
+                <div class="entrada-datalhada">
+                    <section>
+                        <h4> Turno </h4>
+                        <strong> Inicio : </strong><em>08:00:00</em>
+                        <br>
+                        <strong> Fim : </strong> <em>18:00:00</em>
+                    </section>
+    
+                    <section>
+                        <h4> Pontos </h4>
+                        <div class ="entrada-ponto"> <strong> id 1 : </strong> <em> 01/06/2021 -  08:00:00 </em></div>
+                        <div class ="entrada-ponto"> <strong> id 62 : </strong> <em> 01/06/2021 -  12:00:00 </em></div>
+                        <div class ="entrada-ponto"> <strong> id 178 : </strong> <em> 01/06/2021 -  13:30:00 </em></div>
+                        <div class ="entrada-ponto"> <strong> id 420 : </strong> <em> 01/06/2021 -  18:00:00 </em></div>
+                    </section>
 
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Data</th>
-                <th>Id Pessoa</th>
-                <th>Horas Trabalhadas</th>
-                <th>Status</th>
-            </tr>
-            <tr class="EntradaJornadas">
-                <td>#101</td>
-                <td>2021/05/31</td>
-                <td>#10</td>
-                <td>08:01</td>
-                <td>STATUS</td>
-                <tr>
-                    <th colspan="5">Turno</th>
-                    <tr>
-                        <th>ID</th>
-                        <th>Hora Inicio</th>
-                        <th>Hora Fim</th>
-                        <th>Nome</th>
-                        <th>Pessoas Registradas</th>
-                    </tr>
-                    <tr>
-                        <td>42</td>
-                        <td>10:45:00</td>
-                        <td>16:30:10</td>
-                        <td>Nome do Turno</td>
-                        <td>[16 , 12, 15 ,48 , 984]</td>
-                    </tr>
-                </tr>
+                    <section class="botoes-acao">
+                        <a href=JornadaEditar.html class="cl-botoes-crud"><input class="cl-botoes-crud" type="submit" value="Editar Jornada"></a>
+                        <input class="cl-botoes-crud" type="submit" value="Remover Jornada" >
+                    </section>
+                </div>
+            </arcticle>
+    
+            <article>
+                <div class="entrada-resumida">
+                    <div>31/05/2021</div>
+                    <div>08:01</div>
+                    <div>Fechado</div>
+                    <div>...</div>
+                </div>
+            </arcticle>
+    
+            <article>
+                <div class="entrada-resumida">
+                    <div>31/05/2021</div>
+                    <div>08:01</div>
+                    <div>Fechado</div>
+                    <div>...</div>
+                </div>
+            </arcticle>
+        </main>
 
-                <tr>
-                    <th colspan="5">Pontos Registrados</th>
-                    <tr>
-                        <th >ID</th>
-                        <th>Momento</th>
-                    </tr>
-                    <tr>
-                        <td> 456 </td>
-                        <td> 2021-05-21T12:55:00</td>
-                    </tr>
-                </tr>
-
-                <tr>
-                    <th colspan="5">Ações</th>
-                    <tr>
-                        <td><button>Editar</button><button>Excluir</button></td>
-                    </tr>
-                </tr>
-
-            </tr>
-        </table>
     </body>
 </html>

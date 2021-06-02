@@ -1,12 +1,8 @@
-body{
-    background-color: #1ab0b0;
+body {
+    background-color: #009999;
     display:flex;
     flex-wrap: wrap;
     flex-direction: column;
-}
-
-nav {
-    align-self: flex-start;
 }
 
 main {
@@ -16,8 +12,39 @@ main {
     flex-direction: column;
 }
 
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-right: 1%;
+    padding-left: 1%;
+}
+
+nav > section{
+    margin: 2px;
+}
+
 a{
     text-decoration: none;
+}
+
+.cl-botoes-crud{
+    background-color:azure;
+    border: 0;
+    border-radius: 20px;
+    height: 30px;
+    width: 120px;
+}
+
+.cl-botoes-crud:hover{
+    background-color: #dbf3f3;
+}
+
+.botoes-acao{
+    margin: 2%;
+    margin-bottom: 0;
+    align-self: flex-end;
+    
 }
 
 .container-row-reverse{
@@ -66,7 +93,6 @@ a{
     padding-bottom: 1%;
 }
 
-
 .Meses-select{
     display: flex;
     flex-direction: column;
@@ -76,7 +102,7 @@ a{
 }
 
 .Meses-select:hover{
-    transform: scale(1.02   );
+    transform: scale(1.02);
 }
 
 .cl-Retornar-botao{
@@ -105,3 +131,32 @@ a{
 #id-Retornar-botao:hover{
     background-color: #2EE6B7;
 }
+
+.cl-Novo-botao{
+    background-color: #008080;
+    color: white;
+    box-shadow: 0px 32px 32px -12px rgba(7, 48, 163, 0.24);
+    height: 50px;
+    border-radius: 16px;
+    padding: 24px 48px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: Roboto;
+    border-width: 0px;
+    
+}
+
+#id-Novo-botao{
+    color: azure;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-top: 5%;
+    text-decoration: none;
+}
+
+#id-Novo-botao:hover{
+    background-color: #2EE6B7;
+    transform: scale(1.04);
+}
+

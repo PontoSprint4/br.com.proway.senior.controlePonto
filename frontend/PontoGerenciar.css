@@ -4,12 +4,10 @@
                 color: black;
             }
 
-            
-
             a{
                 text-decoration: none;
             }
-            
+
             .cl-Retornar-botao{
                 background-color: #008080;
                 color: white;
@@ -91,12 +89,17 @@
             nav{
                 display: flex;
                 flex-direction: row;
+                justify-content: space-between;
+                padding-right: 1%;
+                padding-left: 1%;
             }
 
             nav > article{
                 display: flex;
                 justify-content: flex-start;
                 flex-direction: row;
+                flex-wrap: wrap;
+                align-content: flex-end;
             }
 
             nav > article > section{
