@@ -41,14 +41,17 @@ a{
     justify-content: space-around;    
 
     padding: 5px;
-    min-width: 600px;
+    min-width: 950px;
     background-color:azure;
     border-radius: 20px;
     color: black;
 }
+.entrada-resumida:hover{
+    transform: scale(1.01);
+    background: #dbf3f3;
+}
 
 .entrada-datalhada{
-    
     width: 96%;
     background-color: rgba(240, 255, 255, 0.534);
     border-radius: 0px 0px 20px 20px;
@@ -70,6 +73,10 @@ a{
     align-items: flex-start;
     padding: 4px;
     border-radius: 20px;
+}
+
+.Meses-select:hover{
+    transform: scale(1.02   );
 }
 
 .cl-Retornar-botao{
