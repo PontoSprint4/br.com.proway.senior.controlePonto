@@ -235,7 +235,7 @@ class JornadaAPITest {
 		api.marcarPonto(idPessoa, ponto);
 		api.marcarPonto(idPessoa, ponto2);
 		
-		assertEquals(2*60, api.minutosTrabalhadosNoPeriodo(idPessoa, intervalo));
+		assertEquals(2*60, api.minutosTrabalhadosNoPeriodo(idPessoa, intervalo), 1);
 	}
 
 }
