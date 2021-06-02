@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turno</title>    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="formulario.css">
+    <link rel="stylesheet" href="table.css">
+    <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="img.css">
+    <style>   
+
+        body {
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;            
+        } 
+
+        p {
+            color:peru;
+        }  
+ 
+        a {
+            color: white;
+            font-size: 16px;
+        }                   
+
+        #criarTurno, #salvarTurno {
+            font-size: 16px;
+            color: white;
+        }
+
+        .details {            
+            background-color: blue; 
+        }         
+
+        #buttonTurno {
+            display: flex;
+            justify-content: center; 
+        }
+
+        #criarTurno {
+        margin-right: 10px;
+        }        
+
+       #formularioTurno {
+            display: flex;            
+            justify-content: center;            
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>ADMINISTRAÇÃO TURNOS</h1>    
+    <div id="img"><img style="border-radius: 10px;" src="imagens/cabecalho_site.png" alt="Ícone Usuário"></div>  
+    <br>      
+    <div id="buttonTurno">
+        <button id="criarTurno">
+            Criar Turno
+        </button>  
+    </div> 
+   <br>
+    <table>
+		<tr>
+			<th>ID</th>
+			<th>Nome</th>
+			<th>Colaboradores</th>
+			<th>Hora Início</th>
+            <th>Hora Fim</th>
+            <th>Action</th>
+            <th>Action</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Turno1</td>
+			<td>111</td>
+			<td>11:11:11</td>
+            <td>11:11:11</td>
+            <td><button class="details button"><a href="detailsTurno.html" target="_self" rel="next" hreflang="pt-br">Details</a></button></td>
+            <td><button class="delete button">Delete</button></td>
+
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Turno2</td>
+			<td>222</td>
+			<td>12:12:12</td>
+            <td>12:12:12</td>
+            <td><button class="details button"><a href="detailsTurno.html" target="_self" rel="next" hreflang="pt-br">Details</a></button></td>
+            <td><button class="delete button">Delete</button></td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>Turno3</td>
+			<td>333</td>
+			<td>13:13:13</td>
+            <td>13:13:13</td>
+            <td><button class="details button"><a href="detailsTurno.html" target="_self" rel="next" hreflang="pt-br">Details</a></button></td>
+            <td><button class="delete button">Delete</button></td>	
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>Turno4</td>
+			<td>444</td>
+			<td>14:14:14</td>
+            <td>12:07:12</td>
+            <td><button class="details button"><a href="detailsTurno.html" target="_self" rel="next" hreflang="pt-br">Details</a></button></td>
+            <td><button class="delete button">Delete</button></td>		
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>Turno1</td>
+			<td>555</td>
+			<td>15:15:15</td>
+            <td>15:15:15</td>
+            <td><button class="details button"><a href="detailsTurno.html" target="_self" rel="next" hreflang="pt-br">Details</a></button></td>
+            <td><button class="delete button">Delete</button></td>
+		</tr>
+    </table>
+    <div id="formularioTurno">  
+
+    </div>    
+    <script src="criarTurno.js"></script>
+    <script src="deletarTurno.js"></script> 
+</body>
+</html>

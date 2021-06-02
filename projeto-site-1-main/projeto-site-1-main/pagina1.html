@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        table, th{
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: #05CB90;                            
+        }
+        
+        table {
+            border-width: 4px;   
+            margin: auto;  
+        }            
+        
+        th, td {            
+            padding: 10px 10px;            
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        th {
+            background-color: rgb(187, 181, 181);   
+            color: rgb(150, 94, 22); 
+            font-size: 20px;
+            border-width: 4px;                      
+        }   
+
+        button.button {
+            width: 120px;
+            height: 30px;
+            border-radius: 10px;            
+        } 
+
+        button.delete {            
+            background-color: red; 
+        } 
+
+        button.details {            
+            background-color: blue; 
+        } 
+
+        a {
+            color: white;
+            font-size: 16px;
+        }
+
+        tr { 
+            border: none;             
+        }
+
+        td {
+            border-right: solid 4px #05CB90; 
+            border-left: solid 4px #05CB90;
+            
+            background-color: white;
+            text-align: center;
+            font-size: 16px;
+        } 
+
+        div.font-color {
+            font-size: 16px;
+            color: white;
+        }
+      
+    </style>
+</head>
+<body>
+    
+    <table>
+		<tr>
+			<th>ID</th>
+			<th>Nome</th>
+			<th>Colaboradores</th>
+			<th>Hora Início</th>
+            <th>Hora Fim</th>
+            <th>Action</th>
+            <th>Action</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Turno1</td>
+			<td>111</td>
+			<td>11:11:11</td>
+            <td>11:11:11</td>
+            <td><button class="details button"><div class="font-color">Details</div></button></td>
+            <td><button class="delete button"><div class="font-color">Delete</div></button></td>
+
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Turno2</td>
+			<td>222</td>
+			<td>12:12:12</td>
+            <td>12:12:12</td>
+            <td><button class="details button"><div class="font-color">Details</div></button></td>
+            <td><button class="delete button"><div class="font-color">Delete</div></button></td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>Turno3</td>
+			<td>333</td>
+			<td>13:13:13</td>
+            <td>13:13:13</td>
+            <td><button class="details button"><div class="font-color">Details</div></button></td>
+            <td><button class="delete button"><div class="font-color">Delete</div></button></td>	
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>Turno4</td>
+			<td>444</td>
+			<td>14:14:14</td>
+            <td>12:07:12</td>
+            <td><button class="details button"><div class="font-color">Details</div></button></td>
+            <td><button class="delete button"><div class="font-color">Delete</div></button></td>		
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>Turno1</td>
+			<td>555</td>
+			<td>15:15:15</td>
+            <td>15:15:15</td>
+            <td><button class="details button"><div class="font-color">Details</div></button></td>
+            <td><button class="delete button"><div class="font-color">Delete</div></button></td>
+		</tr>
+    </table>
+    <hr>        
+    <p style="text-align: center;"><a href="index.html" target="_self" rel="prev" hreflang="pt-br"><img src="imagens/voltar.png" alt="Voltar para Index"></a></p>
+    <hr>
+    <script>        
+        var tests = document.getElementsByClassName('delete')         
+    
+        for(test of tests) {
+            test.addEventListener('click', function(){                  
+                confirm('Deseja mesmo fazer a deletação?')}                     
+            )
+        }
+    </script>    
+</body>
+</html>
