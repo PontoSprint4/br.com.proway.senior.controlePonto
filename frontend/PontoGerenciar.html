@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href=PontoGerenciar.css>
+    <title>Gerencia Ponto</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<nav>
+    <article class="Opcoes">
+        <section><a href=index.html class="Retornar_botao botao"><button class="cl-Retornar-botao"
+                    id="id-Retornar-botao">Retornar</button></a></section>
+        <section><a href=PontoCriar.html target="_blank" class="NovoPonto_botao botao"><button class="cl-Novo-botao"
+                    id="id-Novo-botao">Novo ponto</button></a></section>
+        <section id="id-buscar"><input class="buscarPontoPorId" placeholder="Buscar ponto por ID" type="number" min="1"></section>
+        <section>
+            <select class="Meses_select">
+                <option value="Maio">Maio</option>
+                <option value="Abril">Abril</option>
+                <option value="Março">Março</option>
+                <option value="Fevereiro">Fevereiro</option>
+                <option value="Janeiro">Janeiro</option>
+            </select>
+        </section>
+    </article>
+</nav>
+
+<body>
+
+    <article class="tabelaPonto">
+        <article class="entradaPonto">
+            <section>#101</section>
+            <section>2021/05/31 13:28:30</section>
+            <section>ID Colaborador: #10</section>
+            <a href=PontoEditar.html class="acoes">
+                <section><button>Editar</button><button>Excluir</button>
+            </a>
+            </section>
+        </article>
+    </article>
+</body>
+
+</html>
