@@ -19,7 +19,9 @@ function verificar(){
     // Na página determinada, adiciona o botão: salvarPessoa (obrigatório para haver o registro de um mesmo).
     var button = document.getElementById('buttonPessoaTurno')
     button.append(elemento)
-    elemento.innerHTML = 'Salvar Pessoa(s)' 
+    elemento.innerHTML = 'Salvar Pessoa(s)'
+    
+    addP.setAttribute("style", "background-color: black;")
     
     // Linka o evento 'click' no botão: salvarPessoa.
     // "Chama" a função SALVAR.
@@ -38,6 +40,8 @@ function salvar(){
     button.removeChild(document.getElementById('salvarPessoa'));
 
     // Habilita o botão: addPessoa.
-    document.getElementById('addPessoa').disabled = false 
+    document.getElementById('addPessoa').disabled = false
+    
+    addP.setAttribute("style", "background-color: #31D0D0;")
     
 } 
