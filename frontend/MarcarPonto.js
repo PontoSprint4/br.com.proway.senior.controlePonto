@@ -1,6 +1,4 @@
-const zeroFill = n => {
-    return ('0' + n).slice(-2);
-}
+
 
 // Cria intervalo
 const interval = setInterval(() => {
@@ -11,10 +9,12 @@ const interval = setInterval(() => {
    // const dataHora = zeroFill(now.getUTCDate()) + '/' + zeroFill((now.getMonth() + 1)) + '/' + now.getFullYear() + ' ' + zeroFill(now.getHours()) + ':' + zeroFill(now.getMinutes()) + ':' + zeroFill(now.getSeconds());
 
    // Pegando Hora e Minuto
-    const hora = zeroFill(now.getHours()) + ':' + zeroFill(now.getMinutes());
+    const hora = (now.getHours()) + ':' + (now.getMinutes());
+
+    
 
     // Pegando Dia, Mes e Ano
-    const data = zeroFill(now.getDay()) +' de '+ zeroFill(now.getMonth() + 1)+' de '+ zeroFill(now.getFullYear());
+    const data = now.getDay() +' de '+  +' de '+ now.getFullYear();
 
     // Exibe na tela usando a div#data-hora
     document.getElementById('baterPonto-hora').innerHTML = hora;
