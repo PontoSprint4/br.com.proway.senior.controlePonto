@@ -2,7 +2,6 @@ body{
     background: linear-gradient( 135deg, #79c7c7, #028181, #027a7a, #025353 );
     background-size: 400% 400%;
     animation: gradient 14s ease infinite;
-
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
