@@ -1,0 +1,39 @@
+
+nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 1%;
+  padding-left: 1%;
+}
+
+nav > article{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-end;
+}
+
+nav > article > section{
+  margin:  2px;
+}
+
+.buscarPontoPorId{
+  border-radius: 20px;
+  padding: 4px;
+  align-self: center;
+}
+
+.Meses_select{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4px;
+  border-radius: 20px;
+}
+
+.acoes{
+  display: flex;
+  flex-direction: row;
+}

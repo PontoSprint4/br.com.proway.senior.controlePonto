@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+  --cor-de-fundo : #009999;
+
+  --borda-tabela : 10px;
+}
+
+*{
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--cor-de-fundo);
+  font-family: Roboto;
+  color: black;
+}
+
+a{
+  text-decoration: none;
+}
+
+.entrada-lista{
+  background: whitesmoke;
+  border-radius: 16px;
+  border: 16px;
+  margin:16px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: 0px 32px 32px -12px rgba(7, 48, 163, 0.24);
+}
+
+.entrada-lista > section{
+  padding: 8px
+}
+
+.entrada-lista > .acoes > button{
+  margin: 2px;
+}
+
+.botao{
+  background-color: #008080;
+  color: white;
+  box-shadow: 0px 32px 32px -12px rgba(7, 48, 163, 0.24);
+  height: 50px;
+  border-radius: 16px;
+  padding: 24px 48px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: Roboto;
+  border-width: 0px;
+
+  letter-spacing: 1px;
+  text-decoration: none;
+
+}
+
+.botao:hover{
+  background-color: #2EE6B7;
+  transform: scale(1.04);
+}
+
+.botao-acao{
+  background-color: #008080;
+  color: white;
+  box-shadow: 0px 32px 32px -12px rgba(7, 48, 163, 0.24);
+  height: 24px;
+  border-radius: 16px;
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: Roboto;
+  border-width: 0px;
+
+  letter-spacing: 1px;
+  text-decoration: none;
+
+}
+
+.botao-acao:hover{
+  background-color: #2EE6B7;
+  transform: scale(1.04);
+}
