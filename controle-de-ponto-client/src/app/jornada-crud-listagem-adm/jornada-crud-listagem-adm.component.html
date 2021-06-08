@@ -1,0 +1,85 @@
+
+        <nav>
+            <article>
+                <section><a href=JornadaCriar.html><button class="botao">Nova Jornada</button></a></section>
+            </article>
+            <article>
+                <section><input class="buscarPontoPorId" placeholder="Buscar ponto por ID" type="number" min="1"></section>
+                <section>
+                    <select class="Meses_select">
+                        <option value="Maio">Maio</option>
+                        <option value="Abril">Abril</option>
+                        <option value="Março">Março</option>
+                        <option value="Fevereiro">Fevereiro</option>
+                        <option value="Janeiro">Janeiro</option>
+                    </select>
+                </section>
+            </article>
+        </nav>
+
+    <main class="container-fluid">
+
+        <!--Jornadas-->
+        <div class="container mt-lg-4" *ngFor="let jornada of jornadas; let indice = index">
+            
+            <!--Jornada Resumida-->
+            <button class="collapsible">
+                <div>{{jornada.data | date: 'dd/MM/yyyy' }}</div>
+                <div>{{jornada.data | date: 'dd/MM/yyyy' }}</div>
+                <div>{{jornada.data | date: 'dd/MM/yyyy' }}</div>
+            </button>
+
+            <!--Tabela Colapsada-->
+            <div class="content">
+                <div id="tabela">
+                    <table class="alinhamentoTabela">
+                        <!--CabecalhoTurno-->
+                        <thead>
+                            <tr class="cabecalho">
+                                    <th>Turno</th>
+                                    <th>Inicio</th>
+                                    <th>Fim</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                            
+                
+                            <!--Informações do turno-->
+                            <tr>
+                                <th>{{jornada.turno.nomeTurno}}</th>
+                                <th>{{jornada.turno.horaInicio}}</th>
+                                <th>{{jornada.turno.horaFim}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="alinhamentoTabela">
+                          <!--CabecalhoPonto-->
+                          <thead>
+                            <tr class="cabecalho">
+                               
+                                    <th>Pontos</th>
+                                    <th>ID Ponto</th>
+                                    <th>Data Ponto</th>
+                                    <th>Hora do Ponto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          
+
+                            <!--Informações do ponto-->
+                            <tr>
+                                <th></th>
+                                <th>210</th>
+                                <th>08/06/2021</th>
+                                <th>18:00:00</th>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
