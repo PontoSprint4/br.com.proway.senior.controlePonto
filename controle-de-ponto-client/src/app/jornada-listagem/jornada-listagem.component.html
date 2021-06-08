@@ -1,0 +1,89 @@
+<nav>
+  <button class="botao">Retornar</button>
+  <!--Filtro Meses-->
+  <div>
+    <select class="Meses-select">
+      <option value="Maio">Maio</option>
+      <option value="Abril">Abril</option>
+      <option value="Março">Março</option>
+      <option value="Fevereiro">Fevereiro</option>
+      <option value="Janeiro">Janeiro</option>
+    </select>
+  </div>
+</nav>
+
+<main class="container-fluid">
+
+  <!--Jornadas-->
+  <div class="container">
+
+    <!--Jorndada Resumida-->
+    <button class="collapsible entrada-lista" *ngFor="let jornada of jornadas; let indice = index">
+      <div>#{{indice+1}}</div>
+      <div> {{jornada.horasTrabalhadas/60}}</div>
+      <div>{{jornada.status | titlecase}}</div>
+    </button>
+
+    <!--Tabela Colapsada-->
+    <div class="content entrada-datalhada">
+      <div id="tabela">
+
+        <table class="alinhamentoTabela">
+          <tbody>
+
+            <!--CabecalhoTurno-->
+            <thead>
+              <tr>
+                <th colspan="3" id="titulo">Turno</th>
+              </tr>
+              <div class="cabecalho">
+                <tr>
+                  <th>Nome</th>
+                  <th>Inicio</th>
+                  <th>Fim</th>
+                </tr>
+              </div>
+            </thead>
+
+            <!--Informações do turno-->
+            <tr>
+              <th>nome</th>
+              <th>08:00:00</th>
+              <th>18:00:00</th>
+            </tr>
+          </tbody>
+        </table>
+
+        <br>
+
+        <table class="alinhamentoTabela">
+          <tbody>
+
+            <!--CabecalhoPonto-->
+            <thead>
+              <div class="cabecalho">
+                <tr>
+                  <th colspan="3" id="titulo">Ponto</th>
+                </tr>
+                <tr>
+                  <th>ID Ponto</th>
+                  <th>Data Ponto</th>
+                  <th>Hora do Ponto</th>
+                </tr>
+              </div>
+            </thead>
+
+            <!--Informações do Ponto-->
+            <tr>
+              <th>210</th>
+              <th>08/06/2021</th>
+              <th>18:00:00</th>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</main>
