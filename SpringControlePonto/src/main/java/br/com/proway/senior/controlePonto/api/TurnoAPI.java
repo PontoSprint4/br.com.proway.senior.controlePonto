@@ -3,6 +3,7 @@ package br.com.proway.senior.controlePonto.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import br.com.proway.senior.controlePonto.model.TurnoDTO;
 import br.com.proway.senior.controlePonto.services.TurnoService;
 
 
-
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping(path = "api/")
 public class TurnoAPI {

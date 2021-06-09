@@ -2,6 +2,7 @@ package br.com.proway.senior.controlePonto.api;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import br.com.proway.senior.controlePonto.model.Ponto;
 import br.com.proway.senior.controlePonto.model.Turno;
 import br.com.proway.senior.controlePonto.services.JornadaService;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping(path = "api/")
 public class JornadaAPI {
