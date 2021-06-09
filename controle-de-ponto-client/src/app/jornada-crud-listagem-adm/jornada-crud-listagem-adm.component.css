@@ -108,11 +108,6 @@ table {
     justify-content: space-between;
 }
 
-/* Titulo Das Tabela Turno/Ponto */
-#titulo {
-    text-align: center;
-}
-
 /* Filtro de Meses */
 .Meses_select{
   display: flex;
