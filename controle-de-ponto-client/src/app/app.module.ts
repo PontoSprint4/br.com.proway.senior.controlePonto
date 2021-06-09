@@ -12,7 +12,7 @@ import { JornadaCriarComponent } from './jornada-criar/jornada-criar.component';
 import { JornadaEditarComponent } from './jornada-editar/jornada-editar.component';
 import { JornadaListagemComponent } from './jornada-listagem/jornada-listagem.component';
 import { TurnoIndexComponent } from './turno-index/turno-index.component';
-import { TurnoDetailsComponent } from './turno-details/turno-details.component'
+import { TurnoDetailsComponent } from './turno-details/turno-details.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +24,13 @@ import { TurnoDetailsComponent } from './turno-details/turno-details.component'
     PontoEditarComponent,
     PontoCrudListagemComponent,
     JornadaCriarComponent,
-    JornadaEditarComponent
-    JornadaListagemComponent,
+    JornadaEditarComponent,
+    JornadaListagemComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-    NgbModule
+    AppRoutingModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
