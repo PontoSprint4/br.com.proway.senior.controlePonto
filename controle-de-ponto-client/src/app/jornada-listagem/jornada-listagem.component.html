@@ -17,15 +17,14 @@
   <!--Jornadas-->
   <div class="container">
 
-    <!--Jorndada Resumida-->
-    <button class="collapsible entrada-lista" *ngFor="let jornada of jornadas; let indice = index">
-      <div>#{{indice+1}}</div>
-      <div> {{jornada.minutosTrabalhados /60}}</div> <!-- jornada.horasTrabalhadas -->
-      <div>{{jornada.estado | titlecase}}</div>
-    </button>
-
     <!--Tabela Colapsada-->
     <div class="content entrada-datalhada" *ngFor="let jornada of jornadas; let indice = index">
+      <!--Jorndada Resumida-->
+    <button class="collapsible entrada-lista">
+      <div>#{{indice+1}}</div>
+      <div> {{jornada.minutosTrabalhados /60}}</div>
+      <div>{{jornada.estado | titlecase}}</div>
+    </button>
       <div id="tabela">
 
         <table class="alinhamentoTabela">
