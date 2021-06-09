@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./jornada-crud-listagem-adm.component.css'],
 })
 export class JornadaCrudListagemAdmComponent implements OnInit {
-  public isCollapsed: boolean = true;
+  public isCollapsed: boolean[] = [];
 
   constructor() {}
 
