@@ -3,18 +3,51 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-jornada-crud-listagem-adm',
   templateUrl: './jornada-crud-listagem-adm.component.html',
-  styleUrls: ['./jornada-crud-listagem-adm.component.css']
+  styleUrls: ['./jornada-crud-listagem-adm.component.css'],
 })
 export class JornadaCrudListagemAdmComponent implements OnInit {
+  public isCollapsed: boolean = true;
 
-  public isCollapsed : boolean = true;
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  public turno = {nomeTurno: "turno 1", inicioTurno: new Date(2021, 6, 8, 8,0), fimTurno: new Date(2021, 6, 8, 18,0)}
-  public pontos = [{idPonto: 1, momentoPonto: Date.now(), idPessoa: 12},{idPonto: 11, momentoPonto: Date.now(), idPessoa: 12}]
-  public jornadas = [{dataJornada: new Date(2021, 6, 8), horasTrabalhadas: 836, status: "FECHADO", turno: this.turno, ponto: [this.pontos[0], this.pontos[1]]}];
+  public turno = {
+    id: 0,
+    nomeTurno: 'turno 1',
+    horaInicio: new Date(2021, 6, 8, 8, 0),
+    horaFim: new Date(2021, 6, 8, 18, 0),
+    minutosTrabalho: 600,
+    pessoasNoTurno: [0, 1, 2],
+  };
+  public pontos = [
+    { id: 0, momentoPonto: Date.now(), idPessoa: 12 },
+    { id: 1, momentoPonto: Date.now(), idPessoa: 12 },
+  ];
+  public jornadas = [
+    {
+      id: 0,
+      idPessoa: this.pontos[0].idPessoa,
+      data: new Date(2021, 6, 8),
+      minutosTrabalhados: 836,
+      estado: 'FECHADO',
+      turno: this.turno,
+      listaPonto: this.pontos,
+      dia: 9,
+      mes: 6,
+      ano: 2021,
+    },
+    {
+      id: 1,
+      idPessoa: this.pontos[0].idPessoa,
+      data: new Date(2021, 6, 8),
+      minutosTrabalhados: 836,
+      estado: 'ABERTO',
+      turno: this.turno,
+      listaPonto: this.pontos,
+      dia: 9,
+      mes: 6,
+      ano: 2021,
+    },
+  ];
 }
