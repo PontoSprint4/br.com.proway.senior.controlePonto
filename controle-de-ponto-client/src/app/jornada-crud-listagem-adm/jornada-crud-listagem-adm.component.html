@@ -1,85 +1,80 @@
+<nav>
+    <article>
+        <section><a href=JornadaCriar.html><button class="botao">Nova Jornada</button></a></section>
+    </article>
+    <article>
+        <section><input class="buscarJornadaPorId" placeholder="Buscar Jornada por ID" type="number" min="1"></section>
+        <section>
+            <select class="Meses_select">
+                <option value="Maio">Maio</option>
+                <option value="Abril">Abril</option>
+                <option value="Março">Março</option>
+                <option value="Fevereiro">Fevereiro</option>
+                <option value="Janeiro">Janeiro</option>
+            </select>
+        </section>
+    </article>
+</nav>
 
-        <nav>
-            <article>
-                <section><a href=JornadaCriar.html><button class="botao">Nova Jornada</button></a></section>
-            </article>
-            <article>
-                <section><input class="buscarPontoPorId" placeholder="Buscar ponto por ID" type="number" min="1"></section>
-                <section>
-                    <select class="Meses_select">
-                        <option value="Maio">Maio</option>
-                        <option value="Abril">Abril</option>
-                        <option value="Março">Março</option>
-                        <option value="Fevereiro">Fevereiro</option>
-                        <option value="Janeiro">Janeiro</option>
-                    </select>
-                </section>
-            </article>
-        </nav>
+<main class="container-fluid">
 
-    <main class="container-fluid">
+<!--Jornadas-->
+<div class="container mt-lg-4" *ngFor="let jornada of jornadas; let indice = index">
+    
+    <!--Jornada Resumida-->
+    <button class="collapsible">
+        <div>Data: {{jornada.dataJornada | date: 'dd/MM/yyyy' }}</div>
+        <div>Horas Trabalhadas: {{jornada.horasTrabalhadas }}</div>
+        <div>Status: {{jornada.status }}</div>
+    </button>
 
-        <!--Jornadas-->
-        <div class="container mt-lg-4" *ngFor="let jornada of jornadas; let indice = index">
-            
-            <!--Jornada Resumida-->
-            <button class="collapsible">
-                <div>{{jornada.data | date: 'dd/MM/yyyy' }}</div>
-                <div>{{jornada.data | date: 'dd/MM/yyyy' }}</div>
-                <div>{{jornada.data | date: 'dd/MM/yyyy' }}</div>
-            </button>
+    <!--Tabela Colapsada-->
+    <div class="content entrada-lista">
+        <div id="tabela">
+            <table class="alinhamentoTabela">
+                <!--CabecalhoTurno-->
+                <thead>
+                    <tr><th colspan="3">Turno</th></tr>
+                    <tr class="cabecalho">
+                            <th>Nome</th>
+                            <th>Inicio</th>
+                            <th>Fim</th>
+                        </tr>
+                </thead>
+                <tbody>
+                    <!--Informações do turno-->
+                    <tr>
+                        <th>{{jornada.turno.nomeTurno}}</th>
+                        <th>{{jornada.turno.inicioTurno | date: 'h:mm:ss' }}</th>
+                        <th>{{jornada.turno.fimTurno | date: 'h:mm:ss' }}</th>
+                    </tr>
+                </tbody>
+            </table>
 
-            <!--Tabela Colapsada-->
-            <div class="content">
-                <div id="tabela">
-                    <table class="alinhamentoTabela">
-                        <!--CabecalhoTurno-->
-                        <thead>
-                            <tr class="cabecalho">
-                                    <th>Turno</th>
-                                    <th>Inicio</th>
-                                    <th>Fim</th>
-                                </tr>
-                        </thead>
-                        <tbody>
-                            
-                
-                            <!--Informações do turno-->
-                            <tr>
-                                <th>{{jornada.turno.nomeTurno}}</th>
-                                <th>{{jornada.turno.horaInicio}}</th>
-                                <th>{{jornada.turno.horaFim}}</th>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <table class="alinhamentoTabela">
-                          <!--CabecalhoPonto-->
-                          <thead>
-                            <tr class="cabecalho">
-                               
-                                    <th>Pontos</th>
-                                    <th>ID Ponto</th>
-                                    <th>Data Ponto</th>
-                                    <th>Hora do Ponto</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          
-
-                            <!--Informações do ponto-->
-                            <tr>
-                                <th></th>
-                                <th>210</th>
-                                <th>08/06/2021</th>
-                                <th>18:00:00</th>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <table class="alinhamentoTabela">
+                  <!--CabecalhoPonto-->
+                  <thead>
+                      <tr><th colspan="3">Pontos</th></tr>
+                    <tr class="cabecalho">  
+                        <th>ID Ponto</th>
+                        <th>Data Ponto</th>
+                        <th>Hora do Ponto</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let ponto of jornada.ponto">
+                    <!--Informações do ponto-->
+                    <tr>
+                        <th>{{ ponto.idPonto }}</th>
+                        <th>{{ ponto.momentoPonto | date : 'dd/MM/yyyy'}}</th>
+                        <th>{{ ponto.momentoPonto | date : 'h:mm:ss'}}</th>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </main>
 
-
+        <section class="acoes">
+            <button class="botao-acao">Editar</button><button class="botao-acao">Excluir</button>
+          </section>
+    </div>
+</div>
+</main>

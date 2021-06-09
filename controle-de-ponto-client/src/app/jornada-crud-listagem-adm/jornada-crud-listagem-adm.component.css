@@ -1,18 +1,19 @@
-
-.buscarPontoPorId{
-    border-radius: 20px;
-    padding: 4px;
+main {
     align-self: center;
-  }
-  
-  .Meses_select{
+
+    display:flex;
+    flex-direction: column;
+}
+
+main .container {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 4px;
-    border-radius: 20px;
-  }
-  nav{
+    align-items: center;
+    justify-content: center;
+}
+
+nav{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -32,28 +33,9 @@
     margin:  2px;
   }
 
-main {
-    align-self: center;
-
-    display:flex;
-    flex-direction: column;
-
-}
-
-h1 {
-    font-size: 30px;
-}
-
-h2 {
-    font-size: 20px;
-}
-
-main .container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  /*Sobrescrevendo margin*/
+.entrada-lista{
+    margin-top: 0px;
 }
 
 /* Jornada Resumida */
@@ -97,7 +79,9 @@ main .container {
 
 /* Tabela Ponto / Turno */
 .content {
-
+    /*max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;*/
 
     width: 97%;
     background-color: rgba(240, 255, 255, 0.534);
@@ -111,66 +95,42 @@ main .container {
 
 
 /* tabela */
+table {
+    width: 100%;
+}
+
 #tabela {
     height: 210px;
-    padding: 10px 0px;
     margin: 10px;
-    padding-bottom: 50px;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-table {
-    width: 100%;
-}
-
+/* Titulo Das Tabela Turno/Ponto */
 #titulo {
     text-align: center;
 }
 
-.container-row-reverse{
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 3vw;
-}
-
 /* Filtro de Meses */
-.Meses-select{
-    padding: 4px;
+.Meses_select{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4px;
+  border-radius: 20px;
+}
+ 
+.buscarJornadaPorId {
     border-radius: 20px;
+    padding: 4px;
+    align-self: center;
 }
 
-.Meses-select:hover{
-    transform: scale(1.02);
-}
-
-/* Botao Retornar */
-.cl-Retornar-botao{
-    background-color: #008080;
-    color: white;
-    box-shadow: 0px 32px 32px -12px rgba(7, 48, 163, 0.24);
-    height: 50px;
-    border-radius: 16px;
-    padding: 2px 40px;
+.acoes{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    font-family: Roboto;
-    border-width: 0px;
-    
-}
-
-#id-Retornar-botao{
-    color: azure;
-    font-size: 16px;
-    letter-spacing: 1px;
-    margin-top: 5%;
-    margin-left: 5%;
-
-}
-
-#id-Retornar-botao:hover{
-    background-color: #2EE6B7;
-}
+    justify-content: flex-end;
+    margin: 10px;
+  }
