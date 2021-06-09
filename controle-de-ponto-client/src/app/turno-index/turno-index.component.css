@@ -44,9 +44,6 @@ table {
 }
 
 /* style.css */
-body {    
-    background-color: #009999;    
-}
 h1{
     color: darkslategray;
     text-align: center;
@@ -56,31 +53,35 @@ h1{
 form {
     width: 500px;         			
 }
+
 input {
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
 } 
+
 input:hover {
     background-color: rgb(224, 224, 224);
     transition: 2s;    
 }
+
 legend {
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
+
 fieldset {
     border-color: black;
     margin-block-start: 20px;
     margin-block-end: 20px; 
     background-color: lightgreen;           
-}
+}	
 
 /* table.css */	
 table, th{
     border-collapse: collapse;
     border-style: solid;
-    border-color: #05CB90;                            
+    border-color: #05CB90;                          
 }
 
 table {
@@ -152,4 +153,3 @@ button:hover {
     text-align: center;
     border-radius: 10px;
 }  
-
