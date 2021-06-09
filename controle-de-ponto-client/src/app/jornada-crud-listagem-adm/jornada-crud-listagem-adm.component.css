@@ -20,7 +20,7 @@ nav{
     padding-right: 1%;
     padding-left: 1%;
   }
-  
+
   nav > article{
     display: flex;
     justify-content: flex-start;
@@ -28,7 +28,7 @@ nav{
     flex-wrap: wrap;
     align-content: flex-end;
   }
-  
+
   nav > article > section{
     margin:  2px;
   }
@@ -74,23 +74,14 @@ nav{
 }
 
 .active:after {
-    content: "\2212";
+    content: "\2212"; /*css code para sinal de negativo; transforma o botão de + em -*/
 }
 
 /* Tabela Ponto / Turno */
 .content {
-    /*max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;*/
-
     width: 97%;
     background-color: rgba(240, 255, 255, 0.534);
     border-radius: 0px 0px 20px 20px;
-
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-content: space-between;
 }
 
 
@@ -108,11 +99,6 @@ table {
     justify-content: space-between;
 }
 
-/* Titulo Das Tabela Turno/Ponto */
-#titulo {
-    text-align: center;
-}
-
 /* Filtro de Meses */
 .Meses_select{
   display: flex;
@@ -121,7 +107,7 @@ table {
   padding: 4px;
   border-radius: 20px;
 }
- 
+
 .buscarJornadaPorId {
     border-radius: 20px;
     padding: 4px;

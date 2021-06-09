@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-jornada-crud-listagem-adm',
-  templateUrl: './jornada-crud-listagem-adm.component.html',
-  styleUrls: ['./jornada-crud-listagem-adm.component.css'],
+  selector: 'app-jornada-listagem',
+  templateUrl: './jornada-listagem.component.html',
+  styleUrls: ['./jornada-listagem.component.css'],
 })
-export class JornadaCrudListagemAdmComponent implements OnInit {
+export class JornadaListagemComponent implements OnInit {
   public isCollapsed: boolean[] = [];
 
   constructor() {}
