@@ -22,20 +22,20 @@
 <div class="container mt-lg-4" *ngFor="let jornada of jornadas; let indice = index">
     
     <!--Jornada Resumida-->
-    <button class="collapsible">
+    <button class="collapsible entrada-lista" (click) = "collapse.toggle()" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
         <div>Data: {{jornada.dataJornada | date: 'dd/MM/yyyy' }}</div>
         <div>Horas Trabalhadas: {{jornada.horasTrabalhadas }}</div>
         <div>Status: {{jornada.status }}</div>
     </button>
 
     <!--Tabela Colapsada-->
-    <div class="content entrada-lista">
+    <div class="content" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
         <div id="tabela">
             <table class="alinhamentoTabela">
                 <!--CabecalhoTurno-->
                 <thead>
                     <tr><th colspan="3">Turno</th></tr>
-                    <tr class="cabecalho">
+                        <tr><!---->
                             <th>Nome</th>
                             <th>Inicio</th>
                             <th>Fim</th>
@@ -55,7 +55,7 @@
                   <!--CabecalhoPonto-->
                   <thead>
                       <tr><th colspan="3">Pontos</th></tr>
-                    <tr class="cabecalho">  
+                    <tr>  
                         <th>ID Ponto</th>
                         <th>Data Ponto</th>
                         <th>Hora do Ponto</th>
