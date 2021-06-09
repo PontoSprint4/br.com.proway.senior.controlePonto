@@ -20,12 +20,12 @@
     <!--Jorndada Resumida-->
     <button class="collapsible entrada-lista" *ngFor="let jornada of jornadas; let indice = index">
       <div>#{{indice+1}}</div>
-      <div> {{jornada.horasTrabalhadas/60}}</div>
-      <div>{{jornada.status | titlecase}}</div>
+      <div> {{jornada.minutosTrabalhados /60}}</div> <!-- jornada.horasTrabalhadas -->
+      <div>{{jornada.estado | titlecase}}</div>
     </button>
 
     <!--Tabela Colapsada-->
-    <div class="content entrada-datalhada">
+    <div class="content entrada-datalhada" *ngFor="let jornada of jornadas; let indice = index">
       <div id="tabela">
 
         <table class="alinhamentoTabela">
@@ -34,7 +34,7 @@
             <!--CabecalhoTurno-->
             <thead>
               <tr>
-                <th colspan="3" id="titulo">Turno</th>
+                <th colspan="3" id="titulo" >Turno</th>
               </tr>
               <div class="cabecalho">
                 <tr>
@@ -47,9 +47,9 @@
 
             <!--Informações do turno-->
             <tr>
-              <th>nome</th>
-              <th>08:00:00</th>
-              <th>18:00:00</th>
+              <th>{{jornada.turno.nomeTurno}}</th>
+              <th>{{jornada.turno.horaInicio| date : 'hh:mm:ss'}}</th>
+              <th>{{jornada.turno.horaFim | date : 'hh:mm:ss'}}</th>
             </tr>
           </tbody>
         </table>
@@ -75,9 +75,9 @@
 
             <!--Informações do Ponto-->
             <tr>
-              <th>210</th>
-              <th>08/06/2021</th>
-              <th>18:00:00</th>
+              <th>{{jornada.listaPonto[indice].id}}</th>
+              <th>{{jornada.listaPonto[indice].momentoPonto | date : 'dd/MM/yyyy'}}</th>
+              <th>{{jornada.listaPonto[indice].momentoPonto | date : 'hh:mm:ss'}}</th>
             </tr>
 
           </tbody>
