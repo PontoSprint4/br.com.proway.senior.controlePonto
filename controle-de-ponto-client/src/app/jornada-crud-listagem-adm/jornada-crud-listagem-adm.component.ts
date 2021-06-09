@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JornadaCrudListagemAdmComponent implements OnInit {
 
+  public isCollapsed : boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {

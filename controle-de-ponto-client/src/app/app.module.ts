@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { PontoCrudListagemComponent } from './ponto-crud-listagem/ponto-crud-listagem.component';
 import { JornadaCrudListagemAdmComponent } from './jornada-crud-listagem-adm/jornada-crud-listagem-adm.component';
 import { JornadaListagemComponent } from './jornada-listagem/jornada-listagem.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { JornadaListagemComponent } from './jornada-listagem/jornada-listagem.co
     JornadaListagemComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
