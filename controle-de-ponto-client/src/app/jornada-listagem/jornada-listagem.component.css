@@ -68,9 +68,9 @@ main .container {
 
 /* Tabela Ponto / Turno */
 .content {
-  max-height: 0;
+  /*max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  transition: max-height 0.2s ease-out;*/
 
   width: 97%;
   background-color: rgba(240, 255, 255, 0.534);
