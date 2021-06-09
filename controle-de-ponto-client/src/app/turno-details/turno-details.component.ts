@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-turno-details',
@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class TurnoDetailsComponent { 
 
+  @Input() public pessoas? : pessoa[];
+  // TODO: Fazer isso funcionar (receber de outro componente)
 }
+
+export interface pessoa {id: number,nomePessoa: string}
