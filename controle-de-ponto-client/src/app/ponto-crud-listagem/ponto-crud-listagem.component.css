@@ -1,4 +1,3 @@
-
 nav{
   display: flex;
   flex-direction: row;
@@ -23,14 +22,6 @@ nav > article > section{
   border-radius: 20px;
   padding: 4px;
   align-self: center;
-}
-
-.Meses_select{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 4px;
-  border-radius: 20px;
 }
 
 .acoes{

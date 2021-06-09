@@ -1,0 +1,77 @@
+<nav>
+  <button class="botao">Retornar</button>
+  <!--Filtro Meses-->
+  <div>
+    <select class="Meses-select">
+      <option value="Maio">Maio</option>
+      <option value="Abril">Abril</option>
+      <option value="Março">Março</option>
+      <option value="Fevereiro">Fevereiro</option>
+      <option value="Janeiro">Janeiro</option>
+    </select>
+  </div>
+</nav>
+
+<main class="container-fluid">
+
+  <!--Jornadas-->
+  <div class="container mt-lg-4" *ngFor="let jornada of jornadas; let indice = index">
+
+    <!--Jorndada Resumida-->
+    <button class="collapsible entrada-lista" (click)="isCollapsed[indice] = !isCollapsed[indice]">
+      <div>#{{indice+1}}</div>
+      <div> {{jornada.minutosTrabalhados /60}}</div>
+      <div>{{jornada.estado | titlecase}}</div>
+    </button>
+
+    <!--Tabela Colapsada-->
+    <div class="content" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[indice]">
+      <div id="tabela">
+        <table class="alinhamentoTabela">
+          <!--CabecalhoTurno-->
+          <thead>
+            <tr>
+              <th colspan="3">Turno</th>
+            </tr>
+              <tr>
+                <th>Nome</th>
+                <th>Inicio</th>
+                <th>Fim</th>
+              </tr>
+          </thead>
+          <tbody>
+            <!--Informações do turno-->
+            <tr>
+              <th>{{jornada.turno.nomeTurno | titlecase}}</th>
+              <th>{{jornada.turno.horaInicio| date : 'hh:mm:ss'}}</th>
+              <th>{{jornada.turno.horaFim | date : 'hh:mm:ss'}}</th>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="alinhamentoTabela">
+          <!--CabecalhoPonto-->
+          <thead>
+            <tr>
+              <th colspan="3">Pontos</th>
+            </tr>
+            <tr>
+              <th>ID Ponto</th>
+              <th>Data Ponto</th>
+              <th>Hora do Ponto</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let ponto of jornada.listaPonto">
+            <!--Informações do Ponto-->
+            <tr>
+              <th>{{ponto.id}}</th>
+              <th>{{ponto.momentoPonto | date : 'dd/MM/yyyy'}}</th>
+              <th>{{ponto.momentoPonto | date : 'hh:mm:ss'}}</th>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</main>

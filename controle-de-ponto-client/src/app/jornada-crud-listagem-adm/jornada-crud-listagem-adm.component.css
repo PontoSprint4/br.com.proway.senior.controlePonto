@@ -1,0 +1,122 @@
+main {
+    align-self: center;
+
+    display:flex;
+    flex-direction: column;
+}
+
+main .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 1%;
+    padding-left: 1%;
+  }
+
+  nav > article{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-end;
+  }
+
+  nav > article > section{
+    margin:  2px;
+  }
+
+  /*Sobrescrevendo margin*/
+.entrada-lista{
+    margin-top: 0px;
+}
+
+/* Jornada Resumida */
+.collapsible {
+    background-color:rgb(240, 255, 255);
+    color: black;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 20px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* ao expandir */
+.active,
+.collapsible:hover {
+    transform: scale(1.01);
+    background: #c2f8f8;
+}
+
+/* sinal de mais na jornada resumida */
+.collapsible:after {
+    content: '\002B';
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212"; /*css code para sinal de negativo; transforma o botão de + em -*/
+}
+
+/* Tabela Ponto / Turno */
+.content {
+    width: 97%;
+    background-color: rgba(240, 255, 255, 0.534);
+    border-radius: 0px 0px 20px 20px;
+}
+
+
+/* tabela */
+table {
+    width: 100%;
+}
+
+#tabela {
+    height: 210px;
+    margin: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Filtro de Meses */
+.Meses_select{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4px;
+  border-radius: 20px;
+}
+
+.buscarJornadaPorId {
+    border-radius: 20px;
+    padding: 4px;
+    align-self: center;
+}
+
+.acoes{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 10px;
+  }

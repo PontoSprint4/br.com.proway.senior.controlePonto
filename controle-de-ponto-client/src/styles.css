@@ -18,6 +18,7 @@ a{
   text-decoration: none;
 }
 
+
 .entrada-lista{
   background: whitesmoke;
   border-radius: 16px;
@@ -82,4 +83,14 @@ a{
 .botao-acao:hover{
   background-color: #2EE6B7;
   transform: scale(1.04);
+}
+
+/* Filtro de Meses */
+.Meses-select{
+  padding: 4px;
+  border-radius: 20px;
+}
+
+.Meses-select:hover{
+  transform: scale(1.02);
 }
