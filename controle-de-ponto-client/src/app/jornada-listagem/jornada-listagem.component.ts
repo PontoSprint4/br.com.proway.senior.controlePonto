@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./jornada-listagem.component.css'],
 })
 export class JornadaListagemComponent implements OnInit {
+  public isCollapsed: boolean[] = [];
+
   constructor() {}
 
   ngOnInit(): void {}
