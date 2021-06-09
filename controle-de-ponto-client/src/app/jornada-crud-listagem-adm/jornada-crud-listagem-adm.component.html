@@ -1,80 +1,85 @@
 <nav>
-    <article>
-        <section><a href=JornadaCriar.html><button class="botao">Nova Jornada</button></a></section>
-    </article>
-    <article>
-        <section><input class="buscarJornadaPorId" placeholder="Buscar Jornada por ID" type="number" min="1"></section>
-        <section>
-            <select class="Meses_select">
-                <option value="Maio">Maio</option>
-                <option value="Abril">Abril</option>
-                <option value="Março">Março</option>
-                <option value="Fevereiro">Fevereiro</option>
-                <option value="Janeiro">Janeiro</option>
-            </select>
-        </section>
-    </article>
+  <article>
+    <section><a href=JornadaCriar.html><button class="botao">Nova Jornada</button></a></section>
+  </article>
+  <article>
+    <section><input class="buscarJornadaPorId" placeholder="Buscar Jornada por ID" type="number" min="1"></section>
+    <section>
+      <select class="Meses_select">
+        <option value="Maio">Maio</option>
+        <option value="Abril">Abril</option>
+        <option value="Março">Março</option>
+        <option value="Fevereiro">Fevereiro</option>
+        <option value="Janeiro">Janeiro</option>
+      </select>
+    </section>
+  </article>
 </nav>
 
 <main class="container-fluid">
 
-<!--Jornadas-->
-<div class="container mt-lg-4" *ngFor="let jornada of jornadas; let indice = index">
-    
+  <!--Jornadas-->
+  <div class="container mt-lg-4" *ngFor="let jornada of jornadas; let indice = index">
+
     <!--Jornada Resumida-->
-    <button class="collapsible entrada-lista" (click) = "collapse.toggle()" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-        <div>Data: {{jornada.dataJornada | date: 'dd/MM/yyyy' }}</div>
-        <div>Horas Trabalhadas: {{jornada.horasTrabalhadas }}</div>
-        <div>Status: {{jornada.status }}</div>
+    <button class="collapsible entrada-lista" (click)="isCollapsed[indice] = !isCollapsed[indice]">
+      <div>Data: {{jornada.data | date: 'dd/MM/yyyy' }}</div>
+      <div>Horas Trabalhadas: {{jornada.minutosTrabalhados /60 }}</div>
+      <div>Status: {{jornada.estado | titlecase}}</div>
     </button>
 
     <!--Tabela Colapsada-->
-    <div class="content" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-        <div id="tabela">
-            <table class="alinhamentoTabela">
-                <!--CabecalhoTurno-->
-                <thead>
-                    <tr><th colspan="3">Turno</th></tr>
-                        <tr><!---->
-                            <th>Nome</th>
-                            <th>Inicio</th>
-                            <th>Fim</th>
-                        </tr>
-                </thead>
-                <tbody>
-                    <!--Informações do turno-->
-                    <tr>
-                        <th>{{jornada.turno.nomeTurno}}</th>
-                        <th>{{jornada.turno.inicioTurno | date: 'h:mm:ss' }}</th>
-                        <th>{{jornada.turno.fimTurno | date: 'h:mm:ss' }}</th>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="content" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[indice]">
+      <div id="tabela">
+        <table class="alinhamentoTabela">
+          <!--CabecalhoTurno-->
+          <thead>
+            <tr>
+              <th colspan="3">Turno</th>
+            </tr>
+            <tr>
+              <!---->
+              <th>Nome</th>
+              <th>Inicio</th>
+              <th>Fim</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--Informações do turno-->
+            <tr>
+              <th>{{jornada.turno.nomeTurno | titlecase}}</th>
+              <th>{{jornada.turno.horaInicio | date: 'h:mm:ss' }}</th>
+              <th>{{jornada.turno.horaFim | date: 'h:mm:ss' }}</th>
+            </tr>
+          </tbody>
+        </table>
 
-            <table class="alinhamentoTabela">
-                  <!--CabecalhoPonto-->
-                  <thead>
-                      <tr><th colspan="3">Pontos</th></tr>
-                    <tr>  
-                        <th>ID Ponto</th>
-                        <th>Data Ponto</th>
-                        <th>Hora do Ponto</th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let ponto of jornada.ponto">
-                    <!--Informações do ponto-->
-                    <tr>
-                        <th>{{ ponto.idPonto }}</th>
-                        <th>{{ ponto.momentoPonto | date : 'dd/MM/yyyy'}}</th>
-                        <th>{{ ponto.momentoPonto | date : 'h:mm:ss'}}</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="alinhamentoTabela">
+          <!--CabecalhoPonto-->
+          <thead>
+            <tr>
+              <th colspan="3">Pontos</th>
+            </tr>
+            <tr>
+              <th>ID Ponto</th>
+              <th>Data Ponto</th>
+              <th>Hora do Ponto</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let ponto of jornada.listaPonto">
+            <!--Informações do ponto-->
+            <tr>
+              <th>{{ ponto.id }}</th>
+              <th>{{ ponto.momentoPonto | date : 'dd/MM/yyyy'}}</th>
+              <th>{{ ponto.momentoPonto | date : 'h:mm:ss'}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <section class="acoes">
-            <button class="botao-acao">Editar</button><button class="botao-acao">Excluir</button>
-          </section>
+      <section class="acoes">
+        <button class="botao-acao">Editar</button><button class="botao-acao">Excluir</button>
+      </section>
     </div>
-</div>
+  </div>
 </main>

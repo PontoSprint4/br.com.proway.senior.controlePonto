@@ -1,22 +1,8 @@
-body{
-  background-color: #1ab0b0;
+main {
+  align-self: center;
+
   display:flex;
-  flex-wrap: wrap;
   flex-direction: column;
-}
-
-nav {
-  display:flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-}
-nav > div {
-  margin-left: auto;
-}
-
-nav > button {
-  margin-right: auto;
 }
 
 main .container {
@@ -26,6 +12,34 @@ main .container {
   align-items: center;
   justify-content: center;
 }
+
+
+nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 1%;
+  padding-left: 1%;
+}
+
+nav > article{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-end;
+}
+
+nav > article > section{
+  margin:  2px;
+}
+
+  /*Sobrescrevendo margin*/
+  .entrada-lista{
+    margin-top: 0px;
+}
+
+
 
 /* Jornada Resumida */
 .collapsible {
@@ -63,30 +77,21 @@ main .container {
 }
 
 .active:after {
-  content: "\2212";
+  content: "\2212"; /*css code para sinal de negativo; transforma o botão de + em -*/
 }
 
 /* Tabela Ponto / Turno */
 .content {
-  /*max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;*/
-
   width: 97%;
   background-color: rgba(240, 255, 255, 0.534);
   border-radius: 0px 0px 20px 20px;
-
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-  align-content: space-between;
 }
 
 
 /* tabela */
 #tabela {
   height: 210px;
-  padding: 10px 0px;
+  padding: 10px;
   margin: 10px;
   padding-bottom: 50px;
 
@@ -103,33 +108,16 @@ table {
   text-align: center;
 }
 
-
-
-/* Botao Retornar */
-.cl-Retornar-botao{
-  background-color: #008080;
-  color: white;
-  box-shadow: 0px 32px 32px -12px rgba(7, 48, 163, 0.24);
-  height: 50px;
-  border-radius: 16px;
-  padding: 2px 40px;
+/* Filtro de Meses */
+.Meses_select{
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-family: Roboto;
-  border-width: 0px;
-
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4px;
+  border-radius: 20px;
 }
 
-#id-Retornar-botao{
-  color: azure;
-  font-size: 16px;
-  letter-spacing: 1px;
-  margin-top: 5%;
-  margin-left: 5%;
 
-}
 
-#id-Retornar-botao:hover{
-  background-color: #2EE6B7;
-}
+
+
