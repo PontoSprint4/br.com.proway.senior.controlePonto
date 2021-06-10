@@ -53,7 +53,7 @@ class JornadaAPITest {
 		LocalDateTime momentoPonto = LocalDateTime.now().plusHours(2);
 		Ponto ponto = new Ponto(idPessoa, momentoPonto);
 		
-		api.marcarPonto(idPessoa, ponto);
+		api.marcarPonto(idPessoa);
 		ArrayList<Jornada> jornadasDoDia = (ArrayList<Jornada>) 
 				jornadaController.obterJornadasDoDia(idPessoa, momentoPonto.toLocalDate());
 		
