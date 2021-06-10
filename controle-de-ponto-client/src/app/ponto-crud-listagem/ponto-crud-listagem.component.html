@@ -23,7 +23,7 @@
     <section>ID Colaborador: #{{ponto.idPessoa}}</section>
 
     <section class="acoes">
-      <button class="botao-acao">Editar</button><button class="botao-acao" (click)="this.delete(ponto.idPonto)">Excluir</button>
+      <button class="botao-acao" routerLink="../ponto-edit/{{ponto.idPonto}}">Editar</button><button class="botao-acao" (click)="this.delete(ponto.idPonto)">Excluir</button>
     </section>
   </article>
 </article>

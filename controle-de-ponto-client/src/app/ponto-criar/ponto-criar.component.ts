@@ -19,6 +19,9 @@ export class PontoCriarComponent implements OnInit {
   enviaPonto(ponto : Ponto){
     this.pontoService.createPonto(ponto)
     .subscribe((res)=>{console.log("Criado o ponto: "+res)});
+
+    this.ponto = {} as Ponto;
+    history.back();
   }
 
 }

@@ -24,5 +24,7 @@ export class PontoEditarComponent implements OnInit {
   atualizarPonto(){
     this.pontoService.updatePonto(this.selecionado.idPonto, this.selecionado)
     .subscribe((res)=>{console.log(res)})
+
+    history.back();
   }
 }
