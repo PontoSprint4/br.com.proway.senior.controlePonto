@@ -1,16 +1,16 @@
-<h1>ADMINISTRAÇÃO TURNOS</h1>    
+<h1>ADMINISTRAÇÃO TURNOS</h1>
     <div class="Cimg">
 		<img  class="img" src="assets/cabecalho_site.png" alt="Cabeçalho">
-	</div>  
-    <br>      
+	</div>
+    <br>
     <div id="buttonTurno">
-        <button id="criarTurno">
+        <button id="criarTurno" routerLink="formulario-criar-turno">
             Criar Turno
-        </button> 
+        </button>
         <button id="editarTurno">
             Editar Turno
-        </button>   
-    </div> 
+        </button>
+    </div>
    <br>
     <table>
 		<tr>
@@ -22,18 +22,15 @@
             <th>Action</th>
             <th>Action</th>
 		</tr>
-		
+
 		<tr *ngFor="let turno of turnos">
 			<td>{{turno.id}}</td>
-			<td>{{turno.nomeTurno | titlecase}}</td>
+			<td>{{turno.nomeTurno}}</td>
 			<td>{{turno.pessoasNoTurno.length}}</td>
-			<td>{{turno.horaInicio | date:'hh:mm:ss'}}</td>
-            <td>{{turno.horaFim | date:'hh:mm:ss'}}</td>
+			<td>{{turno.horaInicio}}</td>
+            <td>{{turno.horaFim}}</td>
             <td><button class="details button" routerLink="/turno-details" target="_self" rel="next"  hreflang="pt-br" >Details</button></td>
-            <td><button class="delete button">Delete</button></td>
+            <td><button class="delete button" (click)="delete(turno.id)">Delete</button></td>
 		</tr>
 
     </table>
-    <div id="formularioTurno">  
-
-    </div>    
