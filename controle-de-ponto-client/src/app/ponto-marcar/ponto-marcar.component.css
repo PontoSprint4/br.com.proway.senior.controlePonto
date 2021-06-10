@@ -1,0 +1,177 @@
+body{
+    background: linear-gradient( 135deg, #79c7c7, #028181, #027a7a, #025353 );
+    background-size: 400% 400%;
+    animation: gradient 14s ease infinite;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+   
+    justify-content: center;
+    align-content: center;
+
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 80% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+main{
+    height: 90vh;
+    width: 90vh;
+}
+
+.cl-circulo{
+    box-shadow: 0px 96px 96px
+    rgba(7, 48, 163, 0.16);
+    border-radius: 50%;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   
+    justify-content: center;
+    align-content: center;
+}
+
+.teste{
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+
+.baterPonto{
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+}
+
+.Ponto-botao{
+    background-color: #008080;
+    color: white;
+    box-shadow: 0px 32px 32px -12px rgba(7, 48, 163, 0.24);
+    height: 20%;
+    border-radius: 16px;
+    padding: 24px 48px;
+    border-width: 0px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: Roboto;
+    
+}
+
+#baterPonto-hora{
+    width: 200px;
+    height: 100px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 96px;
+    letter-spacing: -3px;
+    color: #FAFAFA;
+    margin-left: 25%;
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+
+#baterPonto-data{
+    width: 429.98px;
+    height: 38.06px;
+    font-family: Roboto Mono;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: #FAFAFA;
+    margin-left: -1%;
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+
+#vetor3{
+    width: 100%;
+    height: 100%;
+    background-color: #1ab0b0;
+    animation: change-background 5s linear infinite alternate;
+    animation-delay: 2s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes change-background{
+    0%{
+        background:#58e0e07c ;
+    }25%{
+        background:#26aaaa ;
+    }50%{
+        background: #0cb1b1;
+    }75%{
+        background:rgb(41, 165, 165) 
+    }100%{
+        background: #128080 ;
+    }
+}
+
+#vetor2{
+    background-color: #0DBEBE;
+    width: 80%;
+    height: 80%;
+    animation: change-background 5s linear infinite alternate;
+    animation-delay: 1s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes heartbeat {
+    0%{
+        transform: scale(1);
+    }50%{
+        transform: scale(1.05);
+    }100%{
+        transform: scale(1);
+    }
+}
+
+
+#vetor1{
+    background-color: #31d0d0;
+    width: 80%;
+    height: 80%;
+    animation-delay: 0s;
+    animation: heartbeat 2s infinite, change-background 5s linear infinite alternate;
+}
+
+
+#id-registrar-ponto{
+    background-color: #009999;
+    margin-top: 10%;
+    margin-left: 18%;
+    font-size:18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#id-registrar-ponto:hover{
+    background-color: #2EE6B7;
+}
+
+#id-ver-historico{
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+#id-ver-historico:hover{
+    background-color: #2EE6B7;
+}

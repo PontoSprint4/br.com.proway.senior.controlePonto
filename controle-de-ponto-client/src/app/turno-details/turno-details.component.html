@@ -1,5 +1,7 @@
 <h1>ADMINISTRAÇÃO PESSOAS NO TURNO</h1>    
-    <div class="img"><img src="../imagens/cabecalho_site.png" alt="Ícone Usuário"></div>  
+	<div class="Cimg">
+		<img  class="img" src="assets/cabecalho_site.png" alt="Cabeçalho">
+	</div>   
     <br>      
     <div id="buttonPessoaTurno">
         <button id="addPessoa">
@@ -13,31 +15,11 @@
 			<th>Nome</th>			
             <th>Action</th>
 		</tr>
-		<tr>
-			<td>1</td>
-			<td>Thiago</td>			
+		<tr *ngFor="let pessoa of pessoas">
+			<td>{{pessoa.id}}</td>
+			<td>{{pessoa.nomePessoa}}</td>			
             <td><button class="delete button">Delete</button></td>
-		</tr>
-		<tr>
-			<td>2</td>
-			<td>Leonardo</td>			
-            <td><button class="delete button">Delete</button></td>
-		</tr>
-		<tr>
-			<td>3</td>
-			<td>Enzo</td>			
-            <td><button class="delete button">Delete</button></td>	
-		</tr>
-		<tr>
-			<td>4</td>
-			<td>Vitor</td>			
-            <td><button class="delete button">Delete</button></td>		
-		</tr>
-		<tr>
-			<td>5</td>
-			<td>Willian</td>			
-            <td><button class="delete button">Delete</button></td>
-		</tr>
+		</tr>		
     </table>
 
     <div id="formularioPessoa">  
@@ -46,4 +28,4 @@
 
     <br>
     
-    <p style="text-align: center;"><a href="index.html" target="_self" rel="prev" hreflang="pt-br"><img src="../imagens/voltar.png" alt="Voltar para Index"></a></p>
+    <p class="Cimg img"><a routerLink="/turno-index" target="_self" rel="prev" hreflang="pt-br"><img src="assets/voltar.png" alt="Voltar para Index"></a></p>

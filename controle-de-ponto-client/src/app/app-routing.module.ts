@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { JornadaListagemComponent } from './jornada-listagem/jornada-listagem.component';
+import { PontoMarcarComponent } from './ponto-marcar/ponto-marcar.component';
 import { TurnoDetailsComponent } from './turno-details/turno-details.component';
 import { TurnoIndexComponent } from './turno-index/turno-index.component';
 import { PontoCrudListagemComponent } from './ponto-crud-listagem/ponto-crud-listagem.component';
@@ -12,6 +14,8 @@ const routes: Routes = [
   { path: 'ponto-index', component: PontoCrudListagemComponent },
   { path: 'ponto-create', component: PontoCriarComponent },
   { path: 'ponto-edit/:id', component: PontoEditarComponent },
+  { path: 'ponto-marcar', component: PontoMarcarComponent },
+  { path: 'jornada-listagem', component: JornadaListagemComponent }
 ];
 
 @NgModule({
