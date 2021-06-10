@@ -21,7 +21,7 @@ import br.com.proway.senior.controlePonto.model.Ponto;
 import br.com.proway.senior.controlePonto.model.Turno;
 import br.com.proway.senior.controlePonto.services.JornadaService;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin
 @RestController
 @RequestMapping(path = "api/")
 public class JornadaAPI {
