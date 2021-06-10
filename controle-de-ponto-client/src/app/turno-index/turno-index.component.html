@@ -25,10 +25,10 @@
 		
 		<tr *ngFor="let turno of turnos">
 			<td>{{turno.id}}</td>
-			<td>{{turno.nomeTurno | titlecase}}</td>
+			<td>{{turno.nomeTurno }}</td>
 			<td>{{turno.pessoasNoTurno.length}}</td>
-			<td>{{turno.horaInicio | date:'hh:mm:ss'}}</td>
-            <td>{{turno.horaFim | date:'hh:mm:ss'}}</td>
+			<td>{{turno.horaInicio }}</td>
+            <td>{{turno.horaFim }}</td>
             <td><button class="details button" routerLink="/turno-details" target="_self" rel="next"  hreflang="pt-br" >Details</button></td>
             <td><button class="delete button">Delete</button></td>
 		</tr>
