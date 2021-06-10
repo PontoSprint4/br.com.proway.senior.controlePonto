@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Ponto } from '../ponto';
+import { PontoService } from '../ponto.service';
 
 @Component({
   selector: 'app-ponto-criar',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PontoCriarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private pontoService: PontoService) { }
+
+  public ponto : Ponto = {} as Ponto;
 
   ngOnInit(): void {
+  }
+
+  enviaPonto(ponto : Ponto){
+    this.pontoService.createPonto(ponto)
+    .subscribe((res)=>{console.log("Criado o ponto: "+res)});
+
+    this.ponto = {} as Ponto;
+    history.back();
   }
 
 }

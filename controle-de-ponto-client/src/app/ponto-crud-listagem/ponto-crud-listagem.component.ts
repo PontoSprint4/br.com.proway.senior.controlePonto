@@ -1,4 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
+import { Ponto } from '../ponto';
+import { PontoService } from '../ponto.service';
 
 @Component({
   selector: 'app-ponto-crud-listagem',
@@ -7,11 +10,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PontoCrudListagemComponent implements OnInit {
 
-  constructor() { }
+  constructor(private pontoService: PontoService) { }
 
+  public pontos : Ponto[] = [
+    {idPonto: 666, momentoPonto: this.pontoService.formatarData(Date.now()), idPessoa: 12},
+    {idPonto: 666, momentoPonto: this.pontoService.formatarData(Date.now()), idPessoa: 12}]
+
+  public pontoSelecionado : Ponto = {} as Ponto;
+  
   ngOnInit(): void {
+    this.getAll();
   }
 
-  public pontos = [{momentoPonto: Date.now(), idPessoa: 12},{momentoPonto: Date.now(), idPessoa: 12}]
+  getAll(){
+    this.pontoService.getAll()
+      .subscribe(
+        (ponto)=>{this.pontos = ponto}
+      );
+  }
 
+  getOne(id : number){
+    this.pontoService.getPonto(id)
+    .subscribe(
+      ponto => {console.log("callbacking");
+      this.pontoSelecionado = ponto}
+    );
+  }
+
+  create(ponto : Ponto){
+    this.pontoService.createPonto(ponto)
+      .subscribe((answer)=>{
+        console.log(answer) ;
+        this.getAll();
+      });
+  }
+
+  update(id: number, novoPonto : Ponto){
+    this.pontoService.updatePonto(id, novoPonto)
+      .subscribe((answer)=>{
+        console.log(answer);
+        this.getAll();
+      });
+  }
+
+  delete(id :number){
+    this.pontoService.deletePonto(id)
+      .subscribe(
+        (answer)=>{
+          console.log(answer);
+          this.getAll();
+        }
+      );
+  }
+
+  
 }

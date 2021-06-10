@@ -1,6 +1,6 @@
     <nav>
       <article>
-          <section><a href=PontoCriar.html target="_blank"><button class="botao">Novo ponto</button></a></section>
+          <section><a routerLink="../ponto-create"><button class="botao">Novo ponto</button></a></section>
       </article>
       <article>
           <section><input class="buscarPontoPorId" placeholder="Buscar ponto por ID" type="number" min="1"></section>
@@ -18,12 +18,12 @@
 
 <article class="tabelaPonto">
   <article class="entrada-lista" *ngFor="let ponto of pontos; let indice = index">
-    <section>#{{indice+1}}</section>
+    <section>#{{ponto.idPonto}}</section>
     <section>Momento: {{ponto.momentoPonto | date : 'dd/MM/yyyy, hh:mm:ss'}} </section>
     <section>ID Colaborador: #{{ponto.idPessoa}}</section>
 
     <section class="acoes">
-      <button class="botao-acao">Editar</button><button class="botao-acao">Excluir</button>
+      <button class="botao-acao" routerLink="../ponto-edit/{{ponto.idPonto}}">Editar</button><button class="botao-acao" (click)="this.delete(ponto.idPonto)">Excluir</button>
     </section>
   </article>
 </article>

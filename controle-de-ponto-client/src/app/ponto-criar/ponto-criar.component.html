@@ -1,6 +1,6 @@
 <body>
 <nav>
-    <a href="ponto-crud-listagem.html"><button class="cl-Retornar-botao" id="id-Retornar-botao">Retornar</button></a>
+    <a routerLink="../ponto-index"><button class="cl-Retornar-botao" id="id-Retornar-botao">Retornar</button></a>
 </nav>
 <main>
 <header>
@@ -10,14 +10,14 @@
         <form>
             <section>
                 <label for="momento-ponto">Momento do ponto:</label>
-                <input type="datetime-local" id="momento-ponto" name="momento-ponto">
+                <input type="datetime-local" id="momento-ponto" [(ngModel)]="ponto.momentoPonto" name="momentoPonto">
             </section>
             <section>
                 <label for="id-pessoa">ID do colaborador:</label>
-                <input type="number" id="id-pessoa" name="id-pessoa">
+                <input type="number" id="id-pessoa" [(ngModel)]="ponto.idPessoa" name="idPessoa">
             </section>
             <section class="criarPonto_botao">
-                <input type="submit" value="Criar ponto" class="criarPonto_botao">
+                <input type="submit" value="Criar ponto" class="criarPonto_botao" (click)="enviaPonto(ponto)">
             </section>
         </form>
     </article>

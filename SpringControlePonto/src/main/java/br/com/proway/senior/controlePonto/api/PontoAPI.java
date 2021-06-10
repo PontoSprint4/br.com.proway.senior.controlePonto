@@ -2,6 +2,7 @@ package br.com.proway.senior.controlePonto.api;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import br.com.proway.senior.controlePonto.model.Ponto;
 import br.com.proway.senior.controlePonto.model.PontoDTO;
 import br.com.proway.senior.controlePonto.services.PontoService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "api/")
 public class PontoAPI {
@@ -51,7 +53,6 @@ public class PontoAPI {
 			) throws Exception {
 		return pontoService.deletePonto(idPonto);
 	}
-	
 	@GetMapping("/pontos")
 	List<PontoDTO> getAllPontos() throws Exception {
 		return pontoService.getAll();
