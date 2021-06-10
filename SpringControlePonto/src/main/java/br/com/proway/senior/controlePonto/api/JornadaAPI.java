@@ -50,7 +50,7 @@ public class JornadaAPI {
 	}
 	
 	@GetMapping("/jornadas/")
-	List<JornadaDTO> getJornada() throws Exception {
+	List<JornadaDTO> getJornadas() throws Exception {
 		return jornadaService.getAll();
 	}
 
@@ -104,8 +104,16 @@ public class JornadaAPI {
 			PontoController pcon = new PontoController(DBConnection.getSession());
 			Integer idPonto = pcon.create(instancia);
 			
-			jornadaService.marcarPonto(idPessoa, pcon.get(idPonto));
+			this.marcarPonto(idPessoa, pcon.get(idPonto));
 		}
+		
+		// Overload para testabilidade
+		void marcarPonto(
+				@PathVariable("idPessoa") Integer idPessoa,
+				@RequestBody Ponto ponto
+			) throws Exception {
+		jornadaService.marcarPonto(idPessoa, ponto);
+	}
 		
 		@GetMapping("/jornadas/periodo/trabalhado/{idPessoa}")
 		long minutosTrabalhadosNoPeriodo(
