@@ -137,7 +137,10 @@ button:hover {
 }
 
 /* img.css */
-.img {
-    text-align: center;
+.img {    
     border-radius: 10px;
-}  
+} 
+
+.Cimg {
+    text-align: center;
+}
