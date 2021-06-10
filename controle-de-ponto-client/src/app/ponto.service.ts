@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -18,15 +19,16 @@ export class PontoService {
 
   //
   constructor(
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private datePipe: DatePipe ) { }
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
     
   //Criação de Ponto
-  createPonto(ponto: Ponto): void{
-    this.http.post<Ponto>(
+  createPonto(ponto: Ponto): Observable<Ponto>{
+    return this.http.post<Ponto>(
         this.pontoUrl+"ponto/", 
         JSON.stringify(ponto), 
         this.httpOptions
@@ -35,35 +37,29 @@ export class PontoService {
         retry(2),
         catchError(this.handleError)
       )
-      .subscribe((answer)=>{console.log(answer)})
   }
 
   //Busca um Ponto
-  getPonto( id : number): void {
-    this.http.get<Ponto>(this.pontoUrl + "ponto/" + id)
+  getPonto( id : number): Observable<Ponto> {
+    return this.http.get<Ponto>(this.pontoUrl + "ponto/" + id)
     .pipe(
       retry(2),
       catchError(this.handleError)
     )
-    .subscribe(ponto => {console.log("callbacking");this.pontoSelecionado = ponto});
   }
 
   //Busca todos os Pontos
-  getAll() : void{
-    let lista : Ponto[] = [];
-    this.http.get<Ponto>(this.pontoUrl+ "pontos/")
+  getAll() : Observable<Ponto[]>{
+    return this.http.get<Ponto[]>(this.pontoUrl+ "pontos/")
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
-      .subscribe(pontos => lista.push(pontos));
-
-    this.listaDePontos = lista;
   }
 
   //Atualiza um Ponto
-  updatePonto(id : number, atualizado : Ponto){
-    this.http.put<Ponto>
+  updatePonto(id : number, atualizado : Ponto) : Observable<Ponto>{
+    return this.http.put<Ponto>
     (
         this.pontoUrl+ "ponto/"+id, 
         JSON.stringify(atualizado), 
@@ -73,12 +69,11 @@ export class PontoService {
         retry(2),
         catchError(this.handleError)
       )
-      .subscribe((answer)=>{console.log(answer)})
   }
 
   //Deleta um Ponto
-  deletePonto(id: number){
-    this.http.delete<Ponto>
+  deletePonto(id: number) : Observable<Ponto>{
+    return this.http.delete<Ponto>
     (
       this.pontoUrl+ "ponto/"+id
     )
@@ -86,7 +81,7 @@ export class PontoService {
       retry(2),
       catchError(this.handleError)
     )
-    .subscribe((answer)=>{console.log(answer)})
+    
   }
 
   // Manipulação de erros
@@ -102,4 +97,8 @@ export class PontoService {
     console.log(errorMessage);
     return throwError(errorMessage);
   };
+
+  formatarData(data : number) : string{
+    return this.datePipe.transform(data,'yyyy-MM-ddTHH:mm:ss')!
+  }
 }
