@@ -1,37 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Turno } from '../turno';
+import { TurnoService } from '../turno.service';
 
 @Component({
   selector: 'app-turno-index',
   templateUrl: './turno-index.component.html',
   styleUrls: ['./turno-index.component.css']
 })
-export class TurnoIndexComponent { 
+export class TurnoIndexComponent implements OnInit { 
   
-  public turnos = [
-    {
-    id: 0,
-    nomeTurno: 'turno 0',
-    horaInicio: new Date(2021, 6, 8, 8, 0),
-    horaFim: new Date(2021, 6, 8, 18, 0),
-    minutosTrabalho: 600,
-    pessoasNoTurno: [0, 1, 2],
-  },  
-  {
-    id: 1,
-    nomeTurno: 'turno 1',
-    horaInicio: new Date(2021, 6, 8, 8, 0),
-    horaFim: new Date(2021, 6, 8, 18, 0),
-    minutosTrabalho: 600,
-    pessoasNoTurno: [2, 3, 4],
-  },
-  {
-    id: 2,
-    nomeTurno: 'turno 2',
-    horaInicio: new Date(2021, 6, 8, 8, 0),
-    horaFim: new Date(2021, 6, 8, 18, 0),
-    minutosTrabalho: 600,
-    pessoasNoTurno: [0, 1, 2],
+  constructor(private turnoService: TurnoService) {
   }
-  ]
+
+  public turnos : Turno[] = [];
+  
+  ngOnInit(): void {
+    this.getAll();
+  }
+
+  getAll(){
+    this.turnoService.getAll()
+      .subscribe(
+        (turno)=>{this.turnos = turno}
+      );
+  }
 
 }
