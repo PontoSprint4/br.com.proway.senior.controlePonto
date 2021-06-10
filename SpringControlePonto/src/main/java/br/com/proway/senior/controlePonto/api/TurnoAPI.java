@@ -19,7 +19,7 @@ import br.com.proway.senior.controlePonto.model.TurnoDTO;
 import br.com.proway.senior.controlePonto.services.TurnoService;
 
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin
 @RestController
 @RequestMapping(path = "api/")
 public class TurnoAPI {
