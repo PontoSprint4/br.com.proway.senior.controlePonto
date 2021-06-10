@@ -1,6 +1,8 @@
 package br.com.proway.senior.controlePonto.api;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.proway.senior.controlePonto.controller.PontoController;
 import br.com.proway.senior.controlePonto.controller.TurnoController;
 import br.com.proway.senior.controlePonto.dbPersistence.DBConnection;
 import br.com.proway.senior.controlePonto.model.IntervaloTempo;
@@ -44,6 +47,11 @@ public class JornadaAPI {
 				@PathVariable("idJornada") Integer idJornada
 			) throws Exception {
 		return jornadaService.getJornada(idJornada);
+	}
+	
+	@GetMapping("/jornadas/")
+	List<JornadaDTO> getJornadas() throws Exception {
+		return jornadaService.getAll();
 	}
 
 	@PutMapping("/jornada/{idJornada}")
@@ -89,11 +97,23 @@ public class JornadaAPI {
 
 		@PostMapping("/jornada/marcar_ponto/{idPessoa}")
 		void marcarPonto(
-					@PathVariable("idPessoa") Integer idPessoa, 
-					@RequestBody Ponto ponto
+					@PathVariable("idPessoa") Integer idPessoa
 				) throws Exception {
-			jornadaService.marcarPonto(idPessoa, ponto);
+			Ponto instancia = new Ponto(idPessoa, LocalDateTime.now());
+			
+			PontoController pcon = new PontoController(DBConnection.getSession());
+			Integer idPonto = pcon.create(instancia);
+			
+			this.marcarPonto(idPessoa, pcon.get(idPonto));
 		}
+		
+		// Overload para testabilidade
+		void marcarPonto(
+				@PathVariable("idPessoa") Integer idPessoa,
+				@RequestBody Ponto ponto
+			) throws Exception {
+		jornadaService.marcarPonto(idPessoa, ponto);
+	}
 		
 		@GetMapping("/jornadas/periodo/trabalhado/{idPessoa}")
 		long minutosTrabalhadosNoPeriodo(

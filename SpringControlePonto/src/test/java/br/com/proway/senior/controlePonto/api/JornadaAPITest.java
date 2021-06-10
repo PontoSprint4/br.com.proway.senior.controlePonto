@@ -53,7 +53,7 @@ class JornadaAPITest {
 		LocalDateTime momentoPonto = LocalDateTime.now().plusHours(2);
 		Ponto ponto = new Ponto(idPessoa, momentoPonto);
 		
-		api.marcarPonto(idPessoa, ponto);
+		api.marcarPonto(idPessoa);
 		ArrayList<Jornada> jornadasDoDia = (ArrayList<Jornada>) 
 				jornadaController.obterJornadasDoDia(idPessoa, momentoPonto.toLocalDate());
 		
@@ -95,6 +95,26 @@ class JornadaAPITest {
 		Jornada jornada = new Jornada(data, idPessoa, turno);
 		Integer idJornada = api.criarJornada(jornada);
 		assertNotNull(api.getJornada(idJornada));
+	}
+	
+	@Test
+	void testGetJornadas() throws Exception{
+		Integer idPessoa = 44;
+		
+		LocalTime horaInicio = LocalTime.now();
+		LocalTime horaFim = horaInicio.plusHours(8);
+		String nomeTurno = "Wawawewa";
+		
+		Turno turno = new Turno(horaInicio, horaFim, nomeTurno);
+		turno.adicionaPessoaNoTurno(idPessoa);
+		turnoService.salvar(turno);
+		
+		LocalDate data = LocalDate.now();
+		
+		Jornada jornada = new Jornada(data, idPessoa, turno);
+		api.criarJornada(jornada);
+		
+		assertEquals(1, api.getJornadas().size());
 	}
 
 	@Test
