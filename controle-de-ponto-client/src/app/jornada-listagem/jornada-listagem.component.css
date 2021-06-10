@@ -90,7 +90,7 @@ nav > article > section{
 
 /* tabela */
 #tabela {
-  height: 210px;
+  height: auto;
   padding: 10px;
   margin: 10px;
   padding-bottom: 50px;

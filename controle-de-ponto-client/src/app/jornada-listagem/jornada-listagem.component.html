@@ -19,8 +19,8 @@
 
     <!--Jorndada Resumida-->
     <button class="collapsible entrada-lista" (click)="isCollapsed[indice] = !isCollapsed[indice]">
-      <div>#{{indice+1}}</div>
-      <div> {{jornada.minutosTrabalhados /60}}</div>
+      <div>{{jornada.id}}</div>
+      <div>{{jornada.minutosTrabalhados /60}}</div>
       <div>{{jornada.estado | titlecase}}</div>
     </button>
 
@@ -43,8 +43,8 @@
             <!--Informações do turno-->
             <tr>
               <th>{{jornada.turno.nomeTurno | titlecase}}</th>
-              <th>{{jornada.turno.horaInicio| date : 'hh:mm:ss'}}</th>
-              <th>{{jornada.turno.horaFim | date : 'hh:mm:ss'}}</th>
+              <th>{{jornada.turno.horaInicio}}</th>
+              <th>{{jornada.turno.horaFim}}</th>
             </tr>
           </tbody>
         </table>
@@ -64,7 +64,7 @@
           <tbody *ngFor="let ponto of jornada.listaPonto">
             <!--Informações do Ponto-->
             <tr>
-              <th>{{ponto.id}}</th>
+              <th>{{ponto.idPonto}}</th>
               <th>{{ponto.momentoPonto | date : 'dd/MM/yyyy'}}</th>
               <th>{{ponto.momentoPonto | date : 'hh:mm:ss'}}</th>
             </tr>

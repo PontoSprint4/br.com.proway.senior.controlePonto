@@ -16,24 +16,26 @@
         <form>
             <section>
                 <label for="data">Data:</label>
-                <input type="date" id="data" name="data-jornada">
+                <input type="date" id="data" [(ngModel)]="jornada.data" name="data-jornada">
             </section>
             <section>
                 <label>Turno: </label>
                 <select class="Turno-select">
-                    <option value="1">Turno 1</option>
-                    <option value="2">Turno 2</option>
-                    <option value="3">Turno 3</option>
-                    <option value="4">Turno 4</option>
-                    <option value="5">Turno 5</option>
+                    <option>0</option>
                 </select>
             </section>
+            <!--            <section>
+                <label for="turnoNome">Turno: </label>
+                <select class="Turno-select" name="turnoNome" [(ngModel)]="jornada.turno" >
+                    <option *ngFor="let turno of turnos" [ngValue]="turnoNome">{{ turno.nomeTurno }}</option>
+                </select>
+            </section>-->
             <section>
                 <label for="id-Pessoa">ID Colaborador:</label>
-                <input type="number" id="id-Pessoa" name="id-Pessoa">
+                <input type="number" id="id-Pessoa" [(ngModel)]="jornada.idPessoa" name="id-Pessoa">
             </section>
             <section>
-                <input type="submit" value="Criar Jornada">
+                <input type="submit" value="Criar Jornada" (click)="enviaJornada(jornada)">
             </section>
         </form>
     </article>
