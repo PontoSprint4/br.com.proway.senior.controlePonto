@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class TurnoIndexComponent { 
   
-  public Turnos = [
+  public turnos = [
     {
     id: 0,
     nomeTurno: 'turno 0',
@@ -22,7 +22,7 @@ export class TurnoIndexComponent {
     horaInicio: new Date(2021, 6, 8, 8, 0),
     horaFim: new Date(2021, 6, 8, 18, 0),
     minutosTrabalho: 600,
-    pessoasNoTurno: [0, 1, 2],
+    pessoasNoTurno: [2, 3, 4],
   },
   {
     id: 2,
