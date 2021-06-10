@@ -37,15 +37,6 @@ export class PontoCrudListagemComponent implements OnInit {
     );
   }
 
-  createNewPonto(){
-    let ponto : Ponto = 
-    {
-      idPonto: 666,
-      momentoPonto: this.pontoService.formatarData(Date.now()), idPessoa: 999
-    }
-    this.create(ponto)
-  }
-
   create(ponto : Ponto){
     this.pontoService.createPonto(ponto)
       .subscribe((answer)=>{
@@ -55,7 +46,7 @@ export class PontoCrudListagemComponent implements OnInit {
   }
 
   update(id: number, novoPonto : Ponto){
-    this.pontoService.updatePonto(1565, novoPonto)
+    this.pontoService.updatePonto(id, novoPonto)
       .subscribe((answer)=>{
         console.log(answer);
         this.getAll();
