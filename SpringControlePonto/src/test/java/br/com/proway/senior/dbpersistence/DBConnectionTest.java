@@ -32,6 +32,14 @@ class DBConnectionTest {
 	void testGetSessionFactory() {
 		assertNotNull(DBConnection.getSessionFactory());
 	}
+	
+	@Test
+	void testGetSessionFactorySenhaErrada() throws Exception {
+		DBConnection.clearDBConnection();
+		DBConnection.setPassword("errado");
+		assertThrows( ExceptionInInitializerError.class, () -> DBConnection.getSessionFactory());
+		DBConnection.setPassword("admin");
+	}
 
 	@Test
 	void testShutdown() throws Exception {
