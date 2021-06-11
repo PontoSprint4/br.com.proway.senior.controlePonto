@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-ponto-marcar',
@@ -18,7 +18,7 @@ export class PontoMarcarComponent {
     }, 100);
   }
 
-  public horaAtual: number | undefined;
+  public horaAtual: number  = Date.now();
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
