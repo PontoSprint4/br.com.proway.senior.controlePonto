@@ -18,11 +18,11 @@ const routes: Routes = [
   { path: 'ponto-index', component: PontoCrudListagemComponent },
   { path: 'ponto-create', component: PontoCriarComponent },
   { path: 'ponto-edit/:id', component: PontoEditarComponent },
-  { path: 'jornada-listagem', component: JornadaListagemComponent },
   { path: 'jornada-crud', component: JornadaCrudListagemAdmComponent },
   { path: 'jornada-create', component: JornadaCriarComponent },
   { path: 'jornada-edit/:id', component: JornadaEditarComponent },
-  
+  { path: 'ponto-marcar', component: PontoMarcarComponent },
+  { path: 'jornada-listagem', component: JornadaListagemComponent },
 ];
 
 @NgModule({

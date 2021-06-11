@@ -1,7 +1,10 @@
 package br.com.proway.senior.controlePonto.services;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +22,8 @@ import br.com.proway.senior.controlePonto.model.Turno;
 
 @Service
 public class JornadaService {
+	public final int LIMITE_TEMPO = 10;
+	
 	JornadaController controllerJornada = 
 			new JornadaController(DBConnection.getSession());
 	PontoController controllerPonto = 
@@ -99,7 +104,7 @@ public class JornadaService {
 	// ACTIONS
 	
 	public void marcarPonto(Integer idPessoa, Ponto ponto) throws Exception {
-		Integer toleranciaDeHorarioEmMinutos = 20;
+		Integer toleranciaDeHorarioEmMinutos = 30;
 		
 		// Obtem o turno que possui idPessoa
 		TurnoService serviceTurno = new TurnoService();
@@ -142,6 +147,18 @@ public class JornadaService {
 				break;
 			} 
 			case 1 : {
+				// Verifica pontos sucessivos
+				Jornada jornada = jornadasDoDia.get(0);
+				Integer indice_ponto = jornada.listaPonto.size() - 1;
+				
+				if(indice_ponto >=0) {
+					LocalDateTime momentoPonto = jornada.getListaPonto().get(indice_ponto).getMomentoPonto();
+					if(ChronoUnit.SECONDS.between(momentoPonto.toLocalTime(), horaPonto) < LIMITE_TEMPO){
+					
+					throw new Exception("Ponto anterior foi batido menos do que "+LIMITE_TEMPO+" segundos atras!");
+				}}
+				
+				// Marca o ponto
 				int pontoId = controllerPonto.create(ponto);
 				controllerJornada.adicionarPontoNaJornada(
 						jornadasDoDia.get(0).getId(),

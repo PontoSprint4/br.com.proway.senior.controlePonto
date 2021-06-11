@@ -17,6 +17,7 @@ import { JornadaListagemComponent } from './jornada-listagem/jornada-listagem.co
 import { TurnoIndexComponent } from './turno-index/turno-index.component';
 import { TurnoDetailsComponent } from './turno-details/turno-details.component';
 import { PontoMarcarComponent } from './ponto-marcar/ponto-marcar.component';
+import { FormularioCriarTurnoComponent } from './formulario-criar-turno/formulario-criar-turno.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PontoMarcarComponent } from './ponto-marcar/ponto-marcar.component';
     JornadaCriarComponent,
     JornadaEditarComponent,
     JornadaListagemComponent,
-    PontoMarcarComponent
+    PontoMarcarComponent,
+    FormularioCriarTurnoComponent
   ],
   imports: [
     BrowserModule,
