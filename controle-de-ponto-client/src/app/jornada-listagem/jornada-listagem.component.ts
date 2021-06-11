@@ -14,7 +14,7 @@ export class JornadaListagemComponent implements OnInit {
   constructor(private jornadaService: JornadaService) {}
 
   ngOnInit(): void {
-    this.getAll();
+    this.getAllDaPessoa(1);
   }
   
   getAll(){
@@ -24,4 +24,10 @@ export class JornadaListagemComponent implements OnInit {
       );
   }
 
+  getAllDaPessoa(id : number){
+    this.jornadaService.getAllJornadasDaPessoa(id)
+      .subscribe(
+        (jornada)=>{this.jornadas = jornada}
+      );
+  }
 }

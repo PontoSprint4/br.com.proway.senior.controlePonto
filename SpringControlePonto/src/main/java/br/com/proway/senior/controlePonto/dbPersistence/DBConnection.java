@@ -17,9 +17,6 @@ import br.com.proway.senior.controlePonto.model.Turno;
  *
  */
 public class DBConnection {
-	private static String password = "admin";
-	public static void setPassword(String novoPassword) {password = novoPassword;}
-	
 	private static SessionFactory sessionFactory;
 	public static void clearDBConnection() throws Exception {
 		shutdown();sessionFactory = null;session = null;
@@ -32,7 +29,7 @@ public class DBConnection {
 			return new Configuration().setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
 					.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/controlepontodb")
 					.setProperty("hibernate.connection.username", "postgres")
-					.setProperty("hibernate.connection.password", password)
+					.setProperty("hibernate.connection.password", "adm123")
 					.setProperty("hibernate.jdbc.time_zone", "America/Sao_Paulo")
 					.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
 					.setProperty("hibernate.show__sql", "true").setProperty("hibernate.format_sql", "true")

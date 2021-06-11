@@ -42,7 +42,7 @@ public class Jornada {
     private Turno turno;
 
     @Column(name = "lista_ponto")
-    @OneToMany(targetEntity = Ponto.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Ponto.class, cascade = CascadeType.PERSIST)
     public List<Ponto> listaPonto = new ArrayList<Ponto>();
     
     @Column(name = "pessoa_id")

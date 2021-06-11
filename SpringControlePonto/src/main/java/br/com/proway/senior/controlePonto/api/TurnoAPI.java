@@ -31,6 +31,7 @@ public class TurnoAPI {
 	}
 	
 	@PostMapping("/turno")
+	public
 	Integer salvar(@RequestBody Turno turno) {
 		return turnoService.salvar(turno);
 	}
@@ -61,7 +62,7 @@ public class TurnoAPI {
 	// Actions
 	
 	@PutMapping("/turno/pessoas_add/{idTurno}")
-	void adicionarPessoaNoTurno(
+	public void adicionarPessoaNoTurno(
 				@RequestBody ListaDePessoas idPessoa,
 				@PathVariable Integer idTurno
 			) throws Exception{
