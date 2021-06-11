@@ -91,7 +91,7 @@ table {
 }
 
 #tabela {
-    height: 210px;
+    height: auto;
     margin: 10px;
 
     display: flex;

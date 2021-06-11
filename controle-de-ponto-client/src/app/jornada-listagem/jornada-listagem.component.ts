@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Jornada } from '../jornada';
+import { JornadaService } from '../jornada.service';
 
 @Component({
   selector: 'app-jornada-listagem',
@@ -7,47 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JornadaListagemComponent implements OnInit {
   public isCollapsed: boolean[] = [];
+  public jornadas: Jornada[] = [];
 
-  constructor() {}
+  constructor(private jornadaService: JornadaService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getAllDaPessoa(666);
+  }
+  
+  getAll(){
+    this.jornadaService.getAll()
+      .subscribe(
+        (jornada)=>{this.jornadas = jornada}
+      );
+  }
 
-  public turno = {
-    id: 0,
-    nomeTurno: 'turno 1',
-    horaInicio: new Date(2021, 6, 8, 8, 0),
-    horaFim: new Date(2021, 6, 8, 18, 0),
-    minutosTrabalho: 600,
-    pessoasNoTurno: [0, 1, 2],
-  };
-  public pontos = [
-    { id: 0, momentoPonto: Date.now(), idPessoa: 12 },
-    { id: 1, momentoPonto: Date.now(), idPessoa: 12 },
-  ];
-  public jornadas = [
-    {
-      id: 0,
-      idPessoa: this.pontos[0].idPessoa,
-      data: new Date(2021, 6, 8),
-      minutosTrabalhados: 836,
-      estado: 'FECHADO',
-      turno: this.turno,
-      listaPonto: this.pontos,
-      dia: 9,
-      mes: 6,
-      ano: 2021,
-    },
-    {
-      id: 1,
-      idPessoa: this.pontos[0].idPessoa,
-      data: new Date(2021, 6, 8),
-      minutosTrabalhados: 836,
-      estado: 'ABERTO',
-      turno: this.turno,
-      listaPonto: this.pontos,
-      dia: 9,
-      mes: 6,
-      ano: 2021,
-    },
-  ];
+  getAllDaPessoa(id : number){
+    this.jornadaService.getAllJornadasDaPessoa(id)
+      .subscribe(
+        (jornada)=>{this.jornadas = jornada}
+      );
+  }
 }

@@ -7,7 +7,9 @@ import { TurnoIndexComponent } from './turno-index/turno-index.component';
 import { PontoCrudListagemComponent } from './ponto-crud-listagem/ponto-crud-listagem.component';
 import { PontoCriarComponent } from './ponto-criar/ponto-criar.component';
 import { PontoEditarComponent } from './ponto-editar/ponto-editar.component';
-//import { FormularioCriarTurnoComponent } from './formulario-criar-turno/formulario-criar-turno.component';
+import { JornadaCrudListagemAdmComponent } from './jornada-crud-listagem-adm/jornada-crud-listagem-adm.component';
+import { JornadaCriarComponent } from './jornada-criar/jornada-criar.component';
+import { JornadaEditarComponent } from './jornada-editar/jornada-editar.component';
 
 const routes: Routes = [
   { path: '', component: PontoMarcarComponent },
@@ -16,9 +18,11 @@ const routes: Routes = [
   { path: 'ponto-index', component: PontoCrudListagemComponent },
   { path: 'ponto-create', component: PontoCriarComponent },
   { path: 'ponto-edit/:id', component: PontoEditarComponent },
+  { path: 'jornada-crud', component: JornadaCrudListagemAdmComponent },
+  { path: 'jornada-create', component: JornadaCriarComponent },
+  { path: 'jornada-edit/:id', component: JornadaEditarComponent },
   { path: 'ponto-marcar', component: PontoMarcarComponent },
   { path: 'jornada-listagem', component: JornadaListagemComponent },
-  //{ path: 'formulario-criar-turno', component: FormularioCriarTurnoComponent },
 ];
 
 @NgModule({

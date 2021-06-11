@@ -1,6 +1,6 @@
 <nav>
   <article>
-    <section><a href=JornadaCriar.html><button class="botao">Nova Jornada</button></a></section>
+    <section><a routerLink="../jornada-create"><button class="botao">Nova Jornada</button></a></section>
   </article>
   <article>
     <section><input class="buscarJornadaPorId" placeholder="Buscar Jornada por ID" type="number" min="1"></section>
@@ -48,8 +48,8 @@
             <!--Informações do turno-->
             <tr>
               <th>{{jornada.turno.nomeTurno | titlecase}}</th>
-              <th>{{jornada.turno.horaInicio | date: 'h:mm:ss' }}</th>
-              <th>{{jornada.turno.horaFim | date: 'h:mm:ss' }}</th>
+              <th>{{jornada.turno.horaInicio }}</th>
+              <th>{{jornada.turno.horaFim }}</th>
             </tr>
           </tbody>
         </table>
@@ -69,7 +69,7 @@
           <tbody *ngFor="let ponto of jornada.listaPonto">
             <!--Informações do ponto-->
             <tr>
-              <th>{{ ponto.id }}</th>
+              <th>{{ ponto.idPonto }}</th>
               <th>{{ ponto.momentoPonto | date : 'dd/MM/yyyy'}}</th>
               <th>{{ ponto.momentoPonto | date : 'h:mm:ss'}}</th>
             </tr>
@@ -78,7 +78,7 @@
       </div>
 
       <section class="acoes">
-        <button class="botao-acao">Editar</button><button class="botao-acao">Excluir</button>
+        <button class="botao-acao" routerLink="../jornada-edit/{{jornada.id}}">Editar</button><button (click)="this.deletar(jornada.id)" class="botao-acao">Excluir</button>
       </section>
     </div>
   </div>

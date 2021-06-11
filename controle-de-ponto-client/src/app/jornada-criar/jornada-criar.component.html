@@ -1,6 +1,6 @@
 <body>
 <nav>
-    <a class="cl-Retornar-botao" id="id-Retornar-botao" href=MarcarPonto.html>Retornar</a>
+    <a routerLink="./../jornada-crud"><button class="cl-Retornar-botao" >Retornar</button></a>
 </nav>
 </body>
 <br>
@@ -16,24 +16,20 @@
         <form>
             <section>
                 <label for="data">Data:</label>
-                <input type="date" id="data" name="data-jornada">
+                <input type="date" id="data" [(ngModel)]="jornada.data" name="data-jornada">
             </section>
             <section>
-                <label>Turno: </label>
-                <select class="Turno-select">
-                    <option value="1">Turno 1</option>
-                    <option value="2">Turno 2</option>
-                    <option value="3">Turno 3</option>
-                    <option value="4">Turno 4</option>
-                    <option value="5">Turno 5</option>
+                <label for="nomeTurno">Turno: </label>
+                <select class="Turno-select" name="nomeTurno" [(ngModel)]="jornada.turno" >
+                    <option *ngFor="let turno of turnos" [ngValue]="turno">{{ turno.nomeTurno }}</option>
                 </select>
             </section>
             <section>
                 <label for="id-Pessoa">ID Colaborador:</label>
-                <input type="number" id="id-Pessoa" name="id-Pessoa">
+                <input type="number" id="id-Pessoa" [(ngModel)]="jornada.idPessoa" name="id-Pessoa">
             </section>
             <section>
-                <input type="submit" value="Criar Jornada">
+                <input type="submit" value="Criar Jornada" (click)="enviaJornada(jornada)">
             </section>
         </form>
     </article>
