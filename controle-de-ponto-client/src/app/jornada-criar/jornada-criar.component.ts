@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Jornada } from '../jornada';
 import { JornadaService } from '../jornada.service';
+import { Turno } from '../turno';
+import { TurnoService } from '../turno.service';
 
 @Component({
   selector: 'app-jornada-criar',
@@ -10,18 +12,20 @@ import { JornadaService } from '../jornada.service';
 export class JornadaCriarComponent implements OnInit {
 
   public jornada : Jornada = {} as Jornada;
-  public turnos : Jornada[] = [];
+  public turnos : Turno[] = [];
 
-  /*importar turnoService*/
-  constructor(private jornadaService : JornadaService){}
+  constructor(private jornadaService : JornadaService, private turnoService : TurnoService){}
+
+  nomeTurno!: Turno;
 
   ngOnInit(): void {
+    this.getTurno()
   }
 
-  /*getTurno(){
+  getTurno(){
     this.turnoService.getAll()
-    .subscribe((turno)=> this.turnos = turno));
-  }*/
+    .subscribe((turno)=> this.turnos = turno);
+  }
 
   enviaJornada(jornada : Jornada){
     this.jornadaService.createJornada(jornada)

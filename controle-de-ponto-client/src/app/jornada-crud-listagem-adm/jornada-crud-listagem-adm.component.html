@@ -78,7 +78,7 @@
       </div>
 
       <section class="acoes">
-        <button class="botao-acao">Editar</button><button class="botao-acao">Excluir</button>
+        <button class="botao-acao" routerLink="../jornada-edit/{{jornada.id}}">Editar</button><button (click)="this.deletar(jornada.id)" class="botao-acao">Excluir</button>
       </section>
     </div>
   </div>

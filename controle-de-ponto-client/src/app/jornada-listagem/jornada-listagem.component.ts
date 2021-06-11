@@ -14,7 +14,7 @@ export class JornadaListagemComponent implements OnInit {
   constructor(private jornadaService: JornadaService) {}
 
   ngOnInit(): void {
-    this.getAllDaPessoa(1);
+    this.getAllDaPessoa(44);
   }
   
   getAll(){

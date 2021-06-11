@@ -16,15 +16,21 @@ export class JornadaCrudListagemAdmComponent implements OnInit {
   ngOnInit(): void {
     this.getAll();
   }
-  
-  create(){
-    
-  }
 
   getAll(){
     this.jornadaService.getAll()
       .subscribe(
         (jornada)=>{this.jornadas = jornada}
+      );
+  }
+
+  deletar(id :number){
+    this.jornadaService.deleteJornada(id)
+      .subscribe(
+        (answer)=>{
+          console.log(answer);
+          this.getAll();
+        }
       );
   }
 }
