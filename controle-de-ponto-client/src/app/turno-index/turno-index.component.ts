@@ -7,13 +7,13 @@ import { TurnoService } from '../turno.service';
   templateUrl: './turno-index.component.html',
   styleUrls: ['./turno-index.component.css']
 })
-export class TurnoIndexComponent implements OnInit { 
-  
+export class TurnoIndexComponent implements OnInit {
+
   constructor(private turnoService: TurnoService) {
   }
 
   public turnos : Turno[] = [];
-  
+
   ngOnInit(): void {
     this.getAll();
   }
@@ -23,6 +23,16 @@ export class TurnoIndexComponent implements OnInit {
       .subscribe(
         (turno)=>{this.turnos = turno}
       );
+  }
+
+  delete(id : number){
+    this.turnoService.deleteTurno(id)
+      .subscribe(
+        (res)=>{
+          console.log(res);
+          this.getAll()
+        }
+      )
   }
 
 }
