@@ -71,3 +71,4 @@ secrets.yml
 
 org.springframework.ide.eclipse.prefs
 .project
+node_modules

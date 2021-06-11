@@ -10,6 +10,7 @@ import { PontoEditarComponent } from './ponto-editar/ponto-editar.component';
 //import { FormularioCriarTurnoComponent } from './formulario-criar-turno/formulario-criar-turno.component';
 
 const routes: Routes = [
+  { path: '', component: PontoMarcarComponent },
   { path: 'turno-index', component: TurnoIndexComponent },
   { path: 'turno-details', component: TurnoDetailsComponent },
   { path: 'ponto-index', component: PontoCrudListagemComponent },

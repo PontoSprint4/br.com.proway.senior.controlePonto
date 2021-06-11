@@ -118,7 +118,7 @@ class JornadaServiceTest {
 		LocalDate hoje = LocalDate.now();
 		LocalDate diaFora = LocalDate.now().plusMonths(2);
 
-		Turno turno = new Turno(LocalTime.now(), LocalTime.now().plusHours(8), "Turno teste");
+		Turno turno = new Turno(LocalTime.now().minusHours(2), LocalTime.now().plusHours(8), "Turno teste");
 		turno.adicionaPessoaNoTurno(idPessoa);
 		controllerTurno.create(turno);
 
@@ -236,6 +236,28 @@ class JornadaServiceTest {
 		assertThrows(Exception.class, 
 				() ->jService.marcarPonto(70, 
 					controllerPonto.get(idPonto)));
+	}
+	
+	@Test
+	void testMarcarPontoExcessaoPontosSucessivos() throws Exception {
+		LocalTime inicio = LocalTime.of(13, 0);
+		LocalTime fim = LocalTime.of(18, 0);
+		Integer idPessoa = 69;
+		
+		Turno turno = new Turno(inicio, fim, "Turno teste");
+		turno.adicionaPessoaNoTurno(idPessoa);
+		controllerTurno.create(turno);
+		
+		LocalDate hoje = LocalDate.now();
+		Ponto ponto = new Ponto(idPessoa, LocalDateTime.of(hoje, inicio.plusHours(1)));
+		Integer idPonto = controllerPonto.create(ponto);
+		jService.marcarPonto(idPessoa, controllerPonto.get(idPonto));
+		
+		Ponto ponto2 = new Ponto(idPessoa, LocalDateTime.of(hoje, inicio.plusHours(1)));
+		Integer idPonto2 = controllerPonto.create(ponto2);
+		assertThrows(Exception.class, 
+				() ->jService.marcarPonto(idPessoa, 
+					controllerPonto.get(idPonto2)));
 	}
 	
 	@Test
