@@ -21,7 +21,7 @@
             <section>
                 <label for="nomeTurno">Turno: </label>
                 <select class="Turno-select" name="nomeTurno" [(ngModel)]="jornada.turno" >
-                    <option *ngFor="let turno of turnos" [ngValue]="nomeTurno">{{ turno.nomeTurno }}</option>
+                    <option *ngFor="let turno of turnos" [ngValue]="turno">{{ turno.nomeTurno }}</option>
                 </select>
             </section>
             <section>

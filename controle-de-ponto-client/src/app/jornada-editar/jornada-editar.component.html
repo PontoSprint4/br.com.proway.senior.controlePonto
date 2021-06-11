@@ -12,12 +12,12 @@
                     <label for="data">Data:</label>
                     <input type="date" id="data" [(ngModel)]="selecionado.data" name="data-jornada">
                 </section>
-                <!--<section>
+                <section>
                     <label for="nomeTurno">Turno: </label>
                     <select class="Turno-select" name="nomeTurno" [(ngModel)]="selecionado.turno" >
-                        <option *ngFor="let turno of turnos" [ngValue]="nomeTurno">{{ turno.nomeTurno }}</option>
+                        <option *ngFor="let turno of turnos" [ngValue]="turno">{{ turno.nomeTurno }}</option>
                     </select>
-                </section>-->
+                </section>
                 <section>
                     <label for="id-Pessoa">ID Colaborador:</label>
                     <input type="number" id="id-Pessoa" [(ngModel)]="selecionado.idPessoa" name="id-Pessoa">
