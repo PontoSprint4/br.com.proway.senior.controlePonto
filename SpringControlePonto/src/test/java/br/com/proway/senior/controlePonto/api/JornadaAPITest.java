@@ -42,7 +42,7 @@ class JornadaAPITest {
 	void testMarcarPonto() throws Exception {
 		Integer idPessoa = 44;
 		
-		LocalTime horaInicio = LocalTime.now();
+		LocalTime horaInicio = LocalTime.now().minusMinutes(40);
 		LocalTime horaFim = horaInicio.plusHours(8);
 		String nomeTurno = "Wawawewa";
 		
@@ -229,7 +229,7 @@ class JornadaAPITest {
 	void testMinutosTrabalhadosNoPeriodo() throws Exception {
 		Integer idPessoa = 44;
 		
-		LocalTime horaInicio = LocalTime.now();
+		LocalTime horaInicio = LocalTime.now().minusMinutes(40);
 		LocalTime horaFim = horaInicio.plusHours(8);
 		String nomeTurno = "Wawawewa";
 		

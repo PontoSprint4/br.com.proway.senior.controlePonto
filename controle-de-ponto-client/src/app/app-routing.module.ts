@@ -9,12 +9,12 @@ import { PontoCriarComponent } from './ponto-criar/ponto-criar.component';
 import { PontoEditarComponent } from './ponto-editar/ponto-editar.component';
 
 const routes: Routes = [
+  { path: '', component: PontoMarcarComponent },
   { path: 'turno-index', component: TurnoIndexComponent },
   { path: 'turno-details', component: TurnoDetailsComponent },
   { path: 'ponto-index', component: PontoCrudListagemComponent },
   { path: 'ponto-create', component: PontoCriarComponent },
   { path: 'ponto-edit/:id', component: PontoEditarComponent },
-  { path: 'ponto-marcar', component: PontoMarcarComponent },
   { path: 'jornada-listagem', component: JornadaListagemComponent }
 ];
 
